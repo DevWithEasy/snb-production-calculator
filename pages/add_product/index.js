@@ -297,21 +297,20 @@ export default function AddProduct(){
     console.log(quantity);
     return(
         <div className="add_product">
-            <div className="ingredients">
-
-            <table>
-                <thead>
-                    <tr>
-                        <td>Name</td>
-                        <td>Quantity</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        ingredients.map((ingredient,i)=><Input key={i} ingredient={ingredient} quantity={quantity} setQuantity={setQuantity}/>)
-                    }
-                </tbody>
-            </table>
+            <div className="ingredient_area">
+                <h3>Add Product</h3>
+                <div className="heading">
+                    <p className="name">Ingredients Name</p>
+                    <p>Quantity</p>
+                </div>
+                <div className="ingredients">
+                    <div>
+                        {
+                            ingredients.map((ingredient,i)=><Input key={i} ingredient={ingredient} quantity={quantity} setQuantity={setQuantity}/>)
+                        }
+                    </div>
+                    <button>Add Product</button>
+                </div>
             </div>
         </div>
     )
