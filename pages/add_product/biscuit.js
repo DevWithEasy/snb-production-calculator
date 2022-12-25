@@ -294,9 +294,13 @@ export default function AddProduct(){
         },
     ]
     const createProduct = {...product,ingredients}
-    console.log(quantity);
+
+    async function addProduct(){
+        
+    }
+
     return(
-        <div className="add_product pt-5">
+        <div className="add_product">
             <div className="ingredient_area">
                 <h3>Add Product</h3>
                 <div className="heading">

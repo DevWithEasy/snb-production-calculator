@@ -1,5 +1,5 @@
 .add_product {
-    @apply pb-10 flex justify-center ;
+    @apply pb-10 pt-5 flex justify-center ;
     &>.ingredient_area{
         @apply p-4 mx-4 md:w-1/2 border shadow-xl rounded-md;
         &>h3{
