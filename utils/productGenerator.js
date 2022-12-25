@@ -1,3 +1,3 @@
-export default function productGenerate(product){
+export default function productGenerate(quantity){
 
 }

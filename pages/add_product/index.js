@@ -296,11 +296,11 @@ export default function AddProduct(){
     const createProduct = {...product,ingredients}
     console.log(quantity);
     return(
-        <div className="add_product">
+        <div className="add_product pt-5">
             <div className="ingredient_area">
                 <h3>Add Product</h3>
                 <div className="heading">
-                    <p className="name">Ingredients Name</p>
+                    <p className="name">Ingredients</p>
                     <p>Quantity</p>
                 </div>
                 <div className="ingredients">
