@@ -1,0 +1,5 @@
+.index{
+    &>p{
+      @apply text-2xl
+    }
+}
