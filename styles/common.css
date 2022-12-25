@@ -1,0 +1,3 @@
+.add_input{
+    @apply px-2 py-1 border focus:outline-none focus:ring-2
+}

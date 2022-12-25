@@ -1,0 +1,5 @@
+.add_product{
+    &>.ingredients{
+        @apply space-y-2;
+    }
+}

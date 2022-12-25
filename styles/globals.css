@@ -1,7 +1,8 @@
 @import "tailwindcss/base";
 @import "./index.css";
+@import "./addProduct.css";
+@import "./common.css";
 
 @import "tailwindcss/components";
-
 
 @import "tailwindcss/utilities";

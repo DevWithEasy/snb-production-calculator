@@ -1,7 +1,20 @@
-import Head from 'next/head'
+import { collection, getDocs } from 'firebase/firestore';
+import Head from 'next/head';
+import { db } from '../database/conncetDB';
 
-export default function Raw() {
+export async function getServerSideProps(){
+  const docs = await getDocs(collection(db,'sections'))
+  const sections = [];
+  docs.forEach(data => sections.push(data.data()));
+  return({
+    props : {
+      sections
+    }
+  })
+}
 
+export default function Raw({sections}) {
+  console.log(sections);
   return (
     <div className=''>
       <Head>
