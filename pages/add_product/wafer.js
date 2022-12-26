@@ -8,6 +8,7 @@ import handleInput from "../../utils/handleInput";
 import { waferProduct } from "../../utils/productGenerate/productGenerate";
 import { wafer } from "../../utils/quantity/quantity";
 import toast from 'react-hot-toast';
+import { useRouter } from "next/router";
 
 export async function getServerSideProps(){
     const docs = await getDocs(collection(db,'sections'))
@@ -22,6 +23,7 @@ export async function getServerSideProps(){
 }
 
 export default function AddProduct({sections}){
+    const router = useRouter()
     const [products,setProducts] = useState([])
     const [product,setProduct] = useState({
         id: uuidv4(),
@@ -53,6 +55,8 @@ export default function AddProduct({sections}){
         await setDoc(doc(db,'recipes',createProduct.id),createProduct)
         toast.success('Product Added Successfully')
         e.target.reset()
+        router.push(`/add_product/wafer`)
+        
     }
     return(
         <div className="add_product">

@@ -322,9 +322,9 @@ export function waferProduct(quantity) {
             quantity : Number(quantity.tbhq)
         },
         {
-            name : 'Vanilin Powder',
-            code_name : 'vanilinPowder',
-            quantity : Number(quantity.vanilinPowder)
+            name : 'Vanila Flavour KH',
+            code_name : 'vanilaFlavourKH',
+            quantity : Number(quantity.vanilaFlavourKH)
         },
     ]
     return ingredients
