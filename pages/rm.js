@@ -90,7 +90,7 @@ export default function Raw({sections}) {
                     {/* {parseFloat(Number(ingredient.quantity) * Number(batch)).toFixed(2)} */}
                       {/* <input value={Number(ingredient.quantity) * Number(batch)} disabled></input> */}
                       {
-                        parseFloat(Number(ingredient.quantity) * Number(batch)) == 0 ? "-" : parseFloat(Number(ingredient.quantity) * Number(batch))
+                        parseFloat(Number(ingredient.quantity) * Number(batch)) == 0 ? "-" : parseFloat(Number(ingredient.quantity) * Number(batch).toFixed(2))
                       }
                     </div>
               </div>)
