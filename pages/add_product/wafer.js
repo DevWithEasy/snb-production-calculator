@@ -25,6 +25,7 @@ export default function AddProduct({sections}){
     const [products,setProducts] = useState([])
     const [product,setProduct] = useState({
         id: uuidv4(),
+        version :'',
         name: "",
         section: "",
         packetWeight: 0,
@@ -83,6 +84,7 @@ export default function AddProduct({sections}){
                                 </select>
                             </div>
                         </div>
+                        <ProductInput label='Version' name="version" product={product} setProduct={setProduct}/>
                         <ProductInput label='Packet Weight' name="packetWeight" product={product} setProduct={setProduct}/>
                         <ProductInput label='Packet Per Carton' name="packetPerCarton" product={product} setProduct={setProduct}/>
                         <ProductInput label='Process Loss' name="processLoss" product={product} setProduct={setProduct}/>
