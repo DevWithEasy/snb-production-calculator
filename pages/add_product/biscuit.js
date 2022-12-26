@@ -7,6 +7,7 @@ import { db } from "../../database/conncetDB";
 import handleInput from "../../utils/handleInput";
 import biscuitProduct from "../../utils/productGenerate/productGenerate";
 import { biscuit } from "../../utils/quantity/quantity";
+import toast from 'react-hot-toast';
 
 export async function getServerSideProps(){
     const docs = await getDocs(collection(db,'sections'))
@@ -40,18 +41,17 @@ export default function AddProduct({sections}){
         const newValue = {...product}
         newValue[e.target.name] = e.target.value
         setProduct(newValue)
-        console.log(e.target.name);
         const q= query(collection(db,'products'),where('section','==', e.target.value))
         const docs = await getDocs(q)
         const products = [];
         docs.forEach(data => products.push(data.data()));
-        console.log(products);
         setProducts(products)
     }
     async function addProduct(e){
         e.preventDefault();
         await setDoc(doc(db,'recipes',createProduct.id),createProduct)
-        console.log("product added");
+        toast.success('Product Added Successfully')
+        e.target.reset()
     }
     return(
         <div className="add_product">
