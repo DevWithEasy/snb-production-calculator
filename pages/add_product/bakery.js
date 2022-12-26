@@ -7,8 +7,8 @@ import IngredientInput from "../../components/IngredientInput";
 import ProductInput from "../../components/ProductInput";
 import { db } from "../../database/conncetDB";
 import handleInput from "../../utils/handleInput";
-import waferProduct from "../../utils/productGenerate/wafer";
-import wafer from "../../utils/quantity/wafer";
+import bakeryProduct from "../../utils/productGenerate/bakery";
+import bakery from "../../utils/quantity/bakery";
 
 export async function getServerSideProps(){
     const docs = await getDocs(collection(db,'sections'))
@@ -36,9 +36,9 @@ export default function AddProduct({sections}){
         innerFoilWeight: 0,
         foilWeight : 0,
     })
-    const [quantity,setQuantity] = useState(wafer)
+    const [quantity,setQuantity] = useState(bakery)
 
-    const createProduct = {...product,ingredients : waferProduct(quantity)}
+    const createProduct = {...product,ingredients : bakeryProduct(quantity)}
 
     async function productList(e){
         const newValue = {...product}
@@ -55,13 +55,14 @@ export default function AddProduct({sections}){
         await setDoc(doc(db,'recipes',createProduct.id),createProduct)
         toast.success('Product Added Successfully')
         e.target.reset()
-        router.push(`/add_product/wafer`)
+        router.push(`/add_product/bakery`)
         
     }
+    console.log(createProduct);
     return(
         <div className="add_product">
             <div className="ingredient_area">
-                <h3>Wafer Add Product</h3>
+                <h3>Bakery Add Product</h3>
                 
                 <div className="ingredients">
 

@@ -1,4 +1,4 @@
-export const biscuit = {
+const biscuit = {
     ammonium : 0,
     blackCumin : 0,
     bitSalt : 0,
@@ -46,24 +46,4 @@ export const biscuit = {
     buttaBellyFlavour : 0,
     coconutPowder : 0
 }
-
-export const wafer = {
-    chocolateBrownColour_6059 : 0,
-    citricAcidMono : 0,
-    cocoaPowderBlack_4011 : 0,
-    chocolateFlavourKH : 0,
-    daldaHardPUSTI : 0,
-    flourGrade_A : 0,
-    flourGrade_B : 0,
-    soyaLecithine : 0,
-    milkFlavourKH : 0,
-    palmOilSuper : 0,
-    superSalt : 0,
-    skimMilkPowder : 0,
-    sodiumBiCarbonate : 0,
-    sodiumMetaBiSulphate : 0,
-    starchPowder : 0,
-    sugar : 0,
-    tbhq : 0,
-    vanilaFlavourKH : 0,
-}
+export default biscuit;

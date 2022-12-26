@@ -7,7 +7,9 @@ import IngredientInput from "../../components/IngredientInput";
 import ProductInput from "../../components/ProductInput";
 import { db } from "../../database/conncetDB";
 import handleInput from "../../utils/handleInput";
+import lachchaProduct from "../../utils/productGenerate/lachcha";
 import waferProduct from "../../utils/productGenerate/wafer";
+import lachcha from "../../utils/quantity/lachcha";
 import wafer from "../../utils/quantity/wafer";
 
 export async function getServerSideProps(){
@@ -36,9 +38,9 @@ export default function AddProduct({sections}){
         innerFoilWeight: 0,
         foilWeight : 0,
     })
-    const [quantity,setQuantity] = useState(wafer)
+    const [quantity,setQuantity] = useState(lachcha)
 
-    const createProduct = {...product,ingredients : waferProduct(quantity)}
+    const createProduct = {...product,ingredients : lachchaProduct(quantity)}
 
     async function productList(e){
         const newValue = {...product}
@@ -55,13 +57,13 @@ export default function AddProduct({sections}){
         await setDoc(doc(db,'recipes',createProduct.id),createProduct)
         toast.success('Product Added Successfully')
         e.target.reset()
-        router.push(`/add_product/wafer`)
+        router.push(`/add_product/lachcha`)
         
     }
     return(
         <div className="add_product">
             <div className="ingredient_area">
-                <h3>Wafer Add Product</h3>
+                <h3>Lachcha Add Product</h3>
                 
                 <div className="ingredients">
 

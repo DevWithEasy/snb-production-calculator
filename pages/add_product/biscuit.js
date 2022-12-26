@@ -1,13 +1,14 @@
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import toast from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
 import IngredientInput from "../../components/IngredientInput";
 import ProductInput from "../../components/ProductInput";
 import { db } from "../../database/conncetDB";
 import handleInput from "../../utils/handleInput";
-import {biscuitProduct} from "../../utils/productGenerate/productGenerate";
-import { biscuit } from "../../utils/quantity/quantity";
-import toast from 'react-hot-toast';
+import  biscuitProduct  from "../../utils/productGenerate/biscuit";
+import biscuit from "../../utils/quantity/biscuit";
 
 export async function getServerSideProps(){
     const docs = await getDocs(collection(db,'sections'))
@@ -22,6 +23,7 @@ export async function getServerSideProps(){
   }
 
 export default function AddProduct({sections}){
+    const router = useRouter()
     const [products,setProducts] = useState([])
     const [product,setProduct] = useState({
         id: uuidv4(),
@@ -53,6 +55,7 @@ export default function AddProduct({sections}){
         await setDoc(doc(db,'recipes',createProduct.id),createProduct)
         toast.success('Product Added Successfully')
         e.target.reset()
+        router.push('add_product/biscuit')
     }
     return(
         <div className="add_product">
