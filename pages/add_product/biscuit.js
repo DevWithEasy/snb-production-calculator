@@ -57,7 +57,7 @@ export default function AddProduct({sections}){
     return(
         <div className="add_product">
             <div className="ingredient_area">
-                <h3>Add Product</h3>
+                <h3>Biscuit Add Product</h3>
                 
                 <div className="ingredients">
 
@@ -77,7 +77,7 @@ export default function AddProduct({sections}){
                             <label htmlFor="">Product Name</label>
                             <div>
                                 <select name="name"  onChange={(e)=>handleInput(e,product,setProduct)}>
-                                    {/* <option value="">Select Name</option> */}
+                                    <option value="">Select Name</option>
                                     {
                                         products.map(product => <option key={product.id} value={product.name}>{product.name}</option>)
                                     }

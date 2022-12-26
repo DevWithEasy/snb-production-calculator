@@ -65,6 +65,7 @@ export default function Raw({sections}) {
               <label htmlFor="">Product Name</label>
                 <div>
                   <select name="name"  onChange={(e)=>setName(e.target.value)}>
+                    <option value="">Select Name</option>
                     {
                       products.map(product => <option key={product.id} value={product.name}>{product.name}</option>)
                     }
@@ -77,18 +78,16 @@ export default function Raw({sections}) {
                   <input type="number" name='batch' onChange={(e)=>setBatch(e.target.value)}></input>
                 </div>
           </div>
-          <div className='consumption space-y-2'>
+          {product?.ingredients && <div className='consumption space-y-2'>
             <div className="heading">
                             <p className="name">Ingredients</p>
                             <p>Quantity</p>
                         </div>
               <div className='space-y-2'>
                 {
-                  product?.ingredients && product.ingredients.map((ingredient)=><div key={ingredient.code_name} className="w-full flex justify-between py-2 border-b items-center rounded hover:bg-gray-500 hover:text-white transition-all duration-300 hover:scale-[1.02]">
+                   product.ingredients.map((ingredient)=><div key={ingredient.code_name} className="w-full flex justify-between py-2 border-b items-center rounded hover:bg-gray-500 hover:text-white transition-all duration-300 hover:scale-[1.02]">
                   <label htmlFor="" className='w-3/4 pl-2'>{ingredient.name}</label>
                     <div className='w-1/4 text-center'>
-                    {/* {parseFloat(Number(ingredient.quantity) * Number(batch)).toFixed(2)} */}
-                      {/* <input value={Number(ingredient.quantity) * Number(batch)} disabled></input> */}
                       {
                         parseFloat(Number(ingredient.quantity) * Number(batch)) == 0 ? "-" : parseFloat(Number(ingredient.quantity) * Number(batch)).toFixed(2)
                       }
@@ -96,7 +95,7 @@ export default function Raw({sections}) {
               </div>)
                 }
               </div>
-          </div>
+          </div>}
       </div>
     </div>
   )
