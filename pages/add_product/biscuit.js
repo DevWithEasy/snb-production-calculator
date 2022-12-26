@@ -1,8 +1,27 @@
+import { collection, getDocs } from "firebase/firestore";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import Input from "../../components/Input";
+import IngredientInput from "../../components/IngredientInput";
+import ProductInput from "../../components/ProductInput";
+import { db } from "../../database/conncetDB";
 
-export default function AddProduct(){
+export async function getServerSideProps(){
+    const docs = await getDocs(collection(db,'sections'))
+    const sections = [];
+    docs.forEach(data => sections.push(data.data()));
+
+    const docses = await getDocs(collection(db,'products'))
+    const products = [];
+    docses.forEach(data => products.push(data.data()));
+
+    return({
+      props : {
+        sections,products
+      }
+    })
+  }
+
+export default function AddProduct({sections,products}){
     const [product,setProduct] = useState({
         id: uuidv4(),
         name: "",
@@ -298,22 +317,30 @@ export default function AddProduct(){
     async function addProduct(){
         
     }
-
+    console.log(products);
     return(
         <div className="add_product">
             <div className="ingredient_area">
                 <h3>Add Product</h3>
-                <div className="heading">
-                    <p className="name">Ingredients</p>
-                    <p>Quantity</p>
-                </div>
+                
                 <div className="ingredients">
-                    <div>
+
+                    <form>
+                        <ProductInput label='Packet Weight' name="packetWeight" product={product} setProduct={setProduct}/>
+                        <ProductInput label='Packet Per Carton' name="packetPerCarton" product={product} setProduct={setProduct}/>
+                        <ProductInput label='Process Loss' name="processLoss" product={product} setProduct={setProduct}/>
+                        <ProductInput label='Inner Foil Weight' name="innerFoilWeight" product={product} setProduct={setProduct}/>
+                        <ProductInput label='Foil Weigh' name="foilWeight" product={product} setProduct={setProduct}/>
+                        <div className="heading">
+                            <p className="name">Ingredients</p>
+                            <p>Quantity</p>
+                        </div>
+                        
                         {
-                            ingredients.map((ingredient,i)=><Input key={i} ingredient={ingredient} quantity={quantity} setQuantity={setQuantity}/>)
+                            ingredients.map((ingredient,i)=><IngredientInput key={i} ingredient={ingredient} quantity={quantity} setQuantity={setQuantity}/>)
                         }
-                    </div>
-                    <button>Add Product</button>
+                        <button type="submit">Add Product</button>
+                    </form>
                 </div>
             </div>
         </div>

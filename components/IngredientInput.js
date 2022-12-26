@@ -1,7 +1,6 @@
 import handleInput from "../utils/handleInput";
 
-export default function Input({ingredient,quantity,setQuantity}){
-    console.log(ingredient);
+export default function IngredientInput({ingredient,quantity,setQuantity}){
     return(
         <div className="input">
             <label htmlFor={ingredient.code_name}>{ingredient.name}</label>
