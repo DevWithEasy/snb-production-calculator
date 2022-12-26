@@ -3,232 +3,232 @@ export default function biscuitProduct(quantity){
         {
             name : 'Ammonium Bi Carbonate',
             code_name : 'ammonium',
-            quantity : quantity.ammonium
+            quantity : Number(quantity.ammonium)
         },
         {
             name : 'Black Cumin',
             code_name : 'blackCumin',
-            quantity : quantity.blackCumin
+            quantity : Number(quantity.blackCumin)
         },
         {
             name : 'Bit Salt',
             code_name : 'bitSalt',
-            quantity : quantity.bitSalt
+            quantity : Number(quantity.bitSalt)
         },
         {
             name : 'Butter Flavour SK',
             code_name : 'butterFlavourSK',
-            quantity : quantity.butterFlavourSK
+            quantity : Number(quantity.butterFlavourSK)
         },
         {
             name : 'Butter Flavour Symega',
             code_name : 'butterFlavourSYMEGA',
-            quantity : quantity.butterFlavourSYMEGA
+            quantity : Number(quantity.butterFlavourSYMEGA)
         },
         {
             name : 'Butter Solid',
             code_name : 'butterSolid',
-            quantity : quantity.butterSolid
+            quantity : Number(quantity.butterSolid)
         },
         {
             name : 'Butter Oil Substitute',
             code_name : 'butterOilSubstitute',
-            quantity : quantity.butterOilSubstitute
+            quantity : Number(quantity.butterOilSubstitute)
         },
         {
             name : 'Chocolate Brown Colour 815',
             code_name : 'chocolateBrownColour_815',
-            quantity : quantity.chocolateBrownColour_815
+            quantity : Number(quantity.chocolateBrownColour_815)
         },
         {
             name : 'Aspertem',
             code_name : 'aspertem',
-            quantity : quantity.aspertem
+            quantity : Number(quantity.aspertem)
         },
         {
             name : 'Chocokate Flavour KH',
             code_name : 'chocolateFlavourKH',
-            quantity : quantity.chocolateFlavourKH
+            quantity : Number(quantity.chocolateFlavourKH)
         },
         {
             name : 'Calcium Carbonate',
             code_name : 'calciumCarbonate',
-            quantity : quantity.calciumCarbonate
+            quantity : Number(quantity.calciumCarbonate)
         },
         {
             name : 'Cracker Enzyme',
             code_name : 'crakerEnzyme',
-            quantity : quantity.crakerEnzyme
+            quantity : Number(quantity.crakerEnzyme)
         },
         {
             name : 'Citric Acid Mono',
             code_name : 'citricAcidMono',
-            quantity : quantity.citricAcidMono
+            quantity : Number(quantity.citricAcidMono)
         },
         {
             name : 'Cocoa Powder Black 910',
             code_name : 'cocoaPowderBlack_910',
-            quantity : quantity.cocoaPowderBlack_910
+            quantity : Number(quantity.cocoaPowderBlack_910)
         },
         {
             name : 'Dalda Soft (Hilsa)',
             code_name : 'daldaSoftHILSA',
-            quantity : quantity.daldaSoftHILSA
+            quantity : Number(quantity.daldaSoftHILSA)
         },
         {
             name : 'Cardamon Flavour',
             code_name : 'cardamonFlavour',
-            quantity : quantity.cardamonFlavour
+            quantity : Number(quantity.cardamonFlavour)
         },
         {
             name : 'Flour A Grade',
             code_name : 'flourGrade_A',
-            quantity : quantity.flourGrade_A
+            quantity : Number(quantity.flourGrade_A)
         },
         {
             name : 'Flour B Grade',
             code_name : 'flourGrade_B',
-            quantity : quantity.flourGrade_B
+            quantity : Number(quantity.flourGrade_B)
         },
         {
             name : 'Flour C Grade',
             code_name : 'flourGrade_C',
-            quantity : quantity.flourGrade_C
+            quantity : Number(quantity.flourGrade_C)
         },
         {
             name : 'Glucose Powder',
             code_name : 'glucosePowder',
-            quantity : quantity.glucosePowder
+            quantity : Number(quantity.glucosePowder)
         },
         {
             name : 'Lemon Flvour',
             code_name : 'lemonFlavour',
-            quantity : quantity.lemonFlavour
+            quantity : Number(quantity.lemonFlavour)
         },
         {
             name : 'Lemon Yellow Colour',
             code_name : 'lemonYellowColour',
-            quantity : quantity.lemonYellowColour
+            quantity : Number(quantity.lemonYellowColour)
         },
         {
             name : 'Soya Lecithin',
             code_name : 'soyaLecithine',
-            quantity : quantity.soyaLecithine
+            quantity : Number(quantity.soyaLecithine)
         },
         {
             name : 'Liquid Glucose',
             code_name : 'liquidGlucose',
-            quantity : quantity.liquidGlucose
+            quantity : Number(quantity.liquidGlucose)
         },
         {
             name : 'Milk Flavour KH',
             code_name : 'milkFlavourKH',
-            quantity : quantity.milkFlavourKH
+            quantity : Number(quantity.milkFlavourKH)
         },
         {
             name : 'Orange Flavour',
             code_name : 'orangeFlavour',
-            quantity : quantity.orangeFlavour
+            quantity : Number(quantity.orangeFlavour)
         },
         {
             name : 'Onion Flavour Green',
             code_name : 'onionFlavourGreen',
-            quantity : quantity.onionFlavourGreen
+            quantity : Number(quantity.onionFlavourGreen)
         },
         {
             name : 'Onion Flavour Symega',
             code_name : 'onionFlavourSYMEGA',
-            quantity : quantity.onionFlavourSYMEGA
+            quantity : Number(quantity.onionFlavourSYMEGA)
         },
         {
             name : 'Onion Powder',
             code_name : 'onionPowder',
-            quantity : quantity.onionPowder
+            quantity : Number(quantity.onionPowder)
         },
         {
             name : 'Palm Oil Super',
             code_name : 'palmOilSuper',
-            quantity : quantity.palmOilSuper
+            quantity : Number(quantity.palmOilSuper)
         },
         {
             name : 'Pineapple Flavour',
             code_name : 'pineappleFlavour',
-            quantity : quantity.pineappleFlavour
+            quantity : Number(quantity.pineappleFlavour)
         },
         {
             name : 'Palm Corn Oil',
             code_name : 'palmCornOil',
-            quantity : quantity.palmCornOil
+            quantity : Number(quantity.palmCornOil)
         },
         {
             name : 'Salt (Super)',
             code_name : 'superSalt',
-            quantity : quantity.superSalt
+            quantity : Number(quantity.superSalt)
         },
         {
             name : 'Sodium Acid Pyro Phosphet',
             code_name : 'sodiumAcidpyroPhosphet',
-            quantity : quantity.sodiumAcidpyroPhosphet
+            quantity : Number(quantity.sodiumAcidpyroPhosphet)
         },
         {
             name : 'Skim Milk Powder',
             code_name : 'skimMilkPowder',
-            quantity : quantity.skimMilkPowder
+            quantity : Number(quantity.skimMilkPowder)
         },
         {
             name : 'Sodium Meta Bi Sulphate',
             code_name : 'sodiumMetaBiSulphate',
-            quantity : quantity.sodiumMetaBiSulphate
+            quantity : Number(quantity.sodiumMetaBiSulphate)
         },
         {
             name : 'Sodium Bi Carbonate',
             code_name : 'sodiumBiCarbonate',
-            quantity : quantity.sodiumBiCarbonate
+            quantity : Number(quantity.sodiumBiCarbonate)
         },
         {
             name : 'Starch Powder',
             code_name : 'starchPowder',
-            quantity : quantity.starchPowder
+            quantity : Number(quantity.starchPowder)
         },
         {
             name : 'Sugar',
             code_name : 'sugar',
-            quantity : quantity.sugar
+            quantity : Number(quantity.sugar)
         },
         {
             name : 'Testing Salt',
             code_name : 'testingSalt',
-            quantity : quantity.testingSalt
+            quantity : Number(quantity.testingSalt)
         },
         {
             name : 'TBHQ',
             code_name : 'tbhq',
-            quantity : quantity.tbhq
+            quantity : Number(quantity.tbhq)
         },
         {
             name : 'Vanilin Powder',
             code_name : 'vanilinPowder',
-            quantity : quantity.vanilinPowder
+            quantity : Number(quantity.vanilinPowder)
         },
         {
             name : 'Onion Chieves',
             code_name : 'onionChieves',
-            quantity : quantity.onionChieves
+            quantity : Number(quantity.onionChieves)
         },
         {
             name : 'Coconut Flavour',
             code_name : 'coconutFlavour',
-            quantity : quantity.coconutFlavour
+            quantity : Number(quantity.coconutFlavour)
         },
         {
             name : 'Butta Belly Flavour',
             code_name : 'buttaBellyFlavour',
-            quantity : quantity.buttaBellyFlavour
+            quantity : Number(quantity.buttaBellyFlavour)
         },
         {
             name : 'Coconut Powder',
             code_name : 'coconutPowder',
-            quantity : quantity.coconutPowder
+            quantity : Number(quantity.coconutPowder)
         },
     ]
     return ingredients
