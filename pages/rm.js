@@ -1,11 +1,14 @@
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import { db } from '../database/conncetDB';
+
 
 export async function getServerSideProps(){
   const docs = await getDocs(collection(db,'sections'))
   const sections = [];
   docs.forEach(data => sections.push(data.data()));
+
   return({
     props : {
       sections
@@ -14,7 +17,30 @@ export async function getServerSideProps(){
 }
 
 export default function Raw({sections}) {
-  console.log(sections);
+  const [products,setProducts] = useState([])
+  const [name,setName] = useState('')
+  const [product,setProduct] = useState('')
+  const [batch,setBatch] = useState()
+
+  async function productList(e){
+      const q= query(collection(db,'products'),where('section','==', e.target.value))
+      const docs = await getDocs(q)
+      const products = [];
+      docs.forEach(data => products.push(data.data()));
+      setProducts(products)
+  }
+
+  useEffect(()=>{
+    async function getRecipe(name){
+        const q= query(collection(db,'recipes'),where('name','==', name))
+        const docs = await getDocs(q)
+        const products = [];
+        docs.forEach(data => products.push(data.data()));
+        setProduct(products[0])
+    }
+    getRecipe(name)
+  },[name])
+  console.log(product);
   return (
     <div className=''>
       <Head>
@@ -23,12 +49,44 @@ export default function Raw({sections}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className='raw'>
-        <div>
-            <label htmlFor='section'>Section</label>
-            <select>
-                <option value=""></option>
-            </select>
-        </div>
+          <div className="input">
+              <label htmlFor="">Section Name</label>
+                <div>
+                  <select name="section" onChange={(e)=>productList(e)}>
+                    <option value="">Select Product</option>
+                      {
+                          sections.map(section => <option key={section.id} value={section.name}>{section.name}</option>)
+                      }
+                  </select>
+                </div>
+          </div>
+          <div className="input">
+              <label htmlFor="">Product Name</label>
+                <div>
+                  <select name="name"  onChange={(e)=>setName(e.target.value)}>
+                    {
+                      products.map(product => <option key={product.id} value={product.name}>{product.name}</option>)
+                    }
+                  </select>
+                </div>
+          </div>
+          <div className="input">
+              <label htmlFor="">Production Batch</label>
+                <div>
+                  <input type="number" name='batch' onChange={(e)=>setBatch(e.target.value)}></input>
+                </div>
+          </div>
+          <div className='space-y-2'>
+            {
+              product?.ingredients && product.ingredients.map((ingredient)=><div key={ingredient.code_name} className="input">
+              <label htmlFor="">{ingredient.name}</label>
+                <div>
+                {parseFloat(Number(ingredient.quantity) * Number(batch)).toFixed(2)}
+                  {/* <input value={Number(ingredient.quantity) * Number(batch)} disabled></input> */}
+                </div>
+          </div>)
+            }
+          </div>
       </div>
     </div>
   )

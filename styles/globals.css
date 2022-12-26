@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
 @import "./index.css";
 @import "./addProduct.css";
+@import "raw_materials.css";
 @import "./common.css";
 
 @import "tailwindcss/components";

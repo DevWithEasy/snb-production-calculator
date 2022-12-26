@@ -5,8 +5,8 @@ import IngredientInput from "../../components/IngredientInput";
 import ProductInput from "../../components/ProductInput";
 import { db } from "../../database/conncetDB";
 import handleInput from "../../utils/handleInput";
-import {biscuitProduct} from "../../utils/productGenerate/productGenerate";
-import { biscuit } from "../../utils/quantity/quantity";
+import { waferProduct } from "../../utils/productGenerate/productGenerate";
+import { wafer } from "../../utils/quantity/quantity";
 import toast from 'react-hot-toast';
 
 export async function getServerSideProps(){
@@ -19,7 +19,7 @@ export async function getServerSideProps(){
         sections
       }
     })
-  }
+}
 
 export default function AddProduct({sections}){
     const [products,setProducts] = useState([])
@@ -33,9 +33,9 @@ export default function AddProduct({sections}){
         innerFoilWeight: 0,
         foilWeight : 0,
     })
-    const [quantity,setQuantity] = useState(biscuit)
+    const [quantity,setQuantity] = useState(wafer)
 
-    const createProduct = {...product,ingredients : biscuitProduct(quantity)}
+    const createProduct = {...product,ingredients : waferProduct(quantity)}
 
     async function productList(e){
         const newValue = {...product}
