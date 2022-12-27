@@ -53,8 +53,8 @@ export default function AddProduct({sections}){
         e.preventDefault();
         await setDoc(doc(db,'recipes',createProduct.name.split(" ").join("_")),createProduct)
         toast.success('Product Added Successfully')
-        e.target.reset()
-        router.push(`/add_product/wafer`)
+        // e.target.reset()
+        // router.push(`/add_product/wafer`)
         
     }
     return(
