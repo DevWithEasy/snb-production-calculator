@@ -20,7 +20,7 @@
       @apply w-3/4 border-r-4 border-white;
   }
   &>p{
-      @apply w-1/4 p-2 text-center  text-white bg-gray-500 font-bold;
+      @apply w-1/4 p-1 text-center  text-white bg-gray-500 font-bold;
   }
 }
 

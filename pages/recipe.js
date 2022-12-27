@@ -52,7 +52,7 @@ export default function Raw({sections}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className='raw'>
-        <h1 className='py-2 bg-gray-500 text-white text-xl text-center'>Raw Consumption</h1>
+        <h1 className='py-2 bg-gray-500 text-white text-xl text-center'>Recipe</h1>
           <div className="input">
               <label htmlFor="">Section Name</label>
                 <div>
@@ -76,7 +76,7 @@ export default function Raw({sections}) {
                 </div>
           </div>
           {product && <div className='pb-2'>
-            <h3 className='text-center p-1 bg-gray-500 text-white'>Short Info</h3>
+            <h3 className='text-center p-1 font-bold bg-gray-500 text-white'>Short Info</h3>
             <Info text='Version' value={product?.version} unit=''/>
             <Info text='Packet Weight' value={product?.packetWeight} unit='gm'/>
             <Info text='Packet Per Carton' value={product?.packetPerCarton}q unit='Packet'/>
