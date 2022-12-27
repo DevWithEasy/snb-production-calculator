@@ -51,7 +51,7 @@ export default function AddProduct({sections}){
     }
     async function addProduct(e){
         e.preventDefault();
-        await setDoc(doc(db,'recipes',createProduct.id),createProduct)
+        await setDoc(doc(db,'recipes',createProduct.name.split(" ").join("_")),createProduct)
         toast.success('Product Added Successfully')
         e.target.reset()
         router.push(`/add_product/wafer`)

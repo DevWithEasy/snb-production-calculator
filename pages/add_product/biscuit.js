@@ -54,7 +54,7 @@ export default function AddProduct({sections}){
         await setDoc(doc(db,'recipes',createProduct.name.split(" ").join("_")),createProduct)
         toast.success('Product Added Successfully')
         e.target.reset()
-        router.push('add_product/biscuit')
+        router.push('/add_product/biscuit')
     }
     return(
         <div className="add_product">
