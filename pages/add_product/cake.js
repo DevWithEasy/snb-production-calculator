@@ -25,7 +25,6 @@ export default function AddProduct({sections}){
     const router = useRouter()
     const [products,setProducts] = useState([])
     const [product,setProduct] = useState({
-        id: Date.now(),
         version :'',
         name: "",
         section: "",
@@ -37,7 +36,7 @@ export default function AddProduct({sections}){
     })
     const [quantity,setQuantity] = useState(cake)
 
-    const createProduct = {...product,ingredients : cakeProduct(quantity)}
+    const createProduct = {...product,id:product.name.split(" ").join("_"),ingredients : cakeProduct(quantity)}
 
     async function productList(e){
         const newValue = {...product}
@@ -51,12 +50,13 @@ export default function AddProduct({sections}){
     }
     async function addProduct(e){
         e.preventDefault();
-        await setDoc(doc(db,'recipes',createProduct.name.split(" ").join("_")),createProduct)
+        await setDoc(doc(db,'recipes',product.name.split(" ").join("_")),createProduct)
         toast.success('Product Added Successfully')
         // e.target.reset()
         // router.push(`/add_product/cake`)
         
     }
+    console.log(createProduct);
     return(
         <div className="add_product">
             <div className="ingredient_area">
