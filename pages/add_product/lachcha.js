@@ -2,15 +2,12 @@ import { collection, doc, getDocs, query, setDoc, where } from "firebase/firesto
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from 'react-hot-toast';
-import { v4 as uuidv4 } from 'uuid';
 import IngredientInput from "../../components/IngredientInput";
 import ProductInput from "../../components/ProductInput";
 import { db } from "../../database/conncetDB";
 import handleInput from "../../utils/handleInput";
 import lachchaProduct from "../../utils/productGenerate/lachcha";
-import waferProduct from "../../utils/productGenerate/wafer";
 import lachcha from "../../utils/quantity/lachcha";
-import wafer from "../../utils/quantity/wafer";
 
 export async function getServerSideProps(){
     const docs = await getDocs(collection(db,'sections'))
@@ -28,7 +25,7 @@ export default function AddProduct({sections}){
     const router = useRouter()
     const [products,setProducts] = useState([])
     const [product,setProduct] = useState({
-        id: uuidv4(),
+        id: Date.now(),
         version :'',
         name: "",
         section: "",
@@ -54,7 +51,7 @@ export default function AddProduct({sections}){
     }
     async function addProduct(e){
         e.preventDefault();
-        await setDoc(doc(db,'recipes',createProduct.id),createProduct)
+        await setDoc(doc(db,'recipes',createProduct.name.split(" ").join("_")),createProduct)
         toast.success('Product Added Successfully')
         e.target.reset()
         router.push(`/add_product/lachcha`)

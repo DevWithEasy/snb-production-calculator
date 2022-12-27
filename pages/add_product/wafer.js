@@ -2,7 +2,6 @@ import { collection, doc, getDocs, query, setDoc, where } from "firebase/firesto
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from 'react-hot-toast';
-import { v4 as uuidv4 } from 'uuid';
 import IngredientInput from "../../components/IngredientInput";
 import ProductInput from "../../components/ProductInput";
 import { db } from "../../database/conncetDB";
@@ -26,7 +25,7 @@ export default function AddProduct({sections}){
     const router = useRouter()
     const [products,setProducts] = useState([])
     const [product,setProduct] = useState({
-        id: uuidv4(),
+        id: Date.now(),
         version :'',
         name: "",
         section: "",
