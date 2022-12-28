@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Admin from '../components/Admin'
 
 export default function Home() {
-  const [view,setView] = useState(true)
+  const [view,setView] = useState(false)
   return (
     <div className='index flex justify-center'>
       <Head>
@@ -12,17 +12,15 @@ export default function Home() {
         <meta name="description" content="S&B Nice Food Valley Ltd." />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <div className=''>
+      <div className='w-full mx-4 md:w-1/2 p-2 mt-10 border rounded-md shadow-lg space-y-2'>
       <Link href='/recipe'>
-          <a>Recipe</a>
+          <a className='block p-2 border-b text-blue-500 font-bold text-xl'>Recipe</a>
         </Link>
-        <br/>
         <Link href='/rm'>
-          <a>RM / PM Calcutation</a>
+          <a className='block p-2 border-b text-blue-500 font-bold text-xl'>RM / PM Calcutation</a>
         </Link>
-        <br/>
         <Link href=''>
-          <a onClick={()=>setView(!view)}>Admin</a>
+          <a onClick={()=>setView(!view)} className='block p-2'>Admin</a>
         </Link>
         {view && <Admin view={view} setView={setView}/>}
       </div>

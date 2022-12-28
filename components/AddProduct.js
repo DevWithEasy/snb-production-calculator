@@ -31,7 +31,7 @@ export default function AddProduct({product,setProduct}){
     console.log(sections);
 
     return (
-        <div className="absolute w-full h-screen left-0 top-0 z-20 flex justify-center items-center bg-slate-500/70">
+        <div className="absolute w-full h-screen left-0 -top-2 z-20 flex justify-center items-center bg-slate-500/70">
             <div className="relative bg-white rounded-md p-4 space-y-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="absolute bg-white text-red-500 rounded-full -right-5 -top-5 w-8 h-8 cursor-pointer" onClick={()=>setProduct(!product)}>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

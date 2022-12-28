@@ -1,3 +1,4 @@
+import Head from "next/head"
 import Link from "next/link"
 import { useState } from "react"
 import AddProduct from "../components/AddProduct"
@@ -33,19 +34,31 @@ export default function Admin(){
         },
     ]
     return(
-        <div className="">
-            <Link href=''>
-                <a onClick={()=>setSection(!section)}>Add Section</a>
-            </Link>
-            <Link href=''>
-                <a onClick={()=>setProduct(!product)}>Add Product</a>
-            </Link>
-            {data.map((item, index) =><Link key={index} href={`/add_product/${item.link}`}>
-                    <a>{item.title}</a>
-            </Link>)}
+        <div className="flex justify-center">
+            <Head>
+                <title>S&B Nice Food Valley Ltd.</title>
+                <meta name="description" content="S&B Nice Food Valley Ltd." />
+                <link rel="icon" href="/logo.png" />
+            </Head>
+            <div className="w-full mx-4 md:w-1/2 px-2 py-4 mt-10 border rounded-md shadow-lg space-y-2">
+                <div className="space-x-2 border-b pb-4">
+                    <Link href=''>
+                        <a className="p-2 bg-gray-100 rounded" onClick={()=>setSection(!section)}>Add Section</a>
+                    </Link>
+                    <Link href=''>
+                        <a className="p-2 bg-gray-100 rounded" onClick={()=>setProduct(!product)}>Add Product</a>
+                    </Link>
+                </div>
+                <div className="p-2">
+                    <h3 className="text-center bg-gray-500 p-2 text-white">Add Recipe</h3>
+                    {data.map((item, index) =><Link key={index} href={`/add_product/${item.link}`}>
+                            <a className="block p-2">{item.title}</a>
+                    </Link>)}
+                </div>
 
-            {section && <AddSection section={section} setSection={setSection}/>}
-            {product && <AddProduct product={product} setProduct={setProduct}/>}
+                {section && <AddSection section={section} setSection={setSection}/>}
+                {product && <AddProduct product={product} setProduct={setProduct}/>}
+            </div>
         </div>
     )
 }
