@@ -65,25 +65,21 @@ export default function AddProduct({sections}){
                     <form onSubmit={(e)=>addProduct(e)}>
                         <div className="input">
                             <label htmlFor="">Section Name</label>
-                            <div>
-                                <select name="section" onChange={(e)=>productList(e)}>
-                                    <option value="">Select Product</option>
+                            <select name="section" onChange={(e)=>productList(e)}>
+                                <option value="">Select Product</option>
                                     {
                                         sections.map(section => <option key={section.id} value={section.name}>{section.name}</option>)
                                     }
-                                </select>
-                            </div>
+                            </select>
                         </div>
                         <div className="input">
                             <label htmlFor="">Product Name</label>
-                            <div>
-                                <select name="name"  onChange={(e)=>handleInput(e,product,setProduct)}>
-                                    <option value="">Select Name</option>
+                            <select name="name"  onChange={(e)=>handleInput(e,product,setProduct)}>
+                                <option value="">Select Name</option>
                                     {
                                         products.map(product => <option key={product.id} value={product.name}>{product.name}</option>)
                                     }
-                                </select>
-                            </div>
+                            </select>
                         </div>
                         <ProductInput label='Version' name="version" product={product} setProduct={setProduct}/>
                         <ProductInput label='Packet Weight' name="packetWeight" product={product} setProduct={setProduct}/>
@@ -91,9 +87,9 @@ export default function AddProduct({sections}){
                         <ProductInput label='Process Loss' name="processLoss" product={product} setProduct={setProduct}/>
                         <ProductInput label='Inner Foil Weight' name="innerFoilWeight" product={product} setProduct={setProduct}/>
                         <ProductInput label='Foil Weight' name="foilWeight" product={product} setProduct={setProduct}/>
-                        <div className="heading">
-                            <p className="name">Ingredients</p>
-                            <p>Quantity</p>
+                        <div className="flex justify-between px-2 text-white">
+                            <p className="w-7/12 py-1 text-white text-center bg-slate-500 font-bold border-r-4">Ingredients</p>
+                            <p className="w-5/12 py-1 text-white text-center bg-slate-500 font-bold">Quantity</p>
                         </div>
                         
                         {
