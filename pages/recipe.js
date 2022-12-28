@@ -20,7 +20,7 @@ export async function getServerSideProps(){
 export default function Raw({sections}) {
   const [products,setProducts] = useState([])
   const [name,setName] = useState('')
-  const [product,setProduct] = useState('')
+  const [product,setProduct] = useState({})
 
   async function productList(e){
       const q= query(collection(db,'products'),where('section','==', e.target.value))
@@ -37,13 +37,16 @@ export default function Raw({sections}) {
         const products = [];
         docs.forEach(data => products.push(data.data()));
         setProduct(products[0])
-        // setTotal(products[0]?.ingredients.map((a,i)=>a.quantity).reduce((a,i)=>a+i,0))
     }
     getRecipe(name)
   },[name])
 
-  const total = parseFloat(product?.ingredients?.map((a,i)=>a.quantity).reduce((a,i)=>a+i,0)).toFixed(2)
-  console.log(total);
+  const total = parseFloat(product?.ingredients?.map((a,i)=>a.quantity).reduce((a,i)=>a+i,0)).toFixed(2);
+  const processLoss = ((total*Number(product?.processLoss))/100).toFixed(2)
+  console.log(product);
+  const  output = (total - processLoss).toFixed(2);
+  const carton = (output/(Number(product?.packetWeight)/1000))/Number(product?.packetPerCarton)
+
   return (
     <div className='raw-consumption'>
       <Head>
@@ -75,35 +78,52 @@ export default function Raw({sections}) {
                   </select>
                 </div>
           </div>
-          {product && <div className='pb-2'>
-            <h3 className='text-center p-1 font-bold bg-gray-500 text-white'>Short Info</h3>
-            <Info text='Version' value={product?.version} unit=''/>
-            <Info text='Packet Weight' value={product?.packetWeight} unit='gm'/>
-            <Info text='Packet Per Carton' value={product?.packetPerCarton}q unit='Packet'/>
-            <Info text='processLoss' value={product?.processLoss} unit='%'/>
-            <Info text='Foil Weight' value={product?.foilWeight} unit='gm'/>
-          </div>}
-          {product?.ingredients && <div className='consumption space-y-2'>
-            <div className="heading">
-                            <p className="name">Ingredients</p>
-                            <p>Quantity</p>
-                        </div>
-              <div className='space-y-2'>
-                {
-                   product.ingredients.map((ingredient)=><div key={ingredient.code_name} className="w-full flex justify-between py-2 border-b items-center rounded hover:bg-gray-500 hover:text-white transition-all duration-300 hover:scale-[1.02]">
-                  <label htmlFor="" className='w-3/4 pl-2'>{ingredient.name}</label>
-                    <div className='w-1/4 text-center'>
-                      {
-                        Number(ingredient.quantity)  == 0 ? "-" : ingredient.quantity
-                      }
-                    </div>
-                  </div>)
-                }
-                <p className='flex justify-between font-bold p-2'>
-                  <span className='w-3/4'>Total</span>
-                  <span className='w-1/4 text-center'>= {total}</span>
-                </p>
-              </div>
+
+          {product && <div className='recipe-area'>
+            {/*===================== short info area ===================*/}
+            <div className='pb-2'>
+              <h3 className='text-center p-1 font-bold bg-gray-500 text-white'>{product.name} Info</h3>
+              <Info text='Version' value={product?.version} unit=''/>
+              <Info text='Packet Weight' value={product?.packetWeight} unit='gm'/>
+              <Info text='Packet Per Carton' value={product?.packetPerCarton}q unit='Packet'/>
+              <Info text='Process Loss' value={product?.processLoss} unit='%'/>
+              <Info text='Foil Weight' value={product?.foilWeight} unit='gm'/>
+              <Info text='Carton Per Batch' value={carton.toFixed(2)} unit=''/>
+            </div>
+
+            {/*===================== ingredient list area ===================*/}
+            <div className='consumption space-y-2'>
+                <div className="heading">
+                    <p className="name">Ingredients</p>
+                    <p>Quantity</p>
+                </div>
+                <div className='space-y-2'>
+                  {
+                    product?.ingredients?.map((ingredient)=><div key={ingredient.code_name} className="w-full flex justify-between py-2 border-b items-center rounded hover:bg-gray-500 hover:text-white transition-all duration-300 hover:scale-[1.02]">
+                    <label htmlFor="" className='w-3/4 pl-2'>{ingredient.name}</label>
+                      <div className='w-1/4 text-center'>
+                        {
+                          Number(ingredient.quantity)  == 0 ? "-" : ingredient.quantity
+                        }
+                      </div>
+                    </div>)
+                  }
+                  <div className='border shadow rounded-md'>
+                    <p className='flex justify-between p-2'>
+                      <span className='w-3/4'>Total Input</span>
+                      <span className='w-1/4 text-center'> {total}</span>
+                    </p>
+                    <p className='flex justify-between p-2 border-b'>
+                      <span className='w-3/4'>Process Loss ({product?.processLoss}%)</span>
+                      <span className='w-1/4 text-center'>- {processLoss}</span>
+                    </p>
+                    <p className='flex justify-between p-2'>
+                      <span className='w-3/4'>Total Output</span>
+                      <span className='w-1/4 text-center'>= {output}</span>
+                    </p>
+                  </div>
+                </div>
+            </div>
           </div>}
       </div>
     </div>

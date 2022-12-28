@@ -1,15 +1,15 @@
 .input {
   @apply w-full flex justify-between;
   & > label {
-    @apply w-1/2 px-2;
+    @apply md:w-1/2 px-2;
   }
   & > div {
     @apply w-1/2 flex justify-center;
     & > input {
-      @apply md:w-10/12 px-2 py-2 text-center border focus:outline-none focus:ring-2 rounded;
+      @apply md:w-10/12 p-2 text-center border focus:outline-none focus:ring-2 rounded;
     }
     & > select {
-      @apply w-full md:w-10/12 px-2 py-2  border focus:outline-none focus:ring-2 rounded;
+      @apply w-full md:w-10/12 p-2  border focus:outline-none focus:ring-2 rounded;
     }
   }
 }
