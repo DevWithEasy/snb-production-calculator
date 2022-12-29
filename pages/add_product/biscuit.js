@@ -1,4 +1,5 @@
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from 'react-hot-toast';
@@ -57,6 +58,11 @@ export default function AddProduct({sections}){
     }
     return(
         <div className="add_product">
+            <Head>
+                <title>Biscuit Add Product</title>
+                <meta name="description" content="Biscuit Add Product" />
+                <link rel="icon" href="/logo.png" />
+            </Head>
             <div className="ingredient_area">
                 <h3>Biscuit Add Product</h3>
                 

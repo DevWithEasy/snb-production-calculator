@@ -1,4 +1,5 @@
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from 'react-hot-toast';
@@ -58,6 +59,11 @@ export default function AddProduct({sections}){
     }
     return(
         <div className="add_product">
+            <Head>
+                <title>Lachcha Add Product</title>
+                <meta name="description" content="Lachcha Add Product" />
+                <link rel="icon" href="/logo.png" />
+            </Head>
             <div className="ingredient_area">
                 <h3>Lachcha Add Product</h3>
                 
@@ -66,25 +72,21 @@ export default function AddProduct({sections}){
                     <form onSubmit={(e)=>addProduct(e)}>
                         <div className="input">
                             <label htmlFor="">Section Name</label>
-                            <div>
-                                <select name="section" onChange={(e)=>productList(e)}>
-                                    <option value="">Select Product</option>
+                            <select name="section" onChange={(e)=>productList(e)}>
+                                <option value="">Select Product</option>
                                     {
                                         sections.map(section => <option key={section.id} value={section.name}>{section.name}</option>)
                                     }
-                                </select>
-                            </div>
+                            </select>
                         </div>
                         <div className="input">
                             <label htmlFor="">Product Name</label>
-                            <div>
-                                <select name="name"  onChange={(e)=>handleInput(e,product,setProduct)}>
-                                    <option value="">Select Name</option>
+                            <select name="name"  onChange={(e)=>handleInput(e,product,setProduct)}>
+                                <option value="">Select Name</option>
                                     {
                                         products.map(product => <option key={product.id} value={product.name}>{product.name}</option>)
                                     }
-                                </select>
-                            </div>
+                            </select>
                         </div>
                         <ProductInput label='Version' name="version" product={product} setProduct={setProduct}/>
                         <ProductInput label='Packet Weight' name="packetWeight" product={product} setProduct={setProduct}/>

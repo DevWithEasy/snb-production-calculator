@@ -55,28 +55,24 @@ export default function Raw({sections}) {
         <link rel="icon" href="/logo.png" />
       </Head>
       <div className='raw'>
-        <h1 className='py-2 bg-gray-500 text-white text-xl text-center'>Recipe - {product?.name}</h1>
+        <h1 className='py-2 bg-gray-500 text-white text-xl text-center'>Recipe</h1>
           <div className="input">
               <label htmlFor="">Section Name</label>
-                <div>
-                  <select name="section" onChange={(e)=>productList(e)}>
+              <select name="section" onChange={(e)=>productList(e)}>
                     <option value="">Select Section</option>
                       {
                           sections.map(section => <option key={section.id} value={section.name}>{section.name}</option>)
                       }
-                  </select>
-                </div>
+                </select>
           </div>
           <div className="input">
               <label htmlFor="">Product Name</label>
-                <div>
-                  <select name="name"  onChange={(e)=>setName(e.target.value)}>
+              <select name="name"  onChange={(e)=>setName(e.target.value)}>
                     <option value="">{products.length > 0 ? 'Select Name' : ''}</option>
                     {
                       products.map(product => <option key={product.id} value={product.name}>{product.name}</option>)
                     }
-                  </select>
-                </div>
+                </select>
           </div>
 
           {product?.ingredients && <div className='recipe-area'>
