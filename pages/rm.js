@@ -42,13 +42,17 @@ export default function Raw({sections}) {
     }
     getRecipe(name)
   },[name])
-  console.log(product);
+
 
   const total = parseFloat(product?.ingredients?.map((a,i)=>a.quantity).reduce((a,i)=>a+i,0)).toFixed(2);
   const processLoss = ((total*Number(product?.processLoss))/100).toFixed(2)
   console.log(product);
   const  output = (total - processLoss).toFixed(2);
   const carton = (output/(Number(product?.packetWeight)/1000))/Number(product?.packetPerCarton)
+  const totalCarton = (carton * batch).toFixed(0);
+  const different = (totalCarton - productionCarton).toFixed(2);
+  const foilConsumption = ((productionCarton * Number(product?.packetPerCarton) * Number(product?.foilWeight))/1000).toFixed(2)
+  const totalFoilConsumption = (Number(foilConsumption) + Number(wastage)).toFixed(2)
 
   return (
     <div className='raw-consumption'>
@@ -116,29 +120,29 @@ export default function Raw({sections}) {
             <div className='border shadow rounded-md'>
                 <p className='flex justify-between p-2'>
                     <span className='w-3/4'>Recipe wise Carton</span>
-                    <span className='w-1/4 text-center'> {total * batch}</span>
+                    <span className='w-1/4 text-center'> {totalCarton}</span>
                 </p>
                 <p className='flex justify-between p-2'>
                     <span className='w-3/4'>Actual Output</span>
-                    <span className='w-1/4 text-center'> {total}</span>
+                    <span className='w-1/4 text-center'> {productionCarton}</span>
                 </p>
                 <p className='flex justify-between p-2'>
                     <span className='w-3/4'>Different</span>
-                    <span className='w-1/4 text-center'> {total}</span>
+                    <span className='w-1/4 text-center'> {different}</span>
                 </p>
             </div>
             <div className='border shadow rounded-md'>
                 <p className='flex justify-between p-2'>
                     <span className='w-3/4'>Foil Consumpotion By Carton</span>
-                    <span className='w-1/4 text-center'> {total}</span>
+                    <span className='w-1/4 text-center'> {foilConsumption}</span>
                 </p>
                 <p className='flex justify-between p-2 items-center'>
                     <span className='w-3/4'>Wastage</span>
-                    <span className='w-1/4 text-center'> {total}</span>
+                    <span className='w-1/4 text-center'> {wastage}</span>
                 </p>
                 <p className='flex justify-between p-2'>
                     <span className='w-3/4'>Total Consumption</span>
-                    <span className='w-1/4 text-center'> {total}</span>
+                    <span className='w-1/4 text-center'> {totalFoilConsumption}</span>
                 </p>
             </div>
 
