@@ -1,5 +1,5 @@
 .input {
-  @apply w-full flex justify-between items-center print:pl-2;
+  @apply w-full flex justify-between items-center print:pr-2;
   & > label {
     @apply w-7/12
     px-2
