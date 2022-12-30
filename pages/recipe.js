@@ -118,7 +118,7 @@ export default function Raw({sections}) {
                 <div className='space-y-2 print:px-2 print:pb-2'>
                   {
                     product?.ingredients?.map((ingredient)=><div key={ingredient.code_name} className={ingredient.quantity == 0 ? `hidden` : `w-full flex justify-between py-2 print:py-0 border-b print:border-gray-500 items-center rounded print:rounded-none hover:bg-gray-500 hover:text-white transition-all duration-300 hover:scale-[1.02] print:text-sm`}>
-                    <label htmlFor="" className='w-3/4 pl-2'>{ingredient.name}</label>
+                    <label htmlFor="" className='w-3/4 pl-2 print:pl-0'>{ingredient.name}</label>
                       <div className='w-1/4 text-center'>
                         {
                           Number(ingredient.quantity)  == 0 ? "-" : ingredient.quantity
