@@ -1,6 +1,9 @@
-.raw-consumption{
-    @apply p-4 flex justify-center;
-    &>.raw{
-        @apply w-full md:w-1/2 space-y-2 p-2 border shadow-xl rounded-md;
-    }
+.raw-consumption {
+  @apply p-4 flex justify-center ;
+  & > .raw {
+    @apply w-full md:w-1/2 
+        space-y-2 p-2 
+        border shadow-xl rounded-md
+        print:border-0 print:shadow-none;
+  }
 }
