@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import UpdateInput from "../../../components/ProductInputUpdate";
 import RmUpdate from "../../../components/RmUpdate";
 import { db } from "../../../database/conncetDB";
+
 
 export async function getServerSideProps(){
     const q= query(collection(db,'products'),where('section','==', 'Lachcha'))
@@ -42,16 +43,26 @@ export default function AddProduct({products}){
         getUpdateRecipe(name)
       },[name])
 
-    async function addProduct(){
-        if(!data) return toast.error('Select a product name.')
-        await setDoc(doc(db,'products_info',data.id),{...product,id:data.id})
-        await setDoc(doc(db,'products_recipe',data.id),ingredients)
-        toast.success('Product Added Successfully')
+    async function updateProduct(){
+        const infoRef = doc(db, "products_info", product.id);
+        await updateDoc(infoRef, product);
+        const recipeRef = doc(db, "products_recipe", product.id);
+        await updateDoc(recipeRef, ingredients);
+        toast.success('Product update Successfully')
         // e.target.reset()
         // router.push(`/add_product/lachcha`)
-        
     }
-    console.log(product);
+    async function updateProductVerson(){
+        const infoRef = doc(db, "products_info", product.id);
+        await updateDoc(infoRef, product);
+        const recipeRef = doc(db, "products_recipe", product.id);
+        await updateDoc(recipeRef, ingredients);
+        await setDoc(doc(db,'all_version_recipes',("V"+"_"+product.version+"_"+product.id)),{...product,ingredients : ingredients,changedAt: Date.now()})
+        toast.success('Product update Successfully')
+        // e.target.reset()
+        // router.push(`/add_product/lachcha`)
+    }
+    console.log(ingredients);
     return(
         <div className="add_product">
             <Head>
@@ -95,7 +106,9 @@ export default function AddProduct({products}){
                                 <RmUpdate label='Ghee Flavour' name='gheeFlavour' value={ingredients?.gheeFlavour} ingredients={ingredients} setIngredients={setIngredients}/>
                                 <RmUpdate label='TBHQ' name='tbhq' value={ingredients?.tbhq} ingredients={ingredients} setIngredients={setIngredients}/>
                             </div>
-                            <button >Add Product</button>
+                            <button onClick={()=>updateProduct()}>Update Product</button>
+                            <br/>
+                            <button onClick={()=>updateProductVerson()}>Update Product & Change Version</button>
                         </div>}
                 </div>
             </div>
