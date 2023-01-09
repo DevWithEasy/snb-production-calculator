@@ -1,41 +1,38 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../database/conncetDB";
+import axios from "axios";
+import { useState } from "react";
+import findProduct from "../../utils/findProduct";
+import handleInput from "../../utils/handleInput";
+import ingredientsByBatch from "../../utils/ingredientsByBatch";
+import targetBatch from "../../utils/targetBatch";
 
 export async function getServerSideProps(){
-    const q= query(collection(db,'recipes'),where('section','==', 'Wafer'))
-        const docs = await getDocs(q)
-        const products = [];
-        docs.forEach(data => products.push(data.data()));
+    const data = await axios.get('http://localhost:3000/api/monthly_demand/lachcha')
     return{
-        props:{products}
+        props:{
+            products : data.data || []
+        }
     }
 }
 
-export default function BiscuitDemand({products}){
-    function findProduct(products,name){
-        const product = products.find(product=>product.name == name)
-        return product
-    }
-    const vanillaWafer = findProduct(products, 'Vanilla Wafer')
-    const chocolateWafer = findProduct(products, 'Chocolate Wafer')
+export default function LachchaDemand({products}){
+    const [carton,setCarton] = useState({
+        Lachcha_Semai_200gm : 0,
+        Lachcha_Semai_500gm : 0
+    })
+    //generate all recipe ana ingredient
+    const lachcha200 = findProduct(products, 'Lachcha_Semai_200gm')
+    const lachcha500 = findProduct(products, 'Lachcha_Semai_500gm')
+    const lachcha200Batch = targetBatch(carton.Lachcha_Semai_200gm,lachcha200)
+    const lachcha500Batch = targetBatch(carton.Lachcha_Semai_500gm,lachcha500)
+    const all = [...ingredientsByBatch(lachcha200,lachcha200Batch),...ingredientsByBatch(lachcha500,lachcha500Batch)]
 
-    function ingredientsByBatch(ingredients,batch){
-        return ingredients.map(ingredient=>{
-            return {...ingredient,quantity : ingredient.quantity * batch}
-        })
-    }
-    
-    const vanillaWaferIngredients = ingredientsByBatch(vanillaWafer.ingredients,1)
-    const chocolateWaferIngredients = ingredientsByBatch(chocolateWafer.ingredients,1)
-    const all = [...vanillaWaferIngredients,...chocolateWaferIngredients]
-    function ingredient(all,name){
-        return all.filter(item => item.code_name == name).map((a,i)=>a.quantity).reduce((a,i)=>a+i,0).toFixed(2)
-    }
-    const chocolateBrownColour_6059 = ingredient(all, 'chocolateBrownColour_6059')
-    console.log(chocolateBrownColour_6059);
+    console.log(all);
     return(
         <div>
-            Demand
+            <div className="p-10">
+                <input type="number" name="Lachcha_Semai_200gm" onChange={(e)=>handleInput(e,carton,setCarton)} className='p-2 border'/>
+                <input type="number" name="Lachcha_Semai_500gm" onChange={(e)=>handleInput(e,carton,setCarton)} className='p-2 border'/>
+            </div>
         </div>
     )
 }
