@@ -7,8 +7,7 @@ import handleInput from "../../utils/handleInput";
 import ingredient from "../../utils/ingredient";
 import ingredientsByBatch from "../../utils/ingredientsByBatch";
 import targetBatch from "../../utils/targetBatch";
-import targetCarton from "../../utils/targetCarton";
-import targetFoil from "../../utils/totalFoil";
+import totalFoilByTargetCarton from "../../utils/totalFoilByTargetCarton";
 
 export async function getServerSideProps(){
     const data = await axios.get(`${baseUrl}/api/monthly_demand/lachcha`)
@@ -30,7 +29,7 @@ export default function LachchaDemand({products}){
     const lachcha200Batch = targetBatch(carton.Lachcha_Semai_200gm,lachcha200)
     const lachcha500Batch = targetBatch(carton.Lachcha_Semai_500gm,lachcha500)
     const all = [...ingredientsByBatch(lachcha200,lachcha200Batch),...ingredientsByBatch(lachcha500,lachcha500Batch)]
-    const foil = targetFoil(carton.Lachcha_Semai_200gm,lachcha200)
+    const foil = totalFoilByTargetCarton(carton.Lachcha_Semai_200gm,lachcha200)
     console.log(lachcha200,foil);
     return(
         <div className="mt-2 w-1/2 p-2 mx-auto border shadow-lg rounded-md">
