@@ -10,7 +10,7 @@ import { db } from '../../database/conncetDB';
 
 
 export async function getServerSideProps(){
-    const q= query(collection(db,'products'),where('section','==', 'Lachcha'))
+    const q= query(collection(db,'products'),where('section','==', 'Biscuit'))
     const docs = await getDocs(q)
     const products = [];
     docs.forEach(data => products.push(data.data()));
@@ -87,7 +87,7 @@ export default function Raw({products}) {
   let carton
   if(output) carton = totalCarton(output,product?.packetWeight,product?.packetPerCarton)
 
-  console.log(ingredients);
+  console.log(product);
   return (
     <div className='raw-consumption '>
       <Head>
@@ -101,7 +101,7 @@ export default function Raw({products}) {
           <h1 className=' relative py-1 bg-gray-500 text-white text-xl text-center font-bold print:mx-2'>
             Recipe
             {product?.name && <button onClick={()=>handlePrint()} className="absolute right-2 print:hidden"> 
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 ">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
               </svg>
             </button>}
@@ -129,7 +129,7 @@ export default function Raw({products}) {
                 <Info text='Packet Per Carton' value={product?.packetPerCarton}q unit='Packet'/>
                 <Info text='Process Loss' value={product?.processLoss} unit='%'/>
                 <Info text='Foil Weight' value={product?.foilWeight} unit='gm'/>
-                <Info text='Master Poly Weight' value={product?.masterPoly} unit='gm'/>
+                <Info text='Inner Foil Weight' value={product?.innerFoil} unit='gm'/>
                 <Info text='Carton Per Batch' value={carton} unit=''/>
               </div>
             </div>
@@ -141,14 +141,52 @@ export default function Raw({products}) {
                     <p>Quantity (kg)</p>
                 </div>
                 <div className='space-y-2 print:px-2 print:pb-2'>
-                  <RmView name='Flour A Grade' ingredient={product?.ingredients?.flourGrade_A}/>
-                  <RmView name='Flour B Grade' ingredient={product?.ingredients?.flourGrade_B}/>
+                  <RmView name='Ammonium Bi Carbonate' ingredient={product?.ingredients?.ammonium}/>
+                  <RmView name='Black Cumin' ingredient={product?.ingredients?.blackCumin}/>
+                  <RmView name='Bit Salt' ingredient={product?.ingredients?.bitSalt}/>
+                  <RmView name='Butter Flavour SK' ingredient={product?.ingredients?.butterFlavourSK}/>
+                  <RmView name='Butter Flavour SYMEGA' ingredient={product?.ingredients?.butterFlavourSYMEGA}/>
+                  <RmView name='Butter Solid' ingredient={product?.ingredients?.butterSolid}/>
+                  <RmView name='Butter Oil Substitute' ingredient={product?.ingredients?.butterOilSubstitute}/>
+                  <RmView name='Chocolate Brown Colour 815' ingredient={product?.ingredients?.chocolateBrownColour_815}/>
+                  <RmView name='Aspertem' ingredient={product?.ingredients?.aspertem}/>
+                  <RmView name='Chocolate Flavour KH' ingredient={product?.ingredients?.chocolateFlavourKH}/>
+                  <RmView name='Calcium Carbonate' ingredient={product?.ingredients?.calciumCarbonate}/>
+                  <RmView name='Craker Enzyme' ingredient={product?.ingredients?.crakerEnzyme}/>
+                  <RmView name='Citric Acid Mono' ingredient={product?.ingredients?.citricAcidMono}/>
+                  <RmView name='Cocoa Powder Black 910' ingredient={product?.ingredients?.cocoaPowderBlack_910}/>
+                  <RmView name='Dalda Soft HILSA' ingredient={product?.ingredients?.daldaSoftHILSA}/>
+                  <RmView name='Cardamon Flavour' ingredient={product?.ingredients?.cardamonFlavour}/>
+                  <RmView name='Flour Grade A' ingredient={product?.ingredients?.flourGrade_A}/>
+                  <RmView name='Flour Grade B' ingredient={product?.ingredients?.flourGrade_B}/>
+                  <RmView name='Flour Grade C' ingredient={product?.ingredients?.flourGrade_C}/>
+                  <RmView name='Glucose Powder' ingredient={product?.ingredients?.glucosePowder}/>
+                  <RmView name='Lemon Flavour' ingredient={product?.ingredients?.lemonFlavour}/>
+                  <RmView name='Lemon Yellow Colour' ingredient={product?.ingredients?.lemonYellowColour}/>
+                  <RmView name='Soya Lecithine' ingredient={product?.ingredients?.soyaLecithine}/>
+                  <RmView name='Liquid Glucose' ingredient={product?.ingredients?.liquidGlucose}/>
+                  <RmView name='Milk Flavour KH' ingredient={product?.ingredients?.milkFlavourKH}/>
+                  <RmView name='Orange Flavour' ingredient={product?.ingredients?.orangeFlavour}/>
+                  <RmView name='Onion Flavour Green' ingredient={product?.ingredients?.onionFlavourGreen}/>
+                  <RmView name='Onion Flavour SYMEGA' ingredient={product?.ingredients?.onionFlavourSYMEGA}/>
+                  <RmView name='Onion Powder' ingredient={product?.ingredients?.onionPowder}/>
                   <RmView name='Palm Oil Super' ingredient={product?.ingredients?.palmOilSuper}/>
+                  <RmView name='Pineapple Flavour' ingredient={product?.ingredients?.pineappleFlavour}/>
+                  <RmView name='Palm Corn Oil' ingredient={product?.ingredients?.palmCornOil}/>
+                  <RmView name='Super Salt' ingredient={product?.ingredients?.superSalt}/>
+                  <RmView name='Sodium Acid Pyro Phosphet' ingredient={product?.ingredients?.sodiumAcidpyroPhosphet}/>
+                  <RmView name='Skim Milk Powder' ingredient={product?.ingredients?.skimMilkPowder}/>
+                  <RmView name='Sodium Meta Bi Sulphate' ingredient={product?.ingredients?.sodiumMetaBiSulphate}/>
+                  <RmView name='Sodium Bi Carbonate' ingredient={product?.ingredients?.sodiumBiCarbonate}/>
                   <RmView name='Starch Powder' ingredient={product?.ingredients?.starchPowder}/>
-                  <RmView name='Dalda Hard Pusti' ingredient={product?.ingredients?.daldaHardPUSTI}/>
-                  <RmView name='Ghee' ingredient={product?.ingredients?.ghee}/>
-                  <RmView name='Ghee Flavour' ingredient={product?.ingredients?.gheeFlavour}/>
+                  <RmView name='Sugar' ingredient={product?.ingredients?.sugar}/>
+                  <RmView name='Testing Salt' ingredient={product?.ingredients?.testingSalt}/>
                   <RmView name='TBHQ' ingredient={product?.ingredients?.tbhq}/>
+                  <RmView name='Vanilin Powder' ingredient={product?.ingredients?.vanilinPowder}/>
+                  <RmView name='Onion Chieves' ingredient={product?.ingredients?.onionChieves}/>
+                  <RmView name='Coconut Flavour' ingredient={product?.ingredients?.coconutFlavour}/>
+                  <RmView name='Butta Belly Flavour' ingredient={product?.ingredients?.buttaBellyFlavour}/>
+                  <RmView name='Coconut Powder' ingredient={product?.ingredients?.coconutPowder}/>
                 </div>
                 <div className='mt-10 border print:border-gray-500 shadow print:shadow-none rounded-md print:text-sm print:mx-2'>
                     <p className='flex justify-between p-2 print:px-2 print:py-0.5'>

@@ -30,18 +30,10 @@ export default function AddLachcha({products}){
         packetWeight: 0,
         packetPerCarton: 0,
         processLoss : 0,
-        masterPoly: 0,
+        innerFoil: 0,
         foilWeight : 0,
     })
     const [ingredients,setIngredients] = useState({
-        flourGrade_A : 0,
-        flourGrade_B : 0,
-        palmOilSuper : 0,
-        starchPowder : 0,
-        daldaHardPUSTI : 0,
-        ghee : 0,
-        gheeFlavour : 0,
-        tbhq : 0
     });
     const data = products.find(item => item.name == product.name)
 
@@ -58,12 +50,12 @@ export default function AddLachcha({products}){
     return(
         <div className="add_product">
             <Head>
-                <title>Lachcha Add Product</title>
-                <meta name="description" content="Lachcha Add Product" />
+                <title>Water Add Product</title>
+                <meta name="description" content="Water Add Product" />
                 <link rel="icon" href="/logo.png" />
             </Head>
             <div className="ingredient_area">
-                <h3>Lachcha Add Product</h3>
+                <h3>Water Add Product</h3>
                 
                 <div className="ingredients">
                         <div className="input">
@@ -80,20 +72,13 @@ export default function AddLachcha({products}){
                         <ProductInput label='Packet Per Carton' name="packetPerCarton" product={product} setProduct={setProduct}/>
                         <ProductInput label='Process Loss' name="processLoss" product={product} setProduct={setProduct}/>
                         <ProductInput label='Foil Weight' name="foilWeight" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Master Poly Weight' name="masterPoly" product={product} setProduct={setProduct}/>
+                        <ProductInput label='Inner Foil Weight' name="innerFoil" product={product} setProduct={setProduct}/>
                         <div className="heading">
                             <p className="name">Ingredients</p>
                             <p>Quantity</p>
                         </div>
                         <div className="space-y-2">
-                            <RmInput name={'Flour A Grade'} ingredient={'flourGrade_A'} ingredients={ingredients} setIngredients={setIngredients}/>
-                            <RmInput name={'Flour B Grade'} ingredient={'flourGrade_B'} ingredients={ingredients} setIngredients={setIngredients}/>
-                            <RmInput name={'Palm Oil Super'} ingredient={'palmOilSuper'} ingredients={ingredients} setIngredients={setIngredients}/>
-                            <RmInput name={'Starch Powder'} ingredient={'starchPowder'} ingredients={ingredients} setIngredients={setIngredients}/>
-                            <RmInput name={'Dalda Hard Pusti'} ingredient={'daldaHardPUSTI'} ingredients={ingredients} setIngredients={setIngredients}/>
-                            <RmInput name={'Ghee'} ingredient={'ghee'} ingredients={ingredients} setIngredients={setIngredients}/>
-                            <RmInput name={'Ghee Flavour'} ingredient={'gheeFlavour'} ingredients={ingredients} setIngredients={setIngredients}/>
-                            <RmInput name={'TBHQ'} ingredient={'tbhq'} ingredients={ingredients} setIngredients={setIngredients}/>
+                            <RmInput name={''} ingredient={'flourGrade_A'} ingredients={ingredients} setIngredients={setIngredients}/>
                         </div>
                         <button onClick={()=>addProduct()}>Add Product</button>
                 </div>
