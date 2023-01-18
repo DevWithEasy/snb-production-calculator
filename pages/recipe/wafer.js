@@ -10,7 +10,7 @@ import { db } from '../../database/conncetDB';
 
 
 export async function getServerSideProps(){
-    const q= query(collection(db,'products'),where('section','==', 'Biscuit'))
+    const q= query(collection(db,'products'),where('section','==', 'Wafer'))
     const docs = await getDocs(q)
     const products = [];
     docs.forEach(data => products.push(data.data()));
@@ -141,98 +141,41 @@ export default function Raw({products}) {
                     <p>Quantity (kg)</p>
                 </div>
                 <div className='space-y-2 print:px-2 print:pb-2'>
-                  <RmView name='Ammonium Bi Carbonate' ingredient={product?.ingredients?.ammonium}/>
-
-                  <RmView name='Black Cumin' ingredient={product?.ingredients?.blackCumin}/>
-
-                  <RmView name='Bit Salt' ingredient={product?.ingredients?.bitSalt}/>
-
-                  <RmView name='Butter Flavour SK' ingredient={product?.ingredients?.butterFlavourSK}/>
-
-                  <RmView name='Butter Flavour SYMEGA' ingredient={product?.ingredients?.butterFlavourSYMEGA}/>
-
-                  <RmView name='Butter Solid' ingredient={product?.ingredients?.butterSolid}/>
-
-                  <RmView name='Butter Oil Substitute' ingredient={product?.ingredients?.butterOilSubstitute}/>
-
-                  <RmView name='Chocolate Brown Colour 815' ingredient={product?.ingredients?.chocolateBrownColour_815}/>
-
-                  <RmView name='Aspertem' ingredient={product?.ingredients?.aspertem}/>
-
-                  <RmView name='Chocolate Flavour KH' ingredient={product?.ingredients?.chocolateFlavourKH}/>
-
-                  <RmView name='Calcium Carbonate' ingredient={product?.ingredients?.calciumCarbonate}/>
-
-                  <RmView name='Craker Enzyme' ingredient={product?.ingredients?.crakerEnzyme}/>
+                  <RmView name='Chocolate Brown Colour 6059' ingredient={product?.ingredients?.chocolateBrownColour_6059}/>
 
                   <RmView name='Citric Acid Mono' ingredient={product?.ingredients?.citricAcidMono}/>
 
-                  <RmView name='Cocoa Powder Black 910' ingredient={product?.ingredients?.cocoaPowderBlack_910}/>
+                  <RmView name='Cocoa Powder Black 4011' ingredient={product?.ingredients?.cocoaPowderBlack_4011}/>
 
-                  <RmView name='Dalda Soft HILSA' ingredient={product?.ingredients?.daldaSoftHILSA}/>
+                  <RmView name='Chocolate Flavour KH' ingredient={product?.ingredients?.chocolateFlavourKH}/>
 
-                  <RmView name='Cardamon Flavour' ingredient={product?.ingredients?.cardamonFlavour}/>
+                  <RmView name='Dalda Hard PUSTI' ingredient={product?.ingredients?.daldaHardPUSTI}/>
 
-                  <RmView name='Flour Grade A' ingredient={product?.ingredients?.flourGrade_A}/>
+                  <RmView name='Flour A Grade' ingredient={product?.ingredients?.flourGrade_A}/>
 
-                  <RmView name='Flour Grade B' ingredient={product?.ingredients?.flourGrade_B}/>
-
-                  <RmView name='Flour Grade C' ingredient={product?.ingredients?.flourGrade_C}/>
-
-                  <RmView name='Glucose Powder' ingredient={product?.ingredients?.glucosePowder}/>
-
-                  <RmView name='Lemon Flavour' ingredient={product?.ingredients?.lemonFlavour}/>
-
-                  <RmView name='Lemon Yellow Colour' ingredient={product?.ingredients?.lemonYellowColour}/>
+                  <RmView name='Flour B Grade' ingredient={product?.ingredients?.flourGrade_B}/>
 
                   <RmView name='Soya Lecithine' ingredient={product?.ingredients?.soyaLecithine}/>
 
-                  <RmView name='Liquid Glucose' ingredient={product?.ingredients?.liquidGlucose}/>
-
                   <RmView name='Milk Flavour KH' ingredient={product?.ingredients?.milkFlavourKH}/>
-
-                  <RmView name='Orange Flavour' ingredient={product?.ingredients?.orangeFlavour}/>
-
-                  <RmView name='Onion Flavour Green' ingredient={product?.ingredients?.onionFlavourGreen}/>
-
-                  <RmView name='Onion Flavour SYMEGA' ingredient={product?.ingredients?.onionFlavourSYMEGA}/>
-
-                  <RmView name='Onion Powder' ingredient={product?.ingredients?.onionPowder}/>
 
                   <RmView name='Palm Oil Super' ingredient={product?.ingredients?.palmOilSuper}/>
 
-                  <RmView name='Pineapple Flavour' ingredient={product?.ingredients?.pineappleFlavour}/>
-
-                  <RmView name='Palm Corn Oil' ingredient={product?.ingredients?.palmCornOil}/>
-
                   <RmView name='Super Salt' ingredient={product?.ingredients?.superSalt}/>
-
-                  <RmView name='Sodium Acid Pyro Phosphet' ingredient={product?.ingredients?.sodiumAcidpyroPhosphet}/>
 
                   <RmView name='Skim Milk Powder' ingredient={product?.ingredients?.skimMilkPowder}/>
 
-                  <RmView name='Sodium Meta Bi Sulphate' ingredient={product?.ingredients?.sodiumMetaBiSulphate}/>
-
                   <RmView name='Sodium Bi Carbonate' ingredient={product?.ingredients?.sodiumBiCarbonate}/>
+
+                  <RmView name='Sodium Meta Bi Sulphate' ingredient={product?.ingredients?.sodiumMetaBiSulphate}/>
 
                   <RmView name='Starch Powder' ingredient={product?.ingredients?.starchPowder}/>
 
                   <RmView name='Sugar' ingredient={product?.ingredients?.sugar}/>
 
-                  <RmView name='Testing Salt' ingredient={product?.ingredients?.testingSalt}/>
-
                   <RmView name='TBHQ' ingredient={product?.ingredients?.tbhq}/>
 
-                  <RmView name='Vanilin Powder' ingredient={product?.ingredients?.vanilinPowder}/>
-
-                  <RmView name='Onion Chieves' ingredient={product?.ingredients?.onionChieves}/>
-
-                  <RmView name='Coconut Flavour' ingredient={product?.ingredients?.coconutFlavour}/>
-
-                  <RmView name='Butta Belly Flavour' ingredient={product?.ingredients?.buttaBellyFlavour}/>
-
-                  <RmView name='Coconut Powder' ingredient={product?.ingredients?.coconutPowder}/>
-                  
+                  <RmView name='Vanila Flavour KH' ingredient={product?.ingredients?.vanilaFlavourKH}/>
                 </div>
                 <div className='mt-10 border print:border-gray-500 shadow print:shadow-none rounded-md print:text-sm print:mx-2'>
                     <p className='flex justify-between p-2 print:px-2 print:py-0.5'>
