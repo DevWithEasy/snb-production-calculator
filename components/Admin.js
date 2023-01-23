@@ -3,8 +3,10 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { db } from "../database/conncetDB"
+import useUserStore from "../features/userStore"
 
 export default function Admin({view,setView}){
+    const loginData = useUserStore(state=>state.loginData)
     const router = useRouter()
     const [hide,setHide] = useState(false)
     const [type, setType] = useState("password")
@@ -28,7 +30,9 @@ export default function Admin({view,setView}){
         docs.forEach(data => users.push(data.data()));
         if (!users[0]) return toast.error('Admin not found.')
         if (users[0].password !== password) return toast.error('Wrong Password.')
+        loginData(users[0])
         if (users[0]) return router.push('/admin')
+        
     }
 
 

@@ -16,7 +16,8 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
     "react-to-print": "^2.14.10",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "zustand": "^4.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.11",

@@ -11,7 +11,7 @@ const cake = {
     flourGrade_C : 0,
     glycerine : 0,
     isopropylAlcohol : 0,
-    milkFlavourKH : 0,
+    milkFlavourKing : 0,
     paraffinOil : 0,
     potassiumSorbate : 0,
     superSalt : 0,

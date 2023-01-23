@@ -3,8 +3,12 @@ import Link from "next/link"
 import { useState } from "react"
 import AddProduct from "../components/AddProduct"
 import AddSection from "../components/AddSection"
+import AddUser from "../components/AddUser"
+import useUserStore from "../features/userStore"
 
 export default function Admin(){
+    const users = useUserStore(state=>state.user)
+    const [user,setUser] = useState(false)
     const [section,setSection] = useState(false)
     const [product,setProduct] = useState(false)
     const data = [
@@ -33,6 +37,7 @@ export default function Admin(){
             link : 'lachcha'
         },
     ]
+    console.log(users);
     return(
         <div className="flex justify-center">
             <Head>
@@ -42,6 +47,9 @@ export default function Admin(){
             </Head>
             <div className="w-full mx-4 md:w-1/2 px-2 py-4 mt-10 border rounded-md shadow-lg space-y-2">
                 <div className="space-x-2 border-b pb-4">
+                    <Link href=''>
+                        <a className="p-2 bg-gray-100 rounded" onClick={()=>setUser(!user)}>Add User</a>
+                    </Link>
                     <Link href=''>
                         <a className="p-2 bg-gray-100 rounded" onClick={()=>setSection(!section)}>Add Section</a>
                     </Link>
@@ -56,6 +64,7 @@ export default function Admin(){
                     </Link>)}
                 </div>
 
+                {user && <AddUser user={user} setUser={setUser}/>}
                 {section && <AddSection section={section} setSection={setSection}/>}
                 {product && <AddProduct product={product} setProduct={setProduct}/>}
             </div>
