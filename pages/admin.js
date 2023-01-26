@@ -4,10 +4,8 @@ import { useState } from "react"
 import AddProduct from "../components/AddProduct"
 import AddSection from "../components/AddSection"
 import AddUser from "../components/AddUser"
-import useUserStore from "../features/userStore"
 
 export default function Admin(){
-    const users = useUserStore(state=>state.user)
     const [user,setUser] = useState(false)
     const [section,setSection] = useState(false)
     const [product,setProduct] = useState(false)
@@ -37,7 +35,6 @@ export default function Admin(){
             link : 'lachcha'
         },
     ]
-    console.log(users);
     return(
         <div className="flex justify-center">
             <Head>
