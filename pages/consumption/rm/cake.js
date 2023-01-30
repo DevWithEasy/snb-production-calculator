@@ -2,7 +2,6 @@ import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firesto
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import RmViewConsumption from '../../../components/RmViewConsumption';
-import RmViewConsumptionConsumption from '../../../components/RmViewConsumptionConsumption';
 import { db } from '../../../database/conncetDB';
 
 

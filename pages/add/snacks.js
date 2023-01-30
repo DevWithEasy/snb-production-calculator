@@ -30,7 +30,8 @@ export default function AddLachcha({products}){
         packetWeight: 0,
         packetPerCarton: 0,
         processLoss : 0,
-        innerFoil: 0,
+        innerPoly: 0,
+        masterPoly : 0,
         foilWeight : 0,
     })
     const [ingredients,setIngredients] = useState({

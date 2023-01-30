@@ -5,6 +5,7 @@ import { db } from "../database/conncetDB"
 
 export default function AddUser({user,setUser}){
     const [sections,setSections] = useState([])
+    const [name, setName] =useState('')
     const [username, setUsername] =useState('')
     const [password, setPassword] =useState('')
     const [section, setSection] =useState('')
@@ -21,6 +22,7 @@ export default function AddUser({user,setUser}){
 
     async function addSection(){
             await addDoc(collection(db, "users"), {
+                name,
                 username,
                 password,
                 section
@@ -37,6 +39,11 @@ export default function AddUser({user,setUser}){
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="absolute bg-white text-red-500 rounded-full -right-5 -top-5 w-8 h-8 cursor-pointer" onClick={()=>setUser(!user)}>
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
+
+                <div className="space-y-2">
+                    <label className="w-full pl-1">Name :</label>
+                    <input className="w-full border p-2  rounded-md focus:outline-none focus:ring-2" type="text" name="" onChange={(e)=>setName(e.target.value)}/>
+                </div>
 
                 <div className="space-y-2">
                     <label className="w-full pl-1">Username :</label>

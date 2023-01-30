@@ -1,13 +1,17 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import { useState } from 'react'
+import { useRouter } from 'next/router';
+import { Toaster } from 'react-hot-toast';
 import { useSelector } from 'react-redux'
 import Login from '../components/Login'
 import Section from '../components/Section'
 
 export default function Home() {
+  const router = useRouter()
   const user = useSelector(state=>state.user.user)
   console.log(user);
+  if (user?.username === 'admin') {
+    router.push('/admin')
+  }
   return (
     <div className='index flex justify-center'>
       <Head>
@@ -19,6 +23,7 @@ export default function Home() {
         {user.username && <Section {...user}/>}
       </div>
       {!user.username && <Login/>}
+      <Toaster/>
     </div>
   )
 }

@@ -29,7 +29,7 @@ export default function Login(){
         const docs = await getDocs(q)
         const users = [];
         docs.forEach(data => users.push(data.data()));
-        if (!users[0]) return toast.error('Admin not found.')
+        if (!users[0]) return toast.error('User not found.')
         if (users[0].password !== password) return toast.error('Wrong Password.')
         dispatch(login(users[0]))
         if (users[0].username === 'admin') return router.push('/admin')
