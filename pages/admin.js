@@ -12,7 +12,7 @@ import AddSection from "../components/AddSection";
 import AddUser from "../components/AddUser";
 import { db } from "../database/conncetDB";
 import { logout } from "../features/slice/userSlice";
-import { adminUIData } from "../public/adminUIdata";
+import { adminUIData } from "../utils/adminUIData";
 
 export async function getServerSideProps(){
     const q= query(collection(db,'users'))

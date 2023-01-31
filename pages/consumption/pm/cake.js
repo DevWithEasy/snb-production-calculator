@@ -2,8 +2,7 @@ import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firesto
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { db } from '../../../database/conncetDB';
-import totalCarton from '../../../utils/totalCarton';
-import totalFoil from '../../../utils/totalFoil';
+import { totalCarton, totalFoil } from '../../../utils/pmConsumption';
 
 
 export async function getServerSideProps(){
