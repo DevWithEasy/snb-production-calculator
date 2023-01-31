@@ -1,9 +1,9 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Toaster } from 'react-hot-toast';
-import { useSelector } from 'react-redux'
-import Login from '../components/Login'
-import Section from '../components/Section'
+import { useSelector } from 'react-redux';
+import Login from '../components/Login';
+import Section from '../components/Section';
 
 export default function Home() {
   const router = useRouter()
