@@ -1,17 +1,10 @@
 import axios from "axios";
-import { useRef, useState } from "react";
-import { useReactToPrint } from 'react-to-print';
-import Ingredient from "../../components/Ingredient";
-import Ingredientpacking from "../../components/IngredientPaking";
+import { useRef } from "react";
 import PrintHeader from "../../components/PrintHeader";
 import baseUrl from "../../utils/baseUrl";
-import findProduct from "../../utils/findProduct";
-import handleInput from "../../utils/handleInput";
-import totalCartonByTargetCarton, { ingredient, ingredientsByBatch, totalFoilByTargetCarton, totalMasterPPByTargetCarton } from "../../utils/monthlyDemand";
-import targetBatch from "../../utils/targetBatch";
 
 export async function getServerSideProps(){
-    const data = await axios.get(`${baseUrl}/api/monthly_demand/lachcha`)
+    const data = await axios.get(`${baseUrl}/api/monthly_demand/biscuit`)
     return{
         props:{
             products : data.data || []
@@ -19,28 +12,29 @@ export async function getServerSideProps(){
     }
 }
 
-export default function LachchaDemand({products}){
+export default function BiscuitDemand({products}){
     const printRef = useRef()
-    const [carton,setCarton] = useState({
-        Lachcha_Semai_200gm : 0,
-        Lachcha_Semai_500gm : 0
-    })
-    //generate all recipe ana ingredient
-    const lachcha200 = findProduct(products, 'Lachcha_Semai_200gm')
-    const lachcha500 = findProduct(products, 'Lachcha_Semai_500gm')
-    const lachcha200Batch = targetBatch(carton.Lachcha_Semai_200gm,lachcha200)
-    const lachcha500Batch = targetBatch(carton.Lachcha_Semai_500gm,lachcha500)
-    const all = [...ingredientsByBatch(lachcha200,lachcha200Batch),...ingredientsByBatch(lachcha500,lachcha500Batch)]
-    const handlePrint = useReactToPrint({
-        content: () => printRef.current,
-        documentTitle : ""
-      });
-    const premiumBag = carton.Lachcha_Semai_500gm * lachcha500?.info?.packetPerCarton
-    const gumtap = (Math.ceil(Number(carton.Lachcha_Semai_200gm) + Number(carton.Lachcha_Semai_500gm))/120).toFixed(0)
+    // const [carton,setCarton] = useState({
+    //     Lachcha_Semai_200gm : 0,
+    //     Lachcha_Semai_500gm : 0
+    // })
+    // //generate all recipe ana ingredient
+    // const lachcha200 = findProduct(products, 'Lachcha_Semai_200gm')
+    // const lachcha500 = findProduct(products, 'Lachcha_Semai_500gm')
+    // const lachcha200Batch = targetBatch(carton.Lachcha_Semai_200gm,lachcha200)
+    // const lachcha500Batch = targetBatch(carton.Lachcha_Semai_500gm,lachcha500)
+    // const all = [...ingredientsByBatch(lachcha200,lachcha200Batch),...ingredientsByBatch(lachcha500,lachcha500Batch)]
+    // const handlePrint = useReactToPrint({
+    //     content: () => printRef.current,
+    //     documentTitle : ""
+    //   });
+    // const premiumBag = carton.Lachcha_Semai_500gm * lachcha500?.info?.packetPerCarton
+    // const gumtap = (Math.ceil(Number(carton.Lachcha_Semai_200gm) + Number(carton.Lachcha_Semai_500gm))/120).toFixed(0)
+    console.log(products)
     return(
         <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
             <PrintHeader/>
-            <div className="space-y-2 border border-gray-400">
+            {/* <div className="space-y-2 border border-gray-400">
                 <h1 className="relative py-2 bg-gray-500 text-white text-xl text-center font-bold">
                     Production Target Carton
                     <button onClick={()=>handlePrint()} className="absolute right-2 print:hidden"> 
@@ -82,7 +76,7 @@ export default function LachchaDemand({products}){
                     <Ingredientpacking name='Gum Tap 2"' value={gumtap} unit='Pcs'/>
                     <Ingredientpacking name='PP HandGloves' value='500' unit='Pcs'/>
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )

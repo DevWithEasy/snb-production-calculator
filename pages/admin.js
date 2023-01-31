@@ -68,7 +68,6 @@ export default function Admin({users,products}){
         }
        
     }
-    console.log(users)
     return(
         <div className="flex justify-center">
             <Head>

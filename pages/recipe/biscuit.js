@@ -87,7 +87,7 @@ export default function Raw({products}) {
   let carton
   if(output) carton = totalCarton(output,product?.packetWeight,product?.packetPerCarton)
 
-  console.log(product);
+  console.log(products);
   return (
     <div className='raw-consumption '>
       <Head>

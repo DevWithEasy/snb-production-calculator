@@ -8,7 +8,6 @@ import Section from '../components/Section'
 export default function Home() {
   const router = useRouter()
   const user = useSelector(state=>state.user.user)
-  console.log(user);
   if (user?.username === 'admin') {
     router.push('/admin')
   }

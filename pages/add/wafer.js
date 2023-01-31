@@ -60,11 +60,7 @@ export default function AddWafer({products}){
         await setDoc(doc(db,'products_info',data.id),{...product,id:data.id})
         await setDoc(doc(db,'products_recipe',data.id),ingredients)
         toast.success('Product Added Successfully')
-        // e.target.reset()
-        // router.push(`/add_product/lachcha`)
-        
     }
-    console.log(product);
     return(
         <div className="add_product">
             <Head>

@@ -1,7 +1,8 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import ProductInput from "../../components/ProductInput";
 import RmInput from "../../components/RmInput";
 import { db } from "../../database/conncetDB";
@@ -42,9 +43,6 @@ export default function AddLachcha({products}){
         await setDoc(doc(db,'products_info',data.id),{...product,id:data.id})
         await setDoc(doc(db,'products_recipe',data.id),ingredients)
         toast.success('Product Added Successfully')
-        // e.target.reset()
-        // router.push(`/add_product/lachcha`)
-        
     }
     console.log(product);
     return(
