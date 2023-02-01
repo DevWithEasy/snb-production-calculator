@@ -57,6 +57,7 @@ export default function AddUser({user,setUser}){
                     <label className="w-full pl-1">Section Name :</label>
                     <select name="section" onChange={(e)=>setSection(e.target.value)} className="w-full border p-2  rounded-md focus:outline-none focus:ring-2">
                         <option value="">Select section</option>
+                        <option value="Admin">Admin</option>
                             {
                                 sections.map(section => <option key={section.id} value={section.name}>{section.name}</option>)
                             }
