@@ -109,8 +109,10 @@ export default function AddLachcha({products}){
                         </div>
                         <div className="space-y-2">
                             <RmInput name={'Turmeric'} ingredient={'turmeric'} ingredients={ingredients} setIngredients={setIngredients}/>
-
+                            
                             <RmInput name={'Cinamon'} ingredient={'cinamon'} ingredients={ingredients} setIngredients={setIngredients}/>
+
+                            <RmInput name={'Testing Salt'} ingredient={'testingSalt'} ingredients={ingredients} setIngredients={setIngredients}/>
 
                             <RmInput name={'Red Chili'} ingredient={'redChili'} ingredients={ingredients} setIngredients={setIngredients}/>
 
