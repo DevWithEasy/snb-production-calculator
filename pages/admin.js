@@ -76,15 +76,9 @@ export default function Admin({users,products}){
             </Head>
             <div className="relative w-full mx-4 px-2 py-4 mt-10 mb-6 border rounded-md shadow-lg space-y-2">
                 <div className="space-x-2 border-b pb-4">
-                    <Link href=''>
-                        <a className="p-2 bg-gray-500 text-white rounded" onClick={()=>setUser(!user)}>Add User</a>
-                    </Link>
-                    <Link href=''>
-                        <a className="p-2 bg-gray-500 text-white rounded" onClick={()=>setSection(!section)}>Add Section</a>
-                    </Link>
-                    <Link href=''>
-                        <a className="p-2 bg-gray-500 text-white rounded" onClick={()=>setProduct(!product)}>Add Product</a>
-                    </Link>
+                    <AddUser/>
+                    <AddSection/>
+                    <AddProduct/>
                     <AiOutlineLogout size={25} onClick={()=>logoutUser()} className="absolute top-4 right-4 cursor-pointer hover:text-red-500"/>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 gap-y-2">
@@ -98,9 +92,11 @@ export default function Admin({users,products}){
                                 <AiFillFileMarkdown size={25} onClick={()=>sactionHandler('monthly_demand')} className={active === 3 ? 'bg-green-300 p-1 rounded' :'hover:scale-150 transition-all duration-300 hover:bg-green-300 p-1 rounded'}/>
                             </p>
                         </div>
-                        {adminUIData.map((item, index) =><Link key={index} href={`/${action}/${item.link}`}>
-                                <a className="block p-2 hover:bg-blue-50 hover:transition-all duration-300 rounded">{item.title}</a>
-                        </Link>)}
+                        <div className="mt-2">
+                            {adminUIData.map((item, index) =><Link key={index} href={`/${action}/${item.link}`}>
+                                    <a className="block p-2 hover:bg-blue-50 hover:transition-all duration-300 rounded">{item.title}</a>
+                            </Link>)}
+                        </div>
                     </div>
                     <div className="border p-2 rounded shadow">
                         <h1 className="bg-gray-500 p-2 text-white">All Users</h1>
@@ -135,10 +131,6 @@ export default function Admin({users,products}){
                         </div>
                     </div>
                 </div>
-
-                {user && <AddUser user={user} setUser={setUser}/>}
-                {section && <AddSection section={section} setSection={setSection}/>}
-                {product && <AddProduct product={product} setProduct={setProduct}/>}
             </div>
         </div>
     )

@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { Toaster } from 'react-hot-toast';
 import Login from '../components/Login';
 import Section from '../components/Section';
@@ -7,7 +6,7 @@ import useUserStore from '../features/userStore';
 
 export default function Home() {
   const {user} = useUserStore()
-
+  console.log(user);
   return (
     <div className='index flex justify-center'>
       <Head>

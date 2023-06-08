@@ -30,8 +30,9 @@ export default function Login(){
         docs.forEach(data => users.push(data.data()));
         if (!users[0]) return toast.error('User not found.')
         if (users[0].password !== password) return toast.error('Wrong Password.')
-        if (users[0].section === 'Admin') return router.push('/admin')
         loged(users[0])
+        if (users[0].section === 'Admin') return router.push('/admin')
+        
     }
 
     return (
