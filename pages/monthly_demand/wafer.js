@@ -7,7 +7,7 @@ import { getDemandList } from "../../utils/demand_utils";
 
 
 export async function getServerSideProps(){
-    const res = await axios.get(`${baseUrl}/api/products/Biscuit`)
+    const res = await axios.get(`${baseUrl}/api/products/Wafer`)
     return{
         props:{
             products : res.data.data || []
