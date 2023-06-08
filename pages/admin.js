@@ -6,13 +6,12 @@ import { useState } from "react";
 import toast from 'react-hot-toast';
 import { AiFillEdit, AiFillFileMarkdown, AiOutlineDelete, AiOutlineLogout, AiOutlineUnorderedList } from 'react-icons/ai';
 import { BiAddToQueue } from 'react-icons/bi';
-import { useDispatch } from "react-redux";
 import AddProduct from "../components/AddProduct";
 import AddSection from "../components/AddSection";
 import AddUser from "../components/AddUser";
 import { db } from "../database/conncetDB";
-import { logout } from "../features/slice/userSlice";
 import { adminUIData } from "../utils/adminUIData";
+import useUserStore from "../features/userStore";
 
 export async function getServerSideProps(){
     const q= query(collection(db,'users'))
@@ -33,15 +32,15 @@ export async function getServerSideProps(){
 }
 
 export default function Admin({users,products}){
+    const {logout} = useUserStore()
     const [user,setUser] = useState(false)
     const [section,setSection] = useState(false)
     const [product,setProduct] = useState(false)
     const [active,setActive] = useState(0)
     const [action,setAction] = useState('recipe')
-    const dispatch = useDispatch()
     const router = useRouter()
     const logoutUser =()=>{
-        dispatch(logout())
+        logout()
         router.push("/")
     }
 

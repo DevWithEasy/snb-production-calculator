@@ -3,8 +3,10 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { db } from "../database/conncetDB"
+import useUserStore from "../features/userStore"
 
 export default function Login(){
+    const {loged} = useUserStore()
     const router = useRouter()
     const [hide,setHide] = useState(false)
     const [type, setType] = useState("password")
@@ -28,11 +30,16 @@ export default function Login(){
         docs.forEach(data => users.push(data.data()));
         if (!users[0]) return toast.error('Admin not found.')
         if (users[0].password !== password) return toast.error('Wrong Password.')
-        if (users[0].username === 'admin') return router.push('/admin')
+        loged(users[0])
+        if (users[0].username === 'admin') {
+            return router.push('/admin')
+        }else{
+            return router.push('/')
+        }
         
     }
     return(
-        <div className="absolute w-full h-screen left-0 -top-2 z-20 flex justify-center items-center bg-slate-500/70">
+        <div className="flex justify-center items-center">
             <div className=" bg-white rounded-md p-4 space-y-2">
                 <div className="space-y-2">
                     <label className="w-full pl-1">Username :</label>

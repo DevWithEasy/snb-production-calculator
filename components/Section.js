@@ -1,15 +1,18 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { AiOutlineLogout } from 'react-icons/ai';
-import { useDispatch } from "react-redux";
-import { logout } from "../features/slice/userSlice";
+import useUserStore from "../features/userStore";
 
 export default function Section(props){
   const {name,username,section} = props;
-  const dispatch = useDispatch()
+  const {logout} = useUserStore()
   const router = useRouter()
+
+  if(username === 'Admin'){
+    router.push("/admin")
+  }
   const logoutUser =()=>{
-    dispatch(logout())
+    logout()
     router.push("/")
   }
     return (

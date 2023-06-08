@@ -2,12 +2,11 @@ import { collection, getDocs, query, where } from "firebase/firestore"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
-import { useDispatch } from "react-redux"
 import { db } from "../database/conncetDB"
-import { login } from "../features/slice/userSlice"
+import useUserStore from "../features/userStore"
 
 export default function Login(){
-    const dispatch = useDispatch()
+    const {loged} = useUserStore()
     const router = useRouter()
     const [hide,setHide] = useState(false)
     const [type, setType] = useState("password")
@@ -31,13 +30,12 @@ export default function Login(){
         docs.forEach(data => users.push(data.data()));
         if (!users[0]) return toast.error('User not found.')
         if (users[0].password !== password) return toast.error('Wrong Password.')
-        dispatch(login(users[0]))
         if (users[0].section === 'Admin') return router.push('/admin')
-        
+        loged(users[0])
     }
 
     return (
-        <div className="absolute w-full h-screen left-0 -top-2 z-20 flex justify-center items-center bg-slate-500/70">
+        <div className="flex justify-center items-center ">
             <div className="relative bg-white rounded-md p-4 space-y-2">
                 <div className="space-y-2">
                     <label className="w-full pl-1">Username :</label>
