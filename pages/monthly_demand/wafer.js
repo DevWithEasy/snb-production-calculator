@@ -44,9 +44,10 @@ export default function WaferDemand({ products }) {
 
     getDemandList(demand)
 
-    useEffect(()=>{
-        resetDemand()
-    },[])
+    // useEffect(()=>{
+    //     resetDemand()
+    // },[])
+    
     return (
             <div className="p-4">
                 <div>

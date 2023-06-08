@@ -48,7 +48,7 @@ export default function AddUser({user,setUser}){
         <>
         <Button onClick={onOpen}>Add User</Button>
   
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} isCentered>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Add new user</ModalHeader>

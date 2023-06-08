@@ -33,7 +33,7 @@ export default function AddSection({section,setSection}){
         <>
         <Button onClick={onOpen}>Add Section</Button>
 
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
             <ModalHeader>Add new section</ModalHeader>

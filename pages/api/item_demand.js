@@ -1,6 +1,6 @@
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../database/conncetDB";
-import { ingredients_Obj_to_Array, targetBatch } from "../../utils/api_utils";
+import { ingredients_Obj_to_Array, targetBatch } from "../../utils/demand_utils";
 
 
 export default async function handler(req,res,next){

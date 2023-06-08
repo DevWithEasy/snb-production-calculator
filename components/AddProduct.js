@@ -45,7 +45,7 @@ export default function AddProduct({product,setProduct}){
         <>
         <Button onClick={onOpen}>Add Product</Button>
 
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
             <ModalHeader>Add new product</ModalHeader>
