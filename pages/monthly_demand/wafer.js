@@ -3,7 +3,7 @@ import baseUrl from "../../utils/baseUrl";
 import { useEffect, useState } from "react";
 import useUserStore from "../../features/userStore";
 import { toast } from "react-hot-toast";
-import { getDemandList } from "../../utils/demand_utils";
+import { getDemandPM } from "../../utils/demand_utils";
 
 
 export async function getServerSideProps(){
@@ -33,6 +33,7 @@ export default function WaferDemand({ products }) {
             if(find){
                 return toast.error( `${find.name} is already added.`)
             }else{
+                setCarton(0)
                 addDemand(res.data.data)
             }
             
@@ -42,7 +43,7 @@ export default function WaferDemand({ products }) {
 
     }
 
-    getDemandList(demand)
+    getDemandPM(demand)
 
     // useEffect(()=>{
     //     resetDemand()
@@ -51,16 +52,27 @@ export default function WaferDemand({ products }) {
     return (
             <div className="p-4">
                 <div>
-                    {
-                        demand && demand.map(product => <p 
-                            key={product.id}
-                            className="flex justify-between"
-                        >
-                            <span>{product.name}</span>
-                            <span>{product.target}</span>
-                            <button onClick={()=>removeDemand(product.id)}>X</button>
-                        </p>)
-                    }
+                    <table className="w-full">
+                        <thead className="w-full">
+                            <th>
+                                <td>Product Name</td>
+                                <td>Target Carton</td>
+                                <td>Action</td>
+                            </th>
+                        </thead>
+                        <tbody>
+                            {
+                                demand && demand.map(product => <tr 
+                                    key={product.id}
+                                    className="flex justify-between"
+                                >
+                                    <td>{product.name}</td>
+                                    <td>{product.target}</td>
+                                    <td><button onClick={()=>removeDemand(product.id)}>X</button></td>
+                                </tr>)
+                            }
+                        </tbody>
+                    </table>
                 </div>
                 <div className="flex">
                     <select 

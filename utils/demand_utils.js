@@ -1,3 +1,7 @@
+export const nameWith_ = (name)=>{
+    const nameWith_ = name.replace(/ /g, '_');
+    return nameWith_
+}
 
 export const ingredients_Obj_to_Array=(ingredients_obj,batch)=>{
     return Object.entries(ingredients_obj).map(([key, value]) => ({ [key]: value* batch }))
@@ -66,12 +70,12 @@ export  const totalTrayByTargetCarton=(targetCarton,product)=>{
 
 export  const totalBoardByTargetCarton=(targetCarton)=>{
     const totalTragetCarton =  totalCartonByTargetCarton(targetCarton)
-    const foil = totalTragetCarton * 2
-    const wastage = (foil * 0.5)/100
-    return ((foil + wastage)/1000).toFixed(2)
+    const board = totalTragetCarton * 2
+    const wastage = (board * 0.5)/100
+    return (board + wastage).toFixed(2)
 }
 
-export const getDemandList=(demand)=>{
+export const getDemandRM=(demand)=>{
     //get all products ingredientslist
     const ingredients = getIngedients(demand)
 
@@ -97,19 +101,29 @@ export const getDemandList=(demand)=>{
     })
     
     //ingredients array to object
-    const raw = ingredients_Array_to_Obj(data)
-    
+    return ingredients_Array_to_Obj(data)
 
+}
+
+export const getDemandPM=(demand)=>{
+    const rm = getDemandRM(demand)
     const products = getProducts(demand)
+    const data = []
 
     products.forEach(product =>{
         demand.forEach(dProduct =>{
             if(dProduct.id == product){
-                console.log(dProduct)
+                const name = dProduct.name
+                const wra_name = `${nameWith_(name)}_Wrapper`
+                const wra_qty = totalFoilByTargetCarton(dProduct.target,dProduct)
+                const ctn_name = `${nameWith_(name)}_Carton`
+                const ctn_qty = totalCartonByTargetCarton(dProduct.target)
+                const board_name = 'Wafer_Paper_Board'
+                const board_qty = totalBoardByTargetCarton(dProduct.target)
+                data.push({[wra_name] : wra_qty, [ctn_name] : ctn_qty, [board_name] : board_qty})
             }
         })
     })
     
-    console.log(products)
-
+    console.log(data)
 }
