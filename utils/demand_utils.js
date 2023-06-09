@@ -85,11 +85,11 @@ export  const totalTrayByTargetCarton=(targetCarton,product)=>{
     }
 }
 
-export  const totalATCByTargetCarton=(targetCarton,product)=>{
+export  const totalATCByTargetCarton=(targetCarton,product,packet)=>{
     const totalTragetCarton =  totalCartonByTargetCarton(targetCarton)
-    const atc = totalTragetCarton * 6
+    const atc = totalTragetCarton * packet
     const wastage = (atc * 0.5)/100
-    if(product.id === 'Lexus_Family'){
+    if(product.id === 'Lexus_Family' || product.id === 'Lachcha_Semai_500gm'){
         return Number((atc + wastage).toFixed(0))
     }else{
         return 0
@@ -101,6 +101,19 @@ export  const totalBoardByTargetCarton=(targetCarton)=>{
     const board = totalTragetCarton * 2
     const wastage = (board * 0.5)/100
     return Number((board + wastage).toFixed(0))
+}
+
+//---------------lachcha------------------------
+
+export const getLachchaMasterPoly=(targetCarton,product)=>{
+    const totalTragetCarton =  totalCartonByTargetCarton(targetCarton)
+    const foil = totalTragetCarton * product?.master_poly_24_22_5
+    const wastage = (foil * 2)/100
+    if(product.id === 'Lachcha_Semai_200gm'){
+        return Number(((foil + wastage)/1000).toFixed(2))
+    }else{
+        return 0
+    }
 }
 
 export const getDemandRM=(demand)=>{
@@ -158,12 +171,25 @@ export const getDemandPM=(demand)=>{
 
                 const ctn_qty = totalCartonByTargetCarton(dProduct.target)
                 const board_qty = totalTrayByTargetCarton(dProduct.target,dProduct)
-                const atc_qty = totalATCByTargetCarton(dProduct.target,dProduct)
+                const atc_qty = totalATCByTargetCarton(dProduct.target,dProduct,6)
                 data.push({
                     [key] : key,
                     wrapper : wra_qty, 
                     carton : ctn_qty, 
                     tray : board_qty,
+                    atc : atc_qty
+                })
+            }else if(dProduct.id == product && dProduct.section == 'Lachcha'){
+                const key = nameWith_(dProduct.name)
+                const wra_qty = totalFoilByTargetCarton(dProduct.target,dProduct)
+                const ctn_qty = dProduct.id == 'Lachcha_Semai_500gm' ?totalCartonByTargetCarton(dProduct.target) : 0
+                const atc_qty = totalATCByTargetCarton(dProduct.target,dProduct,12)
+                const master_poly = getLachchaMasterPoly(dProduct.target,dProduct)
+                data.push({
+                    [key] : key,
+                    wrapper : wra_qty, 
+                    carton : ctn_qty, 
+                    master_poly : master_poly, 
                     atc : atc_qty
                 })
             }

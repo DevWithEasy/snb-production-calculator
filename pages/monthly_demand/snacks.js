@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import useUserStore from "../../features/userStore";
 import { toast } from "react-hot-toast";
 import { getDemandPM } from "../../utils/demand_utils";
-import { getProduct } from "../../utils/demand_api_utils";
+import { addField, getProduct } from "../../utils/demand_api_utils";
 
 
 export async function getServerSideProps(){
-    const res = await axios.get(`${baseUrl}/api/products/Wafer`)
+    const res = await axios.get(`${baseUrl}/api/products/Snacks`)
     return{
         props:{
             products : res.data.data || []
@@ -17,7 +17,7 @@ export async function getServerSideProps(){
 }
 
 
-export default function WaferDemand({ products }) {
+export default function SnacksDemand({ products }) {
     const{demand,addDemand,removeDemand,resetDemand} = useUserStore()
     const [id,setId] = useState('')
     const [carton,setCarton] = useState(0)
@@ -28,8 +28,21 @@ export default function WaferDemand({ products }) {
     //     resetDemand()
     // },[])
     
+    console.log(products)
     return (
             <div className="p-4">
+
+            {/* {products.map(product=><button 
+                key={product.id}
+                onClick={()=>addField(product.id)}
+                className="px-4 py-2 bg-slate-50 m-2" 
+                >
+                    {product.name}
+                </button>)} */}
+
+
+
+
                 <div>
                     <table className="w-full">
                         <thead className="w-full">

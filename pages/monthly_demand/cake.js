@@ -8,7 +8,7 @@ import { getProduct } from "../../utils/demand_api_utils";
 
 
 export async function getServerSideProps(){
-    const res = await axios.get(`${baseUrl}/api/products/Wafer`)
+    const res = await axios.get(`${baseUrl}/api/products/Cake`)
     return{
         props:{
             products : res.data.data || []
@@ -17,7 +17,7 @@ export async function getServerSideProps(){
 }
 
 
-export default function WaferDemand({ products }) {
+export default function SnacksDemand({ products }) {
     const{demand,addDemand,removeDemand,resetDemand} = useUserStore()
     const [id,setId] = useState('')
     const [carton,setCarton] = useState(0)
@@ -27,7 +27,9 @@ export default function WaferDemand({ products }) {
     // useEffect(()=>{
     //     resetDemand()
     // },[])
+
     
+    console.log(products)
     return (
             <div className="p-4">
                 <div>
