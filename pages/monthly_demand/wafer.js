@@ -84,6 +84,7 @@ export default function WaferDemand({ products }) {
                     </select>
                     <input
                         type="number"
+                        value={carton}
                         onChange={(e)=>setCarton(e.target.value)}
                         className="p-2 border rounded"
                     />

@@ -3,20 +3,33 @@ export const nameWith_ = (name)=>{
     return nameWith_
 }
 
+
+
 export const ingredients_Obj_to_Array=(ingredients_obj,batch)=>{
     return Object.entries(ingredients_obj).map(([key, value]) => ({ [key]: value* batch }))
 }
 
-export const ingredients_Array_to_Obj=(ingredients_Array)=>{
+export const array_to_Obj=(input_array)=>{
     const outputObject = {};
 
-    for (const item of ingredients_Array) {
+    for (const item of input_array) {
         const key = Object.keys(item)[0];
         const value = item[key];
         outputObject[key] = value;
     }
 
     return outputObject
+}
+
+export const arrayOfObj_to_object=(input_arrayOfObj)=>{
+    const result = {};
+    for (const obj of input_arrayOfObj) {
+    const [key, val] = Object.entries(obj)[0];
+    result[key] = { ...result[key], [key]: val, ...obj } || obj;
+    delete result[key][key];
+    }
+
+    return result
 }
 
 export const targetBatch=(targetCarton,product,ingredients)=>{
@@ -58,21 +71,36 @@ export  const totalFoilByTargetCarton=(targetCarton,product)=>{
     const totalTragetCarton =  totalCartonByTargetCarton(targetCarton)
     const foil = totalTragetCarton * product?.foilWeight * product?.packetPerCarton
     const wastage = (foil * 2)/100
-    return ((foil + wastage)/1000).toFixed(2)
+    return Number(((foil + wastage)/1000).toFixed(2))
 }
 
 export  const totalTrayByTargetCarton=(targetCarton,product)=>{
     const totalTragetCarton =  totalCartonByTargetCarton(targetCarton)
-    const foil = totalTragetCarton * product?.packetPerCarton
-    const wastage = (foil * 0.5)/100
-    return ((foil + wastage)/1000).toFixed(2)
+    const tray = totalTragetCarton * product?.packetPerCarton
+    const wastage = (tray * 0.5)/100
+    if(product.id === 'Active_Energy_Family' || product.id === 'Best_Choice_Family' || product.id === 'Valencia_Orange_Family'){
+        return Number((tray + wastage).toFixed(0))
+    }else{
+        return 0
+    }
+}
+
+export  const totalATCByTargetCarton=(targetCarton,product)=>{
+    const totalTragetCarton =  totalCartonByTargetCarton(targetCarton)
+    const atc = totalTragetCarton * 6
+    const wastage = (atc * 0.5)/100
+    if(product.id === 'Lexus_Family'){
+        return Number((atc + wastage).toFixed(0))
+    }else{
+        return 0
+    }
 }
 
 export  const totalBoardByTargetCarton=(targetCarton)=>{
     const totalTragetCarton =  totalCartonByTargetCarton(targetCarton)
     const board = totalTragetCarton * 2
     const wastage = (board * 0.5)/100
-    return (board + wastage).toFixed(2)
+    return Number((board + wastage).toFixed(0))
 }
 
 export const getDemandRM=(demand)=>{
@@ -101,7 +129,7 @@ export const getDemandRM=(demand)=>{
     })
     
     //ingredients array to object
-    return ingredients_Array_to_Obj(data)
+    return array_to_Obj(data)
 
 }
 
@@ -112,18 +140,35 @@ export const getDemandPM=(demand)=>{
 
     products.forEach(product =>{
         demand.forEach(dProduct =>{
-            if(dProduct.id == product){
-                const name = dProduct.name
-                const wra_name = `${nameWith_(name)}_Wrapper`
+            if(dProduct.id == product && dProduct.section == 'Wafer'){
+                const key = nameWith_(dProduct.name)
                 const wra_qty = totalFoilByTargetCarton(dProduct.target,dProduct)
-                const ctn_name = `${nameWith_(name)}_Carton`
+
                 const ctn_qty = totalCartonByTargetCarton(dProduct.target)
-                const board_name = 'Wafer_Paper_Board'
                 const board_qty = totalBoardByTargetCarton(dProduct.target)
-                data.push({[wra_name] : wra_qty, [ctn_name] : ctn_qty, [board_name] : board_qty})
+                data.push({
+                    [key] : key,
+                    wrapper : wra_qty, 
+                    carton : ctn_qty, 
+                    board : board_qty
+                })
+            }else if(dProduct.id == product && dProduct.section == 'Biscuit'){
+                const key = nameWith_(dProduct.name)
+                const wra_qty = totalFoilByTargetCarton(dProduct.target,dProduct)
+
+                const ctn_qty = totalCartonByTargetCarton(dProduct.target)
+                const board_qty = totalTrayByTargetCarton(dProduct.target,dProduct)
+                const atc_qty = totalATCByTargetCarton(dProduct.target,dProduct)
+                data.push({
+                    [key] : key,
+                    wrapper : wra_qty, 
+                    carton : ctn_qty, 
+                    tray : board_qty,
+                    atc : atc_qty
+                })
             }
         })
     })
     
-    console.log(data)
+    console.log(arrayOfObj_to_object(data))
 }

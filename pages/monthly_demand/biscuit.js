@@ -3,7 +3,7 @@ import baseUrl from "../../utils/baseUrl";
 import { useEffect, useState } from "react";
 import useUserStore from "../../features/userStore";
 import { toast } from "react-hot-toast";
-import { getDemandList } from "../../utils/demand_utils";
+import { getDemandPM } from "../../utils/demand_utils";
 
 
 export async function getServerSideProps(){
@@ -19,7 +19,7 @@ export async function getServerSideProps(){
 export default function WaferDemand({ products }) {
     const{demand,addDemand,removeDemand,resetDemand} = useUserStore()
     const [id,setId] = useState('')
-    const [carton,setCarton] = useState(0)
+    const [carton,setCarton] = useState()
 
     const getProduct=async(id,carton)=>{
         if(!id || !carton){
@@ -33,6 +33,7 @@ export default function WaferDemand({ products }) {
             if(find){
                 return toast.error( `${find.name} is already added.`)
             }else{
+                setCarton()
                 addDemand(res.data.data)
             }
             
@@ -42,11 +43,11 @@ export default function WaferDemand({ products }) {
 
     }
 
-    getDemandList(demand)
+    getDemandPM(demand)
 
-    useEffect(()=>{
-        resetDemand()
-    },[])
+    // useEffect(()=>{
+    //     resetDemand()
+    // },[])
     return (
             <div className="p-4">
                 <div>
@@ -71,6 +72,7 @@ export default function WaferDemand({ products }) {
                     </select>
                     <input
                         type="number"
+                        value={carton}
                         onChange={(e)=>setCarton(e.target.value)}
                         className="p-2 border rounded"
                     />
