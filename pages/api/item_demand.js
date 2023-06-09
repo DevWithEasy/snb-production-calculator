@@ -1,6 +1,6 @@
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../database/conncetDB";
-import { ingredients_Obj_to_Array, targetBatch } from "../../utils/demand_utils";
+import {cartonPerBatch, ingredients_Obj_to_Array,targetBatch, targetCarton } from "../../utils/demand_utils";
 
 
 export default async function handler(req,res,next){
@@ -15,8 +15,14 @@ export default async function handler(req,res,next){
         const ingredientRef = doc(db,'products_recipe',products[0].id)
         const ingredients = await getDoc(ingredientRef)
 
+        //get carton per batch
+        const carton_per_batch = cartonPerBatch(products[0],ingredients.data())
+
+        //get target ctn
+        const target_carton = targetCarton(req.query.carton)
+
         //get target batch
-        const batch = targetBatch(req.query.carton,products[0],ingredients.data())
+        const batch = targetBatch(target_carton,carton_per_batch)
 
         //get ingredient array
         const ingredients_Array = ingredients_Obj_to_Array(ingredients.data(),batch)
@@ -26,7 +32,8 @@ export default async function handler(req,res,next){
             success : true,
             data : {
                 ...products[0],
-                target : Number(req.query.carton),
+                demand : req.query.carton,
+                target : target_carton,
                 ingredients:ingredients_Array
             }
         })

@@ -7,14 +7,15 @@ import {
     Tr
 } from '@chakra-ui/react';
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from 'react-to-print';
 import PrintHeader from "../../components/PrintHeader";
 import useUserStore from '../../features/userStore';
 import baseUrl from "../../utils/baseUrl";
 import { getProduct } from '../../utils/demand_api_utils';
 import {toast} from 'react-hot-toast'
-import { getDemandPM } from '../../utils/demand_utils';
+import { getDemand} from '../../utils/demand_utils';
+import RmView from '../../components/RmView';
 
 export async function getServerSideProps(){
     const res = await axios.get(`${baseUrl}/api/products/Lachcha`)
@@ -36,11 +37,11 @@ export default function LachchaDemand({products}){
         documentTitle : ""
       });
 
-    getDemandPM(demand)
+    const {rm,pm} = getDemand(demand)
 
-    // useEffect(()=>{
-    //     resetDemand()
-    // },[])
+    useEffect(()=>{
+        resetDemand()
+    },[])
     return(
         <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
             <PrintHeader/>
@@ -60,6 +61,7 @@ export default function LachchaDemand({products}){
                                         key={product.id}
                                     >
                                         <Td>{product.name}</Td>
+                                        <Td>{product.demand}</Td>
                                         <Td>{product.target}</Td>
                                         <Td>
                                             <button onClick={()=>removeDemand(product.id)}>X</button>
@@ -97,9 +99,18 @@ export default function LachchaDemand({products}){
             <div className="flex justify-between space-x-2">
                 <div className="w-1/2 border border-gray-400 pb-4">
                     <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
+                    <RmView name='Flour A Grade' ingredient={rm?.flourGrade_A}/>
+                    <RmView name='Flour B Grade' ingredient={rm?.flourGrade_B}/>
+                    <RmView name='Palm Oil Super' ingredient={rm?.palmOilSuper}/>
+                    <RmView name='Starch Powder' ingredient={rm?.starchPowder}/>
+                    <RmView name='Dalda Hard Pusti' ingredient={rm?.daldaHardPUSTI}/>
+                    <RmView name='Ghee' ingredient={rm?.ghee}/>
+                    <RmView name='Ghee Flavour' ingredient={rm?.gheeFlavour}/>
+                    <RmView name='TBHQ' ingredient={rm?.tbhq}/>
                 </div>
                 <div className="w-1/2 border border-gray-400">
                     <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
+
                 </div>
             </div>
 
