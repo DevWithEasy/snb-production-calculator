@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from 'react-hot-toast';
-import { AiFillEdit, AiFillFileMarkdown, AiOutlineDelete, AiOutlineLogout, AiOutlineUnorderedList } from 'react-icons/ai';
+import { AiFillEdit, AiFillFileMarkdown, AiOutlineDelete, AiOutlineLogout, AiOutlineMenu, AiOutlineUnorderedList } from 'react-icons/ai';
 import { BiAddToQueue } from 'react-icons/bi';
 import AddProduct from "../components/AddProduct";
 import AddSection from "../components/AddSection";
@@ -12,6 +12,16 @@ import AddUser from "../components/AddUser";
 import { db } from "../database/conncetDB";
 import { adminUIData } from "../utils/adminUIData";
 import useUserStore from "../features/userStore";
+import {
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuItemOption,
+    MenuGroup,
+    MenuOptionGroup,
+    MenuDivider,
+  } from '@chakra-ui/react'
 
 export async function getServerSideProps(){
     const q= query(collection(db,'users'))
@@ -74,12 +84,26 @@ export default function Admin({users,products}){
                 <meta name="description" content="S&B Nice Food Valley Ltd." />
                 <link rel="icon" href="/logo.png" />
             </Head>
-            <div className="relative w-full mx-4 px-2 py-4 mt-10 mb-6 border rounded-md shadow-lg space-y-2">
-                <div className="space-x-2 border-b pb-4">
-                    <AddUser/>
-                    <AddSection/>
-                    <AddProduct/>
-                    <AiOutlineLogout size={25} onClick={()=>logoutUser()} className="absolute top-4 right-4 cursor-pointer hover:text-red-500"/>
+            <div className="relative w-full mx-4 p-2 mt-10 mb-6 border rounded-md shadow-lg space-y-2">
+                <div className=" flex justify-between border-b px-4 pb-2">
+                    <p className="text-2xl">Admin Dashboard</p>
+                    <Menu>
+                        <MenuButton>
+                            <AiOutlineMenu size={25} className="border"/>
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>
+                                <AddUser/>
+                            </MenuItem>
+                            <MenuItem>
+                                <AddSection/>
+                            </MenuItem>
+                            <MenuItem>
+                                <AddProduct/>
+                            </MenuItem>
+                            <MenuItem onClick={()=>logoutUser()}>Logout</MenuItem>
+                        </MenuList>
+                    </Menu>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 gap-y-2">
                     <div className="border p-2 rounded shadow">

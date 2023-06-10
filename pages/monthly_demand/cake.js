@@ -3,7 +3,7 @@ import baseUrl from "../../utils/baseUrl";
 import { useEffect, useRef, useState } from "react";
 import useUserStore from "../../features/userStore";
 import { toast } from "react-hot-toast";
-import { getDemand, getDemandPM } from "../../utils/demand_utils";
+import { getDemand } from "../../utils/demand_utils";
 import { getProduct } from "../../utils/demand_api_utils";
 import PrintHeader from "../../components/PrintHeader";
 import { useReactToPrint } from 'react-to-print';
@@ -42,10 +42,10 @@ export default function SnacksDemand({ products }) {
 
     const {rm,pm}=getDemand(demand)
 
-    useEffect(()=>{
-        resetDemand()
-    },[])
-    
+    // useEffect(()=>{
+    //     resetDemand()
+    // },[])
+    console.log(demand)
     return (
         <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
         <PrintHeader/>

@@ -43,7 +43,7 @@ export default function AddProduct({product,setProduct}){
     return (
 
         <>
-        <Button onClick={onOpen}>Add Product</Button>
+        <button onClick={onOpen} className='w-full text-left'>Add Product</button>
 
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />

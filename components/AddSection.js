@@ -31,7 +31,7 @@ export default function AddSection({section,setSection}){
 
 
         <>
-        <Button onClick={onOpen}>Add Section</Button>
+        <button onClick={onOpen} className='w-full text-left'>Add Section</button>
 
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />

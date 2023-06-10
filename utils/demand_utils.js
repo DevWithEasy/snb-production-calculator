@@ -3,8 +3,6 @@ export const nameWith_ = (name)=>{
     return nameWith_
 }
 
-
-
 export const ingredients_Obj_to_Array=(ingredients_obj,batch)=>{
     return Object.entries(ingredients_obj).map(([key, value]) => ({ [key]: value* batch }))
 }
@@ -106,6 +104,20 @@ export  const totalATCByTargetCarton=(product,packet)=>{
     }
 }
 
+export  const totalGumTapeByTargetCarton=(product)=>{
+    if(product.section === 'Biscuit' || product.section === 'Wafer' || product.section === 'Bakery'){
+        return Number((product.target / 250).toFixed(0))
+    }else if(product.section === 'Snacks'){
+        return Number((product.target / 120).toFixed(0))
+    }else if(product.id === 'Tiffin_Cake_Vanilla_Standard' || product.id === 'Tiffin_Cake_Chocolate_Standard' || product.id === 'Milk_Cake_11_gm_Standard' || product.id === 'Milk_Cake_22_gm_Standard' || product.id === 'Lachcha_Semai_200gm'){
+        return Number((product.target / 234).toFixed(0))
+    }else if(product.id === 'Tiffin_Cake_Vanilla_Family' || product.id === 'Tiffin_Cake_Chocolate_Family' || product.id === 'Milk_Cake_11_gm_Family' || product.id === 'Milk_Cake_22_gm_Family' || product.id === 'Lachcha_Semai_500gm'){
+        return Number((product.target / 168).toFixed(0))
+    }else{
+        return 0
+    }
+}
+
 
 
 //---------------lachcha------------------------
@@ -162,11 +174,13 @@ export const getDemandPM=(demand)=>{
 
                 const ctn_qty = totalCartonByTargetCarton(dProduct.target)
                 const board_qty = totalBoardByTargetCarton(dProduct.target)
+                const gumTape_qty = totalGumTapeByTargetCarton(dProduct)
                 data.push({
                     [key] : key,
                     wrapper : wra_qty, 
                     carton : ctn_qty, 
-                    board : board_qty
+                    board : board_qty,
+                    gumTap2 : gumTape_qty
                 })
             }else if(dProduct.id == product && dProduct.section == 'Biscuit'){
                 const key = nameWith_(dProduct.name)
@@ -175,12 +189,14 @@ export const getDemandPM=(demand)=>{
                 const ctn_qty = totalCartonByTargetCarton(dProduct.target)
                 const board_qty = totalTrayByTargetCarton(dProduct.target,dProduct)
                 const atc_qty = totalATCByTargetCarton(dProduct,6)
+                const gumTape_qty = totalGumTapeByTargetCarton(dProduct)
                 data.push({
                     [key] : key,
                     wrapper : wra_qty, 
                     carton : ctn_qty, 
                     tray : board_qty,
-                    atc : atc_qty
+                    atc : atc_qty,
+                    gumTap2 : gumTape_qty
                 })
             }else if(dProduct.id == product && dProduct.section == 'Lachcha'){
                 const key = nameWith_(dProduct.name)
@@ -188,16 +204,20 @@ export const getDemandPM=(demand)=>{
                 const ctn_qty = dProduct.id == 'Lachcha_Semai_500gm' ?totalCartonByTargetCarton(dProduct.target) : 0
                 const atc_qty = totalATCByTargetCarton(dProduct,12)
                 const master_poly = getLachchaMasterPoly(dProduct)
+                const gumTape_qty = totalGumTapeByTargetCarton(dProduct)
                 data.push({
                     [key] : key,
                     wrapper : wra_qty, 
                     carton : ctn_qty, 
                     master_poly : master_poly, 
-                    atc : atc_qty
+                    atc : atc_qty,
+                    gumTap2 : gumTape_qty
                 })
             }
         })
     })
+
+    console.log(data)
     
     return (arrayOfObj_to_object(data))
 }

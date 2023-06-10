@@ -46,7 +46,7 @@ export default function AddUser({user,setUser}){
 
     return (
         <>
-        <Button onClick={onOpen}>Add User</Button>
+        <button onClick={onOpen} className='w-full text-left'>Add User</button>
   
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
           <ModalOverlay />

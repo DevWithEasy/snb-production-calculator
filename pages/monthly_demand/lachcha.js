@@ -16,6 +16,7 @@ import { getProduct } from '../../utils/demand_api_utils';
 import {toast} from 'react-hot-toast'
 import { getDemand} from '../../utils/demand_utils';
 import RmView from '../../components/RmView';
+import PmView from '../../components/PmView';
 
 export async function getServerSideProps(){
     const res = await axios.get(`${baseUrl}/api/products/Lachcha`)
@@ -38,10 +39,13 @@ export default function LachchaDemand({products}){
       });
 
     const {rm,pm} = getDemand(demand)
+    const {Lachcha_Semai_200gm,Lachcha_Semai_500gm} = pm
 
-    useEffect(()=>{
-        resetDemand()
-    },[])
+    // useEffect(()=>{
+    //     resetDemand()
+    // },[])
+
+    console.log(pm)
     return(
         <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
             <PrintHeader/>
@@ -110,6 +114,12 @@ export default function LachchaDemand({products}){
                 </div>
                 <div className="w-1/2 border border-gray-400">
                     <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
+                    <PmView name='Lachcha Semai 200gm Pouch' unit='' pm={Lachcha_Semai_200gm?.wrapper}/>
+                    <PmView name='Master Poly 24"x22.5"' unit='' pm={Lachcha_Semai_200gm?.master_poly}/>
+                    <PmView name='Lachcha Semai Premium Pouch' unit='' pm={Lachcha_Semai_500gm?.wrapper}/>
+                    <PmView name='Lachcha Semai Premium Bag' unit='Pcs' pm={Lachcha_Semai_500gm?.atc}/>
+                    <PmView name='Lachcha Semai Premium Carton' unit='Pcs' pm={Lachcha_Semai_500gm?.carton}/>
+                    <PmView name='Lachcha Semai 200gm Pouch' unit='Pcs' pm={Lachcha_Semai_200gm?.gumTap2}/>
 
                 </div>
             </div>
