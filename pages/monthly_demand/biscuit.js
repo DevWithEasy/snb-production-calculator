@@ -45,6 +45,7 @@ export default function WaferDemand({ products }) {
     useEffect(()=>{
         resetDemand()
     },[])
+    console.log(pm)
 
     return (
         <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">

@@ -123,9 +123,66 @@ export  const totalGumTape_1ByTargetCarton=(product)=>{
         return Number((product.target / 20).toFixed(0))
     }else if(product.id === 'Butter_Cookies'){
         return Number((product.target / 10).toFixed(0))
+    }else if(product.id === 'Lexus_Family'){
+        return Number((product.target / 12).toFixed(0))
     }else{
         return 0
     }
+}
+
+export  const totalInnerPolyByTargetCarton=(product)=>{
+    const result =(size)=>{
+        const foil = product.target * size * product?.packetPerCarton
+        const wastage = (foil * 2)/100
+        return Number(((foil + wastage)/1000).toFixed(2))
+    }
+    const result2 =(size)=>{
+        const foil = (product.target * size * product?.packetPerCarton)/product?.packet_per_inner
+        const wastage = (foil * 2)/100
+        return Number(((foil + wastage)/1000).toFixed(2))
+    }
+
+    if(product.id === 'Special_Toast'){
+        return result(product?.inner_poly_9_11_5)
+     }else if(product.id === 'Butter_Toast'){
+        return result(product?.inner_poly_8_11_5)
+     }else if(product.id === 'Butter_Cookies'){
+        const foil = product.target * product?.inner_poly_6_8 * product?.packetPerCarton * 2
+        const wastage = (foil * 2)/100
+        return Number(((foil + wastage)/1000).toFixed(2))
+     }else if(product.id === 'Special_Chanachur_15_gm' || product.id === 'Jhal_Chanachur_15_gm' || product.id === 'Fried_Peas'){
+        return result2(product?.inner_poly_18_15)
+     }else if(product.id === 'Special_Chanachur_120_gm' || product.id === 'Jhal_Chanachur_120_gm'){
+        return result2(product?.inner_poly_17_19_5)
+     }else if(product.id === 'Special_Chanachur_180_gm'){
+        return result2(product?.inner_poly_16_21_5)
+     }else if(product.id === 'Fried_Dal'){
+        return result2(product?.inner_poly_24_15)
+     }else if(product.id === 'BBQ'){
+        return result2(product?.inner_poly_19_20)
+     }else{
+         return 0
+     }
+}
+
+export  const totalMasterPolyByTargetCarton=(product)=>{
+    const result =(size)=>{
+        const foil = product.target * size
+        const wastage = (foil * 2)/100
+        return Number(((foil + wastage)/1000).toFixed(2))
+    }
+
+    if(product.id === 'Special_Chanachur_15_gm' || product.id === 'Jhal_Chanachur_15_gm' || product.id === 'Fried_Peas'){
+        return result(product?.master_poly_25_47)
+     }else if(product.id === 'Special_Chanachur_120_gm' || product.id === 'Jhal_Chanachur_120_gm' || product.id === 'Special_Chanachur_180_gm'){
+        return result(product?.master_poly_35_26)
+     }else if(product.id === 'Fried_Dal'){
+        return result(product?.master_poly_44_23)
+     }else if(product.id === 'BBQ'){
+        return result(product?.master_poly_28_42)
+     }else{
+         return 0
+     }
 }
 
 
@@ -152,6 +209,16 @@ export const getCakeOuterPoly=(product)=>{
         return 0
     }
     
+}
+
+//-------------Bakery----------------------------
+export const getBakeryPaper=(product) =>{
+    if(product.id == 'Dry_Cake_Mini' || product.id == 'Dry_Cake_Family' ||product.id == 'Butter_Cookies'){
+        const paper = product.target * product?.dryCakepaper * product?.packetPerCarton
+        return Number((paper/1000).toFixed(2))
+    }else{
+        return 0
+    }
 }
 
 //-----------------------------------------------
@@ -209,18 +276,20 @@ export const getDemandPM=(demand)=>{
             }else if(dProduct.id == product && dProduct.section == 'Biscuit'){
                 const key = nameWith_(dProduct.name)
                 const wra_qty = totalFoilByTargetCarton(dProduct)
-
                 const ctn_qty = totalCartonByTargetCarton(dProduct.target)
                 const tray_qty = totalTrayByTargetCarton(dProduct)
                 const atc_qty = totalATCByTargetCarton(dProduct,6)
                 const gumTape_qty = totalGumTape_2ByTargetCarton(dProduct)
+                const gumTapeBoth_qty = dProduct.id == 'Lexus_Family' ? totalGumTape_1ByTargetCarton(dProduct) : 0
+                
                 data.push({
                     [key] : key,
                     wrapper : wra_qty, 
                     carton : ctn_qty, 
                     tray : tray_qty,
                     atc : atc_qty,
-                    gumTap2 : gumTape_qty
+                    gumTap2 : gumTape_qty,
+                    gumTapeBoth : gumTapeBoth_qty
                 })
             }else if(dProduct.id == product && dProduct.section == 'Lachcha'){
                 const key = nameWith_(dProduct.name)
@@ -261,6 +330,8 @@ export const getDemandPM=(demand)=>{
                 const atc_qty = totalATCByTargetCarton(dProduct,6)
                 const tray_qty = dProduct.id != 'Butter_Cookies' ? totalTrayByTargetCarton(dProduct) : 0 
                 const jar_qty = dProduct.id == 'Butter_Cookies' ? totalTrayByTargetCarton(dProduct) : 0 
+                const inner_poly_qty = totalInnerPolyByTargetCarton(dProduct)
+                const paper = getBakeryPaper(dProduct)
                 const gumTape_qty = totalGumTape_2ByTargetCarton(dProduct)
                 const gumTape1_qty = dProduct.id == 'Butter_Cookies' ? totalGumTape_1ByTargetCarton(dProduct) : 0
                 data.push({
@@ -270,8 +341,24 @@ export const getDemandPM=(demand)=>{
                     atc : atc_qty,
                     tray : tray_qty,
                     jar : jar_qty,
+                    inner_poly: inner_poly_qty,
+                    paper : paper,
+                    label : jar_qty,
                     gumTap2 : gumTape_qty,
                     gumTap1 : gumTape1_qty
+                })
+            }else if(dProduct.id == product && dProduct.section == 'Snacks'){
+                const key = nameWith_(dProduct.name)
+                const wra_qty = totalFoilByTargetCarton(dProduct)
+                const inner_poly_qty = totalInnerPolyByTargetCarton(dProduct)
+                const master_poly_qty = totalMasterPolyByTargetCarton(dProduct)
+                const gumTape_qty = totalGumTape_2ByTargetCarton(dProduct)
+                data.push({
+                    [key] : key,
+                    wrapper : wra_qty, 
+                    inner_poly: inner_poly_qty,
+                    master_poly: master_poly_qty,
+                    gumTap2 : gumTape_qty,
                 })
             }
         })
