@@ -1,12 +1,3 @@
-import axios from "axios";
-import baseUrl from "../../utils/baseUrl";
-import { useEffect, useRef, useState } from "react";
-import useUserStore from "../../features/userStore";
-import { toast } from "react-hot-toast";
-import { getDemand, getDemandPM } from "../../utils/demand_utils";
-import { getProduct } from "../../utils/demand_api_utils";
-import PrintHeader from "../../components/PrintHeader";
-import { useReactToPrint } from 'react-to-print';
 import {
     Spinner,
     Table,
@@ -15,7 +6,17 @@ import {
     Td,
     Tr
 } from '@chakra-ui/react';
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
+import { useReactToPrint } from 'react-to-print';
+import PmView from "../../components/PmView";
+import PrintHeader from "../../components/PrintHeader";
 import RmView from "../../components/RmView";
+import useUserStore from "../../features/userStore";
+import baseUrl from "../../utils/baseUrl";
+import { getProduct } from "../../utils/demand_api_utils";
+import { getDemand, getTotalPmItem } from "../../utils/demand_utils";
 
 
 export async function getServerSideProps(){
@@ -40,6 +41,7 @@ export default function WaferDemand({ products }) {
     });
 
     const {rm,pm}=getDemand(demand)
+    const {Vanilla_Wafer,Chocolate_Wafer} = pm
 
     useEffect(()=>{
         resetDemand()
@@ -105,7 +107,7 @@ export default function WaferDemand({ products }) {
         </div>
         <div className="flex justify-between space-x-2">
             <div className="w-1/2 border border-gray-400 pb-4">
-                <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
+                <h3 className="py-2 bg-gray-500 text-white text-center">Raw Materials (Kg)</h3>
                 <RmView name='Chocolate Brown Colour 6059' ingredient={rm?.chocolateBrownColour_6059}/>
 
                 <RmView name='Citric Acid Mono' ingredient={rm?.citricAcidMono}/>
@@ -143,8 +145,13 @@ export default function WaferDemand({ products }) {
                 <RmView name='Vanila Flavour KH' ingredient={rm?.vanilaFlavourKH}/>
             </div>
             <div className="w-1/2 border border-gray-400">
-                <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
-
+                <h3 className="py-2 bg-gray-500 text-white text-center">Packaging Materials</h3>
+                <PmView name='Chocolate Wafer Wrapper' unit='' pm={Chocolate_Wafer?.wrapper}/>
+                <PmView name='Chocolate Wafer Carton' unit='Pcs' pm={Chocolate_Wafer?.carton}/>
+                <PmView name='Vanilla Wafer Wrapper' unit='' pm={Vanilla_Wafer?.wrapper}/>
+                <PmView name='Vanilla Wafer Carton' unit='Pcs' pm={Vanilla_Wafer?.carton}/>
+                <PmView name='Wafer Paper Board' unit='Pcs' pm={getTotalPmItem(pm,'board')}/>
+                <PmView name='Gum Tape 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTap2')}/>
             </div>
         </div>
 

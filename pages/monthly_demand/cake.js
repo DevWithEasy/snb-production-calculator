@@ -3,7 +3,7 @@ import baseUrl from "../../utils/baseUrl";
 import { useEffect, useRef, useState } from "react";
 import useUserStore from "../../features/userStore";
 import { toast } from "react-hot-toast";
-import { getDemand } from "../../utils/demand_utils";
+import { getDemand, getTotalFoil, getTotalPmItem } from "../../utils/demand_utils";
 import { getProduct } from "../../utils/demand_api_utils";
 import PrintHeader from "../../components/PrintHeader";
 import { useReactToPrint } from 'react-to-print';
@@ -16,6 +16,7 @@ import {
     Tr
 } from '@chakra-ui/react';
 import RmView from "../../components/RmView";
+import PmView from "../../components/PmView";
 
 
 
@@ -41,6 +42,16 @@ export default function SnacksDemand({ products }) {
     });
 
     const {rm,pm}=getDemand(demand)
+    const {
+        Tiffin_Cake_Vanilla_Standard,
+        Tiffin_Cake_Chocolate_Standard,
+        Milk_Cake_11_gm_Standard,
+        Milk_Cake_22_gm_Standard,
+        Tiffin_Cake_Vanilla_Family,
+        Tiffin_Cake_Chocolate_Family,
+        Milk_Cake_11_gm_Family,
+        Milk_Cake_22_gm_Family
+    } = pm
 
     // useEffect(()=>{
     //     resetDemand()
@@ -164,7 +175,25 @@ export default function SnacksDemand({ products }) {
             </div>
             <div className="w-1/2 border border-gray-400">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
-
+                <PmView name='Tiffin Cake Vanilla 15gm Wrapper' unit='' pm={getTotalFoil(pm,'vanilla')}/>
+                <PmView name='Tiffin Cake Vanilla 15gm Carton' unit='Pcs' pm={Tiffin_Cake_Vanilla_Standard?.carton}/>
+                <PmView name='Tiffin Cake Vanilla Family Carton' unit='Pcs' pm={Tiffin_Cake_Vanilla_Family?.carton}/>
+                <PmView name='Tiffin Cake Vanilla Family ATC' unit='Pcs' pm={Tiffin_Cake_Vanilla_Family?.atc}/>
+                <PmView name='Tiffin Cake Chocolate 15gm Wrapper' unit='' pm={getTotalFoil(pm,'chocolate')}/>
+                <PmView name='Tiffin Cake Chocolate 15gm Carton' unit='Pcs' pm={Tiffin_Cake_Chocolate_Standard?.carton}/>
+                <PmView name='Tiffin Cake Chocolate Family Carton' unit='Pcs' pm={Tiffin_Cake_Chocolate_Family?.carton}/>
+                <PmView name='Tiffin Cake Chocolate Family ATC' unit='Pcs' pm={Tiffin_Cake_Chocolate_Family?.atc}/>
+                <PmView name='Milk Cake 15gm Wrapper' unit='' pm={getTotalFoil(pm,'milk11')}/>
+                <PmView name='Milk Cake 15gm Carton' unit='Pcs' pm={Milk_Cake_11_gm_Standard?.carton}/>
+                <PmView name='Milk Cake 15gm Family Carton' unit='Pcs' pm={Milk_Cake_11_gm_Family?.carton}/>
+                <PmView name='Milk Cake 15gm Family ATC' unit='Pcs' pm={Milk_Cake_11_gm_Family?.atc}/>
+                <PmView name='Milk Cake 22gm Wrapper' unit='' pm={getTotalFoil(pm,'milk22')}/>
+                <PmView name='Milk Cake 22gm Carton' unit='Pcs' pm={Milk_Cake_22_gm_Standard?.carton}/>
+                <PmView name='Milk Cake 22gm Family Carton' unit='Pcs' pm={Milk_Cake_22_gm_Family?.carton}/>
+                <PmView name='Milk Cake 22gm Family ATC' unit='Pcs' pm={Milk_Cake_22_gm_Family?.atc}/>
+                <PmView name='Tiffin Cake Shrink Outer Poly' unit='Pcs' pm={getTotalPmItem(pm,'outer_poly')}/>
+                <PmView name='Gum Tape 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTap1')}/>
+                <PmView name='Gum Tape 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTap2')}/>
             </div>
         </div>
 

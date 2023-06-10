@@ -67,6 +67,91 @@ export const getIngedient=(ingredients,name)=>{
     return Number(ingredient)
 }
 
+export const getTotalPmItem=(object,name)=>{
+    const result = Object.keys(object).map(key =>object[key])
+    return result.map(item=> item[name]).reduce((acc,cur)=>acc+cur,0)
+}
+
+export const getTotalInnerMaster=(object,name,unit)=>{
+
+    if(name == 'inner' && unit == 15){
+        return Object.keys(object)
+        .filter(key=> key =='Special_Chanachur_15_gm' || key =='Jhal_Chanachur_15_gm' || key =='Fried_Peas')
+        .map((key=> object[key]))
+        .map(item=> item.inner_poly)
+        .reduce((acc,cur)=>acc+cur,0)
+
+    }else if(name == 'inner' && unit == 90){
+        return Object.keys(object)
+        .filter(key=> key =='Special_Chanachur_90_gm' || key =='Jhal_Chanachur_90_gm')
+        .map((key=> object[key]))
+        .map(item=> item.inner_poly)
+        .reduce((acc,cur)=>acc+cur,0)
+
+    }else if(name == 'inner' && unit == 180){
+        return Object.keys(object)
+        .filter(key=> key =='Special_Chanachur_180_gm')
+        .map((key=> object[key]))
+        .map(item=> item.inner_poly)
+        .reduce((acc,cur)=>acc+cur,0)
+
+    }else if(name == 'master' && unit == 15){
+        return Object.keys(object)
+        .filter(key=> key =='Special_Chanachur_15_gm' || key =='Jhal_Chanachur_15_gm' || key =='Fried_Peas')
+        .map((key=> object[key]))
+        .map(item=> item.master_poly)
+        .reduce((acc,cur)=>acc+cur,0)
+
+    }else if(name == 'master' && unit == 90){
+        return Object.keys(object)
+        .filter(key=> key =='Special_Chanachur_90_gm' || key =='Special_Chanachur_180_gm' || key =='Jhal_Chanachur_90_gm')
+        .map((key=> object[key]))
+        .map(item=> item.master_poly)
+        .reduce((acc,cur)=>acc+cur,0)
+
+    }
+}
+
+export const getTotalFoil=(object,name)=>{
+
+    if(name == 'vanilla'){
+        return Object.keys(object)
+        .filter(key=> key =='Tiffin_Cake_Vanilla_Standard' || key =='Tiffin_Cake_Vanilla_Family')
+        .map((key=> object[key]))
+        .map(item=> item.wrapper)
+        .reduce((acc,cur)=>acc+cur,0)
+
+    }else if(name == 'chocolate'){
+        return Object.keys(object)
+        .filter(key=> key =='Tiffin_Cake_Chocolate_Standard' || key =='Tiffin_Cake_Chocolate_Family')
+        .map((key=> object[key]))
+        .map(item=> item.wrapper)
+        .reduce((acc,cur)=>acc+cur,0)
+
+    }else if(name == 'milk11'){
+        return Object.keys(object)
+        .filter(key=> key =='Milk_Cake_11_gm_Standard' || key =='Milk_Cake_11_gm_Family')
+        .map((key=> object[key]))
+        .map(item=> item.wrapper)
+        .reduce((acc,cur)=>acc+cur,0)
+
+    }else if(name == 'milk22'){
+        return Object.keys(object)
+        .filter(key=> key =='Milk_Cake_22_gm_Standard' || key =='Milk_Cake_22_gm_Family')
+        .map((key=> object[key]))
+        .map(item=> item.wrapper)
+        .reduce((acc,cur)=>acc+cur,0)
+
+    }else if(name == 'lexus'){
+        return Object.keys(object)
+        .filter(key=> key =='Lexus_Mini' || key =='Lexus_Family')
+        .map((key=> object[key]))
+        .map(item=> item.wrapper)
+        .reduce((acc,cur)=>acc+cur,0)
+
+    }
+}
+
 export const totalFoilByTargetCarton=(product)=>{
     const foil = product.target * product?.foilWeight * product?.packetPerCarton
     const wastage = (foil * 2)/100

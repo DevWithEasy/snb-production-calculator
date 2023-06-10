@@ -7,16 +7,16 @@ import {
     Tr
 } from '@chakra-ui/react';
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { toast } from 'react-hot-toast';
 import { useReactToPrint } from 'react-to-print';
+import PmView from '../../components/PmView';
 import PrintHeader from "../../components/PrintHeader";
+import RmView from '../../components/RmView';
 import useUserStore from '../../features/userStore';
 import baseUrl from "../../utils/baseUrl";
 import { getProduct } from '../../utils/demand_api_utils';
-import {toast} from 'react-hot-toast'
-import { getDemand} from '../../utils/demand_utils';
-import RmView from '../../components/RmView';
-import PmView from '../../components/PmView';
+import { getDemand, getTotalPmItem } from '../../utils/demand_utils';
 
 export async function getServerSideProps(){
     const res = await axios.get(`${baseUrl}/api/products/Lachcha`)
@@ -41,11 +41,10 @@ export default function LachchaDemand({products}){
     const {rm,pm} = getDemand(demand)
     const {Lachcha_Semai_200gm,Lachcha_Semai_500gm} = pm
 
-    // useEffect(()=>{
-    //     resetDemand()
-    // },[])
-
-    console.log(pm)
+    useEffect(()=>{
+        resetDemand()
+    },[])
+    
     return(
         <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
             <PrintHeader/>
@@ -123,7 +122,7 @@ export default function LachchaDemand({products}){
                     <PmView name='Lachcha Semai Premium Pouch' unit='' pm={Lachcha_Semai_500gm?.wrapper}/>
                     <PmView name='Lachcha Semai Premium Bag' unit='Pcs' pm={Lachcha_Semai_500gm?.atc}/>
                     <PmView name='Lachcha Semai Premium Carton' unit='Pcs' pm={Lachcha_Semai_500gm?.carton}/>
-                    <PmView name='Lachcha Semai 200gm Pouch' unit='Pcs' pm={Lachcha_Semai_200gm?.gumTap2}/>
+                    <PmView name='Gum Tape 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTap2')}/>
 
                 </div>
             </div>
