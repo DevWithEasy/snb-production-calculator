@@ -9,7 +9,9 @@ export const addField=async(id)=>{
     }
 }
 
-export const getProduct=async(id,carton,setCarton,demand,addDemand,toast,setLoading)=>{
+export const getProduct=async(e,id,carton,setId,setCarton,demand,addDemand,toast,setLoading)=>{
+    e.preventDefault()
+
     if(!id || !carton){
         return toast.error('Feild Empty')
     }
@@ -23,6 +25,7 @@ export const getProduct=async(id,carton,setCarton,demand,addDemand,toast,setLoad
             return toast.error( `${find.name} is already added.`)
         }else{
             setLoading(false)
+            setId('')
             setCarton('')
             addDemand(res.data.data)
         }

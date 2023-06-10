@@ -45,7 +45,7 @@ export default function SnacksDemand({ products }) {
     // useEffect(()=>{
     //     resetDemand()
     // },[])
-    console.log(demand)
+    console.log(pm)
     return (
         <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
         <PrintHeader/>
@@ -76,28 +76,32 @@ export default function SnacksDemand({ products }) {
                     </Table>
                 </TableContainer>  
                 <div className="flex justify-center">
-                    <div className='border'>
-                        <select 
-                            onChange={(e)=>setId(e.target.value)}
-                            className="p-2 border-r"
+                        <form 
+                            onSubmit={(e)=>getProduct(e,id,carton,setId,setCarton,demand,addDemand,toast,setLoading)}
+                            className='border'
                         >
-                            <option value="">Select</option>
-                            {products.map(product=><option key={product.id} value={product.id}>{product.name}</option>)}
-                        </select>
-                        <input
-                            type="number"
-                            value={carton}
-                            onChange={(e)=>setCarton(e.target.value)}
-                            className="p-2"
-                        />
-                        <button
-                            className="px-4 py-2 bg-blue-500 text-white" 
-                            onClick={()=>getProduct(id,carton,setCarton,demand,addDemand,toast,setLoading)}
-                        >
-                            {loading ? <><Spinner size='sm'/> Submitting</> : 'Submit'}
-                        </button>
+                            <select 
+                                value={id}
+                                onChange={(e)=>setId(e.target.value)}
+                                className="p-2 border-r"
+                            >
+                                <option value="">Select</option>
+                                {products.map(product=><option key={product.id} value={product.id}>{product.name}</option>)}
+                            </select>
+                            <input
+                                type="number"
+                                value={carton}
+                                onChange={(e)=>setCarton(e.target.value)}
+                                className="p-2"
+                            />
+                            <button
+                                className="px-4 py-2 bg-blue-500 text-white" 
+                                type='submit'
+                            >
+                                {loading ? <><Spinner size='sm'/> Submitting</> : 'Submit'}
+                            </button>
+                        </form>
                     </div>
-                </div>
             </div>
         </div>
         <div className="flex justify-between space-x-2">

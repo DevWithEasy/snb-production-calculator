@@ -76,8 +76,12 @@ export default function LachchaDemand({products}){
                         </Table>
                     </TableContainer>  
                     <div className="flex justify-center">
-                        <div className='border'>
+                        <form 
+                            onSubmit={(e)=>getProduct(e,id,carton,setId,setCarton,demand,addDemand,toast,setLoading)}
+                            className='border'
+                        >
                             <select 
+                                value={id}
                                 onChange={(e)=>setId(e.target.value)}
                                 className="p-2 border-r"
                             >
@@ -92,11 +96,11 @@ export default function LachchaDemand({products}){
                             />
                             <button
                                 className="px-4 py-2 bg-blue-500 text-white" 
-                                onClick={()=>getProduct(id,carton,setCarton,demand,addDemand,toast,setLoading)}
+                                type='submit'
                             >
                                 {loading ? <><Spinner size='sm'/> Submitting</> : 'Submit'}
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
