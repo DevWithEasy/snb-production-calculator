@@ -1,17 +1,18 @@
-import { collection, getDocs, query, where } from "firebase/firestore"
+import { Spinner } from "@chakra-ui/react"
+import axios from "axios"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
-import { db } from "../database/conncetDB"
 import useUserStore from "../features/userStore"
 
 export default function Login(){
-    const {loged} = useUserStore()
+    const {loged,adminData} = useUserStore()
     const router = useRouter()
     const [hide,setHide] = useState(false)
     const [type, setType] = useState("password")
     const [username, setUsername] =useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
     function handleHide(){
         if(type === "password"){
             setType("text")
@@ -24,14 +25,24 @@ export default function Login(){
     }
 
     async function loginUser(){
-        const q= query(collection(db,'users'),where('username','==', username))
-        const docs = await getDocs(q)
-        const users = [];
-        docs.forEach(data => users.push(data.data()));
-        if (!users[0]) return toast.error('User not found.')
-        if (users[0].password !== password) return toast.error('Wrong Password.')
-        loged(users[0])
-        if (users[0].section === 'Admin') return router.push('/admin')
+        if(!username || !password){
+            toast.error("Please enter a username and password")
+        }
+        try {
+            setLoading(true)
+            const res = await axios.post('/api/user/login', {username,password})
+            if(res.data.status == 200){
+                setLoading(false)
+                loged(res.data.data.user)
+            }
+            if (res.data.data.user.section == 'Admin'){
+                adminData(res.data.data)
+                return router.push('/admin')
+            }
+        } catch (error) {
+            setLoading(false)
+            toast.error(error.response.data.message)
+        }
         
     }
 
@@ -56,7 +67,15 @@ export default function Login(){
                     }
                 </div>
                 <div className="py-2">
-                    <button className="px-6 py-2 bg-slate-500 text-white rounded" onClick={()=>loginUser()}>Login</button>
+                    <button className="px-6 py-2 bg-slate-500 text-white rounded" onClick={()=>loginUser()}>
+                        {loading ? 
+                            <span className="flex items-center space-x-2">
+                                <Spinner size='sm'/>
+                                <span>Login...</span>
+                            </span> 
+                            : 'Login'
+                        }
+                    </button>
                 </div>
             </div>
         </div>

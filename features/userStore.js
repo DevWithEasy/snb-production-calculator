@@ -3,6 +3,9 @@ import { devtools, persist } from "zustand/middleware"
 const userStore = (set)=>({
     user : {},
     demand : [],
+    users : [],
+    sections : [],
+    products : [],
     addDemand : (data) =>{
         set((state)=>({
             demand : [...state.demand,data]
@@ -16,6 +19,13 @@ const userStore = (set)=>({
     resetDemand : () =>{
         set((state)=>({
             demand : []
+        }))
+    },
+    adminData : (data) =>{
+        set((state)=>({
+            users : data.users,
+            sections : data.sections,
+            products : data.products,
         }))
     },
     loged : (userData) =>{

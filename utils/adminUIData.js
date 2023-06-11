@@ -1,4 +1,4 @@
-export const adminUIData = [
+const adminUIData = [
     {
         title : 'Biscuit',
         link : 'biscuit'
@@ -24,3 +24,4 @@ export const adminUIData = [
         link : 'lachcha'
     },
 ]
+export default adminUIData;

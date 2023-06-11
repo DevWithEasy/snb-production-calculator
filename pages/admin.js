@@ -1,162 +1,20 @@
-import {
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuList,
-} from '@chakra-ui/react';
-import axios from "axios";
-import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from 'react-hot-toast';
-import { AiFillEdit, AiFillFileMarkdown, AiOutlineDelete, AiOutlineMenu, AiOutlineUnorderedList } from 'react-icons/ai';
-import { BiAddToQueue } from 'react-icons/bi';
-import AddProduct from "../components/AddProduct";
-import AddSection from "../components/AddSection";
-import AddUser from "../components/AddUser";
+import DashBoard from '../components/DashBoard';
 import useUserStore from "../features/userStore";
-import { adminUIData } from "../utils/adminUIData";
-import baseUrl from "../utils/baseUrl";
-import UpdateUser from '../components/UpdateUser';
-import DeleteUser from '../components/DeleteUser';
 
-export async function getServerSideProps(){
-    const res = await axios.get(`${baseUrl}/api/admin`)
 
-    return({
-      props : {
-        users : res.data.data.users,
-        products : res.data.data.products,
-        sections : res.data.data.sections
-      }
-    })
-}
-
-export default function Admin({users,products,sections}){
-    const {logout} = useUserStore()
-    const [active,setActive] = useState(0)
-    const [action,setAction] = useState('recipe')
-    const router = useRouter()
-    const logoutUser =()=>{
-        logout()
-        router.push("/")
-    }
-
-    function sactionHandler (type){
-        if(type == "recipe"){
-            setAction(type);
-            setActive(0)
-            toast.success('View Mode Active')
-        }
-        if(type == "update/recipe"){
-            setAction(type);
-            setActive(1)
-            toast.success('Update Mode Active')
-        }
-        if(type == "add"){
-            setAction(type);
-            setActive(2)
-            toast.success('Recipe Add Mode Active')
-        }
-        if(type == "monthly_demand"){
-            setAction(type);
-            setActive(3)
-            toast.success('Monthly Demand Mode Active')
-        }
-       
-    }
-
-    console.log(users,products)
-    return(
-        <div className="flex justify-center">
-            <Head>
-                <title>S&B Nice Food Valley Ltd.</title>
-                <meta name="description" content="S&B Nice Food Valley Ltd." />
-                <link rel="icon" href="/logo.png" />
-            </Head>
-            <div className="relative w-full mx-4 p-2 mt-10 mb-6 border rounded-md shadow-lg space-y-2">
-                <div className=" flex justify-between border-b px-4 pb-2">
-                    <p className="text-2xl">Admin Dashboard</p>
-                    <Menu>
-                        <MenuButton>
-                            <AiOutlineMenu size={25} className="border"/>
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>
-                                <AddUser/>
-                            </MenuItem>
-                            <MenuItem>
-                                <AddSection/>
-                            </MenuItem>
-                            <MenuItem>
-                                <AddProduct/>
-                            </MenuItem>
-                            <MenuItem onClick={()=>logoutUser()}>Logout</MenuItem>
-                        </MenuList>
-                    </Menu>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 gap-y-2">
-                    <div className="border p-2 rounded shadow">
-                        <div className="flex justify-between items-center bg-gray-500 p-2 text-white">
-                            <span>Recipes</span>
-                            <p className="w-1/2 flex space-x-4">
-                                <AiOutlineUnorderedList size={25} onClick={()=>sactionHandler('recipe')} className={active === 0 ? 'bg-green-300 p-1 rounded' :'hover:scale-150 transition-all duration-300 hover:bg-green-300 p-1 rounded'}/>
-                                <AiFillEdit size={25} onClick={()=>sactionHandler('update/recipe')} className={active === 1 ? 'bg-green-300 p-1 rounded' :'hover:scale-150 transition-all duration-300 hover:bg-green-300 p-1 rounded'}/>
-                                <BiAddToQueue size={25} onClick={()=>sactionHandler('add')} className={active === 2 ? 'bg-green-300 p-1 rounded' :'hover:scale-150 transition-all duration-300 hover:bg-green-300 p-1 rounded'}/>
-                                <AiFillFileMarkdown size={25} onClick={()=>sactionHandler('monthly_demand')} className={active === 3 ? 'bg-green-300 p-1 rounded' :'hover:scale-150 transition-all duration-300 hover:bg-green-300 p-1 rounded'}/>
-                            </p>
-                        </div>
-                        <div className="mt-2">
-                            {adminUIData.map((item, index) =><Link key={index} href={`/${action}/${item.link}`}>
-                                    <a className="block p-2 hover:bg-blue-50 hover:transition-all duration-300 rounded">{item.title}</a>
-                            </Link>)}
-                        </div>
-                    </div>
-                    <div className="border p-2 rounded shadow">
-                        <table className="w-full">
-                            <thead className="bg-gray-500 p-2 text-white font-bold">
-                                <tr>
-                                    <td className="p-2">Name</td>
-                                    <td className="p-2 text-center">Username</td>
-                                    <td className="p-2 text-center">Password</td>
-                                    <td className="p-2 text-center">Section</td>
-                                    <td className="p-2 text-center">Action</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {users.map(user=><tr key={user.id} className="border-b hover:bg-blue-50 hover:transition-all duration-300 rounded">
-                                    <td className="p-2">{user?.name}</td>
-                                    <td className="p-2 text-center">{user?.username}</td>
-                                    <td className="p-2 text-center">{user?.password}</td>
-                                    <td className="p-2 text-center">{user?.section}</td>
-                                    <td className="p-2 flex justify-center items-center space-x-2">
-                                        <UpdateUser {...{user,sections}}/>
-                                        <DeleteUser {...{user,sections}}/>
-                                    </td>
-                                </tr>)}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="border p-2 rounded shadow">
-                        <h1 className="bg-gray-500 p-2 text-white">All Products</h1>
-                        <div className="h-[400px] overflow-x-auto">
-                            <table className="w-full ">
-                                <tbody>
-                                    {products.map(product=><tr key={product.id} className="border-b hover:bg-blue-50 hover:transition-all duration-300 rounded">
-                                        <td className="p-2">{product?.name}</td>
-                                        <td className="p-2 text-center">{product?.section}</td>
-                                        <td className="p-2 flex justify-center items-center space-x-2">
-                                            <AiFillEdit size={25} className="hover:scale-150 transition-all duration-300 hover:bg-green-500 p-1 rounded cursor-pointer hover:text-white"/>
-                                            <AiOutlineDelete size={25} className="hover:scale-150 transition-all duration-300 hover:bg-red-500 p-1 rounded cursor-pointer hover:text-white"/>
-                                        </td>
-                                    </tr>)}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+export default function Admin({}){
+    const {user} = useUserStore()
+    
+    if(user.section != 'Admin'){
+        return(
+            <div>
+                <p>You are not allowed to</p>
             </div>
-        </div>
-    )
+        )
+    }else{
+        return <DashBoard/>
+    }
 }
