@@ -149,6 +149,20 @@ export const getTotalFoil=(object,name)=>{
         .map(item=> item.wrapper)
         .reduce((acc,cur)=>acc+cur,0)
 
+    }else if(name == 'cookies'){
+        return Object.keys(object)
+        .filter(key=> key =='Milk_Cookies' || key =='Chocolate_Cookies')
+        .map((key=> object[key]))
+        .map(item=> item.tray)
+        .reduce((acc,cur)=>acc+cur,0)
+
+    }else if(name == 'dryCake'){
+        return Object.keys(object)
+        .filter(key=> key =='Dry_Cake_Mini' || key =='Dry_Cake_Family')
+        .map((key=> object[key]))
+        .map(item=> item.paper)
+        .reduce((acc,cur)=>acc+cur,0)
+
     }
 }
 
@@ -172,7 +186,7 @@ export  const totalBoardByTargetCarton=(targetCarton)=>{
 export const totalTrayByTargetCarton=(product)=>{
     const tray = product.target * product?.packetPerCarton
     const wastage = (tray * 0.5)/100
-    if(product.id === 'Active_Energy_Family' || product.id === 'Best_Choice_Family' || product.id === 'Valencia_Orange_Family' || product.id === 'Chocolate_Cookies' || product.id === 'Milk_Cookies' || product.id === 'Butter_Cookies'){
+    if(product.id === 'Active_Energy_Family' || product.id === 'Best_Choice_Family' || product.id === 'Valencia_Orange_Family' || product.id === 'Chocolate_Cookies' || product.id === 'Milk_Cookies' || product.id === 'Butter_Cookies' || product.id === 'Dry_Cake_Family'){
         return Number((tray + wastage).toFixed(0))
     }else{
         return 0
@@ -374,7 +388,7 @@ export const getDemandPM=(demand)=>{
                     tray : tray_qty,
                     atc : atc_qty,
                     gumTap2 : gumTape_qty,
-                    gumTapeBoth : gumTapeBoth_qty
+                    gumTapBoth : gumTapeBoth_qty
                 })
             }else if(dProduct.id == product && dProduct.section == 'Lachcha'){
                 const key = nameWith_(dProduct.name)
@@ -448,8 +462,6 @@ export const getDemandPM=(demand)=>{
             }
         })
     })
-
-    // console.log(data)
     
     return (arrayOfObj_to_object(data))
 }

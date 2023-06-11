@@ -1,22 +1,14 @@
 import axios from "axios";
-import baseUrl from "../../utils/baseUrl";
-import { useEffect, useRef, useState } from "react";
-import useUserStore from "../../features/userStore";
-import { toast } from "react-hot-toast";
-import { getDemand, getDemandPM, getTotalInnerMaster, getTotalPmItem } from "../../utils/demand_utils";
-import { addField, getProduct } from "../../utils/demand_api_utils";
-import PrintHeader from "../../components/PrintHeader";
+import { useEffect, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
-import {
-    Spinner,
-    Table,
-    TableContainer,
-    Tbody,
-    Td,
-    Tr
-} from '@chakra-ui/react';
-import RmView from "../../components/RmView";
 import PmView from "../../components/PmView";
+import PrintHeader from "../../components/PrintHeader";
+import RmView from "../../components/RmView";
+import TargetCarton from "../../components/TargetCarton";
+import useUserStore from "../../features/userStore";
+import baseUrl from "../../utils/baseUrl";
+import { getDemand, getTotalInnerMaster, getTotalPmItem } from "../../utils/demand_utils";
+import Head from "next/head";
 
 
 
@@ -31,10 +23,7 @@ export async function getServerSideProps(){
 
 
 export default function SnacksDemand({ products }) {
-    const{demand,addDemand,removeDemand,resetDemand} = useUserStore()
-    const [id,setId] = useState('')
-    const [carton,setCarton] = useState()
-    const [loading,setLoading] = useState(false)
+    const{demand,resetDemand} = useUserStore()
     const printRef = useRef()
     const handlePrint = useReactToPrint({
         content: () => printRef.current,
@@ -55,66 +44,23 @@ export default function SnacksDemand({ products }) {
 
     useEffect(()=>{
         resetDemand()
-    },[])
+    },[resetDemand])
     
     return (
         <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
+        <Head>
+            <title>Snacks Demand</title>
+            <link rel="icon" href="/logo.png" />
+        </Head>
         <PrintHeader/>
-        <div className="space-y-2 border border-gray-400">
+        <div className="print:hidden space-y-2 border border-gray-400">
             <h1 className="relative py-2 bg-gray-500 text-white text-xl text-center">
                 Production Target Carton
                 <button onClick={()=>handlePrint()} className="absolute right-2 print:hidden"> 
                     Print
                 </button>
             </h1>
-            <div className="p-2 space-y-2">
-                {/* {products.map(product =><button key={product.id} onClick={()=>addField(product.id)} className="border p-2">{product.name}</button>)} */}
-                <TableContainer className='border rounded'>
-                    <Table variant='simple'>
-                        <Tbody>
-                            {
-                                demand && demand.map(product => <Tr 
-                                    key={product.id}
-                                >
-                                    <Td>{product.name}</Td>
-                                    <Td>{product.demand}</Td>
-                                    <Td>{product.target}</Td>
-                                    <Td>
-                                        <button onClick={()=>removeDemand(product.id)}>X</button>
-                                    </Td>
-                                </Tr>)
-                            }
-                        </Tbody>
-                    </Table>
-                </TableContainer>  
-                <div className="flex justify-center">
-                        <form 
-                            onSubmit={(e)=>getProduct(e,id,carton,setId,setCarton,demand,addDemand,toast,setLoading)}
-                            className='border'
-                        >
-                            <select 
-                                value={id}
-                                onChange={(e)=>setId(e.target.value)}
-                                className="p-2 border-r"
-                            >
-                                <option value="">Select</option>
-                                {products.map(product=><option key={product.id} value={product.id}>{product.name}</option>)}
-                            </select>
-                            <input
-                                type="number"
-                                value={carton}
-                                onChange={(e)=>setCarton(e.target.value)}
-                                className="p-2"
-                            />
-                            <button
-                                className="px-4 py-2 bg-blue-500 text-white" 
-                                type='submit'
-                            >
-                                {loading ? <><Spinner size='sm'/> Submitting</> : 'Submit'}
-                            </button>
-                        </form>
-                    </div>
-            </div>
+            <TargetCarton {...{products}}/>
         </div>
         <div className="flex justify-between space-x-2">
             <div className="w-1/2 border border-gray-400 pb-4">

@@ -1,21 +1,14 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import { toast } from "react-hot-toast";
+import Head from "next/head";
+import { useEffect, useRef } from "react";
+import { useReactToPrint } from 'react-to-print';
+import PmView from "../../components/PmView";
+import PrintHeader from "../../components/PrintHeader";
+import RmView from "../../components/RmView";
+import TargetCarton from "../../components/TargetCarton";
 import useUserStore from "../../features/userStore";
 import baseUrl from "../../utils/baseUrl";
-import { getProduct } from "../../utils/demand_api_utils";
-import { getDemand, getDemandPM } from "../../utils/demand_utils";
-import PrintHeader from "../../components/PrintHeader";
-import { useReactToPrint } from 'react-to-print';
-import {
-    Spinner,
-    Table,
-    TableContainer,
-    Tbody,
-    Td,
-    Tr
-} from '@chakra-ui/react';
-import RmView from "../../components/RmView";
+import { getDemand, getTotalFoil, getTotalPmItem } from "../../utils/demand_utils";
 
 
 
@@ -30,10 +23,7 @@ export async function getServerSideProps(){
 
 
 export default function WaferDemand({ products }) {
-    const{demand,addDemand,removeDemand,resetDemand} = useUserStore()
-    const [id,setId] = useState('')
-    const [carton,setCarton] = useState()
-    const [loading,setLoading] = useState(false)
+    const{demand,resetDemand} = useUserStore()
     const printRef = useRef()
     const handlePrint = useReactToPrint({
         content: () => printRef.current,
@@ -41,69 +31,44 @@ export default function WaferDemand({ products }) {
     });
 
     const {rm,pm}=getDemand(demand)
+    const {
+        Active_Energy_Family,
+        Active_Energy_Mini,
+        Active_Energy_Standard,
+        Best_Choice_Family,
+        Best_Choice_Standard,
+        Choco_Plus_Mini,
+        Choco_Plus_Standard,
+        Fruit_Plus_Mini,
+        Fruit_Plus_Standard,
+        Elachi_Standard,
+        King_Cookies_Biscuit,
+        Lexus_Mini,
+        Lexus_Standard,
+        Lexus_Family,
+        Valencia_Orange_Standard,
+        Valencia_Orange_Family
+    } = pm
 
     useEffect(()=>{
         resetDemand()
-    },[])
-    console.log(pm)
+    },[resetDemand])
 
     return (
         <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
+        <Head>
+            <title>Biscuit Demand</title>
+            <link rel="icon" href="/logo.png" />
+        </Head>
         <PrintHeader/>
-        <div className="space-y-2 border border-gray-400">
+        <div className="print:hidden space-y-2 border border-gray-400">
             <h1 className="relative py-2 bg-gray-500 text-white text-xl text-center">
                 Production Target Carton
                 <button onClick={()=>handlePrint()} className="absolute right-2 print:hidden"> 
                     Print
                 </button>
             </h1>
-            <div className="p-2 space-y-2">
-                <TableContainer className='border rounded'>
-                    <Table variant='simple'>
-                        <Tbody>
-                            {
-                                demand && demand.map(product => <Tr 
-                                    key={product.id}
-                                >
-                                    <Td>{product.name}</Td>
-                                    <Td>{product.demand}</Td>
-                                    <Td>{product.target}</Td>
-                                    <Td>
-                                        <button onClick={()=>removeDemand(product.id)}>X</button>
-                                    </Td>
-                                </Tr>)
-                            }
-                        </Tbody>
-                    </Table>
-                </TableContainer>  
-                <div className="flex justify-center">
-                        <form 
-                            onSubmit={(e)=>getProduct(e,id,carton,setId,setCarton,demand,addDemand,toast,setLoading)}
-                            className='border'
-                        >
-                            <select 
-                                value={id}
-                                onChange={(e)=>setId(e.target.value)}
-                                className="p-2 border-r"
-                            >
-                                <option value="">Select</option>
-                                {products.map(product=><option key={product.id} value={product.id}>{product.name}</option>)}
-                            </select>
-                            <input
-                                type="number"
-                                value={carton}
-                                onChange={(e)=>setCarton(e.target.value)}
-                                className="p-2"
-                            />
-                            <button
-                                className="px-4 py-2 bg-blue-500 text-white" 
-                                type='submit'
-                            >
-                                {loading ? <><Spinner size='sm'/> Submitting</> : 'Submit'}
-                            </button>
-                        </form>
-                    </div>
-            </div>
+            <TargetCarton {...{products}}/>
         </div>
         <div className="flex justify-between space-x-2">
             <div className="w-1/2 border border-gray-400 pb-4">
@@ -203,7 +168,43 @@ export default function WaferDemand({ products }) {
             </div>
             <div className="w-1/2 border border-gray-400">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
-
+                <PmView name='Active Energy 45gm Wrapper' unit='' pm={Active_Energy_Standard?.wrapper}/>
+                <PmView name='Active Energy 45gm Carton' unit='Pcs' pm={Active_Energy_Standard?.carton}/>
+                <PmView name='Active Energy 18gm Wrapper' unit='' pm={Active_Energy_Mini?.wrapper}/>
+                <PmView name='Active Energy 18gm Carton' unit='Pcs' pm={Active_Energy_Mini?.carton}/>
+                <PmView name='Active Energy 200gm Wrapper' unit='' pm={Active_Energy_Family?.wrapper}/>
+                <PmView name='Active Energy 200gm Carton' unit='Pcs' pm={Active_Energy_Family?.carton}/>
+                <PmView name='Active Energy 200gm Tray' unit='Pcs' pm={Active_Energy_Family?.tray}/>
+                <PmView name='Valencia Orange 45gm Wrapper' unit='' pm={Valencia_Orange_Standard?.wrapper}/>
+                <PmView name='Valencia Orange 45gm Carton' unit='Pcs' pm={Valencia_Orange_Standard?.carton}/>
+                <PmView name='Valencia Orange 150gm Wrpper' unit='' pm={Valencia_Orange_Family?.wrapper}/>
+                <PmView name='Valencia Orange 150gm Carton' unit='Pcs' pm={Valencia_Orange_Family?.carton}/>
+                <PmView name='Valencia Orange 150gm Tray' unit='Pcs' pm={Valencia_Orange_Family?.tray}/>
+                <PmView name='Best Choice 80gm Wrapper' unit='' pm={Best_Choice_Standard?.wrapper}/>
+                <PmView name='Best Choice 80gm Carton' unit='Pcs' pm={Best_Choice_Standard?.carton}/>
+                <PmView name='Best Choice 220gm Wrapper' unit='' pm={Best_Choice_Family?.wrapper}/>
+                <PmView name='Best Choice 220gm Carton' unit='Pcs' pm={Best_Choice_Family?.carton}/>
+                <PmView name='Best Choice 220gm Tray' unit='Pcs' pm={Best_Choice_Family?.tray}/>
+                <PmView name='Elachi 45gm Wrapper' unit='' pm={Elachi_Standard?.wrapper}/>
+                <PmView name='Elachi 45gm Carton' unit='Pcs' pm={Elachi_Standard?.carton}/>
+                <PmView name='Lexus 15gm Wrapper' unit='' pm={getTotalFoil(pm,'lexus')}/>
+                <PmView name='Lexus 15gm Carton' unit='Pcs' pm={Lexus_Mini?.carton}/>
+                <PmView name='Lexus 180gm Carton' unit='Pcs' pm={Lexus_Family?.carton}/>
+                <PmView name='Lexus 180gm ATC' unit='Pcs' pm={Lexus_Family?.atc}/>
+                <PmView name='Lexus 65gm Wrapper' unit='' pm={Lexus_Standard?.wrapper}/>
+                <PmView name='Lexus 65gm Carton' unit='Pcs' pm={Lexus_Standard?.carton}/>
+                <PmView name='Choco Plus 20gm Wrapper' unit='' pm={Choco_Plus_Mini?.wrapper}/>
+                <PmView name='Choco Plus 20gm Carton' unit='Pcs' pm={Choco_Plus_Mini?.carton}/>
+                <PmView name='Choco Plus 47gm Wrapper' unit='' pm={Choco_Plus_Standard?.wrapper}/>
+                <PmView name='Choco Plus 47gm Carton' unit='Pcs' pm={Choco_Plus_Standard?.carton}/>
+                <PmView name='Fruit Plus gm Wrapper' unit='' pm={Fruit_Plus_Mini?.wrapper}/>
+                <PmView name='Fruit Plus gm Carton' unit='Pcs' pm={Fruit_Plus_Mini?.carton}/>
+                <PmView name='Fruit Plus 47gm Wrapper' unit='' pm={Fruit_Plus_Standard?.wrapper}/>
+                <PmView name='Fruit Plus 47gm Carton' unit='Pcs' pm={Fruit_Plus_Standard?.carton}/>
+                <PmView name='King Cookies Wrapper' unit='' pm={King_Cookies_Biscuit?.wrapper}/>
+                <PmView name='King Cookies Carton' unit='Pcs' pm={King_Cookies_Biscuit?.carton}/>
+                <PmView name='Gum Tape 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTap2')}/>
+                <PmView name='Gum Tape 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTapBoth')}/>
             </div>
         </div>
 
