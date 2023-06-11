@@ -1,51 +1,40 @@
-import { collection, getDocs, query } from "firebase/firestore";
+import {
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuList,
+} from '@chakra-ui/react';
+import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import toast from 'react-hot-toast';
-import { AiFillEdit, AiFillFileMarkdown, AiOutlineDelete, AiOutlineLogout, AiOutlineMenu, AiOutlineUnorderedList } from 'react-icons/ai';
+import { AiFillEdit, AiFillFileMarkdown, AiOutlineDelete, AiOutlineMenu, AiOutlineUnorderedList } from 'react-icons/ai';
 import { BiAddToQueue } from 'react-icons/bi';
 import AddProduct from "../components/AddProduct";
 import AddSection from "../components/AddSection";
 import AddUser from "../components/AddUser";
-import { db } from "../database/conncetDB";
-import { adminUIData } from "../utils/adminUIData";
 import useUserStore from "../features/userStore";
-import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
-  } from '@chakra-ui/react'
+import { adminUIData } from "../utils/adminUIData";
+import baseUrl from "../utils/baseUrl";
+import UpdateUser from '../components/UpdateUser';
+import DeleteUser from '../components/DeleteUser';
 
 export async function getServerSideProps(){
-    const q= query(collection(db,'users'))
-    const docs = await getDocs(q)
-    const users = [];
-    docs.forEach(data => users.push({id:data.id,user : data.data()}));
-
-    const productQ= query(collection(db,'products'))
-    const docsProducts = await getDocs(productQ)
-    const products = [];
-    docsProducts.forEach(data => products.push(data.data()));
+    const res = await axios.get(`${baseUrl}/api/admin`)
 
     return({
       props : {
-        users,products
+        users : res.data.data.users,
+        products : res.data.data.products,
+        sections : res.data.data.sections
       }
     })
 }
 
-export default function Admin({users,products}){
+export default function Admin({users,products,sections}){
     const {logout} = useUserStore()
-    const [user,setUser] = useState(false)
-    const [section,setSection] = useState(false)
-    const [product,setProduct] = useState(false)
     const [active,setActive] = useState(0)
     const [action,setAction] = useState('recipe')
     const router = useRouter()
@@ -77,6 +66,8 @@ export default function Admin({users,products}){
         }
        
     }
+
+    console.log(users,products)
     return(
         <div className="flex justify-center">
             <Head>
@@ -123,15 +114,25 @@ export default function Admin({users,products}){
                         </div>
                     </div>
                     <div className="border p-2 rounded shadow">
-                        <h1 className="bg-gray-500 p-2 text-white">All Users</h1>
                         <table className="w-full">
+                            <thead className="bg-gray-500 p-2 text-white font-bold">
+                                <tr>
+                                    <td className="p-2">Name</td>
+                                    <td className="p-2 text-center">Username</td>
+                                    <td className="p-2 text-center">Password</td>
+                                    <td className="p-2 text-center">Section</td>
+                                    <td className="p-2 text-center">Action</td>
+                                </tr>
+                            </thead>
                             <tbody>
                                 {users.map(user=><tr key={user.id} className="border-b hover:bg-blue-50 hover:transition-all duration-300 rounded">
-                                    <td className="p-2">{user?.user?.name}</td>
-                                    <td className="p-2 text-center">{user?.user?.section}</td>
+                                    <td className="p-2">{user?.name}</td>
+                                    <td className="p-2 text-center">{user?.username}</td>
+                                    <td className="p-2 text-center">{user?.password}</td>
+                                    <td className="p-2 text-center">{user?.section}</td>
                                     <td className="p-2 flex justify-center items-center space-x-2">
-                                        <AiFillEdit size={25} className="hover:scale-150 transition-all duration-300 hover:bg-green-500 p-1 rounded cursor-pointer hover:text-white"/>
-                                        <AiOutlineDelete size={25} className="hover:scale-150 transition-all duration-300 hover:bg-red-500 p-1 rounded cursor-pointer hover:text-white"/>
+                                        <UpdateUser {...{user,sections}}/>
+                                        <DeleteUser {...{user,sections}}/>
                                     </td>
                                 </tr>)}
                             </tbody>
