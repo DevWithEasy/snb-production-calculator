@@ -30,9 +30,15 @@ export default function AddLachcha({products}){
         packetWeight: 0,
         packetPerCarton: 0,
         processLoss : 0,
-        innerPoly: 0,
         foilWeight : 0,
         dryCakepaper: 0,
+        atc: 0,
+        jar : 0,
+        label : 0,
+        tray : 0,
+        inner_poly_6_8 : 0,
+        inner_poly_8_11_5 : 0,
+        inner_poly_9_11_5 : 0,
     })
     const [ingredients,setIngredients] = useState({
         ammonium : 0,
@@ -99,13 +105,69 @@ export default function AddLachcha({products}){
                                     }
                             </select>
                         </div>
-                        <ProductInput label='Version' name="version" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Packet Weight' name="packetWeight" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Packet Per Carton' name="packetPerCarton" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Process Loss' name="processLoss" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Foil Weight' name="foilWeight" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Inner Poly Weight' name="innerPoly" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Dry Cake Paper' name="dryCakepaper" product={product} setProduct={setProduct}/>
+                        <ProductInput {...{
+                            label : 'Version',
+                            name : 'version',
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label : 'Packet Weight',
+                            name : 'packetWeight',
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label : 'Packet Per Carton',
+                            name : 'packetPerCarton',
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label : 'Process Loss',
+                            name : 'processLoss',
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label : 'Foil Weight',
+                            name : 'foilWeight',
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label : 'Inner Poly 6"x8"',
+                            name : 'inner_poly_6_8',
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label : 'Inner Poly 8x11.5"',
+                            name : 'inner_poly_8_11_5',
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label : 'Inner Poly 9"x11.5"',
+                            name : 'inner_poly_9_11_5',
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label : 'Dry Cake Paper',
+                            name : 'dryCakepaper',
+                            product,
+                            setProduct
+                        }}/>
+
                         <div className="heading">
                             <p className="name">Ingredients</p>
                             <p>Quantity</p>

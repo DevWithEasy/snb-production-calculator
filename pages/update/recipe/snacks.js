@@ -29,7 +29,25 @@ export default function AddProduct({products}){
 
     const [oldProduct,setOldProduct] = useState({})
     const [oldIngredients,setOldIngredients] = useState({});
-    const {version,packetWeight,packetPerCarton,processLoss,innerPoly,masterPoly,foilWeight} = oldProduct
+    const {
+        version,
+        packetWeight,
+        packetPerCarton,
+        processLoss,
+        foilWeight,
+        packet_per_inner,
+        inner_per_master,
+        inner_poly_18_15,
+        master_poly_25_47,
+        inner_poly_17_19_5,
+        master_poly_25_37,
+        inner_poly_16_21_5,
+        master_poly_35_26,
+        inner_poly_24_15,
+        master_poly_44_23,
+        inner_poly_19_20,
+        master_poly_28_42,
+    } = oldProduct
     const {
         turmeric,
         cinamon,
@@ -128,19 +146,141 @@ export default function AddProduct({products}){
                         </div>
                         {product?.name && <div className="space-y-2">
                             <div className="space-y-2">
-                                <UpdateInput label='Version' name='version' value={version} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Version',
+                                    name:"version",
+                                    value : version,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Packet Weight' name='packetWeight' value={packetWeight} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Packet Weight',
+                                    name:"packetWeight",
+                                    value : packetWeight,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Packet Per Carton' name='packetPerCarton' value={packetPerCarton} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Packet Per Carton',
+                                    name:"packetPerCarton",
+                                    value : packetPerCarton,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Process Loss' name='processLoss' value={processLoss} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Process Loss',
+                                    name:"processLoss",
+                                    value : processLoss,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Foil Weight' name='foilWeight' value={foilWeight} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Foil Weight',
+                                    name:"foilWeight",
+                                    value : foilWeight,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Inner poly' name='innerPoly' value={innerPoly} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Packet Per Inner',
+                                    name:"packet_per_inner",
+                                    value : packet_per_inner,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Master Poly' name='masterPoly' value={masterPoly} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Inner Per Master',
+                                    name:"inner_per_master",
+                                    value : inner_per_master,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label:'Inner Poly 18"x15"',
+                                    name:"inner_poly_18_15",
+                                    value : inner_poly_18_15,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label:'Master Poly 25"x47"',
+                                    name:"master_poly_25_47",
+                                    value : master_poly_25_47,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label:'Inner Poly 17"x19.5"',
+                                    name:"inner_poly_17_19_5",
+                                    value : inner_poly_17_19_5,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label:'Master Poly 25"x37"',
+                                    name:"master_poly_25_37",
+                                    value : master_poly_25_37,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label:'Inner Poly 16"x21.5"',
+                                    name:"inner_poly_16_21_5",
+                                    value : inner_poly_16_21_5,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label:'Master Poly 35"x26"',
+                                    name:"master_poly_35_26",
+                                    value : master_poly_35_26,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label:'Inner Poly 24"x15"',
+                                    name:"inner_poly_24_15",
+                                    value : inner_poly_24_15,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label:'Master Poly 44"x23"',
+                                    name:"master_poly_44_23",
+                                    value : master_poly_44_23,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label:'Inner Poly 19"x20"',
+                                    name:"inner_poly_19_20",
+                                    value : inner_poly_19_20,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label:'Master Poly 28"x42"',
+                                    name:"master_poly_28_42",
+                                    value : master_poly_28_42,
+                                    product,
+                                    setProduct
+                                }}/>
                             </div>
                             <div className="heading">
                                 <p className="name">Ingredients</p>

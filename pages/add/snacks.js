@@ -41,6 +41,8 @@ export default function AddLachcha({products}){
         master_poly_35_26 : 0,
         inner_poly_24_15 : 0,
         master_poly_44_23 : 0,
+        inner_poly_19_20 : 0,
+        master_poly_28_42 : 0,
     })
     const [ingredients,setIngredients] = useState({
         turmeric : 0,
@@ -105,12 +107,125 @@ export default function AddLachcha({products}){
                                     }
                             </select>
                         </div>
-                        <ProductInput label='Version' name="version" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Packet Weight' name="packetWeight" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Packet Per Carton' name="packetPerCarton" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Process Loss' name="processLoss" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Foil Weight' name="foilWeight" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Inner Foil Weight' name="innerFoil" product={product} setProduct={setProduct}/>
+                        <ProductInput {...{
+                            label:'Version',
+                            name:"version",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Packet Weight',
+                            name:"packetWeight",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Packet Per Carton',
+                            name:"packetPerCarton",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Process Loss',
+                            name:"processLoss",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Foil Weight',
+                            name:"foilWeight",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Packet Per Inner',
+                            name:"packet_per_inner",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Inner Per Master',
+                            name:"inner_per_master",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Inner Poly 18"x15"',
+                            name:"inner_poly_18_15",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Master Poly 25"x47"',
+                            name:"master_poly_25_47",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Inner Poly 17"x19.5"',
+                            name:"inner_poly_17_19_5",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Master Poly 25"x37"',
+                            name:"master_poly_25_37",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Inner Poly 16"x21.5"',
+                            name:"inner_poly_16_21_5",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Master Poly 35"x26"',
+                            name:"master_poly_35_26",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Inner Poly 24"x15"',
+                            name:"inner_poly_24_15",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Master Poly 44"x23"',
+                            name:"master_poly_44_23",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Inner Poly 19"x20"',
+                            name:"inner_poly_19_20",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Master Poly 28"x42"',
+                            name:"master_poly_28_42",
+                            product,
+                            setProduct
+                        }}/>
+
                         <div className="heading">
                             <p className="name">Ingredients</p>
                             <p>Quantity</p>

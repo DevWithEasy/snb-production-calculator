@@ -29,7 +29,7 @@ export default function AddProduct({products}){
 
     const [oldProduct,setOldProduct] = useState({})
     const [oldIngredients,setOldIngredients] = useState({});
-    const {version,packetWeight,packetPerCarton,processLoss,masterPoly,foilWeight} = oldProduct
+    const {version,packetWeight,packetPerCarton,processLoss,master_poly_24_22_5,foilWeight} = oldProduct
     const {flourGrade_A,flourGrade_B,palmOilSuper,starchPowder,daldaHardPUSTI,ghee,gheeFlavour,tbhq} = oldIngredients
 
     useEffect(()=>{
@@ -94,17 +94,53 @@ export default function AddProduct({products}){
                         </div>
                         {product?.name && <div className="space-y-2">
                             <div className="space-y-2">
-                                <UpdateInput label='Version' name='version' value={version} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Version',
+                                    name:"version",
+                                    value : version,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Packet Weight' name='packetWeight' value={packetWeight} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Packet Weight',
+                                    name:"packetWeight",
+                                    value : packetWeight,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Packet Per Carton' name='packetPerCarton' value={packetPerCarton} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Packet Per Carton',
+                                    name:"packetPerCarton",
+                                    value : packetPerCarton,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Process Loss' name='processLoss' value={processLoss} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Process Loss',
+                                    name:"processLoss",
+                                    value : processLoss,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Master Poly Weight' name='masterPoly' value={masterPoly} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Foil Weight',
+                                    name:"foilWeight",
+                                    value : foilWeight,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Foil Weight' name='foilWeight' value={foilWeight} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Master Poly 24"x22.5"',
+                                    name:"master_poly_24_22_5",
+                                    value : master_poly_24_22_5,
+                                    product,
+                                    setProduct
+                                }}/>
                             </div>
                             <div className="heading">
                                 <p className="name">Ingredients</p>

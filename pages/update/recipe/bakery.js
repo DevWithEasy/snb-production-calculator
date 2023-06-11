@@ -29,7 +29,7 @@ export default function AddProduct({products}){
 
     const [oldProduct,setOldProduct] = useState({})
     const [oldIngredients,setOldIngredients] = useState({});
-    const {version,packetWeight,packetPerCarton,processLoss,innerPoly,foilWeight,dryCakepaper} = oldProduct
+    const {version,packetWeight,packetPerCarton,processLoss,inner_poly_6_8,inner_poly_8_11_5,inner_poly_9_11_5,foilWeight,dryCakepaper} = oldProduct
     const {
         ammonium,
         bakingPowder,
@@ -94,8 +94,7 @@ export default function AddProduct({products}){
         const recipeRef = doc(db, "products_recipe", product.id);
         await updateDoc(recipeRef, ingredients);
         toast.success('Product update Successfully')
-        // e.target.reset()
-        // router.push(`/add_product/lachcha`)
+
     }
     async function updateProductVerson(){
         const infoRef = doc(db, "products_info", product.id);
@@ -104,10 +103,9 @@ export default function AddProduct({products}){
         await updateDoc(recipeRef, ingredients);
         await setDoc(doc(db,'all_version_recipes',("V"+"_"+product.version+"_"+product.id)),{...product,ingredients : ingredients,changedAt: Date.now()})
         toast.success('Product update Successfully')
-        // e.target.reset()
-        // router.push(`/add_product/lachcha`)
+
     }
-    console.log(ingredients);
+    console.log(product,ingredients);
     return(
         <div className="add_product">
             <Head>
@@ -130,19 +128,78 @@ export default function AddProduct({products}){
                         </div>
                         {product?.name && <div className="space-y-2">
                             <div className="space-y-2">
-                                <UpdateInput label='Version' name='version' value={version} product={product} setProduct={setProduct}/>
 
-                                <UpdateInput label='Packet Weight' name='packetWeight' value={packetWeight} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label : 'Version',
+                                    name : 'version',
+                                    value : version,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Packet Per Carton' name='packetPerCarton' value={packetPerCarton} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label : 'Packet Weight',
+                                    name : 'packetWeight',
+                                    value : packetWeight,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Process Loss' name='processLoss' value={processLoss} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label : 'Packet Per Carton',
+                                    name : 'packetPerCarton',
+                                    value : packetPerCarton,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Inner Poly' name='innerPoly' value={innerPoly} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label : 'Process Loss',
+                                    name : 'processLoss',
+                                    value : processLoss,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Foil Weight' name='foilWeight' value={foilWeight} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label : 'Foil Weight',
+                                    name : 'foilWeight',
+                                    value : foilWeight,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Dry Cake Paper' name='dryCakepaper' value={dryCakepaper} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label : 'Inner Poly 6"x8"',
+                                    name : 'inner_poly_6_8',
+                                    value : inner_poly_6_8,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label : 'Inner Poly 8x11.5"',
+                                    name : 'inner_poly_8_11_5',
+                                    value : inner_poly_8_11_5,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label : 'Inner Poly 9"x11.5"',
+                                    name : 'inner_poly_9_11_5',
+                                    value : inner_poly_9_11_5,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label : 'Dry Cake Paper',
+                                    name : 'dryCakepaper',
+                                    value : dryCakepaper,
+                                    product,
+                                    setProduct
+                                }}/>
                             </div>
                             <div className="heading">
                                 <p className="name">Ingredients</p>

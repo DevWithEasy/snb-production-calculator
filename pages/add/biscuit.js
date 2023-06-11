@@ -29,7 +29,6 @@ export default function AddLachcha({products}){
         packetWeight: 0,
         packetPerCarton: 0,
         processLoss : 0,
-        innerFoil: 0,
         foilWeight : 0,
     })
     const [ingredients,setIngredients] = useState({
@@ -108,12 +107,42 @@ export default function AddLachcha({products}){
                                     }
                             </select>
                         </div>
-                        <ProductInput label='Version' name="version" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Packet Weight' name="packetWeight" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Packet Per Carton' name="packetPerCarton" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Process Loss' name="processLoss" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Foil Weight' name="foilWeight" product={product} setProduct={setProduct}/>
-                        <ProductInput label='Inner Foil Weight' name="innerFoil" product={product} setProduct={setProduct}/>
+
+                        <ProductInput {...{
+                            label:'Version',
+                            name:"version",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Packet Weight',
+                            name:"packetWeight",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Packet Per Carton',
+                            name:"packetPerCarton",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Process Loss',
+                            name:"processLoss",
+                            product,
+                            setProduct
+                        }}/>
+
+                        <ProductInput {...{
+                            label:'Foil Weight',
+                            name:"foilWeight",
+                            product,
+                            setProduct
+                        }}/>
+
                         <div className="heading">
                             <p className="name">Ingredients</p>
                             <p>Quantity</p>

@@ -122,15 +122,53 @@ export default function AddProduct({products}){
                         </div>
                         {product?.name && <div className="space-y-2">
                             <div className="space-y-2">
-                                <UpdateInput label='Version' name='version' value={version} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Version',
+                                    name:"version",
+                                    value : version,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Packet Weight' name='packetWeight' value={packetWeight} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Packet Weight',
+                                    name:"packetWeight",
+                                    value : packetWeight,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Packet Per Carton' name='packetPerCarton' value={packetPerCarton} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Packet Per Carton',
+                                    name:"packetPerCarton",
+                                    value : packetPerCarton,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Process Loss' name='processLoss' value={processLoss} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Process Loss',
+                                    name:"processLoss",
+                                    value : processLoss,
+                                    product,
+                                    setProduct
+                                }}/>
 
-                                <UpdateInput label='Foil Weight' name='foilWeight' value={foilWeight} product={product} setProduct={setProduct}/>
+                                <UpdateInput {...{
+                                    label:'Foil Weight',
+                                    name:"foilWeight",
+                                    value : foilWeight,
+                                    product,
+                                    setProduct
+                                }}/>
+
+                                <UpdateInput {...{
+                                    label:'Shrink Outer Poly',
+                                    name:"shrink_outer_poly",
+                                    value : shrink_outer_poly,
+                                    product,
+                                    setProduct
+                                }}/>
                             </div>
                             <div className="heading">
                                 <p className="name">Ingredients</p>
