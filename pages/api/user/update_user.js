@@ -1,6 +1,6 @@
 //api end point '/api/add_user'
 
-import {  doc, updateDoc } from "firebase/firestore";
+import {  collection, doc, getDocs, query, updateDoc } from "firebase/firestore";
 import { db } from "../../../database/conncetDB";
 
 export default async function handler(req,res,next){
@@ -13,10 +13,16 @@ export default async function handler(req,res,next){
             section : req.body.section
          });
 
+        const q= query(collection(db,'users'))
+        const docs = await getDocs(q)
+        const users = [];
+        docs.forEach(data => users.push({id:data.id,... data.data()}));
+
         res.status(200).json({
             status : 200,
             success : true,
-            data : 'User update successfully'
+            data : users,
+            message : 'User update successfully'
         })
 
     } catch (error) {

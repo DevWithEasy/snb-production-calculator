@@ -1,28 +1,33 @@
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    Button,
-    useDisclosure,
-    Input,
-    Select,
-  } from '@chakra-ui/react'
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Select,
+  useDisclosure,
+} from '@chakra-ui/react'
+import axios from 'axios'
 import { useState } from 'react'
 import { AiFillEdit } from 'react-icons/ai'
-import handleInput from '../utils/handleInput'
-import axios from 'axios'
+import handleInput from '../../../utils/handleInput'
+import useUserStore from '../../../features/userStore'
 
 export default function UpdateUser({user,sections}) {
+    const {updateAdminData} = useUserStore()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [value,setValue] = useState(user)
     const updateUser=async()=>{
         try {
             const res = await axios.post(`/api/user/update_user?id=${user.id}`,value)
-            console.log(res.data)
+            if(res.data.status === 200){
+              updateAdminData(res.data.data,'user')
+              onClose()
+            }
         } catch (error) {
             console.log(error)
         }

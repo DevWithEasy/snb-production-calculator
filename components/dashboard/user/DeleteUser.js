@@ -12,15 +12,20 @@ import {
 import axios from 'axios'
 import { useRef } from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
+import useUserStore from '../../../features/userStore'
 
 export default function DeleteUser({user}) {
+    const {removeAdminData} = useUserStore() 
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = useRef()
 
     const deleteUser=async()=>{
         try {
             const res = await axios.delete(`/api/user/delete_user?id=${user.id}`)
-            console.log(res.data)
+            if(res.data.status === 200){
+              removeAdminData(user.id,'user')
+              onClose()
+            }
         } catch (error) {
             console.log(error)
         }

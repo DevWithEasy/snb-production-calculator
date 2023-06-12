@@ -7,8 +7,9 @@ import RmView from '../../components/RmView';
 import TargetCarton from '../../components/TargetCarton';
 import useUserStore from '../../features/userStore';
 import baseUrl from "../../utils/baseUrl";
-import { getDemand, getTotalPmItem } from '../../utils/demand_utils';
+import { getDemand, getDemandPM, getTotalPmItem } from '../../utils/demand_utils';
 import Head from "next/head";
+import Demand from "../../utils/demand";
 
 export async function getServerSideProps(){
     const res = await axios.get(`${baseUrl}/api/products/Lachcha`)
@@ -33,6 +34,7 @@ export default function LachchaDemand({products}){
     useEffect(()=>{
         resetDemand()
     },[resetDemand])
+
     
     return(
         <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">

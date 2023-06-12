@@ -12,7 +12,7 @@ import {
 import { doc, setDoc } from "firebase/firestore"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
-import { db } from "../database/conncetDB"
+import { db } from "../../database/conncetDB"
 
 export default function AddSection({section,setSection}){
     const { isOpen, onOpen, onClose } = useDisclosure()

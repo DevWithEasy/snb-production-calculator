@@ -359,9 +359,8 @@ export const getDemandPM=(demand)=>{
     products.forEach(product =>{
         demand.forEach(dProduct =>{
             if(dProduct.id == product && dProduct.section == 'Wafer'){
-                const key = nameWith_(dProduct.name)
+                const key = dProduct.id
                 const wra_qty = totalFoilByTargetCarton(dProduct)
-
                 const ctn_qty = totalCartonByTargetCarton(dProduct.target)
                 const board_qty = totalBoardByTargetCarton(dProduct.target)
                 const gumTape_qty = totalGumTape_2ByTargetCarton(dProduct)
@@ -373,7 +372,7 @@ export const getDemandPM=(demand)=>{
                     gumTap2 : gumTape_qty
                 })
             }else if(dProduct.id == product && dProduct.section == 'Biscuit'){
-                const key = nameWith_(dProduct.name)
+                const key = dProduct.id
                 const wra_qty = totalFoilByTargetCarton(dProduct)
                 const ctn_qty = totalCartonByTargetCarton(dProduct.target)
                 const tray_qty = totalTrayByTargetCarton(dProduct)
@@ -391,7 +390,7 @@ export const getDemandPM=(demand)=>{
                     gumTapBoth : gumTapeBoth_qty
                 })
             }else if(dProduct.id == product && dProduct.section == 'Lachcha'){
-                const key = nameWith_(dProduct.name)
+                const key = dProduct.id
                 const wra_qty = totalFoilByTargetCarton(dProduct)
                 const ctn_qty = dProduct.id == 'Lachcha_Semai_500gm' ?totalCartonByTargetCarton(dProduct.target) : 0
                 const atc_qty = totalATCByTargetCarton(dProduct,12)
@@ -406,7 +405,7 @@ export const getDemandPM=(demand)=>{
                     gumTap2 : gumTape_qty
                 })
             }else if(dProduct.id == product && dProduct.section == 'Cake'){
-                const key = nameWith_(dProduct.name)
+                const key = dProduct.id
                 const wra_qty = totalFoilByTargetCarton(dProduct)
                 const ctn_qty = totalCartonByTargetCarton(dProduct.target) 
                 const atc_qty = dProduct.id == 'Milk_Cake_22_gm_Family'?totalATCByTargetCarton(dProduct,10) : totalATCByTargetCarton(dProduct,18)
@@ -423,7 +422,7 @@ export const getDemandPM=(demand)=>{
                     gumTap1 : gumTape1_qty
                 })
             }else if(dProduct.id == product && dProduct.section == 'Bakery'){
-                const key = nameWith_(dProduct.name)
+                const key = dProduct.id
                 const wra_qty = totalFoilByTargetCarton(dProduct)
                 const ctn_qty = totalCartonByTargetCarton(dProduct.target) 
                 const atc_qty = totalATCByTargetCarton(dProduct,6)
@@ -447,7 +446,7 @@ export const getDemandPM=(demand)=>{
                     gumTap1 : gumTape1_qty
                 })
             }else if(dProduct.id == product && dProduct.section == 'Snacks'){
-                const key = nameWith_(dProduct.name)
+                const key = dProduct.id
                 const wra_qty = totalFoilByTargetCarton(dProduct)
                 const inner_poly_qty = totalInnerPolyByTargetCarton(dProduct)
                 const master_poly_qty = totalMasterPolyByTargetCarton(dProduct)
@@ -462,7 +461,7 @@ export const getDemandPM=(demand)=>{
             }
         })
     })
-    
+
     return (arrayOfObj_to_object(data))
 }
 

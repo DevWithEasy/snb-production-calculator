@@ -9,41 +9,36 @@ import {
     ModalOverlay,
     useDisclosure,
 } from '@chakra-ui/react'
-import { collection, doc, getDocs, setDoc } from "firebase/firestore"
-import { useEffect, useState } from "react"
+import axios from 'axios'
+import { useState } from "react"
 import { toast } from "react-hot-toast"
-import { db } from "../database/conncetDB"
+import useUserStore from '../../../features/userStore'
 
-export default function AddProduct({product,setProduct}){
+export default function AddProduct(){
+    const {sections,addAdminData} = useUserStore()
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const [sections,setSections] = useState([])
     const [name, setName] =useState('')
     const [section, setSection] =useState('')
 
-    useEffect(()=>{
-        async function loadSection(){
-            const docs = await getDocs(collection(db,'sections'))
-            const sections = [];
-            docs.forEach(data => sections.push(data.data()));
-            setSections(sections)
-        }
-        loadSection()
-    },[])
-
-    async function addSection(){
-            await setDoc(doc(db,'products',name.split(" ").join("_")),{
-                id: name.split(" ").join("_"),
-                name,
-                section
-            })
-            toast.success('Product Added Successfully')
-            setProduct(!product)
-        }
+    async function addProduct(){
+            try {
+                const res = await axios.post('api/product/add_product',{name,section}) 
+                
+                if(res.data.status == 200){
+                    addAdminData(res.data.data,'product')
+                    toast.success('Product Added Successfully')
+                    onClose()
+                }
+            } catch (error) {
+                toast.error('Product Added failed')
+            }
+            
+    }
 
     return (
 
         <>
-        <button onClick={onOpen} className='w-full text-left'>Add Product</button>
+        <button onClick={onOpen} className='px-4 py-2 bg-gray-500 text-white mb-1 rounded'>Add Product</button>
 
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
@@ -70,7 +65,7 @@ export default function AddProduct({product,setProduct}){
             <Button colorScheme='gray' mr={3} onClick={onClose}>
                 Close
             </Button>
-            <Button colorScheme='blue' onClick={()=>addSection()}>Submit</Button>
+            <Button colorScheme='blue' onClick={()=>addProduct()}>Submit</Button>
             </ModalFooter>
         </ModalContent>
         </Modal>

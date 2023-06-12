@@ -33,10 +33,10 @@ export default function SnacksDemand({ products }) {
     const {rm,pm}=getDemand(demand)
     const {
         Special_Chanachur_15_gm,
-        Special_Chanachur_90_gm,
+        Special_Chanachur_120_gm,
         Special_Chanachur_180_gm,
         Jhal_Chanachur_15_gm,
-        Jhal_Chanachur_90_gm,
+        Jhal_Chanachur_120_gm,
         BBQ,
         Fried_Peas,
         Fried_Dal
@@ -45,6 +45,7 @@ export default function SnacksDemand({ products }) {
     useEffect(()=>{
         resetDemand()
     },[resetDemand])
+
     
     return (
         <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
@@ -135,10 +136,10 @@ export default function SnacksDemand({ products }) {
             <div className="w-1/2 border border-gray-400">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
                 <PmView name='Special Chanachur 15gm Wrapper' unit='' pm={Special_Chanachur_15_gm?.wrapper}/>
-                <PmView name='Special Chanachur 90gm Wrapper' unit='' pm={Special_Chanachur_90_gm?.wrapper}/>
+                <PmView name='Special Chanachur 90gm Wrapper' unit='' pm={Special_Chanachur_120_gm?.wrapper}/>
                 <PmView name='Special Chanachur 180gm Wrapper' unit='' pm={Special_Chanachur_180_gm?.wrapper}/>
                 <PmView name='Jhal Chanachur 15gm Wrapper' unit='' pm={Jhal_Chanachur_15_gm?.wrapper}/>
-                <PmView name='Jhal Chanachur 90gm Wrapper' unit='' pm={Jhal_Chanachur_90_gm?.wrapper}/>
+                <PmView name='Jhal Chanachur 90gm Wrapper' unit='' pm={Jhal_Chanachur_120_gm?.wrapper}/>
                 <PmView name='Fried Peas Wrapper' unit='' pm={Fried_Peas?.wrapper}/>
                 <PmView name='Inner Poly 18"x15"' unit='' pm={getTotalInnerMaster(pm,'inner',15)}/>
                 <PmView name='Master Poly 25"x47"' unit='' pm={getTotalInnerMaster(pm,'master',15)}/>
