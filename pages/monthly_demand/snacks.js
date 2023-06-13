@@ -56,8 +56,8 @@ export default function SnacksDemand({ products }) {
         </Head>
         <PrintHeader/>
         <TargetCarton {...{products,handlePrint}}/>
-        <div className="flex justify-between space-x-2">
-            <div className="w-1/2 border border-gray-400 pb-4">
+        <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-x-2 md:space-y-0">
+            <div className="w-full md:w-1/2 border border-gray-400 pb-4">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
                 <RmView name='Turmeric' ingredient={rm?.turmeric}/>
 
@@ -126,7 +126,7 @@ export default function SnacksDemand({ products }) {
                   <RmView name='BBQ' ingredient={rm?.bbq}/>
                 
             </div>
-            <div className="w-1/2 border border-gray-400">
+            <div className="w-full md:w-1/2 border border-gray-400 pb-4">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
                 <PmView name='Special Chanachur 15gm Wrapper' unit='' pm={Special_Chanachur_15_gm?.wrapper}/>
                 <PmView name='Special Chanachur 90gm Wrapper' unit='' pm={Special_Chanachur_120_gm?.wrapper}/>

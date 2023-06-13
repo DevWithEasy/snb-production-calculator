@@ -56,8 +56,8 @@ export default function SnacksDemand({ products }) {
         </Head>
         <PrintHeader/>
         <TargetCarton {...{products,handlePrint}}/>
-        <div className="flex justify-between space-x-2">
-            <div className="w-1/2 border border-gray-400 pb-4">
+        <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-x-2 md:space-y-0">
+            <div className="w-full md:w-1/2 border border-gray-400 pb-4">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
                 <RmView name='Vanilin Powder' ingredient={rm?.vanilinPowder}/>
 
@@ -114,7 +114,7 @@ export default function SnacksDemand({ products }) {
                   <RmView name='Starch Powder' ingredient={rm?.starchPowder}/>
                 
             </div>
-            <div className="w-1/2 border border-gray-400">
+            <div className="w-full md:w-1/2 border border-gray-400 pb-4">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
                 <PmView name='Tiffin Cake Vanilla 15gm Wrapper' unit='' pm={result.getTotalFoil(pm,'vanilla')}/>
                 <PmView name='Tiffin Cake Vanilla 15gm Carton' unit='Pcs' pm={Tiffin_Cake_Vanilla_Standard?.carton}/>

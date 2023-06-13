@@ -9,6 +9,7 @@ import TargetCarton from '../../components/TargetCarton';
 import useUserStore from "../../features/userStore";
 import baseUrl from "../../utils/baseUrl";
 import Demand from "../../utils/demand";
+import { useRouter } from "next/router";
 
 
 
@@ -23,6 +24,7 @@ export async function getServerSideProps(){
 
 
 export default function SnacksDemand({ products }) {
+    const router = useRouter()
     const{demand,resetDemand} = useUserStore()
     const printRef = useRef()
     const handlePrint = useReactToPrint({
@@ -47,17 +49,21 @@ export default function SnacksDemand({ products }) {
     },[resetDemand])
 
     return (
-        <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
+        <div ref={printRef} className="relative mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none pb-10">
         <Head>
             <title>Bakery Demand</title>
             <link rel="icon" href="/logo.png" />
         </Head>
         <PrintHeader/>
         <TargetCarton {...{products,handlePrint}}/>
-        <div className="flex justify-between space-x-2">
-            <div className="w-1/2 border border-gray-400 pb-4">
+        <p className="print:absolute top-0 w-full text-gray-400 flex justify-between">
+            <span>{router.pathname}</span>
+            <span>{}</span>
+        </p>
+        <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-x-2 md:space-y-0">
+            <div className="w-full md:w-1/2 border border-gray-400 pb-4">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
-                    <RmView name='Ammonium' ingredient={rm?.ammonium}/>
+                <RmView name='Ammonium' ingredient={rm?.ammonium}/>
 
                   <RmView name='Baking Powder' ingredient={rm?.bakingPowder}/>
                   
@@ -127,7 +133,7 @@ export default function SnacksDemand({ products }) {
 
                   <RmView name='Yeast' ingredient={rm?.yeast}/>
             </div>
-            <div className="w-1/2 border border-gray-400">
+            <div className="w-full md:w-1/2 border border-gray-400">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
                 <PmView name='F.Time Milk/Chocolate Cookies Tray' unit='Pcs' pm={result.getTotalFoil(pm,'cookies')}/>
                 <PmView name='F.Time Chocolate Cookies Pouch' unit='' pm={Chocolate_Cookies?.wrapper}/>

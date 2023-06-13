@@ -63,8 +63,8 @@ export default function WaferDemand({ products }) {
         </Head>
         <PrintHeader/>
         <TargetCarton {...{products,handlePrint}}/>
-        <div className="flex justify-between space-x-2">
-            <div className="w-1/2 border border-gray-400 pb-4">
+        <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-x-2 md:space-y-0">
+            <div className="w-full md:w-1/2 border border-gray-400 pb-4">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
                 <RmView name='Ammonium Bi Carbonate' ingredient={rm?.ammonium}/>
 
@@ -159,7 +159,7 @@ export default function WaferDemand({ products }) {
                   <RmView name='Coconut Powder' ingredient={rm?.coconutPowder}/>
                 
             </div>
-            <div className="w-1/2 border border-gray-400">
+            <div className="w-full md:w-1/2 border border-gray-400 pb-4">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
                 <PmView name='Active Energy 45gm Wrapper' unit='' pm={Active_Energy_Standard?.wrapper}/>
                 <PmView name='Active Energy 45gm Carton' unit='Pcs' pm={Active_Energy_Standard?.carton}/>

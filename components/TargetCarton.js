@@ -45,12 +45,12 @@ const TargetCarton = ({products,handlePrint}) => {
                 <div className="flex justify-center">
                         <form 
                             onSubmit={(e)=>getProduct(e,id,carton,setId,setCarton,demand,addDemand,toast,setLoading)}
-                            className='border'
+                            className='w-full md:w-1/2 flex flex-col md:flex-row p-2 md:p-0 space-y-2 md:space-y-0'
                         >
                             <select 
                                 value={id}
                                 onChange={(e)=>setId(e.target.value)}
-                                className="p-2 border-r"
+                                className="w-full p-2 border  rounded md:rounded-none"
                             >
                                 <option value="">Select</option>
                                 {products.map(product=><option key={product.id} value={product.id}>{product.name}</option>)}
@@ -59,10 +59,10 @@ const TargetCarton = ({products,handlePrint}) => {
                                 type="number"
                                 value={carton}
                                 onChange={(e)=>setCarton(e.target.value)}
-                                className="p-2"
+                                className="w-full p-2 border rounded md:rounded-none"
                             />
                             <button
-                                className="px-4 py-2 bg-blue-500 text-white" 
+                                className="px-4 py-2 bg-blue-500 text-white rounded md:rounded-none" 
                                 type='submit'
                             >
                                 {loading ? <><Spinner size='sm'/> Submitting</> : 'Submit'}
