@@ -9,7 +9,6 @@ import TargetCarton from "../../components/TargetCarton";
 import useUserStore from "../../features/userStore";
 import baseUrl from "../../utils/baseUrl";
 import Demand from "../../utils/demand";
-import { getTotalInnerMaster, getTotalPmItem } from "../../utils/demand_utils";
 
 
 
