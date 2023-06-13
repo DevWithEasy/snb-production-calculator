@@ -6,6 +6,7 @@ import Info from '../../components/Info';
 import PrintHeader from '../../components/PrintHeader';
 import RmView from '../../components/RmView';
 import { db } from '../../database/conncetDB';
+import Recipe from '../../utils/recipe';
 
 
 
@@ -45,48 +46,29 @@ export default function Raw({products}) {
     content: () => printRef.current,
     documentTitle : product?.name + " [Version-"+product?.version+"]"
   });
-  function ingredientsArray(ingredients){
-    const keys = Object.keys(ingredients)
-    const array = keys.map(key =>{
-      return {[key] : ingredients[key] }
-    })
-    return array
-  }
 
-  function totalInput(ingredients){
-    const keys = Object.values(ingredients)
-    const total = keys.reduce((a,i)=>a+i,0).toFixed(2)
-    return total
-  }
+  const {
+    version,
+    packetWeight,
+    packetPerCarton,
+    processLoss,
+    foilWeight,
+  } = product
 
-  function totalProcessLoss(totalInput,percent){
-    return (totalInput*percent/100).toFixed(2)
-  }
-
-  function totalOutput(totalInput,totalProcessLoss){
-    return (totalInput-totalProcessLoss).toFixed(2)
-  }
-
-  function totalCarton(totalOutput,packetWeight,packetPerCarton){
-    return (totalOutput/(packetWeight/1000)/packetPerCarton).toFixed(2)
-  }
-
-
-  let ingredients
-  if(product?.ingredients) ingredients = ingredientsArray(product?.ingredients)
+  const recipe = new Recipe(product)
 
   let total
-  if(product?.ingredients) total = totalInput(product?.ingredients)
+  if(product?.ingredients) total = recipe.totalInput()
 
-  let processLoss
-  if(total)  processLoss = totalProcessLoss(total,product?.processLoss)
+  let totalProcessLoss
+  if(total)  totalProcessLoss = recipe.totalProcessLoss()
 
   let output
-  if(processLoss) output = totalOutput(total,processLoss)
+  if(totalProcessLoss) output = recipe.totalOutput()
+  
   let carton
-  if(output) carton = totalCarton(output,product?.packetWeight,product?.packetPerCarton)
-
-  console.log(product);
+  if(output) carton = recipe.totalCarton()
+  
   return (
     <div className='raw-consumption '>
       <Head>
@@ -123,12 +105,11 @@ export default function Raw({products}) {
             <div className='pb-2'>
               <h3 className='text-center p-1 font-bold bg-gray-500 text-white print:mx-2'>Information</h3>
               <div className='print:grid grid-cols-2 gap-x-8 print:text-sm'>
-                <Info text='Version' value={product?.version} unit=''/>
-                <Info text='Packet Weight' value={product?.packetWeight} unit='gm'/>
-                <Info text='Packet Per Carton' value={product?.packetPerCarton}q unit='Packet'/>
-                <Info text='Process Loss' value={product?.processLoss} unit='%'/>
-                <Info text='Foil Weight' value={product?.foilWeight} unit='gm'/>
-                <Info text='Inner Foil Weight' value={product?.innerFoil} unit='gm'/>
+                <Info text='Version' value={version} unit=''/>
+                <Info text='Packet Weight' value={packetWeight} unit='gm'/>
+                <Info text='Packet Per Carton' value={packetPerCarton}q unit='Packet'/>
+                <Info text='Process Loss' value={processLoss} unit='%'/>
+                <Info text='Foil Weight' value={foilWeight} unit='gm'/>
                 <Info text='Carton Per Batch' value={carton} unit=''/>
               </div>
             </div>
@@ -182,8 +163,8 @@ export default function Raw({products}) {
                       <span className='w-1/4 text-center'> {total}</span>
                     </p>
                     <p className='flex justify-between p-2 print:px-2 print:py-0.5 border-b print:border-0'>
-                      <span className='w-3/4'>Process Loss ({product?.processLoss}%)</span>
-                      <span className='w-1/4 text-center'>{processLoss}</span>
+                      <span className='w-3/4'>Process Loss ({processLoss}%)</span>
+                      <span className='w-1/4 text-center'>{totalProcessLoss}</span>
                     </p>
                     <p className='flex justify-between p-2 print:px-2 print:py-0.5'>
                       <span className='w-3/4'>Total Output</span>

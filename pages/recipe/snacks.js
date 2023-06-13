@@ -191,7 +191,7 @@ export default function Raw({products}) {
 
                 {inner_poly_16_21_5 > 0 && 
                   <Info 
-                    text='inner_poly_16_21_5' 
+                    text='Inner Poly 16"x21.5"' 
                     value={inner_poly_16_21_5} 
                     unit='gm'
                   />
@@ -199,7 +199,7 @@ export default function Raw({products}) {
 
                 {master_poly_35_26 > 0 && 
                   <Info 
-                    text='master_poly_35_26' 
+                    text='Master Poly 35"x26"' 
                     value={master_poly_35_26} 
                     unit='gm'
                   />
@@ -207,7 +207,7 @@ export default function Raw({products}) {
                 
                 {inner_poly_24_15 > 0 && 
                   <Info 
-                    text='inner_poly_24_15' 
+                    text='Inner Poly 24"x15"' 
                     value={inner_poly_24_15} 
                     unit='gm'
                   />
@@ -215,7 +215,7 @@ export default function Raw({products}) {
 
                 {master_poly_44_23 > 0 && 
                   <Info 
-                    text='master_poly_44_23' 
+                    text='Master Poly 44"x23"' 
                     value={master_poly_44_23} 
                     unit='gm'
                   />
@@ -223,7 +223,7 @@ export default function Raw({products}) {
 
                 {inner_poly_19_20 > 0 && 
                   <Info 
-                    text='inner_poly_19_20' 
+                    text='Inner Poly 19"x20"' 
                     value={inner_poly_19_20} 
                     unit='gm'
                   />
@@ -231,7 +231,7 @@ export default function Raw({products}) {
 
                 {master_poly_28_42 > 0 && 
                   <Info 
-                    text='master_poly_28_42' 
+                    text='Master Poly 28"x42"' 
                     value={master_poly_28_42} 
                     unit='gm'
                   />

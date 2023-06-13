@@ -48,17 +48,25 @@ export default function Raw({products}) {
     documentTitle : product?.name + " [Version-"+product?.version+"]"
   });
 
+  const {
+    version,
+    packetWeight,
+    packetPerCarton,
+    processLoss,
+    foilWeight,
+    master_poly_24_22_5,
+  } = product
 
   const recipe = new Recipe(product)
 
   let total
   if(product?.ingredients) total = recipe.totalInput()
 
-  let processLoss
-  if(total)  processLoss = recipe.totalProcessLoss()
+  let totalProcessLoss
+  if(total)  totalProcessLoss = recipe.totalProcessLoss()
 
   let output
-  if(processLoss) output = recipe.totalOutput()
+  if(totalProcessLoss) output = recipe.totalOutput()
   
   let carton
   if(output) carton = recipe.totalCarton()
@@ -99,12 +107,12 @@ export default function Raw({products}) {
             <div className='pb-2'>
               <h3 className='text-center p-1 font-bold bg-gray-500 text-white print:mx-2'>Information</h3>
               <div className='print:grid grid-cols-2 gap-x-8 print:text-sm'>
-                <Info text='Version' value={product?.version} unit=''/>
-                <Info text='Packet Weight' value={product?.packetWeight} unit='gm'/>
-                <Info text='Packet Per Carton' value={product?.packetPerCarton}q unit='Packet'/>
-                <Info text='Process Loss' value={product?.processLoss} unit='%'/>
-                <Info text='Foil Weight' value={product?.foilWeight} unit='gm'/>
-                <Info text='Master Poly 24"x22.5"' value={product?.master_poly_24_22_5} unit='gm'/>
+                <Info text='Version' value={version} unit=''/>
+                <Info text='Packet Weight' value={packetWeight} unit='gm'/>
+                <Info text='Packet Per Carton' value={packetPerCarton}q unit='Packet'/>
+                <Info text='Process Loss' value={processLoss} unit='%'/>
+                <Info text='Foil Weight' value={foilWeight} unit='gm'/>
+                <Info text='Master Poly 24"x22.5"' value={master_poly_24_22_5} unit='gm'/>
                 <Info text='Carton Per Batch' value={carton} unit=''/>
               </div>
             </div>
@@ -131,8 +139,8 @@ export default function Raw({products}) {
                       <span className='w-1/4 text-center'> {total}</span>
                     </p>
                     <p className='flex justify-between p-2 print:px-2 print:py-0.5 border-b print:border-0'>
-                      <span className='w-3/4'>Process Loss ({product?.processLoss}%)</span>
-                      <span className='w-1/4 text-center'>{processLoss}</span>
+                      <span className='w-3/4'>Process Loss ({processLoss}%)</span>
+                      <span className='w-1/4 text-center'>{totalProcessLoss}</span>
                     </p>
                     <p className='flex justify-between p-2 print:px-2 print:py-0.5'>
                       <span className='w-3/4'>Total Output</span>

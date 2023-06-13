@@ -3,6 +3,8 @@ import useUserStore from '../../features/userStore';
 
 const Summary = () => {
     const {users,products,sections} = useUserStore()
+    
+    console.log(users)
      return (
         <div className='grid grid-cols-4 gap-4'>
             <div className='p-4 bg-blue-50 text-center rounded text-blue-600'>
@@ -11,7 +13,7 @@ const Summary = () => {
             </div>
             <div className='p-4 bg-blue-50 text-center rounded text-blue-600'>
                 <h1>Total users</h1>
-                <span className='text-2xl'>{users.length}</span>
+                <span className='text-2xl'>{users.filter(user=>user.section != 'Admin').length}</span>
             </div>
             <div className='p-4 bg-yellow-50 text-center rounded text-yellow-600'>
                 <h1>Total sections</h1>
