@@ -62,15 +62,7 @@ export default function WaferDemand({ products }) {
             <link rel="icon" href="/logo.png" />
         </Head>
         <PrintHeader/>
-        <div className="print:hidden space-y-2 border border-gray-400">
-            <h1 className="relative py-2 bg-gray-500 text-white text-xl text-center">
-                Production Target Carton
-                <button onClick={()=>handlePrint()} className="absolute right-2 print:hidden"> 
-                    Print
-                </button>
-            </h1>
-            <TargetCarton {...{products}}/>
-        </div>
+        <TargetCarton {...{products,handlePrint}}/>
         <div className="flex justify-between space-x-2">
             <div className="w-1/2 border border-gray-400 pb-4">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>

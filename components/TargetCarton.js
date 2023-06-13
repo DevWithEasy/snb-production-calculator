@@ -10,13 +10,20 @@ import useUserStore from '../features/userStore';
 import { toast } from "react-hot-toast";
 import { getProduct } from '../utils/demand_api_utils';
 
-const TargetCarton = ({products}) => {
+const TargetCarton = ({products,handlePrint}) => {
     const{demand,addDemand,removeDemand} = useUserStore()
     const [id,setId] = useState('')
     const [carton,setCarton] = useState('')
     const [loading,setLoading] = useState(false)
     return (
-        <div className="p-2 space-y-2">
+        <div className="print:hidden space-y-2 border border-gray-400">
+            <h1 className="relative py-2 bg-gray-500 text-white text-xl text-center">
+                Production Target Carton
+                <button onClick={()=>handlePrint()} className="absolute right-2 print:hidden"> 
+                    Print
+                </button>
+            </h1>
+            <div className="p-2 space-y-2">
                 <TableContainer className='border rounded'>
                     <Table variant='simple'>
                         <Tbody>
@@ -63,7 +70,9 @@ const TargetCarton = ({products}) => {
                         </form>
                     </div>
             </div>
-    );
+ 
+        </div>
+           );
 };
 
 export default TargetCarton;
