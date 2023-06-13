@@ -3,42 +3,31 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { db } from '../../../database/conncetDB';
 import totalInnerFoil, { totalCarton, totalFoil } from '../../../utils/pmConsumption';
+import axios from 'axios';
+import baseUrl from '../../../utils/baseUrl';
+import ProductSelect from '../../../components/ProductSelect';
 
 
 export async function getServerSideProps(){
-    const q= query(collection(db,'products'),where('section','==', 'Biscuit'))
-    const docs = await getDocs(q)
-    const products = [];
-    docs.forEach(data => products.push(data.data()));
-
-  return({
-    props : {
-        products
-    }
-  })
+  const res = await axios.get(`${baseUrl}/api/products/Biscuit`)
+  return{
+      props:{
+          products : res.data.data || []
+      }
+  }
 }
 
 export default function PM({products}) {
-  const [name,setName] = useState('')
+  const [id,setId] = useState('')
   const [product,setProduct] = useState({})
   const [batch,setBatch] = useState(0)
   const [carton,setCarton] = useState(0)
   const [wastage,setWastage] = useState(0)
 
   useEffect(()=>{
-    async function getRecipe(name){
-        const info_query= query(collection(db,'products_info'),where('id','==', name))
-        const docs = await getDocs(info_query)
-        const products = [];
-        docs.forEach(data => products.push(data.data()));
-        if(products.length){
-            const ingredientRef = doc(db,'products_recipe',products[0].id)
-            const ingredients = await getDoc(ingredientRef)
-            setProduct({...products[0],ingredients:ingredients.data()})
-        }
-    }
-    getRecipe(name)
-  },[name])
+    if(id) getRecipe(id,setProduct)
+  },[id])
+  
   const totalCartonByBatch = product.ingredients ? totalCarton(product,batch) : 0
   const totalFoilByCarton = product.ingredients && carton ? Number(totalFoil(product,carton))+Number(wastage) : 0
   const totalInnerFoilByCarton = product.ingredients && carton ? totalInnerFoil(product,carton) : 0
@@ -53,15 +42,7 @@ export default function PM({products}) {
       <div className='raw'>
         <h1 className='py-2 bg-gray-600 text-white text-xl text-center'>Consumption</h1>
           
-          <div className="input">
-              <label htmlFor="">Product Name</label>
-              <select name="name"  onChange={(e)=>setName(e.target.value)}>
-                    <option value="">Select Name</option>
-                    {
-                      products.map(product => <option key={product.id} value={product.id}>{product.name}</option>)
-                    }
-                </select>
-          </div>
+        <ProductSelect {...{setId,products}}/>
 
           <div className="input">
               <label htmlFor="" >Production Batch</label>

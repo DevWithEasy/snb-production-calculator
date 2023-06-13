@@ -3,19 +3,18 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import RmViewConsumption from '../../../components/RmViewConsumption';
 import { db } from '../../../database/conncetDB';
+import axios from 'axios';
+import baseUrl from '../../../utils/baseUrl';
+import ProductSelect from '../../../components/ProductSelect';
 
 
 export async function getServerSideProps(){
-    const q= query(collection(db,'products'),where('section','==', 'Cake'))
-    const docs = await getDocs(q)
-    const products = [];
-    docs.forEach(data => products.push(data.data()));
-
-  return({
-    props : {
-        products
-    }
-  })
+  const res = await axios.get(`${baseUrl}/api/products/Cake`)
+  return{
+      props:{
+          products : res.data.data || []
+      }
+  }
 }
 
 export default function Biscuit({products}) {
@@ -48,15 +47,8 @@ export default function Biscuit({products}) {
       <div className='raw'>
         <h1 className='py-2 bg-gray-600 text-white text-xl text-center'>Consumption</h1>
           
-          <div className="input">
-              <label htmlFor="">Product Name</label>
-              <select name="name"  onChange={(e)=>setName(e.target.value)}>
-                    <option value="">Select Name</option>
-                    {
-                      products.map(product => <option key={product.id} value={product.id}>{product.name}</option>)
-                    }
-                </select>
-          </div>
+        <ProductSelect {...{setId,products}}/>
+        
           <div className="input">
               <label htmlFor="" >Production Batch</label>
               <input className='name' type="number" name='batch' onChange={(e)=>setBatch(e.target.value)}></input>

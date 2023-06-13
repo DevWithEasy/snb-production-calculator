@@ -1,34 +1,35 @@
-import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
+import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast from 'react-hot-toast';
 import RmUpdate from "../../../components/RmUpdate";
 import UpdateInput from "../../../components/UpdateInput";
-import { db } from "../../../database/conncetDB";
+import { getUpdateRecipe, updateRecipe, updateRecipeWithVersion } from "../../../utils/api_utils";
+import baseUrl from "../../../utils/baseUrl";
+import ProductSelect from "../../../components/ProductSelect";
 
 
 export async function getServerSideProps(){
-    const q= query(collection(db,'products'),where('section','==', 'Wafer'))
-    const docs = await getDocs(q)
-    const products = [];
-    docs.forEach(data => products.push(data.data()));
-
-    return({
-      props : {
-        products
-      }
-    })
-}
+    const res = await axios.get(`${baseUrl}/api/products/Wafer`)
+    return{
+        props:{
+            products : res.data.data || []
+        }
+    }
+  }
 
 export default function AddProduct({products}){
     const router = useRouter()
-    const [name,setName] = useState('')
+    const [id,setId] = useState('')
     const [product,setProduct] = useState({})
     const [ingredients,setIngredients] = useState({});
 
     const [oldProduct,setOldProduct] = useState({})
     const [oldIngredients,setOldIngredients] = useState({});
+
+    const [loading,setLoading] = useState(false)
+
     const {version,packetWeight,packetPerCarton,processLoss,foilWeight} = oldProduct
     const {
         chocolateBrownColour_6059,
@@ -52,65 +53,21 @@ export default function AddProduct({products}){
     } = oldIngredients
 
     useEffect(()=>{
-        async function getUpdateRecipe(name){
-            const info_query= query(collection(db,'products_info'),where('id','==', name))
-            const docs = await getDocs(info_query)
-            const products = [];
-            docs.forEach(data => products.push(data.data()));
-            if(products.length){
-                const ingredientRef = doc(db,'products_recipe',products[0].id)
-                const ingredients = await getDoc(ingredientRef)
-                //set product info
-                setProduct(products[0])
-                setOldProduct(products[0])
-                //set ingredients
-                setIngredients(ingredients.data())
-                setOldIngredients(ingredients.data())
-            }
-        }
-        getUpdateRecipe(name)
-      },[name])
+        if(id) getUpdateRecipe(id,setProduct,setIngredients,setOldProduct,setOldIngredients)
+    },[id])
 
-    async function updateProduct(){
-        const infoRef = doc(db, "products_info", product.id);
-        await updateDoc(infoRef, product);
-        const recipeRef = doc(db, "products_recipe", product.id);
-        await updateDoc(recipeRef, ingredients);
-        toast.success('Product update Successfully')
-        // e.target.reset()
-        // router.push(`/add_product/lachcha`)
-    }
-    async function updateProductVerson(){
-        const infoRef = doc(db, "products_info", product.id);
-        await updateDoc(infoRef, product);
-        const recipeRef = doc(db, "products_recipe", product.id);
-        await updateDoc(recipeRef, ingredients);
-        await setDoc(doc(db,'all_version_recipes',("V"+"_"+product.version+"_"+product.id)),{...product,ingredients : ingredients,changedAt: Date.now()})
-        toast.success('Product update Successfully')
-        // e.target.reset()
-        // router.push(`/add_product/lachcha`)
-    }
-    console.log(ingredients);
     return(
         <div className="add_product">
             <Head>
-                <title>Lachcha Add Product</title>
+                <title>Wafer Add Product</title>
                 <meta name="description" content="Lachcha Add Product" />
                 <link rel="icon" href="/logo.png" />
             </Head>
             <div className="ingredient_area">
                 <h3>Lachcha Update Product</h3>
                 
-                <div className="ingredients">
-                        <div className="input">
-                            <label htmlFor="">Product Name</label>
-                            <select name="name"  onChange={(e)=>setName(e.target.value)}>
-                                <option value="">Select Name</option>
-                                    {
-                                        products.map(product => <option key={product.id} value={product.id}>{product.name}</option>)
-                                    }
-                            </select>
-                        </div>
+                <div className="ingredients"> 
+                    <ProductSelect {...{setId,products}}/>
                         {product?.name && <div className="space-y-2">
                             <div className="space-y-2">
                                     <UpdateInput {...{
@@ -194,9 +151,21 @@ export default function AddProduct({products}){
 
                                 <RmUpdate label='Vanila Flavour KH' name='vanilaFlavourKH' value={vanilaFlavourKH} ingredients={ingredients} setIngredients={setIngredients}/>
                             </div>
-                            <button onClick={()=>updateProduct()}>Update Product</button>
-                            <br/>
-                            <button onClick={()=>updateProductVerson()}>Update Product & Change Version</button>
+                            <div className="flex  space-x-2 py-2">
+                                <button
+                                className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
+                                    onClick={()=>updateRecipe(product.id,toast,setLoading,{product,ingredients})}
+                                >
+                                    Update Product
+                                </button>
+                                <br/>
+                                <button
+                                className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
+                                    onClick={()=>updateRecipeWithVersion(product.id,toast,setLoading,{oldProduct,product,ingredients})}
+                                >
+                                    Update Product & Change Version
+                                </button>
+                            </div>
                         </div>}
                 </div>
             </div>

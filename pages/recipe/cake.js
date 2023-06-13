@@ -1,46 +1,35 @@
-import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import Info from '../../components/Info';
 import PrintHeader from '../../components/PrintHeader';
 import RmView from '../../components/RmView';
-import { db } from '../../database/conncetDB';
+import { getRecipe } from '../../utils/api_utils';
+import baseUrl from '../../utils/baseUrl';
 import Recipe from '../../utils/recipe';
+import ProductSelect from '../../components/ProductSelect';
 
 
 
 export async function getServerSideProps(){
-    const q= query(collection(db,'products'),where('section','==', 'Cake'))
-    const docs = await getDocs(q)
-    const products = [];
-    docs.forEach(data => products.push(data.data()));
-  return({
-    props : {
-        products
-    }
-  })
+  const res = await axios.get(`${baseUrl}/api/products/Cake`)
+  return{
+      props:{
+          products : res.data.data || []
+      }
+  }
 }
 
 export default function Raw({products}) {
   const printRef = useRef()
-  const [name,setName] = useState('')
+  const [id,setId] = useState('')
   const [product,setProduct] = useState({})
 
   useEffect(()=>{
-    async function getRecipe(name){
-        const info_query= query(collection(db,'products_info'),where('id','==', name))
-        const docs = await getDocs(info_query)
-        const products = [];
-        docs.forEach(data => products.push(data.data()));
-        if(products.length){
-            const ingredientRef = doc(db,'products_recipe',products[0].id)
-            const ingredients = await getDoc(ingredientRef)
-            setProduct({...products[0],ingredients:ingredients.data()})
-        }
-    }
-    getRecipe(name)
-  },[name])
+    if(id) getRecipe(id,setProduct)
+  },[id])
+  
 
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
@@ -89,16 +78,9 @@ export default function Raw({products}) {
             </button>}
           </h1>
           {/* =================selection area====================== */}
+          
           <div className='space-y-2 py-2 print:space-y-0 print:flex justify-between print:space-x-4 print:p-2 print:text-sm'>
-            <div className="input">
-                <label htmlFor="">Product Name :</label>
-                <select name="name"  onChange={(e)=>setName(e.target.value)}>
-                      <option value="">{products.length > 0 ? 'Select Name' : ''}</option>
-                      {
-                        products.map(product => <option key={product.id} value={product.id}>{product.name}</option>)
-                      }
-                  </select>
-            </div>
+            <ProductSelect {...{setId,products}}/>
           </div>
 
           {product?.ingredients && <div className='recipe-area'>
