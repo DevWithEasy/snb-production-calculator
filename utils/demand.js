@@ -2,11 +2,11 @@ class Demand{
     constructor(demand){
         this.demand = demand;
     }
-    //arg - product name
-    keyName=(name)=>{
-        const keyName = name.replace(/ /g, '_');
-        return keyName
+    // arg - ingredient object, batch
+    ingredients_Obj_to_Array=(ingredients_obj,batch)=>{
+        return Object.entries(ingredients_obj).map(([key, value]) => ({ [key]: value* batch }))
     }
+
     //arg - signle object of array elements
     array_to_Obj=(input_array)=>{
         const outputObject = {};

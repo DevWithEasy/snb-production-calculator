@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useEffect, useRef } from "react";
+import Head from "next/head";
+import { useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
 import PmView from '../../components/PmView';
 import PrintHeader from "../../components/PrintHeader";
@@ -7,8 +8,6 @@ import RmView from '../../components/RmView';
 import TargetCarton from '../../components/TargetCarton';
 import useUserStore from '../../features/userStore';
 import baseUrl from "../../utils/baseUrl";
-import { getDemand, getDemandPM, getTotalPmItem } from '../../utils/demand_utils';
-import Head from "next/head";
 import Demand from "../../utils/demand";
 
 export async function getServerSideProps(){
@@ -27,8 +26,9 @@ export default function LachchaDemand({products}){
         content: () => printRef.current,
         documentTitle : ""
       });
-
-    const {rm,pm} = getDemand(demand)
+    
+    const result = new Demand(demand)
+    const {rm,pm} = result.getDemand(demand)
     const {Lachcha_Semai_200gm,Lachcha_Semai_500gm} = pm
 
     useEffect(()=>{
@@ -71,7 +71,7 @@ export default function LachchaDemand({products}){
                     <PmView name='Lachcha Semai Premium Pouch' unit='' pm={Lachcha_Semai_500gm?.wrapper}/>
                     <PmView name='Lachcha Semai Premium Bag' unit='Pcs' pm={Lachcha_Semai_500gm?.atc}/>
                     <PmView name='Lachcha Semai Premium Carton' unit='Pcs' pm={Lachcha_Semai_500gm?.carton}/>
-                    <PmView name='Gum Tape 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTap2')}/>
+                    <PmView name='Gum Tape 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap2')}/>
 
                 </div>
             </div>

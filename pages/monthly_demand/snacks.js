@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import { useEffect, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
 import PmView from "../../components/PmView";
@@ -7,8 +8,8 @@ import RmView from "../../components/RmView";
 import TargetCarton from "../../components/TargetCarton";
 import useUserStore from "../../features/userStore";
 import baseUrl from "../../utils/baseUrl";
-import { getDemand, getTotalInnerMaster, getTotalPmItem } from "../../utils/demand_utils";
-import Head from "next/head";
+import Demand from "../../utils/demand";
+import { getTotalInnerMaster, getTotalPmItem } from "../../utils/demand_utils";
 
 
 
@@ -30,7 +31,8 @@ export default function SnacksDemand({ products }) {
         documentTitle : ""
     });
 
-    const {rm,pm}=getDemand(demand)
+    const result = new Demand(demand)
+    const {rm,pm} = result.getDemand(demand)
     const {
         Special_Chanachur_15_gm,
         Special_Chanachur_120_gm,
@@ -141,18 +143,18 @@ export default function SnacksDemand({ products }) {
                 <PmView name='Jhal Chanachur 15gm Wrapper' unit='' pm={Jhal_Chanachur_15_gm?.wrapper}/>
                 <PmView name='Jhal Chanachur 90gm Wrapper' unit='' pm={Jhal_Chanachur_120_gm?.wrapper}/>
                 <PmView name='Fried Peas Wrapper' unit='' pm={Fried_Peas?.wrapper}/>
-                <PmView name='Inner Poly 18"x15"' unit='' pm={getTotalInnerMaster(pm,'inner',15)}/>
-                <PmView name='Master Poly 25"x47"' unit='' pm={getTotalInnerMaster(pm,'master',15)}/>
-                <PmView name='Inner Poly 17"x19.5"' unit='' pm={getTotalInnerMaster(pm,'inner',90)}/>
-                <PmView name='Inner Poly 16"x21.5"' unit='' pm={getTotalInnerMaster(pm,'inner',180)}/>
-                <PmView name='Master Poly 35"x26"' unit='' pm={getTotalInnerMaster(pm,'master',90)}/>
+                <PmView name='Inner Poly 18"x15"' unit='' pm={result.getTotalInnerMaster(pm,'inner',15)}/>
+                <PmView name='Master Poly 25"x47"' unit='' pm={result.getTotalInnerMaster(pm,'master',15)}/>
+                <PmView name='Inner Poly 17"x19.5"' unit='' pm={result.getTotalInnerMaster(pm,'inner',90)}/>
+                <PmView name='Inner Poly 16"x21.5"' unit='' pm={result.getTotalInnerMaster(pm,'inner',180)}/>
+                <PmView name='Master Poly 35"x26"' unit='' pm={result.getTotalInnerMaster(pm,'master',90)}/>
                 <PmView name='Fried Dal Wrapper' unit='' pm={Fried_Dal?.wrapper}/>
                 <PmView name='Inner Poly 15"x24"' unit='' pm={Fried_Dal?.inner_poly}/>
                 <PmView name='Master Poly 23"x44"' unit='' pm={Fried_Dal?.master_poly}/>
                 <PmView name='Bar-BQ Chanachur Wrapper' unit='' pm={BBQ?.wrapper}/>
                 <PmView name='Inner Poly 19"x20"' unit='' pm={BBQ?.inner_poly}/>
                 <PmView name='Master Poly 28"x42"' unit='' pm={BBQ?.master_poly}/>
-                <PmView name='Gum Tap 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTap2')}/>
+                <PmView name='Gum Tap 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap2')}/>
             </div>
         </div>
 

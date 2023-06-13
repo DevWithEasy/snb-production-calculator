@@ -8,7 +8,7 @@ import RmView from "../../components/RmView";
 import TargetCarton from "../../components/TargetCarton";
 import useUserStore from "../../features/userStore";
 import baseUrl from "../../utils/baseUrl";
-import { getDemand, getTotalFoil, getTotalPmItem } from "../../utils/demand_utils";
+import Demand from "../../utils/demand";
 
 
 
@@ -30,7 +30,8 @@ export default function WaferDemand({ products }) {
         documentTitle : ""
     });
 
-    const {rm,pm}=getDemand(demand)
+    const result = new Demand(demand)
+    const {rm,pm} = result.getDemand(demand)
     const {
         Active_Energy_Family,
         Active_Energy_Mini,
@@ -187,7 +188,7 @@ export default function WaferDemand({ products }) {
                 <PmView name='Best Choice 220gm Tray' unit='Pcs' pm={Best_Choice_Family?.tray}/>
                 <PmView name='Elachi 45gm Wrapper' unit='' pm={Elachi_Standard?.wrapper}/>
                 <PmView name='Elachi 45gm Carton' unit='Pcs' pm={Elachi_Standard?.carton}/>
-                <PmView name='Lexus 15gm Wrapper' unit='' pm={getTotalFoil(pm,'lexus')}/>
+                <PmView name='Lexus 15gm Wrapper' unit='' pm={result.getTotalFoil(pm,'lexus')}/>
                 <PmView name='Lexus 15gm Carton' unit='Pcs' pm={Lexus_Mini?.carton}/>
                 <PmView name='Lexus 180gm Carton' unit='Pcs' pm={Lexus_Family?.carton}/>
                 <PmView name='Lexus 180gm ATC' unit='Pcs' pm={Lexus_Family?.atc}/>
@@ -203,8 +204,8 @@ export default function WaferDemand({ products }) {
                 <PmView name='Fruit Plus 47gm Carton' unit='Pcs' pm={Fruit_Plus_Standard?.carton}/>
                 <PmView name='King Cookies Wrapper' unit='' pm={King_Cookies_Biscuit?.wrapper}/>
                 <PmView name='King Cookies Carton' unit='Pcs' pm={King_Cookies_Biscuit?.carton}/>
-                <PmView name='Gum Tape 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTap2')}/>
-                <PmView name='Gum Tape 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTapBoth')}/>
+                <PmView name='Gum Tape 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap2')}/>
+                <PmView name='Gum Tape 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTapBoth')}/>
             </div>
         </div>
 

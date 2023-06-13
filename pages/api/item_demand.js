@@ -1,9 +1,11 @@
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../database/conncetDB";
 import {cartonPerBatch, ingredients_Obj_to_Array,targetBatch, targetCarton } from "../../utils/demand_utils";
+import Demand from '../../utils/demand'
 
 
 export default async function handler(req,res,next){
+    const demand = new Demand()
     try {
         //get product_info
         const info_query= query(collection(db,'products_info'),where('id','==', req.query.id))
@@ -16,16 +18,16 @@ export default async function handler(req,res,next){
         const ingredients = await getDoc(ingredientRef)
 
         //get carton per batch
-        const carton_per_batch = cartonPerBatch(products[0],ingredients.data())
+        const carton_per_batch = demand.cartonPerBatch(products[0],ingredients.data())
 
         //get target ctn
-        const target_carton = targetCarton(req.query.carton)
+        const target_carton = demand.targetCarton(req.query.carton)
 
         //get target batch
-        const batch = targetBatch(target_carton,carton_per_batch)
+        const batch = demand.targetBatch(target_carton,carton_per_batch)
 
         //get ingredient array
-        const ingredients_Array = ingredients_Obj_to_Array(ingredients.data(),batch)
+        const ingredients_Array = demand.ingredients_Obj_to_Array(ingredients.data(),batch)
 
         res.status(200).json({
             status : 200,

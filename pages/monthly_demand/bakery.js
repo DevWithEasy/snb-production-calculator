@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import { useEffect, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
 import PmView from "../../components/PmView";
@@ -7,8 +8,7 @@ import RmView from "../../components/RmView";
 import TargetCarton from '../../components/TargetCarton';
 import useUserStore from "../../features/userStore";
 import baseUrl from "../../utils/baseUrl";
-import { getDemand, getTotalFoil, getTotalPmItem } from "../../utils/demand_utils";
-import Head from "next/head";
+import Demand from "../../utils/demand";
 
 
 
@@ -30,7 +30,8 @@ export default function SnacksDemand({ products }) {
         documentTitle : ""
     });
 
-    const {rm,pm}=getDemand(demand)
+    const result = new Demand(demand)
+    const {rm,pm} = result.getDemand(demand)
     const {
         Butter_Cookies,
         Butter_Toast,
@@ -136,7 +137,7 @@ export default function SnacksDemand({ products }) {
             </div>
             <div className="w-1/2 border border-gray-400">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
-                <PmView name='F.Time Milk/Chocolate Cookies Tray' unit='Pcs' pm={getTotalFoil(pm,'cookies')}/>
+                <PmView name='F.Time Milk/Chocolate Cookies Tray' unit='Pcs' pm={result.getTotalFoil(pm,'cookies')}/>
                 <PmView name='F.Time Chocolate Cookies Pouch' unit='' pm={Chocolate_Cookies?.wrapper}/>
                 <PmView name='F.Time Chocolate Cookies Carton' unit='Pcs' pm={Chocolate_Cookies?.carton}/>
                 <PmView name='F.Time Butter Cookies 750gm Jar' unit='Pcs' pm={Butter_Cookies?.jar}/>
@@ -146,7 +147,7 @@ export default function SnacksDemand({ products }) {
                 <PmView name='F.Time Milk Cookies Carton' unit='Pcs' pm={Milk_Cookies?.carton}/>
                 <PmView name='Cutting paper' unit='' pm={Butter_Cookies?.paper}/>
                 <PmView name='Inner Poly 6"x8"' unit='' pm={Butter_Cookies?.inner_poly}/>
-                <PmView name='Gum Tape 3/4"' unit='Pcs' pm={getTotalPmItem(pm,'gumTap1')}/>
+                <PmView name='Gum Tape 3/4"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap1')}/>
                 <PmView name='Dry Cake Mini 30gm Wrapper' unit='' pm={Dry_Cake_Mini?.wrapper}/>
                 <PmView name='Dry Cake Mini 30gm Carton' unit='Pcs' pm={Dry_Cake_Mini?.carton}/>
                 <PmView name='Special Toast Inner Poly 9"x11"' unit='' pm={Special_Toast?.inner_poly}/>
@@ -159,8 +160,8 @@ export default function SnacksDemand({ products }) {
                 <PmView name='Dry Cake Family Pouch' unit='' pm={Dry_Cake_Family?.wrapper}/>
                 <PmView name='Dry Cake Family ATC Box' unit='Pcs' pm={Dry_Cake_Family?.atc}/>
                 <PmView name='Dry Cake Family Carton' unit='Pcs' pm={Dry_Cake_Family?.carton}/>
-                <PmView name='Dry Cake Paper' unit='Rim' pm={getTotalFoil(pm,'dryCake')}/>
-                <PmView name='Gum Tape 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTap2')}/>
+                <PmView name='Dry Cake Paper' unit='Rim' pm={result.getTotalFoil(pm,'dryCake')}/>
+                <PmView name='Gum Tape 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap2')}/>
             </div>
         </div>
 

@@ -1,4 +1,5 @@
 import axios from "axios";
+import Head from "next/head";
 import { useEffect, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
 import PmView from "../../components/PmView";
@@ -7,8 +8,7 @@ import RmView from "../../components/RmView";
 import TargetCarton from '../../components/TargetCarton';
 import useUserStore from "../../features/userStore";
 import baseUrl from "../../utils/baseUrl";
-import { getDemand, getTotalPmItem } from "../../utils/demand_utils";
-import Head from "next/head";
+import Demand from "../../utils/demand";
 
 
 export async function getServerSideProps(){
@@ -29,7 +29,8 @@ export default function WaferDemand({ products }) {
         documentTitle : ""
     });
 
-    const {rm,pm}=getDemand(demand)
+    const result = new Demand(demand)
+    const {rm,pm} = result.getDemand(demand)
     const {Vanilla_Wafer,Chocolate_Wafer} = pm
 
     useEffect(()=>{
@@ -98,8 +99,8 @@ export default function WaferDemand({ products }) {
                 <PmView name='Chocolate Wafer Carton' unit='Pcs' pm={Chocolate_Wafer?.carton}/>
                 <PmView name='Vanilla Wafer Wrapper' unit='' pm={Vanilla_Wafer?.wrapper}/>
                 <PmView name='Vanilla Wafer Carton' unit='Pcs' pm={Vanilla_Wafer?.carton}/>
-                <PmView name='Wafer Paper Board' unit='Pcs' pm={getTotalPmItem(pm,'board')}/>
-                <PmView name='Gum Tape 2"' unit='Pcs' pm={getTotalPmItem(pm,'gumTap2')}/>
+                <PmView name='Wafer Paper Board' unit='Pcs' pm={result.getTotalPmItem(pm,'board')}/>
+                <PmView name='Gum Tape 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap2')}/>
             </div>
         </div>
 
