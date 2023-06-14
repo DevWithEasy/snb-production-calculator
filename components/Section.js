@@ -17,13 +17,15 @@ export default function Section(props){
   }
     return (
         <div className=''>
-          <h1 className="relative text-center p-2 font-bold text-2xl bg-gray-100">
-            {section}
-            <div className="absolute top-3 right-3 flex items-center space-x-2">
-              <span className="text-xs">Hello {name}</span>
-              <AiOutlineLogout onClick={()=>logoutUser()} className="cursor-pointer hover:text-red-500"/>
-            </div>
-          </h1>
+          <div className="text-center p-2  bg-gray-100">
+            <h1 className="font-bold text-2xl">{section}</h1>
+            <p className="">{name} ({username})</p>
+            <AiOutlineLogout 
+              onClick={()=>logoutUser()} 
+              className="cursor-pointer hover:text-red-500 mx-auto mt-2"
+            />
+              
+          </div>
           <Link href={`/recipe/${section.toLowerCase()}`}>
             <a className='block p-2 border-b text-blue-500 text-xl'>Recipe</a>
           </Link>

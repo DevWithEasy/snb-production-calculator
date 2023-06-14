@@ -4,9 +4,8 @@ import useUserStore from '../../features/userStore';
 const Summary = () => {
     const {users,products,sections} = useUserStore()
     
-    console.log(users)
      return (
-        <div className='grid grid-cols-4 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-4 gap-4'>
             <div className='p-4 bg-blue-50 text-center rounded text-blue-600'>
                 <h1>Total Admin</h1>
                 <span className='text-2xl'>{users.filter(user=>user.section == 'Admin').length}</span>

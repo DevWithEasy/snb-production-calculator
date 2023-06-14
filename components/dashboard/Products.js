@@ -9,7 +9,7 @@ const Products = () => {
     return (
         <div className="">
             <AddProduct/>
-                                <table className="w-full ">
+                                <table className="w-full overflow-x">
                                 <thead className="bg-gray-500 p-2 text-white font-bold">
                                     <tr>
                                         <td className="p-2">Product Name</td>

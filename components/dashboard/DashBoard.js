@@ -6,6 +6,7 @@ import Products from './Products';
 import Recipe from './Recipe';
 import Summary from './Summary';
 import Users from './Users';
+import AdminDrawer from './AdminDrawer';
 
 const DashBoard = () => {
     const {active,setActive,logout} = useUserStore()
@@ -26,9 +27,13 @@ const DashBoard = () => {
                 <meta name="description" content="S&B Nice Food Valley Ltd." />
                 <link rel="icon" href="/logo.png" />
             </Head>
-            <h1 className='text-center text-2xl border-b'>Admin Dashboard</h1>
-            <div className='flex justify-between p-2 gap-x-4'>
-                <div className='w-3/12 space-y-2'>
+            <h1 className='relative text-center text-2xl border-b'>
+                Admin Dashboard
+                <AdminDrawer/>
+            </h1>
+            
+            <div className='md:flex md:justify-between p-2 md:gap-x-4'>
+                <div className='hidden md:block md:w-3/12 space-y-2'>
                     {
                         actives.map((item,index)=><button
                             key={index}
@@ -45,7 +50,7 @@ const DashBoard = () => {
                             Logout
                          </button>
                 </div>
-                <div className="w-9/12 px-2">
+                <div className="w-full md:w-9/12 md:px-2">
 
                     {
                         active === 0 ? <Summary/> :
