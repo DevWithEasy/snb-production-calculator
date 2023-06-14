@@ -9,6 +9,7 @@ import TargetCarton from '../../components/TargetCarton';
 import useUserStore from "../../features/userStore";
 import baseUrl from "../../utils/baseUrl";
 import Demand from "../../utils/demand";
+import MonthlyDemandMonth from "../../components/MonthlyDemandMonth";
 
 
 export async function getServerSideProps(){
@@ -46,6 +47,7 @@ export default function WaferDemand({ products }) {
         </Head>
         <PrintHeader/>
         <TargetCarton {...{products,handlePrint}}/>
+        <MonthlyDemandMonth section='Wafer'/>
         <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-x-2 md:space-y-0">
             <div className="w-full md:w-1/2 border border-gray-400 pb-4">
                 <h3 className="py-2 bg-gray-500 text-white text-center">Raw Materials (Kg)</h3>

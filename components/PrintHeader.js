@@ -7,6 +7,12 @@ export default function PrintHeader(){
                 <Image src='/logo.png' alt='logo' width={50} height={50}/>
                 <span className="font-bold text-red-500">S&B Nice Food Valley Ltd.</span>
             </div>
+            <div className="print:absolute top-0 w-full text-gray-400">
+            <p className="w-full flex justify-between text-xs">
+                <span>{window.location.href}</span>
+                <span>{new Date().toLocaleString()}</span>
+            </p> 
+        </div>
         </div>
     )
 }

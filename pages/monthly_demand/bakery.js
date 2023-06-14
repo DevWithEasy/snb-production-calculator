@@ -10,6 +10,8 @@ import useUserStore from "../../features/userStore";
 import baseUrl from "../../utils/baseUrl";
 import Demand from "../../utils/demand";
 import { useRouter } from "next/router";
+import GetDate from "../../utils/date";
+import MonthlyDemandMonth from "../../components/MonthlyDemandMonth";
 
 
 
@@ -56,10 +58,7 @@ export default function SnacksDemand({ products }) {
         </Head>
         <PrintHeader/>
         <TargetCarton {...{products,handlePrint}}/>
-        <p className="print:absolute top-0 w-full text-gray-400 flex justify-between">
-            <span>{router.pathname}</span>
-            <span>{}</span>
-        </p>
+        <MonthlyDemandMonth section='Bakery'/>
         <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-x-2 md:space-y-0">
             <div className="w-full md:w-1/2 border border-gray-400 pb-4">
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>

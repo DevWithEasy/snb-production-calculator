@@ -26,8 +26,6 @@ const Users = () => {
                                     <tr>
                                         <td className="p-2">User Name</td>
                                         <td className="p-2 text-center">Section</td>
-                                        <td className="p-2 text-center">Username</td>
-                                        <td className="p-2 text-center">Password</td>
                                         <td className="p-2 text-center">Action</td>
                                     </tr>
                                 </thead>
@@ -35,8 +33,6 @@ const Users = () => {
                                         {users.map(user=><tr key={user.id} className="border-b hover:bg-blue-50 hover:transition-all duration-300 rounded">
                                             <td className="p-2">{user?.name}</td>
                                             <td className="p-2 text-center">{user?.section}</td>
-                                            <td className="p-2 text-center">{user?.username}</td>
-                                            <td className="p-2 text-center">{user?.password}</td>
                                             <td className="p-2 flex justify-center items-center space-x-1">
                                             <UpdateUser {...{user,sections}}/>
                                             <DeleteUser {...{user,sections}}/>
