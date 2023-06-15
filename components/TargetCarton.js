@@ -62,7 +62,7 @@ const TargetCarton = ({products,handlePrint}) => {
                                 className="w-full p-2 border rounded md:rounded-none"
                             />
                             <button
-                                className="px-4 py-2 bg-blue-500 text-white rounded md:rounded-none" 
+                                className="px-4 py-2 flex bg-blue-500 text-white rounded md:rounded-none" 
                                 type='submit'
                             >
                                 {loading ? <><Spinner size='sm'/> Submitting</> : 'Submit'}
