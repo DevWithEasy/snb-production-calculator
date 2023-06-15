@@ -235,17 +235,17 @@ export default function AddProduct({products}){
 
                                 <RmUpdate label='Yeast' name='yeast' value={yeast} ingredients={ingredients} setIngredients={setIngredients}/>
                             </div>
-                            <div className="flex  space-x-2 py-2">
+                            <div className="flex flex-col md:flex-row space-x-2 py-2">
                                 <button
                                 className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
-                                    onClick={()=>updateRecipe(product.id,toast,{product,ingredients})}
+                                    onClick={()=>updateRecipe(product.id,toast,setLoading,{product,ingredients})}
                                 >
                                     Update Product
                                 </button>
                                 <br/>
                                 <button
                                 className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
-                                    onClick={()=>updateRecipeWithVersion(product.id,{product,ingredients})}
+                                    onClick={()=>updateRecipeWithVersion(product.id,toast,setLoading,{product,ingredients})}
                                 >
                                     Update Product & Change Version
                                 </button>
