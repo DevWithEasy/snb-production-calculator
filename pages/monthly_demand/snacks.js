@@ -39,6 +39,7 @@ export default function SnacksDemand({ products }) {
         Special_Chanachur_180_gm,
         Jhal_Chanachur_15_gm,
         Jhal_Chanachur_120_gm,
+        Jhal_Chanachur_180_gm,
         BBQ,
         Fried_Peas,
         Fried_Dal
@@ -135,6 +136,7 @@ export default function SnacksDemand({ products }) {
                 <PmView name='Special Chanachur 180gm Wrapper' unit='' pm={Special_Chanachur_180_gm?.wrapper}/>
                 <PmView name='Jhal Chanachur 15gm Wrapper' unit='' pm={Jhal_Chanachur_15_gm?.wrapper}/>
                 <PmView name='Jhal Chanachur 90gm Wrapper' unit='' pm={Jhal_Chanachur_120_gm?.wrapper}/>
+                <PmView name='Jhal Chanachur 90gm Wrapper' unit='' pm={Jhal_Chanachur_180_gm?.wrapper}/>
                 <PmView name='Fried Peas Wrapper' unit='' pm={Fried_Peas?.wrapper}/>
                 <PmView name='Inner Poly 18"x15"' unit='' pm={result.getTotalInnerMaster(pm,'inner',15)}/>
                 <PmView name='Master Poly 25"x47"' unit='' pm={result.getTotalInnerMaster(pm,'master',15)}/>

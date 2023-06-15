@@ -271,7 +271,7 @@ class Demand{
             return result2(product?.inner_poly_18_15)
          }else if(product.id === 'Special_Chanachur_120_gm' || product.id === 'Jhal_Chanachur_120_gm'){
             return result2(product?.inner_poly_17_19_5)
-         }else if(product.id === 'Special_Chanachur_180_gm'){
+         }else if(product.id === 'Special_Chanachur_180_gm' || product.id === 'Jhal_Chanachur_180_gm'){
             return result2(product?.inner_poly_16_21_5)
          }else if(product.id === 'Fried_Dal'){
             return result2(product?.inner_poly_24_15)
@@ -291,7 +291,7 @@ class Demand{
     
         if(product.id === 'Special_Chanachur_15_gm' || product.id === 'Jhal_Chanachur_15_gm' || product.id === 'Fried_Peas'){
             return result(product?.master_poly_25_47)
-         }else if(product.id === 'Special_Chanachur_120_gm' || product.id === 'Jhal_Chanachur_120_gm' || product.id === 'Special_Chanachur_180_gm'){
+         }else if(product.id === 'Special_Chanachur_120_gm' || product.id === 'Jhal_Chanachur_120_gm' || product.id === 'Special_Chanachur_180_gm' || product.id === 'Jhal_Chanachur_180_gm'){
             return result(product?.master_poly_35_26)
          }else if(product.id === 'Fried_Dal'){
             return result(product?.master_poly_44_23)
