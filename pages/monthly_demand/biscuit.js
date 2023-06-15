@@ -57,7 +57,7 @@ export default function WaferDemand({ products }) {
     },[resetDemand])
 
     return (
-        <div ref={printRef} className="mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
+        <div ref={printRef} className="mt-2 p-2 mx-4 print:mx-10 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
         <Head>
             <title>Biscuit Demand</title>
             <link rel="icon" href="/logo.png" />
@@ -67,7 +67,7 @@ export default function WaferDemand({ products }) {
         <MonthlyDemandMonth section='Biscuit'/>
         <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-x-2 md:space-y-0">
             <div className="w-full md:w-1/2 border border-gray-400 pb-4">
-                <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
+                <h3 className="py-0.5 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
                 <RmView name='Ammonium Bi Carbonate' ingredient={rm?.ammonium}/>
 
                   <RmView name='Black Cumin' ingredient={rm?.blackCumin}/>
@@ -162,7 +162,7 @@ export default function WaferDemand({ products }) {
                 
             </div>
             <div className="w-full md:w-1/2 border border-gray-400 pb-4">
-                <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
+                <h3 className="py-0.5 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
                 <PmView name='Active Energy 45gm Wrapper' unit='' pm={Active_Energy_Standard?.wrapper}/>
                 <PmView name='Active Energy 45gm Carton' unit='Pcs' pm={Active_Energy_Standard?.carton}/>
                 <PmView name='Active Energy 18gm Wrapper' unit='' pm={Active_Energy_Mini?.wrapper}/>

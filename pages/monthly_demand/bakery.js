@@ -51,7 +51,7 @@ export default function SnacksDemand({ products }) {
     },[resetDemand])
 
     return (
-        <div ref={printRef} className="relative mt-2 p-2 mx-4 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none pb-10">
+        <div ref={printRef} className="relative mt-2 p-2 mx-4 print:mx-10 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none pb-10">
         <Head>
             <title>Bakery Demand</title>
             <link rel="icon" href="/logo.png" />
@@ -61,7 +61,7 @@ export default function SnacksDemand({ products }) {
         <MonthlyDemandMonth section='Bakery'/>
         <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-x-2 md:space-y-0">
             <div className="w-full md:w-1/2 border border-gray-400 pb-4">
-                <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
+                <h3 className="py-0.5 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
                 <RmView name='Ammonium' ingredient={rm?.ammonium}/>
 
                   <RmView name='Baking Powder' ingredient={rm?.bakingPowder}/>
@@ -133,7 +133,7 @@ export default function SnacksDemand({ products }) {
                   <RmView name='Yeast' ingredient={rm?.yeast}/>
             </div>
             <div className="w-full md:w-1/2 border border-gray-400">
-                <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
+                <h3 className="py-0.5 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
                 <PmView name='F.Time Milk/Chocolate Cookies Tray' unit='Pcs' pm={result.getTotalFoil(pm,'cookies')}/>
                 <PmView name='F.Time Chocolate Cookies Pouch' unit='' pm={Chocolate_Cookies?.wrapper}/>
                 <PmView name='F.Time Chocolate Cookies Carton' unit='Pcs' pm={Chocolate_Cookies?.carton}/>
