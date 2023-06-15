@@ -42,14 +42,14 @@ const Recipe = () => {
                                     <AiFillFileMarkdown size={25} onClick={()=>sactionHandler('monthly_demand')} className={active === 3 ? 'bg-gray-500 text-white p-1 rounded' :'hover:scale-150 transition-all duration-300 hover:bg-gray-500 hover:text-white p-1 rounded'}/>
                             </div>
                             <div className="mt-2 space-y-2">
-                                {adminUIData.map((item, index) =><button 
+                                {adminUIData.map((item, index) =><Link 
                                     key={index}
-                                    onClick={() =>router.push(`/${action}/${item.link}`)} 
-                                    // href={`/${action}/${item.link}`}
-                                    className='w-full p-2 text-left bg-gray-50 hover:bg-blue-100 hover:transition-all duration-300 rounded'
+                                    // onClick={() =>router.push(`/${action}/${item.link}`)} 
+                                    href={`/${action}/${item.link}`}
+                                    className='block w-full p-2 text-left bg-gray-50 hover:bg-blue-100 hover:transition-all duration-300 rounded'
                                 >
-                                    {item.title}
-                                </button>)}
+                                    <a>{item.title}</a>
+                                </Link>)}
                             </div>
                         </div>
     );
