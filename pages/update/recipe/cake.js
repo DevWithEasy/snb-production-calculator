@@ -2,11 +2,12 @@ import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+import ProductSelect from "../../../components/ProductSelect";
 import RmUpdate from "../../../components/RmUpdate";
 import UpdateInput from "../../../components/UpdateInput";
 import { getUpdateRecipe, updateRecipe, updateRecipeWithVersion } from "../../../utils/api_utils";
 import baseUrl from "../../../utils/baseUrl";
-import ProductSelect from "../../../components/ProductSelect";
 
 
 export async function getServerSideProps(){
@@ -23,6 +24,7 @@ export default function AddProduct({products}){
     const [id,setId] = useState('')
     const [product,setProduct] = useState({})
     const [ingredients,setIngredients] = useState({});
+    const [loading,setLoading] = useState(false)
 
     const [oldProduct,setOldProduct] = useState({})
     const [oldIngredients,setOldIngredients] = useState({});
@@ -183,17 +185,17 @@ export default function AddProduct({products}){
 
                                 <RmUpdate label='Starch Powder' name='starchPowder' value={starchPowder} ingredients={ingredients} setIngredients={setIngredients}/>
                             </div>
-                            <div className="flex  space-x-2 py-2">
+                            <div className="flex flex-col md:flex-row space-x-2 py-2">
                                 <button
                                 className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
-                                    onClick={()=>updateRecipe(product.id,{product,ingredients})}
+                                    onClick={()=>updateRecipe(product.id,toast,setLoading,{product,ingredients})}
                                 >
                                     Update Product
                                 </button>
                                 <br/>
                                 <button
                                 className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
-                                    onClick={()=>updateRecipeWithVersion(product.id,{product,ingredients})}
+                                    onClick={()=>updateRecipeWithVersion(product.id,toast,setLoading,{product,ingredients})}
                                 >
                                     Update Product & Change Version
                                 </button>

@@ -2,11 +2,11 @@ import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import ProductSelect from '../../../components/ProductSelect';
 import RmUpdate from "../../../components/RmUpdate";
 import UpdateInput from "../../../components/UpdateInput";
 import { getUpdateRecipe, updateRecipe, updateRecipeWithVersion } from "../../../utils/api_utils";
 import baseUrl from "../../../utils/baseUrl";
-import ProductSelect from '../../../components/ProductSelect'
 
 
 export async function getServerSideProps(){
@@ -23,6 +23,7 @@ export default function AddProduct({products}){
     const [id,setId] = useState('')
     const [product,setProduct] = useState({})
     const [ingredients,setIngredients] = useState({});
+    const [loading,setLoading] = useState(false)
 
     const [oldProduct,setOldProduct] = useState({})
     const [oldIngredients,setOldIngredients] = useState({});
