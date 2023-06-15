@@ -3,9 +3,14 @@ import { Toaster } from 'react-hot-toast';
 import Login from '../components/Login';
 import Section from '../components/Section';
 import useUserStore from '../features/userStore';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter()
   const {user} = useUserStore()
+  if(user.section == 'Admin'){
+    router.push('/admin')
+  }
 
   return (
     <div className='index flex justify-center'>
