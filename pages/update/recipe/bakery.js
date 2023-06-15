@@ -2,6 +2,7 @@ import axios from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import ProductSelect from '../../../components/ProductSelect';
 import RmUpdate from "../../../components/RmUpdate";
 import UpdateInput from "../../../components/UpdateInput";
@@ -73,12 +74,12 @@ export default function AddProduct({products}){
     return(
         <div className="add_product">
             <Head>
-                <title>Bakery Add Product</title>
-                <meta name="description" content="Lachcha Add Product" />
+                <title>Bakery update Product</title>
+                <meta name="description" content="Bakery update Product" />
                 <link rel="icon" href="/logo.png" />
             </Head>
             <div className="ingredient_area">
-                <h3>Lachcha Update Product</h3>
+                <h3>Bakery update Product</h3>
                 
                 <div className="ingredients">
 
