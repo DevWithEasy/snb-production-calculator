@@ -28,7 +28,7 @@ export default function AddProduct({products}){
 
     const [oldProduct,setOldProduct] = useState({})
     const [oldIngredients,setOldIngredients] = useState({});
-    const {version,packetWeight,packetPerCarton,processLoss,foilWeight} = oldProduct
+    const {version,packetWeight,packetPerCarton,processLoss,foilWeight,shrink_outer_poly} = oldProduct
     const {
         vanilinPowder,
         butterOilSubstitute,
@@ -67,12 +67,12 @@ export default function AddProduct({products}){
     return(
         <div className="add_product">
             <Head>
-                <title>Lachcha Add Product</title>
+                <title>Cake update Product</title>
                 <meta name="description" content="Lachcha Add Product" />
                 <link rel="icon" href="/logo.png" />
             </Head>
             <div className="ingredient_area">
-                <h3>Lachcha Update Product</h3>
+                <h3>Cake Update Product</h3>
                 
                 <div className="ingredients">
                     <ProductSelect {...{setId,products}}/>
