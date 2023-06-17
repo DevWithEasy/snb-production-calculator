@@ -1,10 +1,10 @@
 import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
+import ProductSelect from '../../../components/ProductSelect';
 import { getRecipe } from '../../../utils/api_utils';
 import baseUrl from '../../../utils/baseUrl';
 import { totalCarton, totalFoil } from '../../../utils/pmConsumption';
-import ProductSelect from '../../../components/ProductSelect';
 
 
 export async function getServerSideProps(){

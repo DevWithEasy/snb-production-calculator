@@ -1,11 +1,10 @@
-import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { db } from '../../../database/conncetDB';
-import { totalCarton, totalFoil, totalMasterPoly } from '../../../utils/pmConsumption';
-import axios from 'axios';
-import baseUrl from '../../../utils/baseUrl';
 import ProductSelect from '../../../components/ProductSelect';
+import { getRecipe } from '../../../utils/api_utils';
+import baseUrl from '../../../utils/baseUrl';
+import { totalCarton, totalFoil, totalMasterPoly } from '../../../utils/pmConsumption';
 
 
 export async function getServerSideProps(){

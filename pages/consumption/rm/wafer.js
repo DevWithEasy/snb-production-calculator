@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import RmViewConsumption from '../../../components/RmViewConsumption';
 import baseUrl from '../../../utils/baseUrl';
 import ProductSelect from '../../../components/ProductSelect';
+import { getRecipe } from '../../../utils/api_utils';
 
 
 export async function getServerSideProps(){

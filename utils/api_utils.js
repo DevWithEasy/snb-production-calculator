@@ -1,4 +1,3 @@
-import { others } from "@chakra-ui/react"
 import axios from "axios"
 
 export const getRecipe=async(id,setData)=>{
