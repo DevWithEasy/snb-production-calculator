@@ -18,24 +18,13 @@ export async function getServerSideProps(){
 }
 
 export default function Biscuit({products}) {
-  const [name,setName] = useState('')
+  const [id,setId] = useState('')
   const [product,setProduct] = useState({})
   const [batch,setBatch] = useState(0)
 
   useEffect(()=>{
-    async function getRecipe(name){
-        const info_query= query(collection(db,'products_info'),where('id','==', name))
-        const docs = await getDocs(info_query)
-        const products = [];
-        docs.forEach(data => products.push(data.data()));
-        if(products.length){
-            const ingredientRef = doc(db,'products_recipe',products[0].id)
-            const ingredients = await getDoc(ingredientRef)
-            setProduct({...products[0],ingredients:ingredients.data()})
-        }
-    }
-    getRecipe(name)
-  },[name])
+    if(id) getRecipe(id,setProduct)
+  },[id])
 
   return (
     <div className='raw-consumption'>
