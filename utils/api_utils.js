@@ -25,34 +25,34 @@ export const getUpdateRecipe=async(id,setProduct,setIngredient,setOldProduct,set
   }
 }
 
-export const updateRecipe=async(id,toast,setLoading,data)=>{
+export const updateRecipe=async(id,toast,onOpen, onClose,data)=>{
   try {
-    setLoading(true)
+    onOpen()
     const res = await axios.post(`/api/recipe/update/no_version?id=${id}`,data)
     if (res.data.status === 200) {
-      setLoading(false)
+      onClose()
       toast.success('Recipe updated successfully')
     }
   } catch (error) {
-    setLoading(false)
+    onClose()
     toast.error('Recipe updated failed.')
   }
 }
 
-export const updateRecipeWithVersion=async(id,toast,setLoading,data)=>{
+export const updateRecipeWithVersion=async(id,toast,onOpen, onClose,data)=>{
   const {oldProduct,...others} = data
   if(oldProduct.version === data.product.version){
     return toast.error('Change pevious version first.')
   }
   try {
-    setLoading(true)
+    onOpen()
     const res = await axios.post(`/api/recipe/update/with_version?id=${id}`,others)
     if (res.data.status === 200) {
-      setLoading(false)
+      onClose()
       toast.success('Recipe updated successfully')
     }
   } catch (error) {
-    setLoading(false)
+    onClose()
     toast.error('Recipe updated failed.')
   }
 }

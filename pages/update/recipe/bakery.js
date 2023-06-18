@@ -1,8 +1,9 @@
+import { useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import Loading from "../../../components/Loading";
 import ProductSelect from '../../../components/ProductSelect';
 import RmUpdate from "../../../components/RmUpdate";
 import UpdateInput from "../../../components/UpdateInput";
@@ -20,11 +21,10 @@ export async function getServerSideProps(){
   }
 
 export default function AddProduct({products}){
-    const router = useRouter()
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const [id,setId] = useState('')
     const [product,setProduct] = useState({})
     const [ingredients,setIngredients] = useState({});
-    const [loading,setLoading] = useState(false)
 
     const [oldProduct,setOldProduct] = useState({})
     const [oldIngredients,setOldIngredients] = useState({});
@@ -238,14 +238,14 @@ export default function AddProduct({products}){
                             <div className="flex flex-col md:flex-row space-x-2 py-2">
                                 <button
                                 className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
-                                    onClick={()=>updateRecipe(product.id,toast,setLoading,{product,ingredients})}
+                                    onClick={()=>updateRecipe(product.id,toast,onOpen, onClose,{product,ingredients})}
                                 >
                                     Update Product
                                 </button>
                                 <br/>
                                 <button
                                 className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
-                                    onClick={()=>updateRecipeWithVersion(product.id,toast,setLoading,{product,ingredients})}
+                                    onClick={()=>updateRecipeWithVersion(product.id,toast,onOpen, onClose,{product,ingredients})}
                                 >
                                     Update Product & Change Version
                                 </button>
@@ -253,6 +253,7 @@ export default function AddProduct({products}){
                         </div>}
                 </div>
             </div>
+            <Loading {...{isOpen, onOpen, onClose}}/>
         </div>
     )
 }
