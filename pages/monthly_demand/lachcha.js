@@ -66,7 +66,7 @@ export default function LachchaDemand({products}){
                     <PmView name='Lachcha Semai Premium Bag' unit='Pcs' pm={Lachcha_Semai_500gm?.atc}/>
                     <PmView name='Lachcha Semai Premium Carton' unit='Pcs' pm={Lachcha_Semai_500gm?.carton}/>
                     <PmView name='Gum Tape 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap2')}/>
-
+                    <PmView name='P.P Handgloves' unit='Pcs' pm='500'/>
                 </div>
             </div>
 

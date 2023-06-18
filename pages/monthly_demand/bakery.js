@@ -159,6 +159,7 @@ export default function SnacksDemand({ products }) {
                 <PmView name='Dry Cake Family Carton' unit='Pcs' pm={Dry_Cake_Family?.carton}/>
                 <PmView name='Dry Cake Paper' unit='Rim' pm={result.getTotalFoil(pm,'dryCake')}/>
                 <PmView name='Gum Tape 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap2')}/>
+                <PmView name='P.P Handgloves' unit='Pcs' pm='500'/>
             </div>
         </div>
 

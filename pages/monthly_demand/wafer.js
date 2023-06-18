@@ -95,6 +95,7 @@ export default function WaferDemand({ products }) {
                 <PmView name='Vanilla Wafer Carton' unit='Pcs' pm={Vanilla_Wafer?.carton}/>
                 <PmView name='Wafer Paper Board' unit='Pcs' pm={result.getTotalPmItem(pm,'board')}/>
                 <PmView name='Gum Tape 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap2')}/>
+                <PmView name='P.P Handgloves' unit='Pcs' pm='500'/>
             </div>
         </div>
 

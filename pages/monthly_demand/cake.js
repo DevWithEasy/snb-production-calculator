@@ -2,6 +2,7 @@ import axios from "axios";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
+import MonthlyDemandMonth from "../../components/MonthlyDemandMonth";
 import PmView from "../../components/PmView";
 import PrintHeader from "../../components/PrintHeader";
 import RmView from "../../components/RmView";
@@ -9,7 +10,6 @@ import TargetCarton from "../../components/TargetCarton";
 import useUserStore from "../../features/userStore";
 import baseUrl from "../../utils/baseUrl";
 import Demand from "../../utils/demand";
-import MonthlyDemandMonth from "../../components/MonthlyDemandMonth";
 
 
 
@@ -135,8 +135,9 @@ export default function SnacksDemand({ products }) {
                 <PmView name='Milk Cake 22gm Family Carton' unit='Pcs' pm={Milk_Cake_22_gm_Family?.carton}/>
                 <PmView name='Milk Cake 22gm Family ATC' unit='Pcs' pm={Milk_Cake_22_gm_Family?.atc}/>
                 <PmView name='Tiffin Cake Shrink Outer Poly' unit='Pcs' pm={result.getTotalPmItem(pm,'outer_poly')}/>
-                <PmView name='Gum Tape 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap1')}/>
+                <PmView name='Gum Tape 3/4"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap1')}/>
                 <PmView name='Gum Tape 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap2')}/>
+                <PmView name='P.P Handgloves' unit='Pcs' pm='5000'/>
             </div>
         </div>
 

@@ -150,6 +150,7 @@ export default function SnacksDemand({ products }) {
                 <PmView name='Inner Poly 19"x20"' unit='' pm={BBQ?.inner_poly}/>
                 <PmView name='Master Poly 28"x42"' unit='' pm={BBQ?.master_poly}/>
                 <PmView name='Gum Tap 2"' unit='Pcs' pm={result.getTotalPmItem(pm,'gumTap2')}/>
+                <PmView name='P.P Handgloves' unit='Pcs' pm='500'/>
             </div>
         </div>
 
