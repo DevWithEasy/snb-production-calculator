@@ -312,8 +312,7 @@ class Demand{
         }
     }
     
-    getCakeOuterPoly=(product)=>{
-        const packet = product.id =='Milk_Cake_22_gm_Family' ? 10 : 18
+    getCakeOuterPoly=(product,packet)=>{
         const foil = product.target * packet * product?.shrink_outer_poly
         const wastage = (foil * 2)/100
         if(product.id === 'Tiffin_Cake_Vanilla_Family' || product.id === 'Tiffin_Cake_Chocolate_Family' || product.id === 'Milk_Cake_11_gm_Family' || product.id === 'Milk_Cake_22_gm_Family'){
@@ -421,7 +420,7 @@ class Demand{
                     const wra_qty = this.totalFoilByTargetCarton(dProduct)
                     const ctn_qty = this.totalCartonByTargetCarton(dProduct.target)  
                     const atc_qty = this.totalATCByTargetCarton(dProduct,12)
-                    const outer_poly = this.getCakeOuterPoly(dProduct)
+                    const outer_poly = this.getCakeOuterPoly(dProduct,12)
                     const gumTape_qty = this.totalGumTape_2ByTargetCarton(dProduct)
                     const gumTape1_qty = this.totalGumTape_1ByTargetCarton(dProduct)
                     data.push({
