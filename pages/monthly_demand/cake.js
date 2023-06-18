@@ -63,7 +63,7 @@ export default function SnacksDemand({ products }) {
                 <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
                 <RmView name='Vanilin Powder' ingredient={rm?.vanilinPowder}/>
 
-                  <RmView name='butter Oil Substitute' ingredient={rm?.butterOilSubstitute}/>
+                  <RmView name='Butter Oil Substitute' ingredient={rm?.butterOilSubstitute}/>
 
                   <RmView name='Cake Gel' ingredient={rm?.cakeGel}/>
 

@@ -419,8 +419,8 @@ class Demand{
                 }else if(dProduct.id == product && dProduct.section == 'Cake'){
                     const key = dProduct.id
                     const wra_qty = this.totalFoilByTargetCarton(dProduct)
-                    const ctn_qty = this.totalCartonByTargetCarton(dProduct.target) 
-                    const atc_qty = dProduct.id == 'Milk_Cake_22_gm_Family'?this.totalATCByTargetCarton(dProduct,10) : this.totalATCByTargetCarton(dProduct,18)
+                    const ctn_qty = this.totalCartonByTargetCarton(dProduct.target)  
+                    const atc_qty = dProduct.id == 'Milk_Cake_22_gm_Family'?this.totalATCByTargetCarton(dProduct,10) : this.totalATCByTargetCarton(dProduct,12)
                     const outer_poly = this.getCakeOuterPoly(dProduct)
                     const gumTape_qty = this.totalGumTape_2ByTargetCarton(dProduct)
                     const gumTape1_qty = this.totalGumTape_1ByTargetCarton(dProduct)
