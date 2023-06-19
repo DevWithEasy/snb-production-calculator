@@ -60,7 +60,7 @@ export default function SnacksDemand({ products }) {
         <MonthlyDemandMonth section='Cake'/>
         <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-x-2 md:space-y-0">
             <div className="w-full md:w-1/2 border border-gray-400 pb-4">
-                <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
+                <h3 className="py-0.5 bg-gray-500 text-white text-center">Raw Materials (Kg)</h3>
                 <RmView name='Vanilin Powder' ingredient={rm?.vanilinPowder}/>
 
                   <RmView name='Butter Oil Substitute' ingredient={rm?.butterOilSubstitute}/>
@@ -117,7 +117,7 @@ export default function SnacksDemand({ products }) {
                 
             </div>
             <div className="w-full md:w-1/2 border border-gray-400 pb-4">
-                <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
+                <h3 className="py-0.5 bg-gray-500 text-white text-center">Packaging Materials</h3>
                 <PmView name='Tiffin Cake Vanilla 15gm Wrapper' unit='' pm={result.getTotalFoil(pm,'vanilla')}/>
                 <PmView name='Tiffin Cake Vanilla 15gm Carton' unit='Pcs' pm={Tiffin_Cake_Vanilla_Standard?.carton}/>
                 <PmView name='Tiffin Cake Vanilla Family Carton' unit='Pcs' pm={Tiffin_Cake_Vanilla_Family?.carton}/>

@@ -47,7 +47,7 @@ export default function LachchaDemand({products}){
             <MonthlyDemandMonth section='Lachcha'/>
             <div className="flex flex-col space-y-2 md:flex-row md:justify-between md:space-x-2 md:space-y-0">
                 <div className="w-full md:w-1/2 border border-gray-400 pb-4">
-                    <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
+                    <h3 className="py-0.5 bg-gray-500 text-white font-bold text-center">Raw Materials (Kg)</h3>
                     <RmView name='Flour A Grade' ingredient={rm?.flourGrade_A}/>
                     <RmView name='Flour B Grade' ingredient={rm?.flourGrade_B}/>
                     <RmView name='Palm Oil Super' ingredient={rm?.palmOilSuper}/>
@@ -58,7 +58,7 @@ export default function LachchaDemand({products}){
                     <RmView name='TBHQ' ingredient={rm?.tbhq}/>
                 </div>
                 <div className="w-full md:w-1/2 border border-gray-400 pb-4">
-                    <h3 className="py-2 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
+                    <h3 className="py-0.5 bg-gray-500 text-white font-bold text-center">Packaging Materials</h3>
                     <PmView name='Lachcha Semai 200gm Pouch' unit='' pm={Lachcha_Semai_200gm?.wrapper}/>
                     <PmView name='Master Poly 24"x22.5"' unit='' pm={Lachcha_Semai_200gm?.master_poly}/>
                     <PmView name='Lachcha Semai Premium Pouch' unit='' pm={Lachcha_Semai_500gm?.wrapper}/>
