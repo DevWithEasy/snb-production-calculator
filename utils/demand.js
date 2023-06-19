@@ -1,5 +1,3 @@
-import { others } from "@chakra-ui/react";
-
 class Demand{
     constructor(demand){
         this.demand = demand;
@@ -331,6 +329,18 @@ class Demand{
             return Number((paper/1000).toFixed(2))
         }else{
             return 0
+        }
+    }
+
+    getGhee_flavour=(qty)=>{ 
+        const product = this.demand.find(product => product.id == "Lachcha_Semai_500gm")
+        if(!product){
+            return 0
+        }else{
+            const ingredients = this.array_to_Obj(product.ingredients)
+            const {ghee,gheeFlavour,...others} = ingredients
+            const total = Object.values(others).reduce((total,current)=> total+current,0)
+            return (((total-(total*10)/100)/20) * qty).toFixed(2)
         }
     }
 
