@@ -1,6 +1,6 @@
 import axios from "axios";
 import Head from "next/head";
-import { useRef } from "react";
+import { useRef,useEffect } from "react";
 import { useReactToPrint } from 'react-to-print';
 import PmView from '../../components/PmView';
 import PrintHeader from "../../components/PrintHeader";
