@@ -8,6 +8,7 @@ import ProductInput from "../../components/ProductInput";
 import RmInput from "../../components/RmInput";
 import { addProuctRecipe } from "../../utils/api_utils";
 import handleInput from "../../utils/handleInput";
+import baseUrl from "../../utils/baseUrl";
 
 export async function getServerSideProps(){
     const res = await axios.get(`${baseUrl}/api/products/Biscuit`)

@@ -8,6 +8,7 @@ import ProductInput from "../../components/ProductInput";
 import RmInput from "../../components/RmInput";
 import { addProuctRecipe } from "../../utils/api_utils";
 import handleInput from "../../utils/handleInput";
+import baseUrl from "../../utils/baseUrl";
 
 export async function getServerSideProps(){
     const res = await axios.get(`${baseUrl}/api/products/Lachcha`)
@@ -42,7 +43,7 @@ export default function AddLachcha({products}){
         tbhq : 0
     });
     const data = products.find(item => item.name == product.name)
-
+    console.log(product,ingredients)
     return(
         <div className="add_product">
             <Head>

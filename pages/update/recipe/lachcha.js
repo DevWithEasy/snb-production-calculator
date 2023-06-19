@@ -1,15 +1,14 @@
+import { useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import Loading from "../../../components/Loading";
 import ProductSelect from "../../../components/ProductSelect";
 import RmUpdate from "../../../components/RmUpdate";
 import UpdateInput from "../../../components/UpdateInput";
 import { getUpdateRecipe, updateRecipe, updateRecipeWithVersion } from "../../../utils/api_utils";
 import baseUrl from "../../../utils/baseUrl";
-import { useDisclosure } from "@chakra-ui/react";
-import Loading from "../../../components/Loading";
 
 
 export async function getServerSideProps(){

@@ -1,7 +1,8 @@
 import axios from "axios";
 import Head from "next/head";
-import { useRef,useEffect } from "react";
+import { useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
+import MonthlyDemandMonth from "../../components/MonthlyDemandMonth";
 import PmView from '../../components/PmView';
 import PrintHeader from "../../components/PrintHeader";
 import RmView from '../../components/RmView';
@@ -9,7 +10,6 @@ import TargetCarton from '../../components/TargetCarton';
 import useUserStore from '../../features/userStore';
 import baseUrl from "../../utils/baseUrl";
 import Demand from "../../utils/demand";
-import MonthlyDemandMonth from "../../components/MonthlyDemandMonth";
 
 export async function getServerSideProps(){
     const res = await axios.get(`${baseUrl}/api/products/Lachcha`)
@@ -36,7 +36,6 @@ export default function LachchaDemand({products}){
         resetDemand()
     },[resetDemand])
 
-    
     return(
         <div ref={printRef} className="mt-2 p-2 mx-4 print:mx-10 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
             <Head>

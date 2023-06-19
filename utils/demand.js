@@ -1,3 +1,5 @@
+import { others } from "@chakra-ui/react";
+
 class Demand{
     constructor(demand){
         this.demand = demand;
@@ -331,6 +333,7 @@ class Demand{
             return 0
         }
     }
+
 
     getDemandRM=()=>{
         //get all products ingredientslist
