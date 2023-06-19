@@ -1,6 +1,6 @@
 import axios from "axios";
 import Head from "next/head";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
 import MonthlyDemandMonth from "../../components/MonthlyDemandMonth";
 import PmView from '../../components/PmView';
@@ -32,10 +32,9 @@ export default function LachchaDemand({products}){
     const {rm,pm} = result.getDemand(demand)
     const {Lachcha_Semai_200gm,Lachcha_Semai_500gm} = pm
 
-    // useEffect(()=>{
-    //     resetDemand()
-    // },[resetDemand])
-    //   console.log(demand)
+    useEffect(()=>{
+        resetDemand()
+    },[resetDemand])
     
     return(
         <div ref={printRef} className="mt-2 p-2 mx-4 print:mx-10 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
