@@ -2,6 +2,7 @@ import axios from "axios";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
+import MonthlyDemandMonth from "../../components/MonthlyDemandMonth";
 import PmView from "../../components/PmView";
 import PrintHeader from "../../components/PrintHeader";
 import RmView from "../../components/RmView";
@@ -9,7 +10,6 @@ import TargetCarton from "../../components/TargetCarton";
 import useUserStore from "../../features/userStore";
 import baseUrl from "../../utils/baseUrl";
 import Demand from "../../utils/demand";
-import MonthlyDemandMonth from "../../components/MonthlyDemandMonth";
 
 
 
@@ -49,7 +49,7 @@ export default function SnacksDemand({ products }) {
         resetDemand()
     },[resetDemand])
 
-    
+    console.log(pm)
     return (
         <div ref={printRef} className="mt-2 p-2 mx-4 print:mx-10 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
         <Head>
@@ -94,7 +94,7 @@ export default function SnacksDemand({ products }) {
 
                   <RmView name='Lentil' ingredient={rm?.lentil}/>
 
-                  <RmView name='Salt' ingredient={rm?.salt}/>
+                  <RmView name='Salt' ingredient={rm?.saltSuper}/>
 
                   <RmView name='Palm Oil Super' ingredient={rm?.palmOilSuper}/>
 
@@ -136,7 +136,7 @@ export default function SnacksDemand({ products }) {
                 <PmView name='Special Chanachur 180gm Wrapper' unit='' pm={Special_Chanachur_180_gm?.wrapper}/>
                 <PmView name='Jhal Chanachur 15gm Wrapper' unit='' pm={Jhal_Chanachur_15_gm?.wrapper}/>
                 <PmView name='Jhal Chanachur 90gm Wrapper' unit='' pm={Jhal_Chanachur_120_gm?.wrapper}/>
-                <PmView name='Jhal Chanachur 90gm Wrapper' unit='' pm={Jhal_Chanachur_180_gm?.wrapper}/>
+                <PmView name='Jhal Chanachur 180gm Wrapper' unit='' pm={Jhal_Chanachur_180_gm?.wrapper}/>
                 <PmView name='Fried Peas Wrapper' unit='' pm={Fried_Peas?.wrapper}/>
                 <PmView name='Inner Poly 18"x15"' unit='' pm={result.getTotalInnerMaster(pm,'inner',15)}/>
                 <PmView name='Master Poly 25"x47"' unit='' pm={result.getTotalInnerMaster(pm,'master',15)}/>

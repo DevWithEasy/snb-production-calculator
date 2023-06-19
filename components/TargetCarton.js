@@ -1,13 +1,14 @@
 import {
-    Spinner,Table,
+    Spinner, Table,
     TableContainer,
     Tbody,
     Td,
     Tr
- } from '@chakra-ui/react';
+} from '@chakra-ui/react';
 import React, { useState } from 'react';
-import useUserStore from '../features/userStore';
 import { toast } from "react-hot-toast";
+import { AiOutlinePrinter } from 'react-icons/ai';
+import useUserStore from '../features/userStore';
 import { getProduct } from '../utils/demand_api_utils';
 
 const TargetCarton = ({products,handlePrint}) => {
@@ -17,11 +18,9 @@ const TargetCarton = ({products,handlePrint}) => {
     const [loading,setLoading] = useState(false)
     return (
         <div className="print:hidden space-y-2 border border-gray-400">
-            <h1 className="relative py-2 bg-gray-500 text-white text-xl text-center">
+            <h1 className="relative py-1 bg-gray-500 text-white text-xl text-center font-bold print:mx-2">
                 Production Target Carton
-                <button onClick={()=>handlePrint()} className="absolute right-2 print:hidden"> 
-                    Print
-                </button>
+                <AiOutlinePrinter onClick={()=>handlePrint()} className="absolute right-2 top-2 print:hidden cursor-pointer" />
             </h1>
             <div className="p-2 space-y-2">
                 <TableContainer className='border rounded'>

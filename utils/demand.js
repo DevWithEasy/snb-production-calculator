@@ -101,7 +101,7 @@ class Demand{
     
         }else if(name == 'inner' && unit == 90){
             return Object.keys(object)
-            .filter(key=> key =='Special_Chanachur_90_gm' || key =='Jhal_Chanachur_90_gm')
+            .filter(key=> key =='Special_Chanachur_120_gm' || key =='Jhal_Chanachur_120_gm')
             .map((key=> object[key]))
             .map(item=> item.inner_poly)
             .reduce((acc,cur)=>acc+cur,0)
@@ -122,7 +122,7 @@ class Demand{
     
         }else if(name == 'master' && unit == 90){
             return Object.keys(object)
-            .filter(key=> key =='Special_Chanachur_90_gm' || key =='Special_Chanachur_180_gm' || key =='Jhal_Chanachur_90_gm' || key == 'Jhal_Chanachur_180_gm')
+            .filter(key=> key =='Special_Chanachur_120_gm' || key =='Special_Chanachur_180_gm' || key =='Jhal_Chanachur_120_gm' || key == 'Jhal_Chanachur_180_gm')
             .map((key=> object[key]))
             .map(item=> item.master_poly)
             .reduce((acc,cur)=>acc+cur,0)
