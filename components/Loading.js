@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-const Loading = ({isOpen, onOpen, onClose}) => {
+const Loading = ({msg,isOpen, onOpen, onClose}) => {
     const cancelRef = React.useRef()
     return (
         <>
@@ -21,7 +21,7 @@ const Loading = ({isOpen, onOpen, onClose}) => {
                     <AlertDialogContent>
                         <AlertDialogBody className='flex flex-col justify-center items-center space-y-1'>
                             <Spinner/>
-                            <p>Updating...</p>
+                            <p>{msg}...</p>
                             <p>Please with we are working.</p>
                         </AlertDialogBody>
                     </AlertDialogContent>

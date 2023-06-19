@@ -1,5 +1,19 @@
 import axios from "axios"
 
+export const addProuctRecipe=async(id,product,ingredients,toast,onOpen, onClose)=>{
+  try {
+    onOpen()
+    const res = await axios.post(`/api/recipe/add_recipe?id=${id}`,{product,ingredients})
+    if (res.data.status === 200) {
+      onClose()
+      toast.success('Product Added Successfully')
+    }
+  } catch (error) {
+    onClose()
+    console.log(error)
+  }
+}
+
 export const getRecipe=async(id,setData)=>{
     try {
       const res = await axios.get(`/api/recipe/${id}`)

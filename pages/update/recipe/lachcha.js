@@ -138,7 +138,7 @@ export default function AddProduct({products}){
                         </div>}
                 </div>
             </div>
-            <Loading {...{isOpen, onOpen, onClose}}/>
+            <Loading {...{msg:'Updating',isOpen, onOpen, onClose}}/>
         </div>
     )
 }

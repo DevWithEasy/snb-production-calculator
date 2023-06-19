@@ -18,7 +18,7 @@ export async function getServerSideProps(){
             products : res.data.data || []
         }
     }
-  }
+}
 
 export default function AddProduct({products}){
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -253,7 +253,7 @@ export default function AddProduct({products}){
                         </div>}
                 </div>
             </div>
-            <Loading {...{isOpen, onOpen, onClose}}/>
+            <Loading {...{msg:'Updating',isOpen, onOpen, onClose}}/>
         </div>
     )
 }

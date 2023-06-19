@@ -1,27 +1,25 @@
-import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore";
+import { useDisclosure } from "@chakra-ui/react";
+import axios from "axios";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import Loading from "../../components/Loading";
 import ProductInput from "../../components/ProductInput";
 import RmInput from "../../components/RmInput";
-import { db } from "../../database/conncetDB";
+import { addProuctRecipe } from "../../utils/api_utils";
 import handleInput from "../../utils/handleInput";
 
 export async function getServerSideProps(){
-    const q= query(collection(db,'products'),where('section','==', 'Snacks'))
-    const docs = await getDocs(q)
-    const products = [];
-    docs.forEach(data => products.push(data.data()));
-
-    return({
-      props : {
-        products
-      }
-    })
+    const res = await axios.get(`${baseUrl}/api/products/Snacks`)
+    return{
+        props:{
+            products : res.data.data || []
+        }
+    }
 }
 
 export default function AddLachcha({products}){
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const [product,setProduct] = useState({
         id : '',
         version :'',
@@ -81,12 +79,6 @@ export default function AddLachcha({products}){
     });
     const data = products.find(item => item.name == product.name)
 
-    async function addProduct(){
-        if(!data) return toast.error('Select a product name.')
-        await setDoc(doc(db,'products_info',data.id),{...product,id:data.id})
-        await setDoc(doc(db,'products_recipe',data.id),ingredients)
-        toast.success('Product Added Successfully')
-    }
     return(
         <div className="add_product">
             <Head>
@@ -297,9 +289,10 @@ export default function AddLachcha({products}){
                             
                             <RmInput name={'BBQ'} ingredient={'bbq'} ingredients={ingredients} setIngredients={setIngredients}/>
                         </div>
-                        <button onClick={()=>addProduct()}>Add Product</button>
+                        <button onClick={()=>addProuctRecipe(data.id,product,ingredients,toast,onOpen, onClose)}>Add Product</button>
                 </div>
             </div>
+            <Loading {...{msg:'Addeding',isOpen, onOpen, onClose}}/>
         </div>
     )
 }
