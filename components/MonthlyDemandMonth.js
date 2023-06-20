@@ -8,7 +8,7 @@ const MonthlyDemandMonth = ({section}) => {
             <p>Section : {section} , Month : {date.getMonth()}</p>
             <p>
                 <span className='text-red-500 font-bold'>Note : </span>
-                Calcultate ditional 20% from production demand.
+                Calcultate aditional 20% from production demand.
             </p>
         </div>
     );
