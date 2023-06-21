@@ -81,7 +81,7 @@ export default function Raw({products}) {
             {/*===================== short info area ===================*/}
             <div className='pb-2'>
               <h3 className='text-center p-1 font-bold bg-gray-500 text-white print:mx-2'>Information</h3>
-              <div className='print:grid grid-cols-2 gap-x-8 print:text-sm'>
+              <div className='print:grid grid-cols-2 gap-x-8 print:text-sm print:px-2'>
                 <Info text='Version' value={version} unit=''/>
                 <Info text='Packet Weight' value={packetWeight} unit='gm'/>
                 <Info text='Packet Per Carton' value={packetPerCarton}q unit='Packet'/>
