@@ -13,7 +13,7 @@ export default function Admin({}){
                 <p>You are not allowed to</p>
             </div>
         )
-    }else if(!user){
+    }else if(!user.name){
         return router.push('/')
     }else{
         return <DashBoard/>
