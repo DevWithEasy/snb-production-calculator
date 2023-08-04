@@ -144,6 +144,10 @@ export default function Raw({products}) {
 
                   <RmView name='Cocoa Powder 4011' ingredient={product?.ingredients?.cocoaPowder_4011}/>
 
+                  <RmView name='Coconut Powder' ingredient={product?.ingredients?.coconutPowder}/>
+
+                  <RmView name='Coconut Flavour' ingredient={product?.ingredients?.coconutFlavour}/>
+
                   <RmView name='Condenced Milk Flavour' ingredient={product?.ingredients?.condencedMilkFlavour}/>
 
                   <RmView name='Dalda Hard PUSTI' ingredient={product?.ingredients?.daldaHardPUSTI}/>

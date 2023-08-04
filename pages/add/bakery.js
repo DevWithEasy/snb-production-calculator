@@ -50,6 +50,8 @@ export default function AddLachcha({products}){
         chocolateFlavourSYMRISE : 0,
         chocolatePaste : 0,
         cocoaPowder_4011 : 0,
+        coconutPowder : 0,
+        coconutFlavour : 0,
         condencedMilkFlavour : 0,
         daldaHardPUSTI : 0,
         daldaSoftHILSA : 0,
@@ -185,6 +187,10 @@ export default function AddLachcha({products}){
                             <RmInput name={'Chocolate Paste'} ingredient={'chocolatePaste'} ingredients={ingredients} setIngredients={setIngredients}/>
 
                             <RmInput name={'Cocoa Powder 4011'} ingredient={'cocoaPowder_4011'} ingredients={ingredients} setIngredients={setIngredients}/>
+
+                            <RmInput name={'Coconut Powder'} ingredient={'coconutPowder'} ingredients={ingredients} setIngredients={setIngredients}/>
+
+                            <RmInput name={'Coconut Flavour'} ingredient={'coconutFlavour'} ingredients={ingredients} setIngredients={setIngredients}/>
 
                             <RmInput name={'Condenced Milk Flavour'} ingredient={'condencedMilkFlavour'} ingredients={ingredients} setIngredients={setIngredients}/>
 

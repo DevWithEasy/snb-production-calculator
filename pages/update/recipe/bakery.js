@@ -40,6 +40,8 @@ export default function AddProduct({products}){
         chocolateFlavourSYMRISE,
         chocolatePaste,
         cocoaPowder_4011,
+        coconutPowder,
+        coconutFlavour,
         condencedMilkFlavour,
         daldaHardPUSTI,
         daldaSoftHILSA,
@@ -184,6 +186,10 @@ export default function AddProduct({products}){
                                 <RmUpdate label='Chocolate Paste' name='chocolatePaste' value={chocolatePaste} ingredients={ingredients} setIngredients={setIngredients}/>
 
                                 <RmUpdate label='Cocoa Powder 4011' name='cocoaPowder_4011' value={cocoaPowder_4011} ingredients={ingredients} setIngredients={setIngredients}/>
+
+                                <RmUpdate label='Coconut Powder' name='coconutPowder' value={coconutPowder} ingredients={ingredients} setIngredients={setIngredients}/>
+
+                                <RmUpdate label='Coconut Flavour' name='coconutFlavour' value={coconutFlavour} ingredients={ingredients} setIngredients={setIngredients}/>
 
                                 <RmUpdate label='Condenced Milk Flavour' name='condencedMilkFlavour' value={condencedMilkFlavour} ingredients={ingredients} setIngredients={setIngredients}/>
 
