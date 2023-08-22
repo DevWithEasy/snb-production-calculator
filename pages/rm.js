@@ -5,15 +5,15 @@ import { db } from '../database/conncetDB';
 
 
 export async function getServerSideProps(){
-  const docs = await getDocs(collection(db,'sections'))
-  const sections = [];
-  docs.forEach(data => sections.push(data.data()));
+  // const docs = await getDocs(collection(db,'sections'))
+  // const sections = [];
+  // docs.forEach(data => sections.push(data.data()));
 
-  return({
-    props : {
-      sections
-    }
-  })
+  // return({
+  //   props : {
+  //     sections
+  //   }
+  // })
 }
 
 export default function Raw({sections}) {
@@ -25,23 +25,23 @@ export default function Raw({sections}) {
   const [wastage,setWastage] = useState(0)
 
   async function productList(e){
-      const q= query(collection(db,'products'),where('section','==', e.target.value))
-      const docs = await getDocs(q)
-      const products = [];
-      docs.forEach(data => products.push(data.data()));
-      setProducts(products)
+      // const q= query(collection(db,'products'),where('section','==', e.target.value))
+      // const docs = await getDocs(q)
+      // const products = [];
+      // docs.forEach(data => products.push(data.data()));
+      // setProducts(products)
   }
 
-  useEffect(()=>{
-    async function getRecipe(name){
-        const q= query(collection(db,'recipes'),where('name','==', name))
-        const docs = await getDocs(q)
-        const products = [];
-        docs.forEach(data => products.push(data.data()));
-        setProduct(products[0])
-    }
-    getRecipe(name)
-  },[name])
+  // useEffect(()=>{
+  //   async function getRecipe(name){
+  //       const q= query(collection(db,'recipes'),where('name','==', name))
+  //       const docs = await getDocs(q)
+  //       const products = [];
+  //       docs.forEach(data => products.push(data.data()));
+  //       setProduct(products[0])
+  //   }
+  //   getRecipe(name)
+  // },[name])
 
 
   const total = parseFloat(product?.ingredients?.map((a,i)=>a.quantity).reduce((a,i)=>a+i,0)).toFixed(2);
@@ -56,12 +56,12 @@ export default function Raw({sections}) {
 
   return (
     <div className='raw-consumption'>
-      <Head>
+      {/* <Head>
         <title>RM & PM Calculation</title>
         <meta name="description" content="RM & PM Calculation S&B Nice Food Valley Ltd." />
         <link rel="icon" href="/logo.png" />
-      </Head>
-      <div className='raw'>
+      </Head> */}
+      {/* <div className='raw'>
         <h1 className='py-2 bg-gray-600 text-white text-xl text-center'>Consumption</h1>
           <div className="input">
               <label htmlFor="">Section Name</label>
@@ -147,7 +147,7 @@ export default function Raw({sections}) {
             </div>
 
           </div>}
-      </div>
+      </div> */}
     </div>
   )
 }
