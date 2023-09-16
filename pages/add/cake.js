@@ -36,6 +36,7 @@ export default function AddLachcha({products}){
         vanilinPowder : 0,
         butterOilSubstitute : 0,
         cakeGel : 0,
+        cakeEmulsifier : 0,
         chocolateBrownColour_6059 : 0,
         chocolateFlavourSYMRISE : 0,
         chocolatePaste : 0,
@@ -56,6 +57,7 @@ export default function AddLachcha({products}){
         palmOilSuper : 0,
         tbhq : 0,
         vanilaFlavourFORZONE : 0,
+        vanilaFlavourKH : 0,
         xanthemGum : 0,
         sodiumAcidpyroPhosphet : 0,
         sodiumBiCarbonate : 0,
@@ -136,6 +138,8 @@ export default function AddLachcha({products}){
 
                             <RmInput name={'Cake Gel'} ingredient={'cakeGel'} ingredients={ingredients} setIngredients={setIngredients}/>
 
+                            <RmInput name={'Cake Emulsifier'} ingredient={'cakeEmulsifier'} ingredients={ingredients} setIngredients={setIngredients}/>
+
                             <RmInput name={'Chocolate Brown Colour 6059'} ingredient={'chocolateBrownColour_6059'} ingredients={ingredients} setIngredients={setIngredients}/>
 
                             <RmInput name={'Chocolate Flavour SYMRISE'} ingredient={'chocolateFlavourSYMRISE'} ingredients={ingredients} setIngredients={setIngredients}/>
@@ -175,6 +179,8 @@ export default function AddLachcha({products}){
                             <RmInput name={'TBHQ'} ingredient={'tbhq'} ingredients={ingredients} setIngredients={setIngredients}/>
 
                             <RmInput name={'Vanila Flavour FORZONE'} ingredient={'vanilaFlavourFORZONE'} ingredients={ingredients} setIngredients={setIngredients}/>
+
+                            <RmInput name={'Vanila Flavour KH'} ingredient={'vanilaFlavourKH'} ingredients={ingredients} setIngredients={setIngredients}/>
 
                             <RmInput name={'Xanthem Gum'} ingredient={'xanthemGum'} ingredients={ingredients} setIngredients={setIngredients}/>
 

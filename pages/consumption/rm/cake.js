@@ -1,12 +1,10 @@
-import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import RmViewConsumption from '../../../components/RmViewConsumption';
-import { db } from '../../../database/conncetDB';
-import axios from 'axios';
-import baseUrl from '../../../utils/baseUrl';
 import ProductSelect from '../../../components/ProductSelect';
+import RmViewConsumption from '../../../components/RmViewConsumption';
 import { getRecipe } from '../../../utils/api_utils';
+import baseUrl from '../../../utils/baseUrl';
 
 
 export async function getServerSideProps(){
@@ -57,6 +55,8 @@ export default function Biscuit({products}) {
 
                   <RmViewConsumption name='Cake Gel' ingredient={product?.ingredients?.cakeGel} batch={batch}/>
 
+                  <RmViewConsumption name='Cake Emulsifier' ingredient={product?.ingredients?.cakeEmulsifier} batch={batch}/>
+
                   <RmViewConsumption name='Chocolate Brown Colour 6059' ingredient={product?.ingredients?.chocolateBrownColour_6059} batch={batch}/>
 
                   <RmViewConsumption name='Chocolate Flavour SYMRISE' ingredient={product?.ingredients?.chocolateFlavourSYMRISE} batch={batch}/>
@@ -96,6 +96,8 @@ export default function Biscuit({products}) {
                   <RmViewConsumption name='TBHQ' ingredient={product?.ingredients?.tbhq} batch={batch}/>
 
                   <RmViewConsumption name='Vanila Flavour FORZONE' ingredient={product?.ingredients?.vanilaFlavourFORZONE} batch={batch}/>
+
+                  <RmViewConsumption name='Vanila Flavour KH' ingredient={product?.ingredients?.vanilaFlavourKH} batch={batch}/>
 
                   <RmViewConsumption name='Xanthem Gum' ingredient={product?.ingredients?.xanthemGum} batch={batch}/>
 

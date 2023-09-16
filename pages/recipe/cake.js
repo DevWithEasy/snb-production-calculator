@@ -106,6 +106,8 @@ export default function Raw({products}) {
 
                   <RmView name='Cake Gel' ingredient={product?.ingredients?.cakeGel}/>
 
+                  <RmView name='Cake Emulsifier' ingredient={product?.ingredients?.cakeEmulsifier}/>
+
                   <RmView name='Chocolate Brown Colour 6059' ingredient={product?.ingredients?.chocolateBrownColour_6059}/>
 
                   <RmView name='Chocolate Flavour SYMRISE' ingredient={product?.ingredients?.chocolateFlavourSYMRISE}/>
@@ -145,6 +147,8 @@ export default function Raw({products}) {
                   <RmView name='TBHQ' ingredient={product?.ingredients?.tbhq}/>
 
                   <RmView name='Vanila Flavour FORZONE' ingredient={product?.ingredients?.vanilaFlavourFORZONE}/>
+
+                  <RmView name='Vanila Flavour KH' ingredient={product?.ingredients?.vanilaFlavourKH}/>
 
                   <RmView name='Xanthem Gum' ingredient={product?.ingredients?.xanthemGum}/>
 

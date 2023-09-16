@@ -34,6 +34,7 @@ export default function AddProduct({products}){
         vanilinPowder,
         butterOilSubstitute,
         cakeGel,
+        cakeEmulsifier,
         chocolateBrownColour_6059,
         chocolateFlavourSYMRISE,
         chocolatePaste,
@@ -54,6 +55,7 @@ export default function AddProduct({products}){
         palmOilSuper,
         tbhq,
         vanilaFlavourFORZONE,
+        vanilaFlavourKH,
         xanthemGum,
         sodiumAcidpyroPhosphet,
         sodiumBiCarbonate,
@@ -138,6 +140,8 @@ export default function AddProduct({products}){
 
                                 <RmUpdate label='Cake Gel' name='cakeGel' value={cakeGel} ingredients={ingredients} setIngredients={setIngredients}/>
 
+                                <RmUpdate label='Cake Emulsifier' name='cakeEmulsifier' value={cakeEmulsifier} ingredients={ingredients} setIngredients={setIngredients}/>
+
                                 <RmUpdate label='Chocolate Brown Colour 6059' name='chocolateBrownColour_6059' value={chocolateBrownColour_6059} ingredients={ingredients} setIngredients={setIngredients}/>
 
                                 <RmUpdate label='Chocolate Flavour SYMRISE' name='chocolateFlavourSYMRISE' value={chocolateFlavourSYMRISE} ingredients={ingredients} setIngredients={setIngredients}/>
@@ -177,6 +181,8 @@ export default function AddProduct({products}){
                                 <RmUpdate label='TBHQ' name='tbhq' value={tbhq} ingredients={ingredients} setIngredients={setIngredients}/>
 
                                 <RmUpdate label='Vanila Flavour FORZONE' name='vanilaFlavourFORZONE' value={vanilaFlavourFORZONE} ingredients={ingredients} setIngredients={setIngredients}/>
+
+                                <RmUpdate label='Vanila Flavour KH' name='vanilaFlavourKH' value={vanilaFlavourKH} ingredients={ingredients} setIngredients={setIngredients}/>
 
                                 <RmUpdate label='Xanthem Gum' name='xanthemGum' value={xanthemGum} ingredients={ingredients} setIngredients={setIngredients}/>
 
