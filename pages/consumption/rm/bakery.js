@@ -7,6 +7,11 @@ export default function Biscuit() {
   const [id,setId] = useState('')
   const [product,setProduct] = useState({})
   const [batch,setBatch] = useState(0)
+  const [products,setProducts] = useState([])
+
+  useEffect(()=>{
+    getProducts('Bakery',setProducts)
+  },[])
 
 
   useEffect(()=>{
