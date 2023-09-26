@@ -1,13 +1,15 @@
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import {Info,PrintHeader,ProductSelect,RmView,Heading,Total} from '../../components/Index';
+import { Heading, Info, PrintHeader, ProductSelect, RmView, Total, WaferExcel } from '../../components/Index';
 import { getProducts, getRecipe } from '../../utils/api_utils';
 import Recipe from '../../utils/recipe';
-
+import { useDownloadExcel } from 'react-export-table-to-excel';
+  
 
 export default function Raw() {
   const printRef = useRef()
+  const excelRef = useRef()
   const [id, setId] = useState('')
   const [product, setProduct] = useState({})
   const [products, setProducts] = useState([])
@@ -24,6 +26,12 @@ export default function Raw() {
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
     documentTitle: product?.name + " [Version-" + product?.version + "]"
+  });
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: excelRef.current,
+    filename: `${product?.section} - ${product?.name} [v-${product?.version}]`,
+    sheet: product?.name
   });
 
   const {
@@ -58,7 +66,7 @@ export default function Raw() {
       <div className='raw print:mx-12' ref={printRef}>
         <PrintHeader />
         <div>
-          <Heading {...{ product, handlePrint }} />
+        <Heading {...{product,handlePrint,onDownload}}/>
 
           <div className='space-y-2 py-2 print:space-y-0 print:flex justify-between print:space-x-4 print:p-2 print:text-sm'>
             <ProductSelect {...{ setId, products }} />
@@ -127,6 +135,7 @@ export default function Raw() {
           </div>}
         </div>
       </div>
+      <WaferExcel {...{product,total,totalProcessLoss,output,carton,excelRef}}/>
     </div>
   )
 }
