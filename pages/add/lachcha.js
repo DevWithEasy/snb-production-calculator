@@ -1,8 +1,8 @@
 import { useDisclosure } from "@chakra-ui/react";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import {Loading,ProductInput,RmInput} from "../../components/Index";
+import { Loading, ProductInput, RmInput } from "../../components/Index";
 import { addProuctRecipe, getProducts } from "../../utils/api_utils";
 import handleInput from "../../utils/handleInput";
 
