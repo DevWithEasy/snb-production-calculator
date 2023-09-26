@@ -4,7 +4,9 @@ import baseUrl from "./baseUrl"
 export const getProducts=async(section,setProducts) =>{
   try {
     const res = await axios.get(`${baseUrl}/api/products/${section}`)
-    setProducts(res.data.data)
+    if(res.data.status === 200){
+      setProducts(res.data.data)
+    }
   } catch (error) {
     console.log(error)
   }

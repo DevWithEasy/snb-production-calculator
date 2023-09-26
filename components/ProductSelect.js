@@ -5,7 +5,7 @@ const ProductSelect = ({products,setId}) => {
             <div className="input">
                 <label htmlFor="">Product Name :</label>
                 <select name="name"  onChange={(e)=>setId(e.target.value)}>
-                    <option value="">{products.length > 0 ? 'Select Name' : ''}</option>
+                    <option value="">{products.length > 0 ? 'Select Name' : 'Loading...'}</option>
                         {
                         products.map(product => <option key={product.id} value={product.id}>{product.name}</option>)
                         }
