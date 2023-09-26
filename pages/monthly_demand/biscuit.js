@@ -1,29 +1,13 @@
-import axios from "axios";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
-import PmView from "../../components/PmView";
-import PrintHeader from "../../components/PrintHeader";
-import RmView from "../../components/RmView";
-import TargetCarton from "../../components/TargetCarton";
+import {MonthlyDemandMonth,PmView,PrintHeader,RmView,TargetCarton} from "../../components/Index";
 import useUserStore from "../../features/userStore";
-import baseUrl from "../../utils/baseUrl";
+import { getProducts } from "../../utils/api_utils";
 import Demand from "../../utils/demand";
-import MonthlyDemandMonth from "../../components/MonthlyDemandMonth";
 
-
-
-export async function getServerSideProps(){
-    const res = await axios.get(`${baseUrl}/api/products/Biscuit`)
-    return{
-        props:{
-            products : res.data.data || []
-        }
-    }
-}
-
-
-export default function WaferDemand({ products }) {
+export default function WaferDemand() {
+    const [products, setProducts] = useState([])
     const{demand,resetDemand} = useUserStore()
     const printRef = useRef()
     const handlePrint = useReactToPrint({
@@ -51,6 +35,10 @@ export default function WaferDemand({ products }) {
         Valencia_Orange_Standard,
         Valencia_Orange_Family
     } = pm
+
+    useEffect(() => {
+        getProducts('Biscuit', setProducts)
+    }, [])
 
     useEffect(()=>{
         resetDemand()

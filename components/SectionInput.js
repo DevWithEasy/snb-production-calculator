@@ -1,6 +1,6 @@
 import handleInput from "../utils/handleInput";
 
-export default function ProductInput({label,name,products,product,setProduct}){
+export default function SectionInput({label,name,products,product,setProduct}){
     return(
         <div className="input">
             <label htmlFor={name}>{label}</label>

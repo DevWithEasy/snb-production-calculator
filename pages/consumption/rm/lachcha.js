@@ -1,25 +1,18 @@
-import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import RmViewConsumption from '../../../components/RmViewConsumption';
-import baseUrl from '../../../utils/baseUrl';
-import ProductSelect from '../../../components/ProductSelect';
-import { getRecipe } from '../../../utils/api_utils';
+import {ProductSelect,RmViewConsumption} from '../../../components/Index';
+import { getProducts, getRecipe } from '../../../utils/api_utils';
 
 
-export async function getServerSideProps(){
-  const res = await axios.get(`${baseUrl}/api/products/Lachcha`)
-  return{
-      props:{
-          products : res.data.data || []
-      }
-  }
-}
-
-export default function Biscuit({products}) {
+export default function Biscuit() {
   const [id,setId] = useState('')
   const [product,setProduct] = useState({})
   const [batch,setBatch] = useState(0)
+  const [products,setProducts] = useState([])
+
+  useEffect(()=>{
+    getProducts('Lachcha',setProducts)
+  },[])
 
   useEffect(()=>{
     if(id) getRecipe(id,setProduct)

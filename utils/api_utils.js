@@ -1,4 +1,14 @@
 import axios from "axios"
+import baseUrl from "./baseUrl"
+
+export const getProducts=async(section,setProducts) =>{
+  try {
+    const res = await axios.get(`${baseUrl}/api/products/${section}`)
+    setProducts(res.data.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export const addProuctRecipe=async(id,product,ingredients,toast,onOpen, onClose)=>{
   try {
@@ -54,13 +64,13 @@ export const updateRecipe=async(id,toast,onOpen, onClose,data)=>{
 }
 
 export const updateRecipeWithVersion=async(id,toast,onOpen, onClose,data)=>{
-  const {oldProduct,...others} = data
-  if(oldProduct.version === data.product.version){
+  const {oldRecipe,newRecipe} = data
+  if(oldRecipe?.product.version === newRecipe.product.version){
     return toast.error('Change pevious version first.')
   }
   try {
     onOpen()
-    const res = await axios.post(`/api/recipe/update/with_version?id=${id}`,others)
+    const res = await axios.post(`/api/recipe/update/with_version?id=${id}`,data)
     if (res.data.status === 200) {
       onClose()
       toast.success('Recipe updated successfully')

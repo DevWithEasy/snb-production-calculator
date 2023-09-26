@@ -1,23 +1,8 @@
 import React from 'react';
 import useUserStore from '../../features/userStore';
-import AddUser from './user/AddUser';
-import DeleteUser from './user/DeleteUser';
-import UpdateUser from './user/UpdateUser';
-import {
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-    TableContainer,
-  } from '@chakra-ui/react'
-
+import {AddUser,DeleteUser,UpdateUser} from '../Index';
 const Users = () => {
     const {users,sections} = useUserStore()
-    console.log(users)
     return (
         <div className="">
             <AddUser/>

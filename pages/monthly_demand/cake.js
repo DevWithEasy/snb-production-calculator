@@ -1,29 +1,13 @@
-import axios from "axios";
 import Head from "next/head";
 import { useEffect, useRef } from "react";
 import { useReactToPrint } from 'react-to-print';
-import MonthlyDemandMonth from "../../components/MonthlyDemandMonth";
-import PmView from "../../components/PmView";
-import PrintHeader from "../../components/PrintHeader";
-import RmView from "../../components/RmView";
-import TargetCarton from "../../components/TargetCarton";
+import {MonthlyDemandMonth,PmView,PrintHeader,RmView,TargetCarton} from "../../components/Index";
 import useUserStore from "../../features/userStore";
-import baseUrl from "../../utils/baseUrl";
+import { getProducts } from "../../utils/api_utils";
 import Demand from "../../utils/demand";
 
-
-
-export async function getServerSideProps(){
-    const res = await axios.get(`${baseUrl}/api/products/Cake`)
-    return{
-        props:{
-            products : res.data.data || []
-        }
-    }
-}
-
-
-export default function SnacksDemand({ products }) {
+export default function SnacksDemand() {
+    const [products, setProducts] = useState([])
     const{demand,resetDemand} = useUserStore()
     const printRef = useRef()
     const handlePrint = useReactToPrint({
@@ -43,6 +27,10 @@ export default function SnacksDemand({ products }) {
         Milk_Cake_11_gm_Family,
         Milk_Cake_22_gm_Family
     } = pm
+
+    useEffect(() => {
+        getProducts('Cake', setProducts)
+    }, [])
 
     useEffect(()=>{
         resetDemand()

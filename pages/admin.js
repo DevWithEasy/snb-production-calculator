@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
-import DashBoard from '../components/dashboard/DashBoard';
-import useUserStore from "../features/userStore";
+
 import Image from 'next/image';
-import not_allow from '../public/not_allow.svg'
+import { DashBoard } from '../components/Index';
+import useUserStore from "../features/userStore";
+import not_allow from '../public/not_allow.svg';
 
 
 export default function Admin({}){

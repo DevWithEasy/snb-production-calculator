@@ -1,36 +1,28 @@
-import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { db } from '../../../database/conncetDB';
+import {ProductSelect} from '../../../components/Index';
+import { getProducts, getRecipe } from '../../../utils/api_utils';
 import { totalCarton, totalFoil } from '../../../utils/pmConsumption';
-import axios from 'axios';
-import baseUrl from '../../../utils/baseUrl';
-import ProductSelect from '../../../components/ProductSelect';
-import { getRecipe } from '../../../utils/api_utils';
 
 
-export async function getServerSideProps(){
-  const res = await axios.get(`${baseUrl}/api/products/Cake`)
-  return{
-      props:{
-          products : res.data.data || []
-      }
-  }
-}
-
-export default function PM({products}) {
+export default function PM() {
   const [id,setId] = useState('')
   const [product,setProduct] = useState({})
   const [batch,setBatch] = useState(0)
   const [standardCarton,setStandardCarton] = useState(0)
   const [familyCarton,setFamilyCarton] = useState(0)
   const [wastage,setWastage] = useState(0)
-  const carton = Number(standardCarton)+Number(familyCarton)*3
+  const [products,setProducts] = useState([])
+
+  useEffect(()=>{
+    getProducts('Cake',setProducts)
+  },[])
 
   useEffect(()=>{
     if(id) getRecipe(id,setProduct)
   },[id])
   
+  const carton = Number(standardCarton)+Number(familyCarton)*3
   const totalCartonByBatch = product.ingredients ? totalCarton(product,batch) : 0
   const totalFoilByCarton = product.ingredients && standardCarton ? Number(totalFoil(product,carton))+Number(wastage) : 0
   console.log(product);

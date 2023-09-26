@@ -1,9 +1,8 @@
 import Head from 'next/head';
-import { Toaster } from 'react-hot-toast';
-import Login from '../components/Login';
-import Section from '../components/Section';
-import useUserStore from '../features/userStore';
 import { useRouter } from 'next/router';
+import { Toaster } from 'react-hot-toast';
+import { Login, Section } from "../components/Index";
+import useUserStore from '../features/userStore';
 
 export default function Home() {
   const router = useRouter()

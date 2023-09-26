@@ -1,25 +1,17 @@
-import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import ProductSelect from '../../../components/ProductSelect';
-import RmViewConsumption from '../../../components/RmViewConsumption';
-import { getRecipe } from '../../../utils/api_utils';
-import baseUrl from '../../../utils/baseUrl';
+import {ProductSelect,RmViewConsumption} from '../../../components/Index';
+import { getProducts, getRecipe } from '../../../utils/api_utils';
 
-
-export async function getServerSideProps(){
-  const res = await axios.get(`${baseUrl}/api/products/Cake`)
-  return{
-      props:{
-          products : res.data.data || []
-      }
-  }
-}
-
-export default function Biscuit({products}) {
+export default function Biscuit() {
   const [id,setId] = useState('')
   const [product,setProduct] = useState({})
   const [batch,setBatch] = useState(0)
+  const [products,setProducts] = useState([])
+
+  useEffect(()=>{
+    getProducts('Cake',setProducts)
+  },[])
 
   useEffect(()=>{
     if(id) getRecipe(id,setProduct)
@@ -51,7 +43,7 @@ export default function Biscuit({products}) {
                 <div className='space-y-2'>
                   <RmViewConsumption name='Vanilin Powder' ingredient={product?.ingredients?.vanilinPowder} batch={batch}/>
 
-                  <RmViewConsumption name='butter Oil Substitute' ingredient={product?.ingredients?.butterOilSubstitute} batch={batch}/>
+                  <RmViewConsumption name='Butter Oil Substitute' ingredient={product?.ingredients?.butterOilSubstitute} batch={batch}/>
 
                   <RmViewConsumption name='Cake Gel' ingredient={product?.ingredients?.cakeGel} batch={batch}/>
 

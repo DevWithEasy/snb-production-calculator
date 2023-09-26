@@ -1,32 +1,20 @@
-import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import Info from '../../components/Info';
-import PrintHeader from '../../components/PrintHeader';
-import RmView from '../../components/RmView';
-import { getRecipe } from '../../utils/api_utils';
-import baseUrl from '../../utils/baseUrl';
+import {Info,PrintHeader,ProductSelect,RmView,Heading,Total} from '../../components/Index';
+import { getProducts, getRecipe } from '../../utils/api_utils';
 import Recipe from '../../utils/recipe';
-import ProductSelect from '../../components/ProductSelect';
-import Total from '../../components/recipe/Total';
-import Heading from '../../components/recipe/Heading';
 
 
-
-export async function getServerSideProps(){
-  const res = await axios.get(`${baseUrl}/api/products/Lachcha`)
-  return{
-      props:{
-          products : res.data.data || []
-      }
-  }
-}
-
-export default function Raw({products}) {
+export default function Raw() {
   const printRef = useRef()
   const [id,setId] = useState('')
   const [product,setProduct] = useState({})
+  const [products,setProducts] = useState([])
+
+  useEffect(()=>{
+    getProducts('Lachcha',setProducts)
+  },[])
 
   useEffect(()=>{
     if(id) getRecipe(id,setProduct)

@@ -1,27 +1,20 @@
-import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { getRecipe } from '../../../utils/api_utils';
-import baseUrl from '../../../utils/baseUrl';
+import {ProductSelect} from '../../../components/Index';
+import { getProducts, getRecipe } from '../../../utils/api_utils';
 import { totalCarton, totalFoil, totalMasterPoly } from '../../../utils/pmConsumption';
-import ProductSelect from '../../../components/ProductSelect';
 
-
-export async function getServerSideProps(){
-  const res = await axios.get(`${baseUrl}/api/products/Snacks`)
-  return{
-      props:{
-          products : res.data.data || []
-      }
-  }
-}
-
-export default function PM({products}) {
+export default function PM() {
   const [id,setId] = useState('')
   const [product,setProduct] = useState({})
   const [batch,setBatch] = useState(0)
   const [carton,setCarton] = useState(0)
   const [wastage,setWastage] = useState(0)
+  const [products,setProducts] = useState([])
+
+  useEffect(()=>{
+    getProducts('Snacks',setProducts)
+  },[])
 
   useEffect(()=>{
     if(id) getRecipe(id,setProduct)

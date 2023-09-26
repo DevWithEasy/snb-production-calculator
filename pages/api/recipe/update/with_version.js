@@ -7,12 +7,12 @@ export default async function handler(req,res,next){
     try {
 
         const infoRef = doc(db, "products_info", req.query.id);
-        await updateDoc(infoRef, req.body.product);
+        await updateDoc(infoRef, req.body.newRecipe.product);
 
         const recipeRef = doc(db, "products_recipe", req.query.id);
-        await updateDoc(recipeRef, req.body.ingredients);
+        await updateDoc(recipeRef, req.body.newRecipe.ingredients);
 
-        await setDoc(doc(db,'all_version_recipes',("V"+"_"+req.body.product.version+"_"+req.body.product.id)),{...req.body.product,ingredients : req.body.ingredients,changedAt: Date.now()})
+        await setDoc(doc(db,'all_version_recipes',("V"+"_"+req.body.oldRecipe?.product.version+"_"+req.body.newRecipe.product.id)),{...req.body.oldRecipe.product,ingredients : req.body.oldRecipe.ingredients,changedAt: Date.now()})
 
         res.status(200).json({
             status : 200,
