@@ -37,6 +37,20 @@ export const getRecipe=async(id,setData)=>{
     }
 }
 
+export const getAllRecipe = async (name,setProducts,onOpen, onClose) => {
+  onOpen()
+  try {
+      const res = await axios.get(`/api/recipe/all/${name}`)
+      if (res.data.status === 200) {
+          onClose()
+          setProducts(res.data.data)
+      }
+  } catch (error) {
+      onClose()
+      console.log(error)
+  }
+}
+
 export const getUpdateRecipe=async(id,setProduct,setIngredient,setOldProduct,setOldIngredient)=>{
   try {
     const res = await axios.get(`/api/recipe/update/find?id=${id}`)

@@ -18,6 +18,9 @@ import Section from "./Section"
 import SectionInput from "./SectionInput"
 import TargetCarton from "./TargetCarton"
 import Tr from "./Tr"
+import TrBlank from "./TrBlank"
+import TrInfo from "./TrInfo"
+import TrRaw from "./TrRaw"
 import UpdateIngredientInput from "./UpdateIngredientInput"
 import UpdateInput from "./UpdateInput"
 import UpdateProductInput from "./UpdateProductInput"
@@ -43,4 +46,4 @@ import WaferExcel from "./excel/Wafer"
 import Heading from "./recipe/Heading"
 import Total from "./recipe/Total"
 
-export { AddProduct, AddSection, AddUser, AdminDrawer, BakeryExcel, BiscuitExcel, CakeExcel, DashBoard, DeleteProduct, DeleteUser, Header, Heading, Info, Ingredient, IngredientInput, Ingredientpacking, LachchaExcel, Loading, Login, MonthlyDemandMonth, PmView, PrintHeader, ProductInput, ProductSelect, Products, Recipe, RmInput, RmUpdate, RmView, RmViewConsumption, Section, SectionInput, SnacksExcel, Summary, TargetCarton, Total, Tr, UpdateIngredientInput, UpdateInput, UpdateProduct, UpdateProductInput, UpdateUser, Users, WaferExcel }
+export { AddProduct, AddSection, AddUser, AdminDrawer, BakeryExcel, BiscuitExcel, CakeExcel, DashBoard, DeleteProduct, DeleteUser, Header, Heading, Info, Ingredient, IngredientInput, Ingredientpacking, LachchaExcel, Loading, Login, MonthlyDemandMonth, PmView, PrintHeader, ProductInput, ProductSelect, Products, Recipe, RmInput, RmUpdate, RmView, RmViewConsumption, Section, SectionInput, SnacksExcel, Summary, TargetCarton, Total, Tr, TrBlank, TrInfo, TrRaw, UpdateIngredientInput, UpdateInput, UpdateProduct, UpdateProductInput, UpdateUser, Users, WaferExcel }
