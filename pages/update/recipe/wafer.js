@@ -2,10 +2,11 @@ import { useDisclosure } from "@chakra-ui/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import toast from 'react-hot-toast';
-import {Loading,ProductSelect,RmUpdate,UpdateInput} from "../../../components/Index";
+import {Loading,LoginChecked,ProductSelect,RmUpdate,UpdateInput} from "../../../components/Index";
 import { getProducts, getUpdateRecipe, updateRecipe, updateRecipeWithVersion } from "../../../utils/api_utils";
 
 export default function UpdateProduct() {
+    const {user} = useUserStore()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [products, setProducts] = useState([])
     const [id, setId] = useState('')
@@ -173,6 +174,7 @@ export default function UpdateProduct() {
                 </div>
             </div>
             <Loading {...{ msg: 'Updating', isOpen, onOpen, onClose }} />
+            {!user.name && <LoginChecked/>}
         </div>
     )
 }

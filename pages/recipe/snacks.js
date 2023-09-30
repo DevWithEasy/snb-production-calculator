@@ -1,13 +1,15 @@
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import {Info,PrintHeader,ProductSelect,RmView,Heading,Total, SnacksExcel} from '../../components/Index';
+import {Info,PrintHeader,ProductSelect,RmView,Heading,Total, SnacksExcel, LoginChecked} from '../../components/Index';
 import { getProducts, getRecipe } from '../../utils/api_utils';
 import Recipe from '../../utils/recipe';
 import { useDownloadExcel } from 'react-export-table-to-excel';
+import useUserStore from '../../features/userStore';
 
 
 export default function Raw() {
+  const {user} = useUserStore()
   const printRef = useRef()
   const excelRef = useRef()
   const [id,setId] = useState('')
@@ -296,6 +298,7 @@ export default function Raw() {
         </div>
       </div>
       <SnacksExcel {...{product,total,totalProcessLoss,output,carton,excelRef}}/>
+      {!user.name && <LoginChecked/>}
     </div>
   )
 }

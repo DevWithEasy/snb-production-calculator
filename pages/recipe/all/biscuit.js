@@ -1,12 +1,11 @@
-import axios from 'axios';
+import { useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDownloadExcel } from 'react-export-table-to-excel';
 import { AiOutlineFileExcel, AiOutlinePrinter } from 'react-icons/ai';
 import { useReactToPrint } from 'react-to-print';
 import { Loading, TrBlank, TrInfo, TrRaw } from '../../../components/Index';
+import { getAllRecipe } from '../../../utils/api_utils';
 import ExcelReport from '../../../utils/excelReport';
-import { useDisclosure } from '@chakra-ui/react';
-import { getAllRecipe } from '../../../utils/api_utils'
 
 const BiscuitAllRecipe = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -52,7 +51,7 @@ const BiscuitAllRecipe = () => {
                         className=''
                     >
                         <tr
-                            className='bg-gray-100 font-semibold'
+                            className='bg-gray-100 font-semibold sticky top-0'
                         >
                             <td
                                 className='p-2 border w-[250px] print:w-[250px]'
@@ -100,7 +99,7 @@ const BiscuitAllRecipe = () => {
                         }} />
 
                         <TrRaw {...{
-                            name: 'Butter Flavour SK',
+                            name: 'Butter Flavour Asia',
                             unit: 'Kg',
                             query: 'butterFlavourSK',
                             report
@@ -134,12 +133,12 @@ const BiscuitAllRecipe = () => {
                             report
                         }} />
 
-                        <TrRaw {...{
+                        {/* <TrRaw {...{
                             name: 'Aspertem',
                             unit: 'Kg',
                             query: 'aspertem',
                             report
-                        }} />
+                        }} /> */}
 
                         <TrRaw {...{
                             name: 'Chocolate Flavour KH',

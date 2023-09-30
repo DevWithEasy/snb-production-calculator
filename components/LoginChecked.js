@@ -1,13 +1,11 @@
-import { Spinner } from "@chakra-ui/react"
-import axios from "axios"
-import { useRouter } from "next/router"
-import { useState } from "react"
-import { toast } from "react-hot-toast"
-import useUserStore from "../features/userStore"
+import React, { useState } from 'react';
+import useUserStore from '../features/userStore';
+import { Spinner } from '@chakra-ui/react';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
-export default function Login() {
+const LoginChecked = () => {
     const { loged, adminData } = useUserStore()
-    const router = useRouter()
     const [hide, setHide] = useState(false)
     const [type, setType] = useState("password")
     const [username, setUsername] = useState('')
@@ -37,7 +35,6 @@ export default function Login() {
             }
             if (res.data.data.user.section == 'Admin') {
                 adminData(res.data.data)
-                return router.push('/admin')
             }
         } catch (error) {
             setLoading(false)
@@ -45,10 +42,12 @@ export default function Login() {
         }
 
     }
-
     return (
-        <div className="flex justify-center items-center ">
-            <div className="relative bg-white rounded-md p-4 space-y-2">
+        <div
+            className='fixed left-0 top-0 h-screen w-full flex justify-center items-center bg-slate-500/50 z-10'
+        >
+            <div className="w-full mx-2 md:mx-0 md:w-1/2 flex justify-center items-center">
+            <div className="w-full relative bg-white rounded-md p-4 space-y-2">
                 <div className="space-y-2">
                     <label className="w-full pl-1">Username :</label>
                     <input className="w-full border p-2  rounded-md focus:outline-none focus:ring-2" type="email" name="" onChange={(e) => setUsername(e.target.value)} />
@@ -79,5 +78,8 @@ export default function Login() {
                 </div>
             </div>
         </div>
-    )
-}
+        </div>
+    );
+};
+
+export default LoginChecked;
