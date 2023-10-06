@@ -84,7 +84,7 @@ export default function UpdateProduct() {
     return (
         <div className="add_product">
             <Head>
-                <title>Lachcha Add Product</title>
+                <title>Lachcha update Product</title>
                 <meta name="description" content="Lachcha Add Product" />
                 <link rel="icon" href="/logo.png" />
             </Head>

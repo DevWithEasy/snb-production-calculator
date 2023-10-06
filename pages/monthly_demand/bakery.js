@@ -8,7 +8,7 @@ import Demand from "../../utils/demand";
 
 export default function SnacksDemand() {
     const [products, setProducts] = useState([])
-    const {user, demand, resetDemand } = useUserStore()
+    const { user, demand, resetDemand } = useUserStore()
     const printRef = useRef()
     const handlePrint = useReactToPrint({
         content: () => printRef.current,
@@ -24,7 +24,8 @@ export default function SnacksDemand() {
         Dry_Cake_Family,
         Special_Toast,
         Milk_Cookies,
-        Chocolate_Cookies
+        Chocolate_Cookies,
+        Coconut_Cookies
     } = pm
 
     useEffect(() => {
@@ -36,7 +37,7 @@ export default function SnacksDemand() {
     }, [resetDemand])
 
     return (
-        <div ref={printRef} className="relative mt-2 p-2 mx-4 print:mx-10 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none pb-10">
+        <div ref={printRef} className="relative mt-2 p-2 mx-4 print:mx-10 space-y-2 border rounded-md print:shadow-none print:border-none print:rounded-none pb-10">
             <Head>
                 <title>Bakery Demand</title>
                 <link rel="icon" href="/logo.png" />
@@ -66,6 +67,10 @@ export default function SnacksDemand() {
                     <RmView name='Chocolate Paste' ingredient={rm?.chocolatePaste} />
 
                     <RmView name='Cocoa Powder 4011' ingredient={rm?.cocoaPowder_4011} />
+
+                    <RmView name='Cocoanut Powder' ingredient={rm?.coconutPowder} />
+
+                    <RmView name='Coconut Flavour Aroma' ingredient={rm?.coconutFlavour} />
 
                     <RmView name='Condenced Milk Flavour' ingredient={rm?.condencedMilkFlavour} />
 
@@ -127,6 +132,9 @@ export default function SnacksDemand() {
                     <PmView name='F.Time Butter Cookies 750gm Carton' unit='Pcs' pm={Butter_Cookies?.carton} />
                     <PmView name='F.Time Milk Cookies Pouch' unit='' pm={Milk_Cookies?.wrapper} />
                     <PmView name='F.Time Milk Cookies Carton' unit='Pcs' pm={Milk_Cookies?.carton} />
+                    <PmView name='Coconut Cookies Pouch' unit='' pm={Coconut_Cookies?.wrapper} />
+                    <PmView name='Coconut Cookies Carton' unit='Pcs' pm={Coconut_Cookies?.carton} />
+                    <PmView name='Coconut Glassine Paper' unit='Pcs' pm={Coconut_Cookies?.glassinePaper} />
                     <PmView name='Cutting paper' unit='' pm={Butter_Cookies?.paper} />
                     <PmView name='Inner Poly 6"x8"' unit='' pm={Butter_Cookies?.inner_poly} />
                     <PmView name='Gum Tape 3/4"' unit='Pcs' pm={result.getTotalPmItem(pm, 'gumTap1')} />

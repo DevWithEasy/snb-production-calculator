@@ -37,9 +37,9 @@ export default function SnacksDemand() {
     }, [resetDemand])
 
     return (
-        <div ref={printRef} className="mt-2 p-2 mx-4 print:mx-10 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
+        <div ref={printRef} className="mt-2 p-2 mx-4 print:mx-10 space-y-2 border rounded-md print:shadow-none print:border-none print:rounded-none">
             <Head>
-                <title>Biscuit Demand</title>
+                <title>Cake Demand</title>
                 <link rel="icon" href="/logo.png" />
             </Head>
             <PrintHeader />

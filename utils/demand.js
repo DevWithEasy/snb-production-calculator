@@ -332,15 +332,12 @@ class Demand {
         }
     }
 
-    getGhee_flavour = (qty) => {
-        const product = this.demand.find(product => product.id == "Lachcha_Semai_500gm")
-        if (!product) {
-            return 0
+    getBakeryGlassinePaper = (product) => {
+        if (product.id == 'Coconut_Cookies') {
+            const paper = product.target * product?.packetPerCarton * 1
+            return Number(paper.toFixed(0))
         } else {
-            const ingredients = this.array_to_Obj(product.ingredients)
-            const { ghee, gheeFlavour, ...others } = ingredients
-            const total = Object.values(others).reduce((total, current) => total + current, 0)
-            return (((total - (total * 10) / 100) / 20) * qty).toFixed(2)
+            return 0
         }
     }
 
@@ -454,6 +451,7 @@ class Demand {
                     const jar_qty = dProduct.id == 'Butter_Cookies' ? this.totalTrayByTargetCarton(dProduct) : 0
                     const inner_poly_qty = this.totalInnerPolyByTargetCarton(dProduct)
                     const paper = this.getBakeryPaper(dProduct)
+                    const glassinePaper = this.getBakeryGlassinePaper(dProduct)
                     const gumTape_qty = this.totalGumTape_2ByTargetCarton(dProduct)
                     const gumTape1_qty = dProduct.id == 'Butter_Cookies' ? this.totalGumTape_1ByTargetCarton(dProduct) : 0
                     data.push({
@@ -465,6 +463,7 @@ class Demand {
                         jar: jar_qty,
                         inner_poly: inner_poly_qty,
                         paper: paper,
+                        glassinePaper: glassinePaper,
                         label: jar_qty,
                         gumTap2: gumTape_qty,
                         gumTap1: gumTape1_qty

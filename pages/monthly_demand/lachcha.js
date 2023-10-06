@@ -28,7 +28,7 @@ export default function LachchaDemand() {
     }, [resetDemand])
 
     return (
-        <div ref={printRef} className="mt-2 p-2 mx-4 print:mx-10 space-y-2 border shadow-lg rounded-md print:shadow-none print:border-none print:rounded-none">
+        <div ref={printRef} className="mt-2 p-2 mx-4 print:mx-10 space-y-2 border rounded-md print:shadow-none print:border-none print:rounded-none">
             <Head>
                 <title>Lachcha Demand</title>
                 <link rel="icon" href="/logo.png" />
@@ -44,8 +44,8 @@ export default function LachchaDemand() {
                     <RmView name='Palm Oil Super' ingredient={rm?.palmOilSuper} />
                     <RmView name='Starch Powder' ingredient={rm?.starchPowder} />
                     <RmView name='Dalda Hard Pusti' ingredient={rm?.daldaHardPUSTI} />
-                    <RmView name='Ghee' ingredient={result.getGhee_flavour(.064)} />
-                    <RmView name='Ghee Flavour' ingredient={result.getGhee_flavour(.016)} />
+                    <RmView name='Ghee' ingredient={rm.ghee} />
+                    <RmView name='Ghee Flavour' ingredient={rm.gheeFlavour} />
                     <RmView name='TBHQ' ingredient={rm?.tbhq} />
                 </div>
                 <div className="w-full md:w-1/2 border border-gray-400 pb-4">
