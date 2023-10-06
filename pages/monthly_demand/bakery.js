@@ -8,7 +8,7 @@ import Demand from "../../utils/demand";
 
 export default function SnacksDemand() {
     const [products, setProducts] = useState([])
-    const { demand, resetDemand } = useUserStore()
+    const {user, demand, resetDemand } = useUserStore()
     const printRef = useRef()
     const handlePrint = useReactToPrint({
         content: () => printRef.current,

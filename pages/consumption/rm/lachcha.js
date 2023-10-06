@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import {ProductSelect,RmViewConsumption} from '../../../components/Index';
+import {LoginChecked, ProductSelect,RmViewConsumption} from '../../../components/Index';
 import { getProducts, getRecipe } from '../../../utils/api_utils';
+import useUserStore from '../../../features/userStore';
 
 
 export default function Biscuit() {
+  const {user} = useUserStore()
   const [id,setId] = useState('')
   const [product,setProduct] = useState({})
   const [batch,setBatch] = useState(0)
@@ -55,6 +57,7 @@ export default function Biscuit() {
             </div>
           </div>}
       </div>
+      {!user.name && <LoginChecked />}
     </div>
   )
 }

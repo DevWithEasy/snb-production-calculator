@@ -2,11 +2,13 @@ import { useDisclosure } from "@chakra-ui/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Loading, ProductInput, RmInput } from "../../components/Index";
+import { Loading, LoginChecked, ProductInput, RmInput } from "../../components/Index";
 import { addProuctRecipe, getProducts } from "../../utils/api_utils";
 import handleInput from "../../utils/handleInput";
+import useUserStore from "../../features/userStore";
 
 export default function AddSnacks() {
+    const {user} = useUserStore()
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [products, setProducts] = useState([])
     const [product, setProduct] = useState({
@@ -286,6 +288,7 @@ export default function AddSnacks() {
                 </div>
             </div>
             <Loading {...{ msg: 'Addeding', isOpen, onOpen, onClose }} />
+            {!user.name && <LoginChecked />}
         </div>
     )
 }

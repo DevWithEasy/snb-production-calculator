@@ -1,14 +1,14 @@
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from 'react-to-print';
-import {MonthlyDemandMonth,PmView,PrintHeader,RmView,TargetCarton} from "../../components/Index";
+import {LoginChecked, MonthlyDemandMonth,PmView,PrintHeader,RmView,TargetCarton} from "../../components/Index";
 import useUserStore from "../../features/userStore";
 import { getProducts } from "../../utils/api_utils";
 import Demand from "../../utils/demand";
 
 export default function SnacksDemand() {
     const [products, setProducts] = useState([])
-    const{demand,resetDemand} = useUserStore()
+    const{user,demand,resetDemand} = useUserStore()
     const printRef = useRef()
     const handlePrint = useReactToPrint({
         content: () => printRef.current,
@@ -141,7 +141,7 @@ export default function SnacksDemand() {
                 <PmView name='P.P Handgloves' unit='Pcs' pm='500'/>
             </div>
         </div>
-
+        {!user.name && <LoginChecked />}
     </div>
         )
 }

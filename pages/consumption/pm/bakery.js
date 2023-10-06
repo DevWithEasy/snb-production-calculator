@@ -1,11 +1,13 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import {ProductSelect} from '../../../components/Index';
+import {LoginChecked, ProductSelect} from '../../../components/Index';
 import { getProducts, getRecipe } from '../../../utils/api_utils';
 import { totalCarton, totalFoil, totalMasterPoly } from '../../../utils/pmConsumption';
+import useUserStore from '../../../features/userStore';
 
 
 export default function PM() {
+  const {user} = useUserStore()
   const [id,setId] = useState('')
   const [product,setProduct] = useState({})
   const [batch,setBatch] = useState(0)
@@ -83,6 +85,7 @@ export default function PM() {
             </div>
           </div>}
       </div>
+      {!user.name && <LoginChecked />}
     </div>
   )
 }
