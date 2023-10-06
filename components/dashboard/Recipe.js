@@ -14,7 +14,7 @@ const Recipe = () => {
             setActive(0)
             toast.success('View Mode Active')
         }
-        if (type == "update/recipe") {
+        if (type == "recipe/update") {
             setAction(type);
             setActive(1)
             toast.success('Update Mode Active')
