@@ -6,6 +6,7 @@ const userStore = (set)=>({
     users : [],
     sections : [],
     products : [],
+    cashEntries : [],
     active : 0,
     addDemand : (data) =>{
         set((state)=>({
@@ -91,6 +92,16 @@ const userStore = (set)=>({
     loged : (userData) =>{
         set((state)=>({
             user : userData
+        }))
+    },
+    addEntries : (data) =>{
+        set((state)=>({
+            cashEntries : data
+        }))
+    },
+    newEntries : (entry)=>{
+        set((state)=>({
+            cashEntries : [entry,...state.cashEntries]
         }))
     },
     logout : () =>{
