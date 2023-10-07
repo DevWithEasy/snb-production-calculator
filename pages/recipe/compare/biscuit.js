@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ComparePmView, CompareRmView, ProductSelect, ProductSelectOld } from '../../../components/Index';
+import { ComparePmView, CompareRmView, LoginChecked, ProductSelect, ProductSelectOld } from '../../../components/Index';
 import useUserStore from '../../../features/userStore';
 import { getOldProduct, getOldProducts, getProducts, getRecipe } from '../../../utils/api_utils';
 import Head from 'next/head';
@@ -26,7 +26,7 @@ const BiscuitCompare = () => {
     useEffect(() => {
         if (oldID) getOldProduct(oldID, setOldProduct)
     }, [oldID])
-    console.log(oldProduct?.ingredients)
+
     return (
         <div className='p-4'>
             <div
@@ -306,6 +306,7 @@ const BiscuitCompare = () => {
 
             </div>
         </div>
+        {!user.name && <LoginChecked/>}
         </div>
     );
 };

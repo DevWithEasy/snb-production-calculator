@@ -18,7 +18,7 @@ export default function Home() {
         <meta name="description" content="S&B Nice Food Valley Ltd." />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <div className='w-full mx-4 md:w-1/2 p-2 mt-10 border rounded-md shadow-lg space-y-2'>
+      <div className='w-full mx-4 md:w-1/2 p-2 mt-10 border rounded-md space-y-2'>
         {user.username ? <Section {...user}/> : <Login/>}
       </div>
       <Toaster/>
