@@ -11,6 +11,7 @@ import PmView from "./PmView"
 import PrintHeader from "./PrintHeader"
 import ProductInput from "./ProductInput"
 import ProductSelect from "./ProductSelect"
+import ProductSelectOld from "./ProductSelectOld"
 import RmInput from "./RmInput"
 import RmUpdate from "./RmUpdate"
 import RmView from "./RmView"
@@ -25,6 +26,8 @@ import TrRaw from "./TrRaw"
 import UpdateIngredientInput from "./UpdateIngredientInput"
 import UpdateInput from "./UpdateInput"
 import UpdateProductInput from "./UpdateProductInput"
+import ComparePmView from "./compare/ComparePmView"
+import CompareRmView from "./compare/CompareRmView"
 import AddSection from "./dashboard/AddSection"
 import AdminDrawer from "./dashboard/AdminDrawer"
 import DashBoard from "./dashboard/DashBoard"
@@ -47,5 +50,5 @@ import WaferExcel from "./excel/Wafer"
 import Heading from "./recipe/Heading"
 import Total from "./recipe/Total"
 
-export { AddProduct, AddSection, AddUser, AdminDrawer, BakeryExcel, BiscuitExcel, CakeExcel, DashBoard, DeleteProduct, DeleteUser, Header, Heading, Info, Ingredient, IngredientInput, Ingredientpacking, LachchaExcel, Loading, Login, LoginChecked, MonthlyDemandMonth, PmView, PrintHeader, ProductInput, ProductSelect, Products, Recipe, RmInput, RmUpdate, RmView, RmViewConsumption, Section, SectionInput, SnacksExcel, Summary, TargetCarton, Total, Tr, TrBlank, TrInfo, TrRaw, UpdateIngredientInput, UpdateInput, UpdateProduct, UpdateProductInput, UpdateUser, Users, WaferExcel }
+export { AddProduct, AddSection, AddUser, AdminDrawer, BakeryExcel, BiscuitExcel, CakeExcel, ComparePmView, CompareRmView, DashBoard, DeleteProduct, DeleteUser, Header, Heading, Info, Ingredient, IngredientInput, Ingredientpacking, LachchaExcel, Loading, Login, LoginChecked, MonthlyDemandMonth, PmView, PrintHeader, ProductInput, ProductSelect, ProductSelectOld, Products, Recipe, RmInput, RmUpdate, RmView, RmViewConsumption, Section, SectionInput, SnacksExcel, Summary, TargetCarton, Total, Tr, TrBlank, TrInfo, TrRaw, UpdateIngredientInput, UpdateInput, UpdateProduct, UpdateProductInput, UpdateUser, Users, WaferExcel }
 

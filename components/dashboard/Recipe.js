@@ -1,7 +1,7 @@
 import { Link } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { AiFillEdit, AiFillFileMarkdown, AiOutlineFileExcel, AiOutlineUnorderedList } from 'react-icons/ai';
+import { AiFillEdit, AiFillFileMarkdown, AiOutlineFileExcel, AiOutlineUnorderedList, AiOutlineCopyrightCircle} from 'react-icons/ai';
 import { BiSolidAddToQueue } from 'react-icons/bi';
 import adminUIData from '../../utils/adminUIData';
 
@@ -24,6 +24,11 @@ const Recipe = () => {
             setActive(2)
             toast.success('Recipe Add Mode Active')
         }
+        if (type == "recipe/compare") {
+            setAction(type);
+            setActive(3)
+            toast.success('Compare Mode Active')
+        }
         if (type == "monthly_demand") {
             setAction(type);
             setActive(3)
@@ -40,9 +45,10 @@ const Recipe = () => {
         <div className="">
             <div className="flex justify-center items-center p-2 space-x-4">
                 <AiOutlineUnorderedList size={25} onClick={() => sactionHandler('recipe')} className={active === 0 ? 'bg-gray-500 text-white p-1 rounded' : 'hover:scale-150 transition-all duration-300 hover:bg-gray-500 hover:text-white p-1 rounded'} />
-                <AiFillEdit size={25} onClick={() => sactionHandler('update/recipe')} className={active === 1 ? 'bg-gray-500 text-white p-1 rounded' : 'hover:scale-150 transition-all duration-300 hover:bg-gray-500 hover:text-white p-1 rounded'} />
+                <AiFillEdit size={25} onClick={() => sactionHandler('recipe/update')} className={active === 1 ? 'bg-gray-500 text-white p-1 rounded' : 'hover:scale-150 transition-all duration-300 hover:bg-gray-500 hover:text-white p-1 rounded'} />
                 <BiSolidAddToQueue size={25} onClick={() => sactionHandler('add')} className={active === 2 ? 'bg-gray-500 p-1 rounded' : 'hover:scale-150 transition-all duration-300 hover:bg-gray-500 hover:text-white p-1 rounded'} />
                 <AiFillFileMarkdown size={25} onClick={() => sactionHandler('monthly_demand')} className={active === 3 ? 'bg-gray-500 text-white p-1 rounded' : 'hover:scale-150 transition-all duration-300 hover:bg-gray-500 hover:text-white p-1 rounded'} />
+                <AiOutlineCopyrightCircle size={25} onClick={() => sactionHandler('recipe/compare')} className={active === 3 ? 'bg-gray-500 text-white p-1 rounded' : 'hover:scale-150 transition-all duration-300 hover:bg-gray-500 hover:text-white p-1 rounded'} />
                 <AiOutlineFileExcel size={25} onClick={() => sactionHandler('recipe/all')} className={active === 4 ? 'bg-gray-500 text-white p-1 rounded' : 'hover:scale-150 transition-all duration-300 hover:bg-gray-500 hover:text-white p-1 rounded'} />
             </div>
             <div className="mt-2 space-y-2">

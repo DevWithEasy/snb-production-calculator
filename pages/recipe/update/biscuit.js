@@ -2,9 +2,9 @@ import { useDisclosure } from "@chakra-ui/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import {Loading,LoginChecked,ProductSelect,RmUpdate,UpdateInput} from "../../../components/Index";
-import { getProducts, getUpdateRecipe, updateRecipe, updateRecipeWithVersion } from "../../../utils/api_utils";
+import { Loading, LoginChecked, ProductSelect, RmUpdate, UpdateInput } from "../../../components/Index";
 import useUserStore from "../../../features/userStore";
+import { getProducts, getUpdateRecipe, updateRecipe, updateRecipeWithVersion } from "../../../utils/api_utils";
 
 export default function UpdateProduct() {
     const {user} = useUserStore()
@@ -76,7 +76,7 @@ export default function UpdateProduct() {
     return (
         <div className="add_product">
             <Head>
-                <title>Lachcha Add Product</title>
+                <title>Biscuit update Product</title>
                 <meta name="description" content="Lachcha Add Product" />
                 <link rel="icon" href="/logo.png" />
             </Head>

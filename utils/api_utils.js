@@ -1,5 +1,6 @@
 import axios from "axios"
 import baseUrl from "./baseUrl"
+import toast from "react-hot-toast"
 
 export const getProducts=async(section,setProducts) =>{
   try {
@@ -94,5 +95,30 @@ export const updateRecipeWithVersion=async(id,toast,onOpen, onClose,data)=>{
   } catch (error) {
     onClose()
     toast.error('Recipe updated failed.')
+  }
+}
+
+export const getOldProducts=async(id,setProducts) =>{
+  try {
+    const res = await axios.get(`${baseUrl}/api/recipe/compare/all/${id}`)
+    if(res.data.status === 200){
+      setProducts(res.data.data)
+      if(res.data.data.length === 0){
+        toast.error('There was no another version available.')
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getOldProduct=async(id,setProducts) =>{
+  try {
+    const res = await axios.get(`${baseUrl}/api/recipe/compare/${id}`)
+    if(res.data.status === 200){
+      setProducts(res.data.data)
+    }
+  } catch (error) {
+    console.log(error)
   }
 }
