@@ -1,11 +1,14 @@
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../database/conncetDB";
 
+
 export default async function handler(req,res,next){
     try {
-        const cashRef = doc(db,'cash',req.body._id)
+        
+        const id = req.body._id
+        const cashQuery = doc(db,'cash',id.toString())
 
-        await setDoc(cashRef,req.body)
+        await setDoc(cashQuery,req.body)
 
         res.status(200).json({
             status : 200,

@@ -1,18 +1,18 @@
-//api end point '/api/add_user'
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../../database/conncetDB";
 
-import { deleteDoc, doc, getDoc } from "firebase/firestore";
-import { db } from "../../../../database/conncetDB";
 
 export default async function handler(req,res,next){
     try {
-        const cashQuery = doc(db, "cash", req.query.id)
-
-        await deleteDoc(cashQuery)
+        const cashQuery = collection(db,'cash')
+        const docs = await getDocs(cashQuery)
+        const cashEntries = []
+        docs.forEach(data => cashEntries.push(data.data()))
 
         res.status(200).json({
             status : 200,
             success : true,
-            data : 'Cash Entry deleted successfully'
+            data : cashEntries
         })
 
     } catch (error) {

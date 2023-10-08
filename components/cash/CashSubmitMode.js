@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import handleInput from '../../utils/handleInput';
+import { createCashEntry } from '../../utils/cash_api_utils';
+import useUserStore from '../../features/userStore';
 
 const CashSubmitMode = ({ type, setType }) => {
+    const { newEntries } = useUserStore()
     const [value, setValue] = useState({
         _id : Date.now(),
         name: '',
         section: '',
         id: '',
-        ammount: '',
+        amount: '',
         type: type,
         date: new Date().toLocaleDateString(),
         time: new Date().toLocaleTimeString()
@@ -23,15 +26,14 @@ const CashSubmitMode = ({ type, setType }) => {
             type: type,
         })
     }
-
     return (
         <div
-            className={`w-full h-screen fixed top-0 left-0 z-10 flex justify-center items-center ${type === 'cash-in' ? 'bg-green-500/20' : 'bg-red-500/20'}`}
+            className={`w-full h-screen fixed top-0 left-0 z-10 flex justify-center items-center ${type === 'cash_in' ? 'bg-green-500/20' : 'bg-red-500/20'}`}
         >
             <div
                 className='w-1/2 space-y-2 bg-white rounded-md'
             >
-                <h2 className={`text-sm font-bold p-2 text-white text-center rounded-t-md ${type === 'cash-in' ? 'bg-green-500' : 'bg-red-500'}`}>নতুন এন্ট্রি সাবমিট করুন</h2>
+                <h2 className={`text-sm font-bold p-2 text-white text-center rounded-t-md ${type === 'cash_in' ? 'bg-green-500' : 'bg-red-500'}`}>নতুন এন্ট্রি সাবমিট করুন</h2>
                 <div
                     className='p-2 space-y-2'
                 >
@@ -64,6 +66,7 @@ const CashSubmitMode = ({ type, setType }) => {
                     className='p-2 space-x-2'
                 >
                     <button
+                        onClick={()=>createCashEntry(value,newEntries,handleClose)}
                         className='px-6 py-2 bg-blue-500 text-white rounded-md text-sm'
                     >
                         সাবমিট

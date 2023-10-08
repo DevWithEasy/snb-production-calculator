@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
+import useUserStore from '../../features/userStore';
+import { deleteCashEntry } from '../../utils/cash_api_utils';
 
-const CashDeleteMode = ({data}) => {
-    const [value, setValue] = useState(data)
-
-    const handleClose = (e) => {
-    }
-
+const CashDeleteMode = ({data,setView}) => {
+    const {deleteEntries} = useUserStore()
     return (
         <div
-            className={`w-full h-screen fixed top-0 left-0 z-10 flex justify-center items-center bg-red-500`}
+            className={`w-full h-screen fixed top-0 left-0 z-10 flex justify-center items-center bg-red-500/20`}
         >
             <div
                 className='w-1/2 space-y-2 bg-white rounded-md'
@@ -23,12 +21,13 @@ const CashDeleteMode = ({data}) => {
                     className='p-2 space-x-2'
                 >
                     <button
+                        onClick={()=>deleteCashEntry(data._id,deleteEntries,setView)}
                         className='px-6 py-2 bg-red-500 text-white rounded-md text-sm'
                     >
                         ডিলিট করুন
                     </button>
                     <button
-                        onClick={() => handleClose()}
+                        onClick={() => setView('')}
                         className='px-6 py-2 bg-gray-500 text-white rounded-md text-sm'
                     >
                         বন্ধ করুন

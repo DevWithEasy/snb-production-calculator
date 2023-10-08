@@ -99,9 +99,19 @@ const userStore = (set)=>({
             cashEntries : data
         }))
     },
-    newEntries : (entry)=>{
+    newEntries : (data)=>{
         set((state)=>({
-            cashEntries : [entry,...state.cashEntries]
+            cashEntries : [data,...state.cashEntries]
+        }))
+    },
+    updateEntries : (data)=>{
+        set((state)=>({
+            cashEntries : [data,...state.cashEntries.filter(entry=>entry._id !== data._id)]
+        }))
+    },
+    deleteEntries : (id)=>{
+        set((state)=>({
+            cashEntries : state.cashEntries.filter(entry=> entry._id !== id)
         }))
     },
     logout : () =>{
