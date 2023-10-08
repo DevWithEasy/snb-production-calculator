@@ -73,9 +73,149 @@ const CakeCompare = () => {
                 <div className='w-full p-2'>
                     <h2 className='p-2 mb-2 bg-gray-100 text-center'>Raw materils Info</h2>
                     <CompareRmView {...{
-                        label: '',
-                        current: product?.ingredients?.ammonium,
-                        oldValue: oldProduct?.ingredients?.ammonium
+                        label: 'Vanilin Powder',
+                        current: product?.ingredients?.vanilinPowder,
+                        oldValue: oldProduct?.ingredients?.vanilinPowder
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Butter Oil Substitute',
+                        current: product?.ingredients?.butterOilSubstitute,
+                        oldValue: oldProduct?.ingredients?.butterOilSubstitute
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Cake Gel',
+                        current: product?.ingredients?.cakeGel,
+                        oldValue: oldProduct?.ingredients?.cakeGel
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Cake Emulsifier',
+                        current: product?.ingredients?.cakeEmulsifier,
+                        oldValue: oldProduct?.ingredients?.cakeEmulsifier
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Chocolate Brown Colour 6059',
+                        current: product?.ingredients?.chocolateBrownColour_6059,
+                        oldValue: oldProduct?.ingredients?.chocolateBrownColour_6059
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Chocolate Flavour SYMRISE',
+                        current: product?.ingredients?.chocolateFlavourSYMRISE,
+                        oldValue: oldProduct?.ingredients?.chocolateFlavourSYMRISE
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Chocolate Paste',
+                        current: product?.ingredients?.chocolatePaste,
+                        oldValue: oldProduct?.ingredients?.chocolatePaste
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Citric Acid Mono',
+                        current: product?.ingredients?.citricAcidMono,
+                        oldValue: oldProduct?.ingredients?.citricAcidMono
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Egg',
+                        current: product?.ingredients?.egg,
+                        oldValue: oldProduct?.ingredients?.egg
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Flour Grade B',
+                        current: product?.ingredients?.flourGrade_B,
+                        oldValue: oldProduct?.ingredients?.flourGrade_B
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Flour Grade C',
+                        current: product?.ingredients?.flourGrade_C,
+                        oldValue: oldProduct?.ingredients?.flourGrade_C
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Glycerine',
+                        current: product?.ingredients?.glycerine,
+                        oldValue: oldProduct?.ingredients?.glycerine
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Isopropyl Alcohol',
+                        current: product?.ingredients?.isopropylAlcohol,
+                        oldValue: oldProduct?.ingredients?.isopropylAlcohol
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Milk Flavour King',
+                        current: product?.ingredients?.milkFlavourKing,
+                        oldValue: oldProduct?.ingredients?.milkFlavourKing
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Paraffin Oil',
+                        current: product?.ingredients?.paraffinOil,
+                        oldValue: oldProduct?.ingredients?.paraffinOil
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Potassium Sorbate',
+                        current: product?.ingredients?.potassiumSorbate,
+                        oldValue: oldProduct?.ingredients?.potassiumSorbate
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Super Salt',
+                        current: product?.ingredients?.superSalt,
+                        oldValue: oldProduct?.ingredients?.superSalt
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Skim Milk Powder',
+                        current: product?.ingredients?.skimMilkPowder,
+                        oldValue: oldProduct?.ingredients?.skimMilkPowder
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Sorbitol',
+                        current: product?.ingredients?.sorbitol,
+                        oldValue: oldProduct?.ingredients?.sorbitol
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Soya Lecithine',
+                        current: product?.ingredients?.soyaLecithine,
+                        oldValue: oldProduct?.ingredients?.soyaLecithine
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Sugar',
+                        current: product?.ingredients?.sugar,
+                        oldValue: oldProduct?.ingredients?.sugar
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Palm Oil Super',
+                        current: product?.ingredients?.palmOilSuper,
+                        oldValue: oldProduct?.ingredients?.palmOilSuper
+                    }} />
+                    <CompareRmView {...{
+                        label: 'TBHQ',
+                        current: product?.ingredients?.tbhq,
+                        oldValue: oldProduct?.ingredients?.tbhq
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Vanila Flavour FORZONE',
+                        current: product?.ingredients?.vanilaFlavourFORZONE,
+                        oldValue: oldProduct?.ingredients?.vanilaFlavourFORZONE
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Vanila Flavour KH',
+                        current: product?.ingredients?.vanilaFlavourKH,
+                        oldValue: oldProduct?.ingredients?.vanilaFlavourKH
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Xanthem Gum',
+                        current: product?.ingredients?.xanthemGum,
+                        oldValue: oldProduct?.ingredients?.xanthemGum
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Sodium Acid pyro Phosphet',
+                        current: product?.ingredients?.sodiumAcidpyroPhosphet,
+                        oldValue: oldProduct?.ingredients?.sodiumAcidpyroPhosphet
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Sodium Bi Carbonate',
+                        current: product?.ingredients?.sodiumBiCarbonate,
+                        oldValue: oldProduct?.ingredients?.sodiumBiCarbonate
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Starch Powder',
+                        current: product?.ingredients?.starchPowder,
+                        oldValue: oldProduct?.ingredients?.starchPowder
                     }} />
                 </div>
             </div>

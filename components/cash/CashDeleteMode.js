@@ -9,7 +9,7 @@ const CashDeleteMode = ({data,setView}) => {
             className={`w-full h-screen fixed top-0 left-0 z-10 flex justify-center items-center bg-red-500/20`}
         >
             <div
-                className='w-1/2 space-y-2 bg-white rounded-md'
+                className='mx-2 md:w-1/2 space-y-2 bg-white rounded-md'
             >
                 <h2 className={`text-sm font-bold p-2 text-white text-center rounded-t-md bg-red-500`}>এন্ট্রি ডিলিট ? </h2>
                 <div

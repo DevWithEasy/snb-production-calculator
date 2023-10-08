@@ -65,6 +65,7 @@ const CashList = () => {
                     </div>
                 </div>
             </div>
+            <div className='w-full overflow-auto'>
             <table
                 className='w-full'
             >
@@ -96,7 +97,7 @@ const CashList = () => {
                                 <td className='px-4 py-2'>{entry?.type === 'cash_in' ? 'ক্যাশ ইন' : 'ক্যাশ আউট'}</td>
                                 <td className={`px-4 py-2 font-bold ${entry?.type === 'cash_in' ? 'text-green-600' : 'text-red-600'} print:text-black`}>{entry?.amount}</td>
                                 <td className='px-4 py-2'>{entry?.stock}</td>
-                                <td className='px-4 py-2 group-hover:visible flex items-center space-x-4 invisible'>
+                                <td className='px-4 py-2 group-hover:visible flex items-center justify-center space-x-4 invisible'>
                                     <BiEditAlt
                                         onClick={()=>{setData(entry),setView('update')}}
                                         size={20} className='cursor-pointer hover:text-blue-500'/>
@@ -109,6 +110,7 @@ const CashList = () => {
                     }
                 </tbody>
             </table>
+            </div>
             {view === 'update' && <CashUpdateMode {...{data, setView}} />}
             {view === 'delete' && <CashDeleteMode {...{data, setView}} />}
         </div>

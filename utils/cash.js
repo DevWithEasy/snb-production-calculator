@@ -20,9 +20,10 @@ class Cash{
     }
 
     getEntriesWithBalance(){
+        // console.log(this.entries.sort((a,b)=>a-b))
         let stock =0
         const newEntries = []
-        this.entries.forEach(entry => {
+        this.entries.sort((a,b)=>b-a).forEach(entry => {
 
             if(entry.type === 'cash_in'){
                 stock = stock + entry.amount
@@ -35,7 +36,8 @@ class Cash{
                 stock: stock
             })
         });
-        return newEntries
+        console.log(newEntries)
+        return newEntries.sort((a,b)=>b-a)
     }
 }
 

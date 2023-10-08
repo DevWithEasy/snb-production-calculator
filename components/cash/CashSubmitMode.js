@@ -31,7 +31,7 @@ const CashSubmitMode = ({ type, setType }) => {
             className={`w-full h-screen fixed top-0 left-0 z-10 flex justify-center items-center ${type === 'cash_in' ? 'bg-green-500/20' : 'bg-red-500/20'}`}
         >
             <div
-                className='w-1/2 space-y-2 bg-white rounded-md'
+                className='mx-2 md:w-1/2 space-y-2 bg-white rounded-md'
             >
                 <h2 className={`text-sm font-bold p-2 text-white text-center rounded-t-md ${type === 'cash_in' ? 'bg-green-500' : 'bg-red-500'}`}>নতুন এন্ট্রি সাবমিট করুন</h2>
                 <div

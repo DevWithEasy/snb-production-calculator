@@ -73,9 +73,169 @@ const SnacksCompare = () => {
                 <div className='w-full p-2'>
                     <h2 className='p-2 mb-2 bg-gray-100 text-center'>Raw materils Info</h2>
                     <CompareRmView {...{
-                        label: '',
-                        current: product?.ingredients?.ammonium,
-                        oldValue: oldProduct?.ingredients?.ammonium
+                        label: 'Turmeric',
+                        current: product?.ingredients?.turmeric,
+                        oldValue: oldProduct?.ingredients?.turmeric
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Cinamon',
+                        current: product?.ingredients?.cinamon,
+                        oldValue: oldProduct?.ingredients?.cinamon
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Testing Salt',
+                        current: product?.ingredients?.testingSalt,
+                        oldValue: oldProduct?.ingredients?.testingSalt
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Red Chili',
+                        current: product?.ingredients?.redChili,
+                        oldValue: oldProduct?.ingredients?.redChili
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Nutmug',
+                        current: product?.ingredients?.nutMug,
+                        oldValue: oldProduct?.ingredients?.nutMug
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Cumin',
+                        current: product?.ingredients?.cumin,
+                        oldValue: oldProduct?.ingredients?.cumin
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Black Pepper',
+                        current: product?.ingredients?.blackPepper,
+                        oldValue: oldProduct?.ingredients?.blackPepper
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Clove',
+                        current: product?.ingredients?.clove,
+                        oldValue: oldProduct?.ingredients?.clove
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Cardamon',
+                        current: product?.ingredients?.cardamon,
+                        oldValue: oldProduct?.ingredients?.cardamon
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Cumin Sweet',
+                        current: product?.ingredients?.cuminSweet,
+                        oldValue: oldProduct?.ingredients?.cuminSweet
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Bit Salt',
+                        current: product?.ingredients?.bitSalt,
+                        oldValue: oldProduct?.ingredients?.bitSalt
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Ginger',
+                        current: product?.ingredients?.ginger,
+                        oldValue: oldProduct?.ingredients?.ginger
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Rice Flask',
+                        current: product?.ingredients?.riceFlask,
+                        oldValue: oldProduct?.ingredients?.riceFlask
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Sodium Bi Carbonate',
+                        current: product?.ingredients?.sodiumBiCarbonate,
+                        oldValue: oldProduct?.ingredients?.sodiumBiCarbonate
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Raw Peanut',
+                        current: product?.ingredients?.rawPeanut,
+                        oldValue: oldProduct?.ingredients?.rawPeanut
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Lentil',
+                        current: product?.ingredients?.lentil,
+                        oldValue: oldProduct?.ingredients?.lentil
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Salt Super',
+                        current: product?.ingredients?.saltSuper,
+                        oldValue: oldProduct?.ingredients?.saltSuper
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Palm Oil Super',
+                        current: product?.ingredients?.palmOilSuper,
+                        oldValue: oldProduct?.ingredients?.palmOilSuper
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Anchor Dal',
+                        current: product?.ingredients?.anchorDal,
+                        oldValue: oldProduct?.ingredients?.anchorDal
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Pea',
+                        current: product?.ingredients?.pea,
+                        oldValue: oldProduct?.ingredients?.pea
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Skim Milk Powder',
+                        current: product?.ingredients?.skimMilkPowder,
+                        oldValue: oldProduct?.ingredients?.skimMilkPowder
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Sugar',
+                        current: product?.ingredients?.sugar,
+                        oldValue: oldProduct?.ingredients?.sugar
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Citric Acid Ano',
+                        current: product?.ingredients?.citricAcidAno,
+                        oldValue: oldProduct?.ingredients?.citricAcidAno
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Mug Dal',
+                        current: product?.ingredients?.mugDal,
+                        oldValue: oldProduct?.ingredients?.mugDal
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Apple Green Colour',
+                        current: product?.ingredients?.appleGreenColour,
+                        oldValue: oldProduct?.ingredients?.appleGreenColour
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Aapioca Starch',
+                        current: product?.ingredients?.tapiocaStarch,
+                        oldValue: oldProduct?.ingredients?.tapiocaStarch
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Onion Powder',
+                        current: product?.ingredients?.onionPowder,
+                        oldValue: oldProduct?.ingredients?.onionPowder
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Garlic Powder',
+                        current: product?.ingredients?.garlicPowder,
+                        oldValue: oldProduct?.ingredients?.garlicPowder
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Jwain Masala',
+                        current: product?.ingredients?.jwainMasala,
+                        oldValue: oldProduct?.ingredients?.jwainMasala
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Rice Atop',
+                        current: product?.ingredients?.riceAtop,
+                        oldValue: oldProduct?.ingredients?.riceAtop
+                    }} />
+                    <CompareRmView {...{
+                        label: 'Lemon Yellow Colour',
+                        current: product?.ingredients?.lemonYellowColour,
+                        oldValue: oldProduct?.ingredients?.lemonYellowColour
+                    }} />
+                    <CompareRmView {...{
+                        label: 'TBHQ',
+                        current: product?.ingredients?.tbhq,
+                        oldValue: oldProduct?.ingredients?.tbhq
+                    }} />
+                    <CompareRmView {...{
+                        label: 'BBQ',
+                        current: product?.ingredients?.bbq,
+                        oldValue: oldProduct?.ingredients?.bbq
                     }} />
                 </div>
             </div>
