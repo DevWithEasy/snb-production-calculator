@@ -16,7 +16,7 @@ const CompareRmView = ({ label, current, oldValue }) => {
                             {oldValue}
                         </span>
                         <span className='block w-4/12 text-center'>
-                            {current && oldValue && current - oldValue}
+                            {current && oldValue && (current - oldValue).toFixed(2)}
                         </span>
                     </p>
                 </div>
