@@ -87,7 +87,7 @@ class Demand {
 
     getTotalPmItem = (object, name) => {
         const result = Object.keys(object).map(key => object[key])
-        return result.map(item => item[name]).reduce((acc, cur) => acc + cur, 0)
+        return result.map(item => item[name]).reduce((acc, cur) => acc + cur, 0).toFixed(2)
     }
 
     getTotalInnerMaster = (object, name, unit) => {

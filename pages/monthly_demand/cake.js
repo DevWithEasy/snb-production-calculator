@@ -96,6 +96,8 @@ export default function SnacksDemand() {
 
                     <RmView name='Vanila Flavour FORZONE' ingredient={rm?.vanilaFlavourFORZONE} />
 
+                    <RmView name='Vanila Flavour KH' ingredient={rm?.vanilaFlavourKH} />
+
                     <RmView name='Xanthem Gum' ingredient={rm?.xanthemGum} />
 
                     <RmView name='Sodium Acid pyro Phosphet' ingredient={rm?.sodiumAcidpyroPhosphet} />
