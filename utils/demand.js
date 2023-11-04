@@ -138,6 +138,7 @@ class Demand {
                 .map((key => object[key]))
                 .map(item => item.wrapper)
                 .reduce((acc, cur) => acc + cur, 0)
+                .toFixed(2)
 
         } else if (name == 'chocolate') {
             return Object.keys(object)
@@ -145,6 +146,7 @@ class Demand {
                 .map((key => object[key]))
                 .map(item => item.wrapper)
                 .reduce((acc, cur) => acc + cur, 0)
+                .toFixed(2)
 
         } else if (name == 'milk11') {
             return Object.keys(object)
@@ -152,6 +154,7 @@ class Demand {
                 .map((key => object[key]))
                 .map(item => item.wrapper)
                 .reduce((acc, cur) => acc + cur, 0)
+                .toFixed(2)
 
         } else if (name == 'milk22') {
             return Object.keys(object)
@@ -159,6 +162,7 @@ class Demand {
                 .map((key => object[key]))
                 .map(item => item.wrapper)
                 .reduce((acc, cur) => acc + cur, 0)
+                .toFixed(2)
 
         } else if (name == 'lexus') {
             return Object.keys(object)
@@ -166,6 +170,7 @@ class Demand {
                 .map((key => object[key]))
                 .map(item => item.wrapper)
                 .reduce((acc, cur) => acc + cur, 0)
+                .toFixed(2)
 
         } else if (name == 'cookies') {
             return Object.keys(object)
@@ -173,6 +178,7 @@ class Demand {
                 .map((key => object[key]))
                 .map(item => item.tray)
                 .reduce((acc, cur) => acc + cur, 0)
+                .toFixed(2)
 
         } else if (name == 'dryCake') {
             return Object.keys(object)
@@ -180,7 +186,7 @@ class Demand {
                 .map((key => object[key]))
                 .map(item => item.paper)
                 .reduce((acc, cur) => acc + cur, 0)
-
+                .toFixed(2)
         }
     }
 
