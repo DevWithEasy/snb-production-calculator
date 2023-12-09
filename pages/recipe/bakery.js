@@ -59,7 +59,7 @@ export default function Raw() {
   let carton
   if(output) carton = recipe.totalCarton()
 
-
+  
   return (
     <div className='raw-consumption'>
       <Head>
