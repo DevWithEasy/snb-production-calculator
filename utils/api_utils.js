@@ -73,6 +73,7 @@ export const updateRecipe=async(id,toast,onOpen, onClose,data)=>{
     if (res.data.status === 200) {
       onClose()
       toast.success('Recipe updated successfully')
+      window.location.reload()
     }
   } catch (error) {
     onClose()
