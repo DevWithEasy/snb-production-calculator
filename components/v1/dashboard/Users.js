@@ -1,6 +1,6 @@
 import React from 'react';
-import useUserStore from '../../../features/userStore';
 import { AddUser, DeleteUser, UpdateUser } from '../Index';
+import useUserStore from '../../../features/userStore';
 const Users = () => {
     const {users,sections} = useUserStore()
     return (

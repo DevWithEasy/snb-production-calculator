@@ -11,8 +11,8 @@ import {
 import axios from 'axios'
 import { useRef } from 'react'
 import { AiOutlineDelete } from 'react-icons/ai'
-import useUserStore from '../../../../features/userStore'
 import { toast } from 'react-hot-toast'
+import useUserStore from '../../../../features/userStore'
 
 export default function DeleteProduct({ product }) {
   const { removeAdminData } = useUserStore()

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useUserStore from '../../../features/userStore';
-import { updateCashEntry } from '../../../utils/v1/cash_api_utils';
 import handleInput from '../../../utils/v1/handleInput';
+import { updateCashEntry } from '../../../utils/v1/cash_api_utils';
 
 const CashUpdateMode = ({data,setView}) => {
     const {updateEntries} = useUserStore()
