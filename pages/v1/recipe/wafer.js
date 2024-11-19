@@ -4,8 +4,8 @@ import { useDownloadExcel } from 'react-export-table-to-excel';
 import { useReactToPrint } from 'react-to-print';
 import { Heading, Info, LoginChecked, PrintHeader, ProductSelect, RmView, Total, WaferExcel } from '../../../components/v1/Index';
 import useUserStore from '../../../features/userStore';
-import { getProducts, getRecipe } from '../../../utils/api_utils';
-import Recipe from '../../../utils/recipe';
+import { getProducts, getRecipe } from '../../../utils/v1/api_utils';
+import Recipe from '../../../utils/v1/recipe';
   
 
 export default function Raw() {

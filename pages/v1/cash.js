@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CashList from '../../components/v1/cash/CashList';
 import CashSubmitMode from '../../components/v1/cash/CashSubmitMode';
 import useUserStore from '../../features/userStore';
-import { getAllCashEntries } from '../../utils/cash_api_utils';
+import { getAllCashEntries } from '../../utils/v1/cash_api_utils';
 
 const Cash = () => {
     const [type,setType] = useState('')
