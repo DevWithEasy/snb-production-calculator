@@ -1,27 +1,43 @@
-import Head from 'next/head';
+import Image from 'next/image'
+import React, { useEffect } from 'react'
+import logo from '../public/logo.png'
+import { ImSpinner2 } from "react-icons/im";
 import { useRouter } from 'next/router';
-import { Toaster } from 'react-hot-toast';
-import { Login, Section } from "../components/Index";
-import useUserStore from '../features/userStore';
+import appStore from '../features/appStore';
 
-export default function Home() {
-  const router = useRouter()
-  const {user} = useUserStore()
-  if(user.section == 'Admin'){
-    router.push('/admin')
-  }
+export default function Index() {
+    const router = useRouter()
+    const {user,loading} = appStore()
+    useEffect(()=>{
+        if(user.section){
+            router.push('/v2/'+user.section.toLowerCase())
+        }else{
+            setTimeout(()=>{
+                router.push('/v2/login')
+            },2000)
+        }
+    },[])
+    return (
+        <div
+            className='h-screen flex flex-col justify-center items-center'
+        >
+            <div
+            className='relative flex flex-col items-center'
+            >
+                <Image
+                alt='logo'
+                src={logo}
+                height={60}
+                width={80}
+            />
+            <p
+                className='font-bold hidden md:block'
+            >
+                S&B Nice Food Valley Ltd.
+            </p>
+            <ImSpinner2 size={260} className="absolute -top-24 md:-top-16 w-40 md:w-80 size-6 animate-spin text-gray-200"/>
+            </div>
 
-  return (
-    <div className='index flex justify-center'>
-      <Head>
-        <title>S&B Nice Food Valley Ltd.</title>
-        <meta name="description" content="S&B Nice Food Valley Ltd." />
-        <link rel="icon" href="/logo.png" />
-      </Head>
-      <div className='w-full mx-4 md:w-1/2 p-2 mt-10 border rounded-md space-y-2'>
-        {user.username ? <Section {...user}/> : <Login/>}
-      </div>
-      <Toaster/>
-    </div>
-  )
+        </div>
+    )
 }
