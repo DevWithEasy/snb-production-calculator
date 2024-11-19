@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import {LoginChecked, ProductSelect} from '../../../components/Index';
-import { getProducts, getRecipe } from '../../../utils/api_utils';
-import totalInnerFoil, { totalCarton, totalFoil } from '../../../utils/pmConsumption';
-import useUserStore from '../../../features/userStore';
+import {LoginChecked, ProductSelect} from '../../../../components/v1/Index';
+import { getProducts, getRecipe } from '../../../../utils/v1/api_utils';
+import totalInnerFoil, { totalCarton, totalFoil } from '../../../../utils/v1/pmConsumption';
+import useUserStore from '../../../../features/userStore';
 
 
 export default function PM() {

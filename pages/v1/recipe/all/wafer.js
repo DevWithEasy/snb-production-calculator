@@ -3,10 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDownloadExcel } from 'react-export-table-to-excel';
 import { AiOutlineFileExcel, AiOutlinePrinter } from 'react-icons/ai';
 import { useReactToPrint } from 'react-to-print';
-import { Loading, TrBlank, TrInfo, TrRaw } from '../../../components/Index';
-import ExcelReport from '../../../utils/excelReport';
+import { Loading, TrBlank, TrInfo, TrRaw } from '../../../../components/v1/Index';
+import ExcelReport from '../../../../utils/v1/excelReport';
 import { useDisclosure } from '@chakra-ui/react';
-import { getAllRecipe } from '../../../utils/api_utils';
+import { getAllRecipe } from '../../../../utils/v1/api_utils';
 
 const WaferAllRecipe = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()

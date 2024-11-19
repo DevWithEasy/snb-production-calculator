@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from 'react-to-print';
-import { MonthlyDemandMonth, PmView, PrintHeader, RmView, TargetCarton } from "../../components/Index";
-import useUserStore from "../../features/userStore";
-import { getProducts } from "../../utils/api_utils";
-import Demand from "../../utils/demand";
+import { MonthlyDemandMonth, PmView, PrintHeader, RmView, TargetCarton } from "../../../components/v1/Index";
+import { getProducts } from "../../../utils/v1/api_utils";
+import Demand from "../../../utils/v1/demand";
+import useUserStore from "../../../features/userStore";
 
 export default function SnacksDemand() {
     const [products, setProducts] = useState([])

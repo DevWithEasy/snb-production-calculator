@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-
 export async function getServerSideProps(){
   // const docs = await getDocs(collection(db,'sections'))
   // const sections = [];

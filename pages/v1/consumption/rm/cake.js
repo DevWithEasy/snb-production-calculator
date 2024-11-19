@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import {LoginChecked, ProductSelect,RmViewConsumption} from '../../../components/Index';
-import { getProducts, getRecipe } from '../../../utils/api_utils';
-import useUserStore from '../../../features/userStore';
+import {LoginChecked, ProductSelect,RmViewConsumption} from '../../../../components/v1/Index';
+import { getProducts, getRecipe } from '../../../../utils/v1/api_utils';
+import useUserStore from '../../../../features/userStore';
 
 export default function Biscuit() {
   const {user} = useUserStore()

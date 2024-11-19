@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import {Info,PrintHeader,ProductSelect,RmView,Heading,Total, LachchaExcel, LoginChecked} from '../../components/Index';
-import { getProducts, getRecipe } from '../../utils/api_utils';
-import Recipe from '../../utils/recipe';
+import {Info,PrintHeader,ProductSelect,RmView,Heading,Total, LachchaExcel, LoginChecked} from '../../../components/v1/Index';
+import { getProducts, getRecipe } from '../../../utils/v1/api_utils';
+import Recipe from '../../../utils/v1/recipe';
 import { useDownloadExcel } from 'react-export-table-to-excel';
-import useUserStore from '../../features/userStore';
+import useUserStore from '../../../features/userStore';
 
 export default function Raw() {
   const {user} = useUserStore()

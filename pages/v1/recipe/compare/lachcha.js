@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { ComparePmView, CompareRmView, LoginChecked, ProductSelect, ProductSelectOld } from '../../../components/Index';
-import useUserStore from '../../../features/userStore';
-import { getOldProduct, getOldProducts, getProducts, getRecipe } from '../../../utils/api_utils';
+import { ComparePmView, CompareRmView, LoginChecked, ProductSelect, ProductSelectOld } from '../../../../components/v1/Index';
+import useUserStore from '../../../../features/userStore';
+import { getOldProduct, getOldProducts, getProducts, getRecipe } from '../../../../utils/v1/api_utils';
 import Head from 'next/head';
 
 const LachchaCompare = () => {

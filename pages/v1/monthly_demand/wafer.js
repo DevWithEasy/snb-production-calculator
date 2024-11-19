@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from 'react-to-print';
 import { LoginChecked, MonthlyDemandMonth, PmView, PrintHeader, RmView, TargetCarton } from "../../../components/v1/Index";
 import useUserStore from "../../../features/userStore";
-import { getProducts } from "../../../utils/api_utils";
-import Demand from "../../../utils/demand";
+import { getProducts } from "../../../utils/v1/api_utils";
+import Demand from "../../../utils/v1/demand";
 
 export default function WaferDemand() {
     const [products, setProducts] = useState([])

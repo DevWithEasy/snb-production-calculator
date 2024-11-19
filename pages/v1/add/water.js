@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import ProductInput from "../../../components/v1/ProductInput";
 import RmInput from "../../../components/v1/RmInput";
 import { db } from "../../../database/conncetDB";
-import handleInput from "../../../utils/handleInput";
+import handleInput from "../../../utils/v1/handleInput";
 
 export async function getServerSideProps() {
     const q = query(collection(db, 'products'), where('section', '==', 'Lachcha'))

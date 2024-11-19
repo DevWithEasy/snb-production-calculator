@@ -2,9 +2,9 @@ import { useDisclosure } from "@chakra-ui/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Loading, LoginChecked, ProductSelect, RmUpdate, UpdateInput } from "../../../components/Index";
-import useUserStore from "../../../features/userStore";
-import { getProducts, getUpdateRecipe, updateRecipe, updateRecipeWithVersion } from "../../../utils/api_utils";
+import { Loading, LoginChecked, ProductSelect, RmUpdate, UpdateInput } from "../../../../components/v1/Index";
+import useUserStore from "../../../../features/userStore";
+import { getProducts, getUpdateRecipe, updateRecipe, updateRecipeWithVersion } from "../../../../utils/v1/api_utils";
 
 export default function UpdateProduct() {
     const {user} = useUserStore()

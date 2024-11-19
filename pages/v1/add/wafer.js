@@ -2,10 +2,10 @@ import { useDisclosure } from "@chakra-ui/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import toast from 'react-hot-toast';
-import { Loading, LoginChecked, ProductInput, RmInput } from "../../components/Index";
-import { addProuctRecipe, getProducts } from "../../utils/api_utils";
-import handleInput from "../../utils/handleInput";
-import useUserStore from "../../features/userStore";
+import { Loading, LoginChecked, ProductInput, RmInput } from "../../../components/v1/Index";
+import { addProuctRecipe, getProducts } from "../../../utils/v1/api_utils";
+import handleInput from "../../../utils/v1/handleInput";
+import useUserStore from "../../../features/userStore";
 
 export default function AddWafer() {
     const {user} = useUserStore()
