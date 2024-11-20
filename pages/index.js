@@ -7,7 +7,7 @@ import appStore from '../features/appStore';
 
 export default function Index() {
     const router = useRouter()
-    const {user,loading} = appStore()
+    const { user } = appStore()
     useEffect(()=>{
         if(user.section){
             router.push('/v2/user_area/'+user.section.toLowerCase())
@@ -22,20 +22,20 @@ export default function Index() {
             className='h-screen flex flex-col justify-center items-center'
         >
             <div
-            className='relative flex flex-col items-center'
+                className='relative flex flex-col items-center'
             >
                 <Image
-                alt='logo'
-                src={logo}
-                height={60}
-                width={80}
-            />
-            <p
-                className='font-bold hidden md:block'
-            >
-                S&B Nice Food Valley Ltd.
-            </p>
-            <ImSpinner2 size={260} className="absolute -top-24 md:-top-16 w-40 md:w-80 size-6 animate-spin text-gray-200"/>
+                    alt='logo'
+                    src={logo}
+                    height={60}
+                    width={80}
+                />
+                <p
+                    className='font-bold hidden md:block'
+                >
+                    S&B Nice Food Valley Ltd.
+                </p>
+                <ImSpinner2 size={260} className="absolute -top-24 md:-top-16 w-40 md:w-80 animate-spin text-gray-200" />
             </div>
 
         </div>

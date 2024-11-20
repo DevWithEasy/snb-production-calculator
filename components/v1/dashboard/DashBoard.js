@@ -15,7 +15,7 @@ const DashBoard = () => {
 
     const logoutUser =()=>{
         logout()
-        router.push("/")
+        router.push("/v1")
     }
 
     const actives = ['Dashboard', 'Recipes', 'Users', 'Products']
@@ -27,10 +27,8 @@ const DashBoard = () => {
                 <meta name="description" content="S&B Nice Food Valley Ltd." />
                 <link rel="icon" href="/logo.png" />
             </Head>
-            <h1 className='relative text-center text-2xl border-b'>
-                Admin Dashboard
-                <AdminDrawer/>
-            </h1>
+            
+            <AdminDrawer/>
             
             <div className='md:flex md:justify-between p-2 md:gap-x-4'>
                 <div className='hidden md:block md:w-3/12 space-y-2'>

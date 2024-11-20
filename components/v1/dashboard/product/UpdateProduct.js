@@ -1,14 +1,3 @@
-import {
-    Button,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
-    useDisclosure,
-} from '@chakra-ui/react'
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { AiFillEdit } from 'react-icons/ai'
@@ -17,7 +6,6 @@ import axios from 'axios'
 
 export default function UpdateProduct({product}){
     const {sections,updateAdminData} = useUserStore()
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const [name, setName] =useState(product.name)
 
     async function updateProduct(){
@@ -38,16 +26,8 @@ export default function UpdateProduct({product}){
 
     return (
 
-        <>
-        <AiFillEdit onClick={onOpen} size={25} className="hover:scale-150 transition-all duration-300 hover:bg-green-500 p-1 rounded cursor-pointer hover:text-white"/>
-
-        <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
-        <ModalContent>
-            <ModalHeader>Add new product</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-            <div className="space-y-2">
+        <div>
+                        <div className="space-y-2">
                     <label className="w-full pl-1">Product Name :</label>
                     <input
                         value={name} 
@@ -65,16 +45,11 @@ export default function UpdateProduct({product}){
                             }
                     </select>
                 </div>
-            </ModalBody>
-
-            <ModalFooter>
-            <Button colorScheme='gray' mr={3} onClick={onClose}>
+        <AiFillEdit  size={25} className="hover:scale-150 transition-all duration-300 hover:bg-green-500 p-1 rounded cursor-pointer hover:text-white"/>
+        <button >
                 Close
-            </Button>
-            <Button colorScheme='blue' onClick={()=>updateProduct()}>Submit</Button>
-            </ModalFooter>
-        </ModalContent>
-        </Modal>
-        </>
+            </button>
+            <button onClick={()=>updateProduct()}>Submit</button>
+        </div>
     )
 }

@@ -6,14 +6,16 @@ import toast from "react-hot-toast"
 import logo from '../../public/logo.png'
 import Image from 'next/image'
 import Link from "next/link"
+import { FaCheckCircle } from "react-icons/fa";
 
 export default function Login() {
-    const {setLoading,loading,loged} = appStore()
+    const {loged} = appStore()
     const router = useRouter()
     const [hide, setHide] = useState(false)
     const [type, setType] = useState("password")
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
     function handleHide() {
         if (type === "password") {
             setType("text")
@@ -25,11 +27,11 @@ export default function Login() {
         }
     }
     async function login() {
-        setLoading()
+        setLoading(!loading)
         try {
             const {data} = await axios.get(process.env.NEXT_PUBLIC_API_URL+`?route=login&username=${username}&password=${password}`)
             if(data.sucess){
-                setLoading()
+                setLoading(!loading)
                 toast.success(data.message)
 
                 const user = data.data
@@ -41,10 +43,11 @@ export default function Login() {
                     router.push('/v2/user_area/'+user.section.toLowerCase())
                 }
             }else{
-                setLoading()
+                setLoading(!loading)
                 toast.error(data.message)
             }
         } catch (error) {
+            setLoading(!loading)
             console.log(error)
         }
     }
@@ -52,7 +55,13 @@ export default function Login() {
 
     return (
         <div className="h-screen w-full flex justify-center items-center bg-gray-100">
-            <div className="flex flex-col items-center bg-white rounded-md p-4 space-y-2">
+            <div className="relative flex flex-col items-center bg-white rounded-md p-4 space-y-2">
+                <button
+                    className="absolute top-0 right-0 px-2 py-1 flex items-center space-x-1 bg-green-500 text-white text-sm rounded-tr"
+                >
+                    <FaCheckCircle/>
+                    <span>V.2 (Appscript)</span>
+                </button>
                 <Image
                     alt='logo'
                     src={logo}

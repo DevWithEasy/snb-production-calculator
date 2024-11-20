@@ -8,6 +8,12 @@ const userStore = (set)=>({
     products : [],
     cashEntries : [],
     active : 0,
+    loading : false,
+    setLoading : () =>{
+        set((state)=>({
+            loading : !state.loading,
+        }))
+    },
     addDemand : (data) =>{
         set((state)=>({
             demand : [...state.demand,data]
