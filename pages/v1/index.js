@@ -8,7 +8,7 @@ export default function Home() {
   const router = useRouter()
   const {user} = useUserStore()
   if(user.section == 'Admin'){
-    router.push('/admin')
+    router.push('/v1/admin')
   }
 
   return (

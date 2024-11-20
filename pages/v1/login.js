@@ -32,9 +32,9 @@ export default function Login() {
         if (users[0].password !== password) return toast.error('Wrong Password.')
         loged(users[0])
         if (users[0].username === 'admin') {
-            return router.push('/admin')
+            return router.push('/v1/admin')
         } else {
-            return router.push('/')
+            return router.push('/v1')
         }
 
     }

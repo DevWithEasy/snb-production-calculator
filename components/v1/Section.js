@@ -9,11 +9,11 @@ export default function Section(props){
   const router = useRouter()
 
   if(username === 'Admin'){
-    router.push("/admin")
+    router.push("/v1/admin")
   }
   const logoutUser =()=>{
     logout()
-    router.push("/")
+    router.push("/v1")
   }
     return (
         <div className=''>
@@ -26,16 +26,16 @@ export default function Section(props){
             />
               
           </div>
-          <Link href={`/recipe/${section.toLowerCase()}`}>
+          <Link href={`v1/recipe/${section.toLowerCase()}`}>
             <a className='block p-2 border-b text-blue-500 text-xl'>Recipe</a>
           </Link>
-          <Link href={`/consumption/rm/${section.toLowerCase()}`}>
+          <Link href={`v1/consumption/rm/${section.toLowerCase()}`}>
             <a className='block p-2 border-b text-blue-500 text-xl'>RM Calcutation</a>
           </Link>
-          <Link href={`/consumption/pm/${section.toLowerCase()}`}>
+          <Link href={`v1/consumption/pm/${section.toLowerCase()}`}>
             <a className='block p-2 border-b text-blue-500 text-xl'>PM Calcutation</a>
           </Link>
-          <Link href={`/monthly_demand/${section.toLowerCase()}`}>
+          <Link href={`v1/monthly_demand/${section.toLowerCase()}`}>
             <a className='block p-2 border-b text-blue-500 text-xl'>Monthly Demand</a>
           </Link>
         </div>

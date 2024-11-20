@@ -10,7 +10,7 @@ export default function Index() {
     const {user,loading} = appStore()
     useEffect(()=>{
         if(user.section){
-            router.push('/v2/'+user.section.toLowerCase())
+            router.push('/v2/user_area/'+user.section.toLowerCase())
         }else{
             setTimeout(()=>{
                 router.push('/v2/login')
