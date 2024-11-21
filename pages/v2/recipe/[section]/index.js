@@ -12,37 +12,38 @@ export default function Recipe() {
   const [product, setProduct] = useState('')
   const [recipe, setRecipe] = useState({})
   const getProducts = async (section) => {
-    setLoading(!loading)
+    setLoading(true)
     try {
       const { data } = await axios.get(process.env.NEXT_PUBLIC_API_URL + `?route=products&section=${section}`)
       if (data.success) {
         setProducts(data.data)
-        setLoading(!loading)
+        setLoading(false)
       }
     } catch (error) {
-      setLoading(!loading)
+      setLoading(false)
       console.log(error)
     }
   }
 
   const getRecipe = async (section, name) => {
-    setLoading(!loading)
+    setLoading(true)
     setProduct(name)
     try {
       const { data } = await axios.get(process.env.NEXT_PUBLIC_API_URL + `?route=recipe&section=${section}&name=${name}`)
+      console.log(data)
       if (data.success) {
-        setLoading(!loading)
+        setLoading(false)
         setRecipe(data.data)
       }
     } catch (error) {
-      setLoading(!loading)
+      setLoading(false)
     }
   }
 
   useEffect(() => {
     getProducts(section)
   }, [section])
-
+  console.log(recipe)
   return (
     <div
       className='h-screen overflow-y-auto bg-gray-50'
