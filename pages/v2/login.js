@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import appStore from "../../features/appStore"
 import toast from "react-hot-toast"
@@ -9,7 +9,7 @@ import Link from "next/link"
 import { FaCheckCircle } from "react-icons/fa";
 
 export default function Login() {
-    const {loged} = appStore()
+    const {loged,user} = appStore()
     const router = useRouter()
     const [hide, setHide] = useState(false)
     const [type, setType] = useState("password")
@@ -27,11 +27,11 @@ export default function Login() {
         }
     }
     async function login() {
-        setLoading(!loading)
+        setLoading(true)
         try {
             const {data} = await axios.get(process.env.NEXT_PUBLIC_API_URL+`?route=login&username=${username}&password=${password}`)
             if(data.sucess){
-                setLoading(!loading)
+                setLoading(false)
                 toast.success(data.message)
 
                 const user = data.data
@@ -43,16 +43,23 @@ export default function Login() {
                     router.push('/v2/user_area/'+user.section.toLowerCase())
                 }
             }else{
-                setLoading(!loading)
+                setLoading(false)
                 toast.error(data.message)
             }
         } catch (error) {
-            setLoading(!loading)
+            setLoading(false)
             console.log(error)
         }
     }
 
-
+    useEffect(()=>{
+        if(user) {
+            toast.success('Already loged in.')
+            setTimeout(()=>{
+                router.push('/v2/user_area/'+user.section.toLowerCase())
+            },1000)
+        }
+    },[])
     return (
         <div className="h-screen w-full flex justify-center items-center bg-gray-100">
             <div className="relative flex flex-col items-center bg-white rounded-md p-4 space-y-2">

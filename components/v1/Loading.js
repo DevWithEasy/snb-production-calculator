@@ -1,32 +1,7 @@
-import {
-    AlertDialog,
-    AlertDialogBody,
-    AlertDialogContent,
-    AlertDialogOverlay,
-    Spinner
-} from '@chakra-ui/react';
-import React from 'react';
-
-const Loading = ({msg,isOpen, onOpen, onClose}) => {
-    const cancelRef = React.useRef()
+const Loading = ({msg}) => {
     return (
         <>
-            <AlertDialog
-                isOpen={isOpen}
-                leastDestructiveRef={cancelRef}
-                onClose={onClose}
-                isCentered
-            >
-                <AlertDialogOverlay>
-                    <AlertDialogContent>
-                        <AlertDialogBody className='flex flex-col justify-center items-center space-y-1'>
-                            <Spinner/>
-                            <p>{msg}...</p>
-                            <p>Please with we are working.</p>
-                        </AlertDialogBody>
-                    </AlertDialogContent>
-                </AlertDialogOverlay>
-            </AlertDialog>
+            <p>Please with we are working.</p>
         </>
     );
 };

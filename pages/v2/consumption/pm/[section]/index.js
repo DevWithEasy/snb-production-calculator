@@ -15,6 +15,7 @@ export default function Consumption() {
     const [product, setProduct] = useState('')
     const [batch, setBatch] = useState('')
     const [consumption, setConsumption] = useState({})
+    const [isFamily, setIsFamily] = useState(false)
     const getProducts = async (section) => {
         setLoading(true);
         try {
@@ -48,7 +49,7 @@ export default function Consumption() {
 
     const getConsumption = async () => {
         try {
-            const { data } = await axios.get(process.env.NEXT_PUBLIC_API_URL + `?route=consumption_rm&section=${section}&items=${getItemsString(requests)}`);
+            const { data } = await axios.get(process.env.NEXT_PUBLIC_API_URL + `?route=consumption_pm&section=${section}&items=${getItemsString(requests)}&isFamily=${isFamily}`);
             if (data.success) {
                 setConsumption(data.data)
                 toast.success('Consumption added successfully')
@@ -107,12 +108,26 @@ export default function Consumption() {
                         className="flex items-center justify-between bg-gray-100 p-2 rounded-t-lg"
                     >
                         <p>Select Product & Batch</p>
-                        <button
-                            onClick={getConsumption}
-                            className="bg-gray-500 text-white px-4 py-1 text-sm rounded"
+                        <div
+                            className="space-x-2"
                         >
-                            Submit
-                        </button>
+                            {
+                                section &&
+                                <button
+                                    onClick={() => setIsFamily(!isFamily)}
+                                    className={`${isFamily ? 'bg-green-500' : 'bg-gray-200'} text-white px-4 py-1 text-sm rounded`}
+                                >
+                                    isFamily
+                                </button>
+                            }
+                            <button
+                                onClick={getConsumption}
+                                className="bg-gray-500 text-white px-4 py-1 text-sm rounded"
+                            >
+                                Submit
+                            </button>
+                        </div>
+
                     </div>
                     <div className="p-2 space-y-2">
                         {

@@ -1,5 +1,3 @@
-.index{
-    &>p{
-      @apply text-2xl
-    }
+body{
+  @apply font-default font-light;
 }

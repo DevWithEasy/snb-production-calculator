@@ -14,7 +14,15 @@ export default function Section() {
     }
     return (
         <div>
-            <Link href={`/v2/recipe/${router.query.section}`}>Go Recipe</Link>
+            <Link href={`/v2/recipe/${router.query.section}`}>
+                <p>Recipe</p>
+            </Link>
+            <Link href={`/v2/consumption/rm/${router.query.section}`}>
+                <p>RM Consumption</p>
+            </Link>
+            <Link href={`/v2/consumption/pm/${router.query.section}`}>
+                <p>PM Consumption</p>
+            </Link>
             <button onClick={handleLogout}>Logout</button>
         </div>
     )
