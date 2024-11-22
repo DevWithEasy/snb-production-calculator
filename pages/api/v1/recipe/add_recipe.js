@@ -1,7 +1,7 @@
 //api end point '/api/recipe/add_recipe?id=id'
 
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../../database/conncetDB";
+import { db } from "../../../../database/conncetDB";
 
 export default async function handler(req,res,next){
     try {
