@@ -11,10 +11,6 @@ export default async function handler(req,res,next){
         const ingredient_ref = doc(db,'products_recipe',req.query.id)
         const ingredients = await getDoc(ingredient_ref)
 
-        const recipe_info = product.data()
-        const recipe_ingredients = ingredients.data()
-        console.log()
-
         res.status(200).json({
             status : 200,
             success : true,
