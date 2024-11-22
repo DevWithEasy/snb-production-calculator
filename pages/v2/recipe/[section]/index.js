@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import Loading from '../../../../components/v2/Loading'
 import TableRecipe from '../../../../components/v2/TableRecipe'
+import appscript_api_url from '../../../../utils/v2/appscript_api_url'
+import HeadInfo from '../../../../components/HeadInfo'
 
 export default function Recipe() {
   const router = useRouter()
@@ -14,7 +16,7 @@ export default function Recipe() {
   const getProducts = async (section) => {
     setLoading(true)
     try {
-      const { data } = await axios.get(process.env.NEXT_PUBLIC_API_URL + `?route=products&section=${section}`)
+      const { data } = await axios.get(appscript_api_url + `?route=products&section=${section}`)
       if (data.success) {
         setProducts(data.data)
         setLoading(false)
@@ -29,7 +31,7 @@ export default function Recipe() {
     setLoading(true)
     setProduct(name)
     try {
-      const { data } = await axios.get(process.env.NEXT_PUBLIC_API_URL + `?route=recipe&section=${section}&name=${name}`)
+      const { data } = await axios.get(appscript_api_url + `?route=recipe&section=${section}&name=${name}`)
       console.log(data)
       if (data.success) {
         setLoading(false)
@@ -45,6 +47,8 @@ export default function Recipe() {
   }, [section])
   console.log(recipe)
   return (
+    <>
+    <HeadInfo title={`Recipe - ${section}`}/>
     <div
       className='h-screen overflow-y-auto bg-gray-50'
     >
@@ -108,5 +112,7 @@ export default function Recipe() {
 
       {loading && <Loading />}
     </div>
+    </>
+    
   )
 }

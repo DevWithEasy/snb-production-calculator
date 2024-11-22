@@ -3,16 +3,19 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import appStore from '../../../../features/appStore'
 import toast from 'react-hot-toast'
+import HeadInfo from '../../../../components/HeadInfo'
 
 export default function Section() {
     const router = useRouter()
-    const {logout} = appStore()
+    const {logout,user} = appStore()
     const handleLogout=()=>{
         logout()
         router.push('/')
         toast.success('Logged out successfully')
     }
     return (
+        <>
+        <HeadInfo title={`${user?.name} - ${user?.section}`}/>
         <div>
             <Link href={`/v2/recipe/${router.query.section}`}>
                 <p>Recipe</p>
@@ -25,5 +28,7 @@ export default function Section() {
             </Link>
             <button onClick={handleLogout}>Logout</button>
         </div>
+        </>
+        
     )
 }

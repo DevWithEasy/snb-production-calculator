@@ -1,6 +1,6 @@
-import React from 'react';
+import Head from 'next/head';
 
-const Head = ({title,content}) => {
+const HeadInfo = ({title,content}) => {
     return (
         <Head>
             <title>{title}</title>
@@ -10,4 +10,4 @@ const Head = ({title,content}) => {
     );
 };
 
-export default Head;
+export default HeadInfo;

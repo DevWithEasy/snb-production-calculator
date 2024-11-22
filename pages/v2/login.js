@@ -7,6 +7,8 @@ import logo from '../../public/logo.png'
 import Image from 'next/image'
 import Link from "next/link"
 import { FaCheckCircle } from "react-icons/fa";
+import appscript_api_url from "../../utils/v2/appscript_api_url"
+import HeadInfo from "../../components/HeadInfo"
 
 export default function Login() {
     const {loged,user} = appStore()
@@ -29,7 +31,7 @@ export default function Login() {
     async function login() {
         setLoading(true)
         try {
-            const {data} = await axios.get(process.env.NEXT_PUBLIC_API_URL+`?route=login&username=${username}&password=${password}`)
+            const {data} = await axios.get(appscript_api_url+`?route=login&username=${username}&password=${password}`)
             if(data.sucess){
                 setLoading(false)
                 toast.success(data.message)
@@ -61,7 +63,9 @@ export default function Login() {
         }
     },[router,user])
     return (
-        <div className="h-screen w-full flex justify-center items-center bg-gray-100">
+        <>
+        <HeadInfo title="Login (V.2) - user authentication"/>
+            <div className="h-screen w-full flex justify-center items-center bg-gray-100">
             <div className="relative flex flex-col items-center bg-white rounded-md p-4 space-y-2">
                 <button
                     className="absolute top-0 right-0 px-2 py-1 flex items-center space-x-1 bg-green-500 text-white text-sm rounded-tr"
@@ -105,5 +109,6 @@ export default function Login() {
                 </div>
             </div>
         </div>
+        </>
     )
 }

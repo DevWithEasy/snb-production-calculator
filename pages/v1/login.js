@@ -8,6 +8,7 @@ import useUserStore from "../../features/userStore"
 import logo from '../../public/logo.png'
 import Link from "next/link"
 import { TbCircleXFilled } from "react-icons/tb";
+import HeadInfo from "../../components/HeadInfo"
 
 export default function Login() {
     const { loged,loading,setLoading } = useUserStore()
@@ -55,6 +56,8 @@ export default function Login() {
 
     }
     return (
+        <>
+        <HeadInfo title="Login (V.1) - user authentication"/>
         <div className="h-screen w-full flex justify-center items-center bg-gray-100">
             <div className="relative flex flex-col items-center bg-white rounded-md p-4 space-y-2">
             <button
@@ -100,5 +103,7 @@ export default function Login() {
                 </div>
             </div>
         </div>
+        </>
+        
     )
 }

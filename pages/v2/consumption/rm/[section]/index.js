@@ -5,6 +5,8 @@ import Loading from '../../../../../components/v2/Loading'
 import toast from "react-hot-toast";
 import getItemsString from "../../../../../utils/v2/getItemsString";
 import TableConsumption from "../../../../../components/v2/consumption/TableConsumption";
+import appscript_api_url from "../../../../../utils/v2/appscript_api_url";
+import HeadInfo from "../../../../../components/HeadInfo";
 
 export default function Consumption() {
     const router = useRouter();
@@ -19,7 +21,7 @@ export default function Consumption() {
         setLoading(true);
         try {
             const { data } = await axios.get(
-                process.env.NEXT_PUBLIC_API_URL + `?route=products&section=${section}`
+                appscript_api_url + `?route=products&section=${section}`
             )
             setLoading(false)
             if (data.success) {
@@ -48,7 +50,7 @@ export default function Consumption() {
 
     const getConsumption = async () => {
         try {
-            const { data } = await axios.get(process.env.NEXT_PUBLIC_API_URL + `?route=consumption_rm&section=${section}&items=${getItemsString(requests)}`);
+            const { data } = await axios.get(appscript_api_url + `?route=consumption_rm&section=${section}&items=${getItemsString(requests)}`);
             if (data.success) {
                 setConsumption(data.data)
                 toast.success('Consumption added successfully')
@@ -66,7 +68,9 @@ export default function Consumption() {
 
     // console.log(consumption)
     return (
-        <div className="h-screen bg-gray-50 overflow-y-auto">
+        <>
+        <HeadInfo title={`Consumption(RM) - ${section}`}/>
+            <div className="h-screen bg-gray-50 overflow-y-auto">
             <div
                 className='container md:max-w-3xl md:mx-auto md:px-4 space-y-4'
             >
@@ -146,5 +150,7 @@ export default function Consumption() {
             </div>
             {loading && <Loading />}
         </div>
+        </>
+        
     );
 }
