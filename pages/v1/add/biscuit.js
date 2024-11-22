@@ -1,4 +1,3 @@
-import { useDisclosure } from "@chakra-ui/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -9,7 +8,6 @@ import useUserStore from "../../../features/userStore";
 
 export default function AddBiscuit() {
     const {user} = useUserStore()
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const [products, setProducts] = useState([])
     const [product, setProduct] = useState({
         id: '',

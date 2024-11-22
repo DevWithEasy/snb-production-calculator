@@ -1,15 +1,13 @@
-import { useDisclosure } from "@chakra-ui/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Loading, LoginChecked, ProductInput, RmInput } from "../../../components/v1/Index";
+import useUserStore from "../../../features/userStore";
 import { addProuctRecipe, getProducts } from "../../../utils/v1/api_utils";
 import handleInput from "../../../utils/v1/handleInput";
-import useUserStore from "../../../features/userStore";
 
 export default function AddLachcha() {
     const {user} = useUserStore()
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const [products, setProducts] = useState([])
     const [product, setProduct] = useState({
         id: '',
