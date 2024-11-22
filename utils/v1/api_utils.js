@@ -13,16 +13,14 @@ export const getProducts=async(section,setProducts) =>{
   }
 }
 
-export const addProuctRecipe=async(id,product,ingredients,toast,onOpen, onClose)=>{
+export const addProuctRecipe=async(id,product,ingredients,toast)=>{
   try {
     onOpen()
     const res = await axios.post(`/api/recipe/add_recipe?id=${id}`,{product,ingredients})
     if (res.data.status === 200) {
-      onClose()
       toast.success('Product Added Successfully')
     }
   } catch (error) {
-    onClose()
     console.log(error)
   }
 }
@@ -39,15 +37,12 @@ export const getRecipe=async(id,setData)=>{
 }
 
 export const getAllRecipe = async (name,setProducts) => {
-  onOpen()
   try {
       const res = await axios.get(`/api/recipe/all/${name}`)
       if (res.data.status === 200) {
-          onClose()
           setProducts(res.data.data)
       }
   } catch (error) {
-      onClose()
       console.log(error)
   }
 }
@@ -68,15 +63,12 @@ export const getUpdateRecipe=async(id,setProduct,setIngredient,setOldProduct,set
 
 export const updateRecipe=async(id,toast,data)=>{
   try {
-    onOpen()
     const res = await axios.post(`/api/recipe/update/no_version?id=${id}`,data)
     if (res.data.status === 200) {
-      onClose()
       toast.success('Recipe updated successfully')
       window.location.reload()
     }
   } catch (error) {
-    onClose()
     toast.error('Recipe updated failed.')
   }
 }
@@ -90,11 +82,9 @@ export const updateRecipeWithVersion=async(id,toast,data)=>{
     onOpen()
     const res = await axios.post(`/api/recipe/update/with_version?id=${id}`,data)
     if (res.data.status === 200) {
-      onClose()
       toast.success('Recipe updated successfully')
     }
   } catch (error) {
-    onClose()
     toast.error('Recipe updated failed.')
   }
 }

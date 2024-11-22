@@ -1,12 +1,10 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import ExcelReport from '../../../../utils/v1/excelReport';
-import { AiOutlineFileExcel, AiOutlinePrinter } from 'react-icons/ai';
 import { useDownloadExcel } from 'react-export-table-to-excel';
+import { AiOutlineFileExcel, AiOutlinePrinter } from 'react-icons/ai';
 import { useReactToPrint } from 'react-to-print';
-import { TrRaw, TrBlank, TrInfo, Loading } from '../../../../components/v1/Index';
-import { useDisclosure } from '@chakra-ui/react';
+import { TrBlank, TrInfo, TrRaw } from '../../../../components/v1/Index';
 import { getAllRecipe } from '../../../../utils/v1/api_utils';
+import ExcelReport from '../../../../utils/v1/excelReport';
 
 const LachchaAllRecipe = () => {
     const excelRef = useRef()

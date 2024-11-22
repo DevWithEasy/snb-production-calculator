@@ -53,10 +53,10 @@ export default function Login() {
     }
 
     useEffect(()=>{
-        if(user) {
+        if(user.name) {
             toast.success('Already loged in.')
             setTimeout(()=>{
-                router.push('/v2/user_area/'+user.section.toLowerCase())
+                router.push('/v2/user_area/'+user?.section?.toLowerCase())
             },1000)
         }
     },[router,user])

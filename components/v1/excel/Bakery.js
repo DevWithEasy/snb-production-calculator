@@ -14,183 +14,184 @@ const BakeryExcel = ({ product, total, totalProcessLoss, output, carton, excelRe
 
     return (
         <table ref={excelRef} className='hidden'>
-            <tr>
-                <td></td>
-                <td colSpan={3} style={{ color: 'white', background: '#64748b', border: 'border 1px solid #cbd5e1', textAlign: 'center', fontSize: '18px' }}>Product Information</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td colSpan={2}>Section</td>
-                <td>{section}</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td colSpan={2}>Product Name</td>
-                <td>{name}</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td colSpan={2}>Version</td>
-                <td style={{
-                    textAlign: 'center',
-                }}>{version}</td>
-                <td></td>
-            </tr>
-
-            <Tr {...{
-                title: 'Packet Weight',
-                unit: 'gm',
-                value: packetWeight
-            }} />
-            <Tr {...{
-                title: 'Packet Per Carton',
-                unit: 'Pkt',
-                value: packetPerCarton
-            }} />
-            <Tr {...{
-                title: 'Process Loss',
-                unit: '%',
-                value: processLoss
-            }} />
-            <Tr {...{
-                title: 'Foil Weight',
-                unit: 'gm',
-                value: foilWeight
-            }} />
-            <Tr {...{
-                title: 'Carton Per Batch',
-                unit: 'Ctn',
-                value: total
-            }} />
-            <tr>
-                <td></td>
-                <td colSpan={3}></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td
-                    style={{
-                        background: '#e2e8f0',
-                        border: '0.2px solid #94a3b8'
-                    }}
-                >
-                    Raw Materials Name
-                </td>
-                <td
-                    style={{
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td colSpan={3} style={{ color: 'white', background: '#64748b', border: 'border 1px solid #cbd5e1', textAlign: 'center', fontSize: '18px' }}>Product Information</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colSpan={2}>Section</td>
+                    <td>{section}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colSpan={2}>Product Name</td>
+                    <td>{name}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colSpan={2}>Version</td>
+                    <td style={{
                         textAlign: 'center',
-                        background: '#e2e8f0',
-                        border: '0.2px solid #94a3b8'
-                    }}
-                >
-                    Unit
-                </td>
-                <td
-                    style={{
-                        textAlign: 'center',
-                        background: '#e2e8f0',
-                        border: '0.2px solid #94a3b8'
-                    }}
-                >
-                    Quantity
-                </td>
-                <td></td>
-            </tr>
+                    }}>{version}</td>
+                    <td></td>
+                </tr>
 
-            <Tr title='Ammonium' unit='Kg' value={product?.ingredients?.ammonium} />
+                <Tr {...{
+                    title: 'Packet Weight',
+                    unit: 'gm',
+                    value: packetWeight
+                }} />
+                <Tr {...{
+                    title: 'Packet Per Carton',
+                    unit: 'Pkt',
+                    value: packetPerCarton
+                }} />
+                <Tr {...{
+                    title: 'Process Loss',
+                    unit: '%',
+                    value: processLoss
+                }} />
+                <Tr {...{
+                    title: 'Foil Weight',
+                    unit: 'gm',
+                    value: foilWeight
+                }} />
+                <Tr {...{
+                    title: 'Carton Per Batch',
+                    unit: 'Ctn',
+                    value: total
+                }} />
+                <tr>
+                    <td></td>
+                    <td colSpan={3}></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td> </td>
+                    <td
+                        style={{
+                            background: '#e2e8f0',
+                            border: '0.2px solid #94a3b8'
+                        }}
+                    >
+                        Raw Materials Name
+                    </td>
+                    <td
+                        style={{
+                            textAlign: 'center',
+                            background: '#e2e8f0',
+                            border: '0.2px solid #94a3b8'
+                        }}
+                    >
+                        Unit
+                    </td>
+                    <td
+                        style={{
+                            textAlign: 'center',
+                            background: '#e2e8f0',
+                            border: '0.2px solid #94a3b8'
+                        }}
+                    >
+                        Quantity
+                    </td>
+                    <td></td>
+                </tr>
 
-            <Tr title='Baking Powder' unit='Kg' value={product?.ingredients?.bakingPowder} />
+                <Tr title='Ammonium' unit='Kg' value={product?.ingredients?.ammonium} />
 
-            <Tr title='Black Cumin' unit='Kg' value={product?.ingredients?.blackCumin} />
+                <Tr title='Baking Powder' unit='Kg' value={product?.ingredients?.bakingPowder} />
 
-            <Tr title='Bread Improver' unit='Kg' value={product?.ingredients?.breadImprover} />
+                <Tr title='Black Cumin' unit='Kg' value={product?.ingredients?.blackCumin} />
 
-            <Tr title='Butter Flavour SM' unit='Kg' value={product?.ingredients?.butterFlavourSM} />
+                <Tr title='Bread Improver' unit='Kg' value={product?.ingredients?.breadImprover} />
 
-            <Tr title='Cake Gel' unit='Kg' value={product?.ingredients?.cakeGel} />
+                <Tr title='Butter Flavour SM' unit='Kg' value={product?.ingredients?.butterFlavourSM} />
 
-            <Tr title='Chocolate Chips' unit='Kg' value={product?.ingredients?.chocolateChips} />
+                <Tr title='Cake Gel' unit='Kg' value={product?.ingredients?.cakeGel} />
 
-            <Tr title='Chocolate Flavour SYMRISE' unit='Kg' value={product?.ingredients?.chocolateFlavourSYMRISE} />
+                <Tr title='Chocolate Chips' unit='Kg' value={product?.ingredients?.chocolateChips} />
 
-            <Tr title='Chocolate Paste' unit='Kg' value={product?.ingredients?.chocolatePaste} />
+                <Tr title='Chocolate Flavour SYMRISE' unit='Kg' value={product?.ingredients?.chocolateFlavourSYMRISE} />
 
-            <Tr title='Cocoa Powder 4011' unit='Kg' value={product?.ingredients?.cocoaPowder_4011} />
+                <Tr title='Chocolate Paste' unit='Kg' value={product?.ingredients?.chocolatePaste} />
 
-            <Tr title='Coconut Powder' unit='Kg' value={product?.ingredients?.coconutPowder} />
+                <Tr title='Cocoa Powder 4011' unit='Kg' value={product?.ingredients?.cocoaPowder_4011} />
 
-            <Tr title='Coconut Flavour' unit='Kg' value={product?.ingredients?.coconutFlavour} />
+                <Tr title='Coconut Powder' unit='Kg' value={product?.ingredients?.coconutPowder} />
 
-            <Tr title='Condenced Milk Flavour' unit='Kg' value={product?.ingredients?.condencedMilkFlavour} />
+                <Tr title='Coconut Flavour' unit='Kg' value={product?.ingredients?.coconutFlavour} />
 
-            <Tr title='Dalda Hard PUSTI' unit='Kg' value={product?.ingredients?.daldaHardPUSTI} />
+                <Tr title='Condenced Milk Flavour' unit='Kg' value={product?.ingredients?.condencedMilkFlavour} />
 
-            <Tr title='Dalda Soft HILSA' unit='Kg' value={product?.ingredients?.daldaSoftHILSA} />
+                <Tr title='Dalda Hard PUSTI' unit='Kg' value={product?.ingredients?.daldaHardPUSTI} />
 
-            <Tr title='Egg' unit='Kg' value={product?.ingredients?.egg} />
+                <Tr title='Dalda Soft HILSA' unit='Kg' value={product?.ingredients?.daldaSoftHILSA} />
 
-            <Tr title='Egg Yellow Colour' unit='Kg' value={product?.ingredients?.eggYellowColour} />
+                <Tr title='Egg' unit='Kg' value={product?.ingredients?.egg} />
 
-            <Tr title='Flour A Grade' unit='Kg' value={product?.ingredients?.flourGrade_A} />
+                <Tr title='Egg Yellow Colour' unit='Kg' value={product?.ingredients?.eggYellowColour} />
 
-            <Tr title='Flour B Grade' unit='Kg' value={product?.ingredients?.flourGrade_B} />
+                <Tr title='Flour A Grade' unit='Kg' value={product?.ingredients?.flourGrade_A} />
 
-            <Tr title='Flour C Grade' unit='Kg' value={product?.ingredients?.flourGrade_C} />
+                <Tr title='Flour B Grade' unit='Kg' value={product?.ingredients?.flourGrade_B} />
 
-            <Tr title='Ghee' unit='Kg' value={product?.ingredients?.ghee} />
+                <Tr title='Flour C Grade' unit='Kg' value={product?.ingredients?.flourGrade_C} />
 
-            <Tr title='Ghee Flavour' unit='Kg' value={product?.ingredients?.gheeFlavour} />
+                <Tr title='Ghee' unit='Kg' value={product?.ingredients?.ghee} />
 
-            <Tr title='Glucose Powder' unit='Kg' value={product?.ingredients?.glucosePowder} />
+                <Tr title='Ghee Flavour' unit='Kg' value={product?.ingredients?.gheeFlavour} />
 
-            <Tr title='Lemon Yellow Colour' unit='Kg' value={product?.ingredients?.lemonYellowColour} />
+                <Tr title='Glucose Powder' unit='Kg' value={product?.ingredients?.glucosePowder} />
 
-            <Tr title='Skim Milk Powder' unit='Kg' value={product?.ingredients?.skimMilkPowder} />
+                <Tr title='Lemon Yellow Colour' unit='Kg' value={product?.ingredients?.lemonYellowColour} />
 
-            <Tr title='Milk Flavour KH' unit='Kg' value={product?.ingredients?.milkFlavourKH} />
+                <Tr title='Skim Milk Powder' unit='Kg' value={product?.ingredients?.skimMilkPowder} />
 
-            <Tr title='Mono Saccharine' unit='Kg' value={product?.ingredients?.monoSaccharine} />
+                <Tr title='Milk Flavour KH' unit='Kg' value={product?.ingredients?.milkFlavourKH} />
 
-            <Tr title='Palm Oil Super' unit='Kg' value={product?.ingredients?.palmOilSuper} />
+                <Tr title='Mono Saccharine' unit='Kg' value={product?.ingredients?.monoSaccharine} />
 
-            <Tr title='Super Salt' unit='Kg' value={product?.ingredients?.superSalt} />
+                <Tr title='Palm Oil Super' unit='Kg' value={product?.ingredients?.palmOilSuper} />
 
-            <Tr title='Sodium Acid Pyro Phosphet' unit='Kg' value={product?.ingredients?.sodiumAcidPyroPhosphet} />
+                <Tr title='Super Salt' unit='Kg' value={product?.ingredients?.superSalt} />
 
-            <Tr title='Sodium Bi Carbonate' unit='Kg' value={product?.ingredients?.sodiumBiCarbonate} />
+                <Tr title='Sodium Acid Pyro Phosphet' unit='Kg' value={product?.ingredients?.sodiumAcidPyroPhosphet} />
 
-            <Tr title='Starch Powder' unit='Kg' value={product?.ingredients?.starchPowder} />
+                <Tr title='Sodium Bi Carbonate' unit='Kg' value={product?.ingredients?.sodiumBiCarbonate} />
 
-            <Tr title='Sugar' unit='Kg' value={product?.ingredients?.sugar} />
+                <Tr title='Starch Powder' unit='Kg' value={product?.ingredients?.starchPowder} />
 
-            <Tr title='TBHQ' unit='Kg' value={product?.ingredients?.tbhq} />
+                <Tr title='Sugar' unit='Kg' value={product?.ingredients?.sugar} />
 
-            <Tr title='Vanilin Powder Flavour' unit='Kg' value={product?.ingredients?.vanilinPowderFlavour} />
+                <Tr title='TBHQ' unit='Kg' value={product?.ingredients?.tbhq} />
 
-            <Tr title='Xanthem Gum' unit='Kg' value={product?.ingredients?.xanthemGum} />
+                <Tr title='Vanilin Powder Flavour' unit='Kg' value={product?.ingredients?.vanilinPowderFlavour} />
 
-            <Tr title='Yeast' unit='Kg' value={product?.ingredients?.yeast} />
+                <Tr title='Xanthem Gum' unit='Kg' value={product?.ingredients?.xanthemGum} />
 
-            <Tr {...{
-                title: 'Total',
-                unit: '',
-                value: total
-            }} />
-            <Tr {...{
-                title: 'Process Loss',
-                unit: '',
-                value: totalProcessLoss
-            }} />
-            <Tr {...{
-                title: 'Output',
-                unit: '',
-                value: output
-            }} />
+                <Tr title='Yeast' unit='Kg' value={product?.ingredients?.yeast} />
 
+                <Tr {...{
+                    title: 'Total',
+                    unit: '',
+                    value: total
+                }} />
+                <Tr {...{
+                    title: 'Process Loss',
+                    unit: '',
+                    value: totalProcessLoss
+                }} />
+                <Tr {...{
+                    title: 'Output',
+                    unit: '',
+                    value: output
+                }} />
+            </tbody>
         </table>
     );
 };

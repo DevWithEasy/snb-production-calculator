@@ -172,7 +172,6 @@ export default function UpdateProduct() {
                     </div>}
                 </div>
             </div>
-            <Loading {...{ msg: 'Updating', isOpen, onOpen, onClose }} />
             {!user.name && <LoginChecked/>}
         </div>
     )

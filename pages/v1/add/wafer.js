@@ -127,7 +127,6 @@ export default function AddWafer() {
                     <button onClick={() => addProuctRecipe(data.id, product, ingredients, toast, onOpen, onClose)}>Add Product</button>
                 </div>
             </div>
-            <Loading {...{ msg: 'Addeding', isOpen, onOpen, onClose }} />
             {!user.name && <LoginChecked />}
         </div>
     )
