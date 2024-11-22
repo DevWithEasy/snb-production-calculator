@@ -49,14 +49,17 @@ export default function Consumption() {
     }
 
     const getConsumption = async () => {
+        setLoading(true)
         try {
             const { data } = await axios.get(`/api/v2/consumption/pm?section=${section}&items=${getItemsString(requests)}&isFamily=${isFamily}`);
             if (data.success) {
+                setLoading(false)
                 setConsumption(data.data)
                 toast.success('Consumption added successfully')
                 setRequest([])
             }
         } catch (error) {
+            setLoading(false)
             console.log(error);
         }
     }
@@ -69,102 +72,110 @@ export default function Consumption() {
     // console.log(consumption)
     return (
         <>
-        <HeadInfo title={`Consumption(PM) - ${section}`}/>
-           <div className="h-screen bg-gray-50 overflow-y-auto">
+            <HeadInfo title={`Consumption(PM) - ${section}`} />
             <div
-                className='container md:max-w-3xl md:mx-auto md:px-4 space-y-4'
-            >
-                <div>
-                    <div className="flex">
-                        <div
-                            className="flex w-full"
-                        >
-                            <select
-                                value={product}
-                                onChange={(e) => setProduct(e.target.value)}
-                                className='w-full p-2 border-l border-t border-b rounded-l'
+                    className='space-y-4'
+                >
+                    <div>
+                        <div className="flex">
+                            <div
+                                className="flex w-full"
                             >
-                                <option value="">Select a product</option>
-                                {products.length > 0 &&
-                                    products.map((product) => (
-                                        <option key={product.name} value={product.name}>{product.name}</option>
-                                    ))}
-                            </select>
-                            <input
-                                value={batch}
-                                onChange={(e) => setBatch(e.target.value)}
-                                placeholder={section === 'choclate' ? 'Carton' : 'Batch'}
-                                className='w-[150px] p-2 border'
-                            />
-                        </div>
-
-                        <button
-                            onClick={addRequest}
-                            className="w-[100px] px-6 bg-gray-100 border-r border-t border-b rounded-r hover:bg-gray-200"
-                        >
-                            Add
-                        </button>
-                    </div>
-                </div>
-                <div className="bg-white rounded-lg">
-                    <div
-                        className="flex items-center justify-between bg-gray-100 p-2 rounded-t-lg"
-                    >
-                        <p>Select Product & Batch</p>
-                        <div
-                            className="space-x-2"
-                        >
-                            {
-                                section &&
-                                <button
-                                    onClick={() => setIsFamily(!isFamily)}
-                                    className={`${isFamily ? 'bg-green-500' : 'bg-gray-200'} text-white px-4 py-1 text-sm rounded`}
+                                <select
+                                    value={product}
+                                    onChange={(e) => setProduct(e.target.value)}
+                                    className='w-full p-2 border-l border-t border-b rounded-l'
                                 >
-                                    isFamily
-                                </button>
-                            }
+                                    <option value="">Select a product</option>
+                                    {products.length > 0 &&
+                                        products.map((product) => (
+                                            <option key={product.name} value={product.name}>{product.name}</option>
+                                        ))}
+                                </select>
+                                <input
+                                    value={batch}
+                                    onChange={(e) => setBatch(e.target.value)}
+                                    placeholder={section === 'choclate' ? 'Carton' : 'Batch'}
+                                    className='w-[150px] p-2 border'
+                                />
+                            </div>
+
                             <button
-                                onClick={getConsumption}
-                                className="bg-gray-500 text-white px-4 py-1 text-sm rounded"
+                                onClick={addRequest}
+                                className="w-[100px] px-6 bg-gray-100 border-r border-t border-b rounded-r hover:bg-gray-200"
                             >
-                                Submit
+                                Add
                             </button>
                         </div>
-
                     </div>
-                    <div className="p-2 space-y-2">
+                    <div className="bg-white rounded-lg border border-gray-200">
+                        <div
+                            className="flex items-center justify-between bg-gray-100 p-2 rounded-t-lg"
+                        >
+                            <p>Product & Batch</p>
+                            <div
+                                className="space-x-2"
+                            >
+                                {
+                                    section === 'cake' &&
+                                    <button
+                                        onClick={() => setIsFamily(!isFamily)}
+                                        className={`${isFamily ? 'bg-green-500' : 'bg-gray-200'} text-white px-4 py-1 text-sm rounded`}
+                                    >
+                                        isFamily
+                                    </button>
+                                }
+                                <button
+                                    onClick={getConsumption}
+                                    className="bg-gray-500 text-white px-4 py-1 text-sm rounded"
+                                >
+                                    Submit
+                                </button>
+                            </div>
+
+                        </div>
+                        <div className="p-2 space-y-2">
+                            {
+                                requests.length > 0 ?
+                                    <table
+                                        className="w-full"
+                                    >
+                                        <tbody>
+                                            {
+                                                requests.map((req, index) => (
+                                                    <tr key={index} className="flex justify-between space-x-2">
+                                                        <td className="w-1/3">{req.product}</td>
+                                                        <td className="w-1/3 text-center">{req.batch}</td>
+                                                        <td className="w-1/3 text-right">
+                                                            <button
+                                                                onClick={() => setRequest(requests.filter(r => r.product !== req.product))}
+                                                                className="px-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md"
+                                                            >
+                                                                Remove
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            }
+                                        </tbody>
+                                    </table>
+                                    :
+                                    <p className="text-center text-sm text-gray-300">No Products Added yet</p>
+                            }
+                        </div>
+                    </div>
+                    <div>
                         {
-                            requests.length > 0 ?
-                                requests.map((req, index) => (
-                                    <div key={index} className="flex justify-between space-x-2">
-                                        <p>{req.product}</p>
-                                        <p>{req.batch}</p>
-                                        <button
-                                            onClick={() => setRequest(requests.filter(r => r.product !== req.product))}
-                                            className="px-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md"
-                                        >
-                                            Remove
-                                        </button>
-                                    </div>
-                                ))
-                                :
-                                <p className="text-center text-sm text-gray-300">No Products Added yet</p>
+                            consumption.headers &&
+                            <TableConsumption
+                                headers={consumption.headers}
+                                rows={consumption.rows}
+                            />
                         }
                     </div>
                 </div>
-                <div>
-                    {
-                        consumption.headers &&
-                        <TableConsumption
-                            headers={consumption.headers}
-                            rows={consumption.rows}
-                        />
-                    }
-                </div>
-            </div>
-            {loading && <Loading />}
-        </div> 
+                {loading && <Loading />}
         </>
-        
+
     );
 }
