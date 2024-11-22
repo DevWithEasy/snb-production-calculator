@@ -5,7 +5,7 @@ import Image from 'next/image'
 export default function Header() {
   return (
     <div
-        className='flex flex-col justify-center items-center pb-2 border-b-2 mb-4'
+        className='h-24 flex flex-col justify-center items-center pb-2 border-b-2 mb-4'
     >
         <Image
             alt='logo'
