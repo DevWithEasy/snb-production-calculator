@@ -5,8 +5,8 @@ import Loading from '../../../../../components/v2/Loading'
 import toast from "react-hot-toast";
 import getItemsString from "../../../../../utils/v2/getItemsString";
 import TableConsumption from "../../../../../components/v2/consumption/TableConsumption";
-import appscript_api_url from "../../../../../utils/v2/appscript_api_url";
 import HeadInfo from "../../../../../components/HeadInfo";
+import getAPI from "../../../../../utils/v2/appscript_api_url";
 
 export default function Consumption() {
     const router = useRouter();
@@ -20,9 +20,7 @@ export default function Consumption() {
     const getProducts = async (section) => {
         setLoading(true);
         try {
-            const { data } = await axios.get(
-                appscript_api_url + `?route=products&section=${section}`
-            )
+            const { data } = await axios.get(`/api/v2/products?section=${section}`)
             setLoading(false)
             if (data.success) {
                 setProducts(data.data);
@@ -50,7 +48,7 @@ export default function Consumption() {
 
     const getConsumption = async () => {
         try {
-            const { data } = await axios.get(appscript_api_url + `?route=consumption_rm&section=${section}&items=${getItemsString(requests)}`);
+            const { data } = await axios.get(`/api/v2/consumption/rm?section=${section}&items=${getItemsString(requests)}`);
             if (data.success) {
                 setConsumption(data.data)
                 toast.success('Consumption added successfully')

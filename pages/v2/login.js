@@ -31,7 +31,7 @@ export default function Login() {
     async function login() {
         setLoading(true)
         try {
-            const {data} = await axios.get(appscript_api_url+`?route=login&username=${username}&password=${password}`)
+            const {data} = await axios.get(`/api/v2/login?username=${username}&password=${password}`)
             if(data.sucess){
                 setLoading(false)
                 toast.success(data.message)
@@ -40,9 +40,9 @@ export default function Login() {
 
                 loged(user)
                 if(user.role === 'admin'){
-                    router.push('/v2/admin')
+                    return router.push('/v2/admin')
                 }else{
-                    router.push('/v2/user_area/'+user.section.toLowerCase())
+                    return router.push('/v2/user_area/'+user.section.toLowerCase())
                 }
             }else{
                 setLoading(false)
