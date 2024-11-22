@@ -1,10 +1,3 @@
-import {
-    Spinner, Table,
-    TableContainer,
-    Tbody,
-    Td,
-    Tr
-} from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { toast } from "react-hot-toast";
 import { AiOutlinePrinter } from 'react-icons/ai';
@@ -23,24 +16,22 @@ const TargetCarton = ({products,handlePrint}) => {
                 <AiOutlinePrinter onClick={()=>handlePrint()} className="absolute right-2 top-2 print:hidden cursor-pointer" />
             </h1>
             <div className="p-2 space-y-2">
-                <TableContainer className='border rounded'>
-                    <Table variant='simple'>
-                        <Tbody>
+            <table variant='simple'>
+                        <tbody>
                             {
-                                demand && demand.map(product => <Tr 
+                                demand && demand.map(product => <tr 
                                     key={product.id}
                                 >
-                                    <Td>{product.name}</Td>
-                                    <Td>{product.demand}</Td>
-                                    <Td>{product.target}</Td>
-                                    <Td>
+                                    <td>{product.name}</td>
+                                    <td>{product.demand}</td>
+                                    <td>{product.target}</td>
+                                    <td>
                                         <button onClick={()=>removeDemand(product.id)}>X</button>
-                                    </Td>
-                                </Tr>)
+                                    </td>
+                                </tr>)
                             }
-                        </Tbody>
-                    </Table>
-                </TableContainer>  
+                        </tbody>
+                    </table>
                 <div className="flex justify-center">
                         <form 
                             onSubmit={(e)=>getProduct(e,id,carton,setId,setCarton,demand,addDemand,toast,setLoading)}
@@ -65,7 +56,6 @@ const TargetCarton = ({products,handlePrint}) => {
                                 type='submit'
                             >
                                 {loading ? <span className='flex items-center space-x-1'>
-                                        <Spinner size='sm'/> 
                                         <span>Submitting</span>
                                     </span> : 'Submit'
                                 }

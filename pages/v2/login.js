@@ -59,7 +59,7 @@ export default function Login() {
                 router.push('/v2/user_area/'+user.section.toLowerCase())
             },1000)
         }
-    },[])
+    },[router,user])
     return (
         <div className="h-screen w-full flex justify-center items-center bg-gray-100">
             <div className="relative flex flex-col items-center bg-white rounded-md p-4 space-y-2">

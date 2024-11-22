@@ -1,4 +1,3 @@
-import { Spinner } from "@chakra-ui/react"
 import axios from "axios"
 import { useRouter } from "next/router"
 import { useState } from "react"
@@ -37,7 +36,7 @@ export default function Login() {
             }
             if (res.data.data.user.section == 'Admin') {
                 adminData(res.data.data)
-                return router.push('/admin')
+                return router.push('/v1/admin')
             }
         } catch (error) {
             setLoading(false)
@@ -70,7 +69,6 @@ export default function Login() {
                     <button className="px-6 py-2 bg-slate-500 text-white rounded" onClick={() => loginUser()}>
                         {loading ?
                             <span className="flex items-center space-x-2">
-                                <Spinner size='sm' />
                                 <span>Login...</span>
                             </span>
                             : 'Login'

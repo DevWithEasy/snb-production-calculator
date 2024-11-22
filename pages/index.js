@@ -16,7 +16,7 @@ export default function Index() {
                 router.push('/v2/login')
             },2000)
         }
-    },[])
+    },[router,user])
     return (
         <div
             className='h-screen flex flex-col justify-center items-center'

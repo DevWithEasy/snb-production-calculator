@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
-
 import Image from 'next/image';
-import { DashBoard } from '../../components/v1/Index';
 import useUserStore from "../../features/userStore";
 import not_allow from '../../public/not_allow.svg';
+import { DashBoard } from '../../components/v1/Index';
 
 
 export default function Admin({}){

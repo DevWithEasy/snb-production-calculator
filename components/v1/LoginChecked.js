@@ -1,4 +1,3 @@
-import { Spinner } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -69,7 +68,6 @@ const LoginChecked = () => {
                     <button className="px-6 py-2 bg-slate-500 text-white rounded" onClick={() => loginUser()}>
                         {loading ?
                             <span className="flex items-center space-x-2">
-                                <Spinner size='sm' />
                                 <span>Login...</span>
                             </span>
                             : 'Login'
