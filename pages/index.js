@@ -7,16 +7,16 @@ import appStore from '../features/appStore';
 
 export default function Index() {
     const router = useRouter()
-    const { user } = appStore()
+    const { app_user } = appStore()
     useEffect(()=>{
-        if(user.section){
-            router.push('/v2/user_area/'+user.section.toLowerCase())
+        if(app_user.section){
+            return router.push('/v2/user_area/'+app_user?.section.toLowerCase())
         }else{
             setTimeout(()=>{
-                router.push('/v2/login')
+                return router.push('/v2/login')
             },2000)
         }
-    },[router,user])
+    },[router,app_user])
     return (
         <div
             className='h-screen flex flex-col justify-center items-center'

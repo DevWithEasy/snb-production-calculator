@@ -7,11 +7,10 @@ import logo from '../../public/logo.png'
 import Image from 'next/image'
 import Link from "next/link"
 import { FaCheckCircle } from "react-icons/fa";
-import appscript_api_url from "../../utils/v2/appscript_api_url"
 import HeadInfo from "../../components/HeadInfo"
 
 export default function Login() {
-    const {loged,user} = appStore()
+    const {loged,app_user} = appStore()
     const router = useRouter()
     const [hide, setHide] = useState(false)
     const [type, setType] = useState("password")
@@ -36,13 +35,13 @@ export default function Login() {
                 setLoading(false)
                 toast.success(data.message)
 
-                const user = data.data
+                const app_user = data.data
 
-                loged(user)
-                if(user.role === 'admin'){
+                loged(app_user)
+                if(app_user.role === 'admin'){
                     return router.push('/v2/admin')
                 }else{
-                    return router.push('/v2/user_area/'+user.section.toLowerCase())
+                    return router.push('/v2/user_area/'+app_user.section.toLowerCase())
                 }
             }else{
                 setLoading(false)
@@ -55,16 +54,16 @@ export default function Login() {
     }
 
     useEffect(()=>{
-        if(user.name) {
+        if(app_user.name) {
             toast.success('Already loged in.')
             setTimeout(()=>{
-                router.push('/v2/user_area/'+user?.section?.toLowerCase())
+                router.push('/v2/user_area/'+app_user?.section?.toLowerCase())
             },1000)
         }
-    },[router,user])
+    },[router,app_user])
     return (
         <>
-        <HeadInfo title="Login (V.2) - user authentication"/>
+        <HeadInfo title="Login (V.2) - app_user authentication"/>
             <div className="h-screen w-full flex justify-center items-center bg-gray-100">
             <div className="relative flex flex-col items-center bg-white rounded-md p-4 space-y-2">
                 <button

@@ -7,7 +7,7 @@ import HeadInfo from '../../../../components/HeadInfo'
 
 export default function Section() {
     const router = useRouter()
-    const {logout,user} = appStore()
+    const {logout,app_user} = appStore()
     const handleLogout=()=>{
         logout()
         router.push('/')
@@ -15,7 +15,7 @@ export default function Section() {
     }
     return (
         <>
-        <HeadInfo title={`${user?.name} - ${user?.section}`}/>
+        <HeadInfo title={`${app_user?.name} - ${app_user?.section}`}/>
         <div>
             <Link href={`/v2/recipe/${router.query.section}`}>
                 <p>Recipe</p>

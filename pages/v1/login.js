@@ -1,7 +1,7 @@
 import { collection, getDocs, query, where } from "firebase/firestore"
 import Image from "next/image"
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
 import { db } from "../../database/conncetDB"
 import useUserStore from "../../features/userStore"
@@ -11,7 +11,7 @@ import { TbCircleXFilled } from "react-icons/tb";
 import HeadInfo from "../../components/HeadInfo"
 
 export default function Login() {
-    const { loged,loading,setLoading } = useUserStore()
+    const { loged,loading,setLoading,user } = useUserStore()
     const router = useRouter()
     const [hide, setHide] = useState(false)
     const [type, setType] = useState("password")
@@ -55,6 +55,12 @@ export default function Login() {
         }
 
     }
+
+    useEffect(()=>{
+        if(user){
+            router.push('/v1')
+        }
+    },[router,user])
     return (
         <>
         <HeadInfo title="Login (V.1) - user authentication"/>

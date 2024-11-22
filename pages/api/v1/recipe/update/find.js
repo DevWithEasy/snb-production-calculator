@@ -1,7 +1,7 @@
 //api end point '/api/products/:name'
 
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../../../database/conncetDB";
+import { db } from "../../../../../database/conncetDB";
 
 export default async function handler(req,res,next){
     try {

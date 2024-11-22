@@ -1,6 +1,6 @@
 import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../../database/conncetDB";
-import Demand from '../../../utils/v1/demand';
+import { db } from "../../../../database/conncetDB";
+import Demand from '../../../../utils/v1/demand';
 
 
 export default async function handler(req,res,next){

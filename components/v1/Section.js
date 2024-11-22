@@ -27,16 +27,16 @@ export default function Section(props){
               
           </div>
           <Link href={`v1/recipe/${section.toLowerCase()}`}>
-            <a className='block p-2 border-b text-blue-500 text-xl'>Recipe</a>
+            <p className='block p-2 border-b text-blue-500 text-xl'>Recipe</p>
           </Link>
           <Link href={`v1/consumption/rm/${section.toLowerCase()}`}>
-            <a className='block p-2 border-b text-blue-500 text-xl'>RM Calcutation</a>
+            <p className='block p-2 border-b text-blue-500 text-xl'>RM Calcutation</p>
           </Link>
           <Link href={`v1/consumption/pm/${section.toLowerCase()}`}>
-            <a className='block p-2 border-b text-blue-500 text-xl'>PM Calcutation</a>
+            <p className='block p-2 border-b text-blue-500 text-xl'>PM Calcutation</p>
           </Link>
           <Link href={`v1/monthly_demand/${section.toLowerCase()}`}>
-            <a className='block p-2 border-b text-blue-500 text-xl'>Monthly Demand</a>
+            <p className='block p-2 border-b text-blue-500 text-xl'>Monthly Demand</p>
           </Link>
         </div>
     )
