@@ -16,7 +16,7 @@ export default function Recipe() {
   const getProducts = async (section) => {
     setLoading(true)
     try {
-      const { data } = await axios.get(appscript_api_url + `?route=products&section=${section}`)
+      const { data } = await axios.get(`/api/v2/products?section=${section}`)
       if (data.success) {
         setProducts(data.data)
         setLoading(false)
@@ -31,7 +31,7 @@ export default function Recipe() {
     setLoading(true)
     setProduct(name)
     try {
-      const { data } = await axios.get(appscript_api_url + `?route=recipe&section=${section}&name=${name}`)
+      const { data } = await axios.get(`/api/v2/recipe?section=${section}&name=${name}`)
       console.log(data)
       if (data.success) {
         setLoading(false)

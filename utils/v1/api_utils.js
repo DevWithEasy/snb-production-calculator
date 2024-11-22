@@ -4,7 +4,7 @@ import toast from "react-hot-toast"
 
 export const getProducts=async(section,setProducts) =>{
   try {
-    const res = await axios.get(`${baseUrl}/api/products/${section}`)
+    const res = await axios.get(`${baseUrl}/api/v1/products/${section}`)
     if(res.data.status === 200){
       setProducts(res.data.data)
     }
@@ -16,7 +16,7 @@ export const getProducts=async(section,setProducts) =>{
 export const addProuctRecipe=async(id,product,ingredients,toast)=>{
   try {
     onOpen()
-    const res = await axios.post(`/api/recipe/add_recipe?id=${id}`,{product,ingredients})
+    const res = await axios.post(`/api/v1/recipe/add_recipe?id=${id}`,{product,ingredients})
     if (res.data.status === 200) {
       toast.success('Product Added Successfully')
     }
@@ -27,7 +27,7 @@ export const addProuctRecipe=async(id,product,ingredients,toast)=>{
 
 export const getRecipe=async(id,setData)=>{
     try {
-      const res = await axios.get(`/api/recipe/${id}`)
+      const res = await axios.get(`/api/v1/recipe/${id}`)
       if (res.data.status === 200) {
         setData(res.data.data)
       }
@@ -38,7 +38,7 @@ export const getRecipe=async(id,setData)=>{
 
 export const getAllRecipe = async (name,setProducts) => {
   try {
-      const res = await axios.get(`/api/recipe/all/${name}`)
+      const res = await axios.get(`/api/v1/recipe/all/${name}`)
       if (res.data.status === 200) {
           setProducts(res.data.data)
       }
@@ -49,7 +49,7 @@ export const getAllRecipe = async (name,setProducts) => {
 
 export const getUpdateRecipe=async(id,setProduct,setIngredient,setOldProduct,setOldIngredient)=>{
   try {
-    const res = await axios.get(`/api/recipe/update/find?id=${id}`)
+    const res = await axios.get(`/api/v1/recipe/update/find?id=${id}`)
     if (res.data.status === 200) {
       setProduct(res.data.data.product)
       setOldProduct(res.data.data.product)
@@ -63,7 +63,7 @@ export const getUpdateRecipe=async(id,setProduct,setIngredient,setOldProduct,set
 
 export const updateRecipe=async(id,toast,data)=>{
   try {
-    const res = await axios.post(`/api/recipe/update/no_version?id=${id}`,data)
+    const res = await axios.post(`/api/v1/recipe/update/no_version?id=${id}`,data)
     if (res.data.status === 200) {
       toast.success('Recipe updated successfully')
       window.location.reload()
@@ -80,7 +80,7 @@ export const updateRecipeWithVersion=async(id,toast,data)=>{
   }
   try {
     onOpen()
-    const res = await axios.post(`/api/recipe/update/with_version?id=${id}`,data)
+    const res = await axios.post(`/api/v1/recipe/update/with_version?id=${id}`,data)
     if (res.data.status === 200) {
       toast.success('Recipe updated successfully')
     }
@@ -91,7 +91,7 @@ export const updateRecipeWithVersion=async(id,toast,data)=>{
 
 export const getOldProducts=async(id,setProducts) =>{
   try {
-    const res = await axios.get(`${baseUrl}/api/recipe/compare/all/${id}`)
+    const res = await axios.get(`${baseUrl}/api/v1/recipe/compare/all/${id}`)
     if(res.data.status === 200){
       setProducts(res.data.data)
       if(res.data.data.length === 0){
@@ -105,7 +105,7 @@ export const getOldProducts=async(id,setProducts) =>{
 
 export const getOldProduct=async(id,setProducts) =>{
   try {
-    const res = await axios.get(`${baseUrl}/api/recipe/compare/${id}`)
+    const res = await axios.get(`${baseUrl}/api/v1/recipe/compare/${id}`)
     if(res.data.status === 200){
       setProducts(res.data.data)
     }

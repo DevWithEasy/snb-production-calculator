@@ -1,5 +1,5 @@
-import { deleteField, doc, updateDoc } from "firebase/firestore";
-import { db } from "../../database/conncetDB"
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../database/conncetDB";
 
 export default async function handler(req,res,next){
     try {

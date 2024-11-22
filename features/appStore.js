@@ -1,7 +1,7 @@
 import { create } from "zustand"
 import { devtools, persist } from "zustand/middleware"
 const userStore = (set)=>({
-    user : {},
+    app_user : {},
     loading : false,
     message : '',
     message_type : '',
