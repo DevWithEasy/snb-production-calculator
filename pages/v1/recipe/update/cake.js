@@ -1,4 +1,3 @@
-import { useDisclosure } from "@chakra-ui/react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -8,7 +7,6 @@ import { getProducts, getUpdateRecipe, updateRecipe, updateRecipeWithVersion } f
 
 export default function UpdateProduct() {
     const {user} = useUserStore()
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const [products, setProducts] = useState([])
     const [id, setId] = useState('')
     const [product, setProduct] = useState({})
@@ -185,7 +183,7 @@ export default function UpdateProduct() {
                         <div className="flex flex-col md:flex-row space-x-2 py-2">
                             <button
                                 className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
-                                onClick={() => updateRecipe(product.id, toast, onOpen, onClose, { product, ingredients })}
+                                onClick={() => updateRecipe(product.id, toast,{ product, ingredients })}
                             >
                                 Update Product
                             </button>
@@ -193,7 +191,7 @@ export default function UpdateProduct() {
                             <button
                                 className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded"
                                 onClick={() => updateRecipeWithVersion(
-                                    product.id, toast, onOpen, onClose, 
+                                    product.id, toast,
                                     { 
                                         oldRecipe : {
                                             product : oldProduct, 

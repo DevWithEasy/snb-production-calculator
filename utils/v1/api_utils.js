@@ -38,7 +38,7 @@ export const getRecipe=async(id,setData)=>{
     }
 }
 
-export const getAllRecipe = async (name,setProducts,onOpen, onClose) => {
+export const getAllRecipe = async (name,setProducts) => {
   onOpen()
   try {
       const res = await axios.get(`/api/recipe/all/${name}`)
@@ -66,7 +66,7 @@ export const getUpdateRecipe=async(id,setProduct,setIngredient,setOldProduct,set
   }
 }
 
-export const updateRecipe=async(id,toast,onOpen, onClose,data)=>{
+export const updateRecipe=async(id,toast,data)=>{
   try {
     onOpen()
     const res = await axios.post(`/api/recipe/update/no_version?id=${id}`,data)
@@ -81,7 +81,7 @@ export const updateRecipe=async(id,toast,onOpen, onClose,data)=>{
   }
 }
 
-export const updateRecipeWithVersion=async(id,toast,onOpen, onClose,data)=>{
+export const updateRecipeWithVersion=async(id,toast,data)=>{
   const {oldRecipe,newRecipe} = data
   if(oldRecipe?.product.version === newRecipe.product.version){
     return toast.error('Change pevious version first.')

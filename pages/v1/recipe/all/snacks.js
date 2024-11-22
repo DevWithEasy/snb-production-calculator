@@ -8,12 +8,11 @@ import { getAllRecipe } from '../../../../utils/v1/api_utils';
 import ExcelReport from '../../../../utils/v1/excelReport';
 
 const LachchaAllRecipe = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const excelRef = useRef()
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        getAllRecipe('Snacks', setProducts, onOpen, onClose)
+        getAllRecipe('Snacks', setProducts)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -420,7 +419,6 @@ const LachchaAllRecipe = () => {
                     </tbody>
                 </table>
             </div>
-            <Loading {...{ msg: 'Generate Recipe', isOpen, onOpen, onClose }} />
         </div>
     );
 };

@@ -9,12 +9,11 @@ import { useDisclosure } from '@chakra-ui/react';
 import { getAllRecipe } from '../../../../utils/v1/api_utils';
 
 const LachchaAllRecipe = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const excelRef = useRef()
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        getAllRecipe('Lachcha', setProducts, onOpen, onClose)
+        getAllRecipe('Lachcha', setProducts)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -176,7 +175,6 @@ const LachchaAllRecipe = () => {
                     </tbody>
                 </table>
             </div>
-            <Loading {...{ msg: 'Generate Recipe', isOpen, onOpen, onClose }} />
         </div>
     );
 };

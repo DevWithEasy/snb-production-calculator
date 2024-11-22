@@ -1,4 +1,3 @@
-import { useDisclosure } from '@chakra-ui/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDownloadExcel } from 'react-export-table-to-excel';
 import { AiOutlineFileExcel, AiOutlinePrinter } from 'react-icons/ai';
@@ -8,12 +7,11 @@ import { getAllRecipe } from '../../../../utils/v1/api_utils';
 import ExcelReport from '../../../../utils/v1/excelReport';
 
 const BakeryAllRecipe = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const excelRef = useRef()
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        getAllRecipe('Bakery',setProducts,onOpen, onClose)
+        getAllRecipe('Bakery',setProducts)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -420,7 +418,6 @@ const BakeryAllRecipe = () => {
                     </tbody>
                 </table>
             </div>
-            <Loading {...{ msg: 'Generate Recipe', isOpen, onOpen, onClose }} />
         </div>
     );
 };

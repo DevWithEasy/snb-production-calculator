@@ -1,20 +1,17 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import ExcelReport from '../../../../utils/v1/excelReport';
-import { AiOutlineFileExcel, AiOutlinePrinter } from 'react-icons/ai';
 import { useDownloadExcel } from 'react-export-table-to-excel';
+import { AiOutlineFileExcel, AiOutlinePrinter } from 'react-icons/ai';
 import { useReactToPrint } from 'react-to-print';
-import { TrRaw, TrBlank, TrInfo, Loading } from '../../../../components/v1/Index';
-import { useDisclosure } from '@chakra-ui/react';
+import { TrBlank, TrInfo, TrRaw } from '../../../../components/v1/Index';
 import { getAllRecipe } from '../../../../utils/v1/api_utils';
+import ExcelReport from '../../../../utils/v1/excelReport';
 
 const CakeAllRecipe = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const excelRef = useRef()
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        getAllRecipe('Cake', setProducts, onOpen, onClose)
+        getAllRecipe('Cake', setProducts)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -322,7 +319,6 @@ const CakeAllRecipe = () => {
                     </tbody>
                 </table>
             </div>
-            <Loading {...{ msg: 'Generate Recipe', isOpen, onOpen, onClose }} />
         </div>
     );
 };

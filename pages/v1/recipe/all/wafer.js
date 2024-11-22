@@ -9,12 +9,11 @@ import { useDisclosure } from '@chakra-ui/react';
 import { getAllRecipe } from '../../../../utils/v1/api_utils';
 
 const WaferAllRecipe = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const excelRef = useRef()
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        getAllRecipe('Wafer', setProducts, onOpen, onClose)
+        getAllRecipe('Wafer', setProducts)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -238,7 +237,6 @@ const WaferAllRecipe = () => {
                     </tbody>
                 </table>
             </div>
-            <Loading {...{ msg: 'Generate Recipe', isOpen, onOpen, onClose }} />
         </div>
     );
 };
