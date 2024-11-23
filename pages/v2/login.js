@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import appStore from "../../features/appStore"
 import toast from "react-hot-toast"
-import logo from '../../public/logo.png'
+import logo from '../../public/key.png'
 import Image from 'next/image'
 import Link from "next/link"
 import { FaCheckCircle } from "react-icons/fa";
@@ -65,12 +65,12 @@ export default function Login() {
         <>
             <HeadInfo title="Login (V.2) - app_user authentication" />
             <div className="h-[calc(100%-128px)] w-full flex justify-center items-center">
-                <div className="relative flex flex-col items-center bg-white rounded-md p-4 space-y-2">
+                <div className="relative flex flex-col items-center bg-white rounded-md p-4 pt-10 space-y-1">
                     <button
-                        className="absolute top-0 right-0 px-2 py-1 flex items-center space-x-1 bg-green-500 text-white text-sm rounded-tr"
+                        className="absolute top-0 right-0 px-2 py-1 flex items-center space-x-1 bg-green-500 text-white rounded-tr"
                     >
                         <FaCheckCircle />
-                        <span>V.2 (Appscript)</span>
+                        <span className="text-xs">V.2 (Appscript)</span>
                     </button>
                     <Image
                         alt='logo'
@@ -78,12 +78,12 @@ export default function Login() {
                         height={60}
                         width={80}
                     />
-                    <h2 className="text-lg p-2 text-red-500">User Authentication Required</h2>
-                    <div className="space-y-2">
+                    <h2 className="p-2 text-red-500">User Authentication Required</h2>
+                    <div className="space-y-1">
                         <label className="w-full pl-1">Username :</label>
                         <input className="w-full border-2 p-2  rounded-md focus:outline-none focus:border-blue-500" type="email" name="" onChange={(e) => setUsername(e.target.value)} />
                     </div>
-                    <div className="space-y-2 relative">
+                    <div className="space-y-1 relative">
                         <label className="w-full pl-1">Password :</label>
                         <input className="w-full border-2 p-2  rounded-md focus:outline-none focus:border-blue-500" type={type} name="" onChange={(e) => setPassword(e.target.value)} />
                         {!hide ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="absolute right-3 top-9 w-5 h-5" onClick={() => handleHide()}>

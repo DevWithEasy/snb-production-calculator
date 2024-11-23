@@ -15,7 +15,7 @@ const DashBoard = () => {
 
     const logoutUser =()=>{
         logout()
-        router.push("/v1")
+        return router.push("/v1/login")
     }
 
     const actives = ['Dashboard', 'Recipes', 'Users', 'Products']
@@ -39,7 +39,7 @@ const DashBoard = () => {
                          </button>)
                     }
                     <button
-                            onClick={()=>logout()}
+                            onClick={logoutUser}
                             className={`block w-full p-2 border-b text-left hover:bg-red-100 `}
                          >
                             Logout
