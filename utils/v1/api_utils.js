@@ -28,6 +28,7 @@ export const addProuctRecipe=async(id,product,ingredients,toast)=>{
 export const getRecipe=async(id,setData)=>{
     try {
       const res = await axios.get(`/api/v1/recipe/${id}`)
+      console.log(res.data)
       if (res.data.status === 200) {
         setData(res.data.data)
       }

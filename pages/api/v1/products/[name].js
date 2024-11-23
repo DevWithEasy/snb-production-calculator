@@ -5,15 +5,12 @@ import { db } from "../../../../database/conncetDB";
 
 export default async function handler(req,res,next){
     try {
-        const q= query(collection(db,'products'),where('section','==', req.query.name))
+        const name = req.query.name.charAt(0).toUpperCase() + req.query.name.slice(1)
+        const q= query(collection(db,'products'),where('section','==', name))
         const docs = await getDocs(q)
         const products = [];
         docs.forEach(data => products.push(data.data()));
-        res.status(200).json({
-            status : 200,
-            success : true,
-            data : products
-        })
+        res.status(200).json(products)
 
     } catch (error) {
         res.status(500).json({

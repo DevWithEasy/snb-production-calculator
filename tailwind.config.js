@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily : {
-        default : ['Parkinsans', 'sans-serif'],
+        default : ['Noto Serif Bengali', 'sans-serif'],
         bangla : ['mainak_signature','sans-serif']
       }
     },
