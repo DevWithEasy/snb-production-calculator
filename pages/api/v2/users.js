@@ -4,7 +4,8 @@ import getAPI from "../../../utils/v2/appscript_api_url";
 
 export default async function handler(req,res,next){
     try {
-        const {data} = await axios.get(getAPI()+`route=products_all`)
+        console.log('users')
+        const {data} = await axios.get(getAPI()+`route=users`)
         res.send(data.data)
     } catch (error) {
         res.status(500).json({

@@ -5,14 +5,18 @@ import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
-  const isHeader = router.pathname.split('/').pop() !== 'login' ? false : true 
+  const isHeader = router.pathname.split('/').pop() === 'login' ? true : false 
   return <div
-    className='h-screen overflow-y-auto p-4 bg-gray-50'
+    className='h-screen overflow-y-auto bg-gray-50'
   >
     {
-      isHeader  && <Header/>
+      !isHeader  && <Header/>
     }
-    <Component {...pageProps} /> 
+    <div
+      className='h-[calc(100%-96px)] overflow-y-auto p-2'
+    >
+      <Component {...pageProps} />
+    </div>
     <Toaster position="bottom-right"/>
   </div>
 }

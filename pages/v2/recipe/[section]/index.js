@@ -16,7 +16,7 @@ export default function Recipe() {
   const getProducts = async (section) => {
     setLoading(true)
     try {
-      const { data } = await axios.get(`/api/v2/products?section=${section}`)
+      const { data } = await axios.get(`/api/v2/${section}/products`)
       if (data.success) {
         setProducts(data.data)
         setLoading(false)
@@ -50,13 +50,13 @@ export default function Recipe() {
     <>
     <HeadInfo title={`Recipe - ${section}`}/>
     <div
-      className='h-screen overflow-y-auto bg-gray-50'
+      className=' bg-gray-50'
     >
       <div
-        className='container md:max-w-3xl md:mx-auto md:px-4'
+        className='container md:max-w-3xl md:mx-auto space-y-2'
       >
         <div
-          className='p-4'
+          className=''
         >
           <select
             onChange={(e) => getRecipe(section, e.target.value)}
@@ -70,7 +70,7 @@ export default function Recipe() {
           </select>
         </div>
         <div
-          className='mx-4 p-2 bg-white rounded-lg'
+          className='p-2 bg-white rounded-lg'
         >
           <p>Section : {section}</p>
           <p>Product Name : {product}</p>

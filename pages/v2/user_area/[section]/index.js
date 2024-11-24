@@ -13,6 +13,7 @@ export default function Section() {
         router.push('/')
         toast.success('Logged out successfully')
     }
+    console.log(app_user)
     return (
         <>
         <HeadInfo title={`${app_user?.name} - ${app_user?.section}`}/>

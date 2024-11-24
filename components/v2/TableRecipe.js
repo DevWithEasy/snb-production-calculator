@@ -4,8 +4,8 @@ import TrRMTotal from './TrRMTotal'
 
 export default function TableRecipe({ title, rm, rm_total }) {
     return (
-        <div className="container max-w-3xl px-4 mx-auto sm:px-8">
-            <div className="px-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
+        <div className="max-w-3xl mx-auto">
+            <div className="overflow-x-auto">
                 <p
                     className='px-2 py-1 bg-gray-100 border-l border-r border-t rounded-t-lg font-bold'
                 >
@@ -15,16 +15,16 @@ export default function TableRecipe({ title, rm, rm_total }) {
                     <table className="min-w-full leading-normal">
                         <thead>
                             <tr>
-                                <th scope="col" className="px-5 py-2 text-sm font-normal text-center text-gray-800 uppercase bg-gray-100 border-b border-gray-200">
+                                <th scope="col" className="px-5 py-2 text-sm font-normal text-center text-gray-800 bg-gray-100 border-b border-gray-200">
                                     Sl
                                 </th>
-                                <th scope="col" className="pr-5 py-2 text-sm font-normal text-left text-gray-800 uppercase bg-gray-100 border-b border-gray-200">
+                                <th scope="col" className="pr-5 py-2 text-sm font-normal text-left text-gray-800 bg-gray-100 border-b border-gray-200">
                                     Name
                                 </th>
-                                <th scope="col" className="px-5 py-2 text-sm font-normal text-center text-gray-800 uppercase bg-gray-100 border-b border-gray-200">
+                                <th scope="col" className="px-5 py-2 text-sm font-normal text-center text-gray-800 bg-gray-100 border-b border-gray-200">
                                     Unit
                                 </th>
-                                <th scope="col" className="px-5 py-2 text-sm font-normal text-center text-gray-800 uppercase bg-gray-100 border-b border-gray-200">
+                                <th scope="col" className="px-5 py-2 text-sm font-normal text-center text-gray-800 bg-gray-100 border-b border-gray-200">
                                     Quantity
                                 </th>
                             </tr>

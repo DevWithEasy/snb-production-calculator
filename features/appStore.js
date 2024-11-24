@@ -18,12 +18,12 @@ const userStore = (set)=>({
     },
     loged : (userData) =>{
         set((state)=>({
-            user : userData
+            app_user : userData
         }))
     },
     logout : () =>{
         set((state)=>({
-            user : {}
+            app_user : {}
         }))
     }
 })

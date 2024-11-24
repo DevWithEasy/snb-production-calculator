@@ -47,6 +47,7 @@ export default function Consumption() {
     }
 
     const getConsumption = async () => {
+        if(requests.length === 0) return toast.error('No requests product add')
         setLoading(true)
         try {
             const { data } = await axios.get(`/api/v2/consumption/rm?section=${section}&items=${getItemsString(requests)}`);
@@ -75,7 +76,7 @@ export default function Consumption() {
                     className='space-y-4'
                 >
                     <div>
-                        <div className="flex">
+                        <div className="flex flex-col space-y-1">
                             <div
                                 className="flex w-full"
                             >
@@ -97,10 +98,10 @@ export default function Consumption() {
                                     className='w-[150px] p-2 border'
                                 />
                             </div>
-
+                            
                             <button
                                 onClick={addRequest}
-                                className="w-[100px] px-6 bg-gray-100 border-r border-t border-b rounded-r hover:bg-gray-200"
+                                className="px-2 py-1 bg-gray-100 border-r border-t border-b rounded-lg hover:bg-gray-200"
                             >
                                 Add
                             </button>
