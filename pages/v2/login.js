@@ -64,7 +64,7 @@ export default function Login() {
     return (
         <>
             <HeadInfo title="Login (V.2) - app_user authentication" />
-            <div className="w-full flex justify-center items-center">
+            <div className="w-full flex justify-center items-center pt-10">
                 <div className="relative flex flex-col items-center bg-white rounded-md p-4 pt-10 space-y-1">
                     <button
                         className="absolute top-0 right-0 px-2 py-1 flex items-center space-x-1 bg-green-500 text-white rounded-tr"

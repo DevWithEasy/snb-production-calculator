@@ -27,20 +27,20 @@ export default function AddUser(){
 
     return (
         <>
-                    <div className="space-y-2">
+                    <div className="space-y-1">
                     <label className="w-full pl-1">Name :</label>
-                    <input className="w-full border p-2  rounded-md focus:outline-none focus:ring-2" type="text" name="" onChange={(e)=>setName(e.target.value)}/>
+                    <input className="w-full border-2 p-2  rounded-md focus:outline-none focus:border-blue-500"type="text" name="" onChange={(e)=>setName(e.target.value)}/>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-1">
                     <label className="w-full pl-1">Username :</label>
-                    <input className="w-full border p-2  rounded-md focus:outline-none focus:ring-2" type="text" name="" onChange={(e)=>setUsername(e.target.value)}/>
+                    <input className="w-full border-2 p-2  rounded-md focus:outline-none focus:border-blue-500"type="text" name="" onChange={(e)=>setUsername(e.target.value)}/>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1">
                     <label className="w-full pl-1">Password :</label>
-                    <input className="w-full border p-2  rounded-md focus:outline-none focus:ring-2" type="text" name="" onChange={(e)=>setPassword(e.target.value)}/>
+                    <input className="w-full border-2 p-2  rounded-md focus:outline-none focus:border-blue-500"type="text" name="" onChange={(e)=>setPassword(e.target.value)}/>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1">
                     <label className="w-full pl-1">Section Name :</label>
                     <select name="section" onChange={(e)=>setSection(e.target.value)} className="w-full border p-2  rounded-md focus:outline-none focus:ring-2">
                         <option value="">Select section</option>

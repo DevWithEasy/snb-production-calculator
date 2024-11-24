@@ -3,14 +3,28 @@ import AdminLayout from '../../../components/admin/AdminLayout'
 import axios from 'axios'
 import baseUrl from '../../../utils/v1/baseUrl'
 import capitalizeFirstLetter from '../../../utils/v2/capitalizeFirstLetter'
+import Link from 'next/link'
+import adduser from '../../../public/adduser.png'
+import Image from 'next/image'
 
 export default function Users({users}) {
   const headers = Object.keys(users[0])
   return (
     <AdminLayout>
         <div
-          className=''
+          className='space-y-2'
         >
+          <Link href='/admin/users/add'>
+            <button className='flex items-center space-x-2 px-3 py-2 bg-gray-100 rounded-lg shadow-sm border  hover:bg-gray-200'>
+            <Image
+            alt='logout'
+            src={adduser}
+            height={20}
+            width={20}
+          />
+              <span>New User</span>
+            </button>
+          </Link>
           <table
             className='w-full border rounded-lg'
           >
