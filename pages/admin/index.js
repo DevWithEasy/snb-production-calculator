@@ -1,5 +1,6 @@
 import React from 'react'
-import AdminLayout from '../../components/admin/AdminLayout'
+import dynamic from 'next/dynamic'
+const AdminLayout = dynamic(() => import('../../components/admin/AdminLayout'))
 
 export default function Admin() {
   return (

@@ -1,11 +1,12 @@
 import React from 'react'
-import AdminLayout from '../../../components/admin/AdminLayout'
 import axios from 'axios'
 import baseUrl from '../../../utils/v1/baseUrl'
 import capitalizeFirstLetter from '../../../utils/v2/capitalizeFirstLetter'
 import Link from 'next/link'
 import adduser from '../../../public/adduser.png'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
+const AdminLayout = dynamic(() => import('../../../components/admin/AdminLayout'))
 
 export default function Users({users}) {
   const headers = Object.keys(users[0])

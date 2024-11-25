@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import AdminLayout from '../../../components/admin/AdminLayout'
+import dynamic from 'next/dynamic'
+const AdminLayout = dynamic(() => import('../../../components/admin/AdminLayout'))
 import axios from 'axios';
 import baseUrl from '../../../utils/v1/baseUrl';
 import toast from 'react-hot-toast';
