@@ -3,14 +3,18 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import admin from '../../public/admin.png'
-import logout from '../../public/logout.png'
+import logout_icon from '../../public/logout.png'
 import product from '../../public/products.png'
 import section from '../../public/sections.png'
 import user from '../../public/users.png'
 import getBreadCrumbArray from '../../utils/v2/getBreadCrumbArray'
+import appStore from '../../features/appStore'
+import { BiLogOutCircle } from "react-icons/bi";
+import toast from 'react-hot-toast'
 
 export default function AdminLayout({ children }) {
   const router = useRouter()
+  const { logout } = appStore()
   const path = router.pathname
   const menus = [
     {
@@ -34,7 +38,11 @@ export default function AdminLayout({ children }) {
       image: product
     },
   ]
-
+  const handleLogout = () => {
+    logout()
+    router.push('/')
+    toast.success('Logged out successfully')
+  }
   return (
     <div
       className='flex'
@@ -59,10 +67,10 @@ export default function AdminLayout({ children }) {
             </Link>
           ))
         }
-        <button className='w-full flex items-center space-x-3 my-1.5 px-4 py-2 text-left bg-white rounded-full hover:bg-red-100 duration-300 shadow-sm'>
+        <button onClick={handleLogout} className='w-full flex items-center space-x-3 my-1.5 px-4 py-2 text-left bg-white rounded-full hover:bg-red-100 duration-300 shadow-sm'>
           <Image
             alt='logout'
-            src={logout}
+            src={logout_icon}
             height={20}
             width={20}
           />
@@ -71,32 +79,35 @@ export default function AdminLayout({ children }) {
       </div>
       <div className='w-full md:w-10/12 bg-white rounded-lg p-4'>
         <div
-          className='border-b mb-2 md:hidden'
+          className='border-b mb-2 md:hidden relative'
         >
-        <div
-          className='text-sm'
-        >
-          {
-            menus.map((menu, i) => (
-              <Link key={i} href={menu.href}>
-                <span className='text-gray-300 px-1'>*</span>
-                <span className='text-blue-500'>{menu.name}</span>
-              </Link>
-            ))
-          }
-        </div>
-        <div
-          className='text-sm'
-        >
-          {
-            getBreadCrumbArray(path).map((path, i) => (
-              <Link key={i} href={path.href}>
-                <span className='text-gray-300 px-1'>/</span>
-                <span className='text-blue-500'>{path.name}</span>
-              </Link>
-            ))
-          }
-        </div>
+          <button onClick={handleLogout} className='absolute top-1  right-0 text-red-500'>
+          <BiLogOutCircle size={20}/>
+        </button>
+          <div
+            className='text-sm'
+          >
+            {
+              menus.map((menu, i) => (
+                <Link key={i} href={menu.href}>
+                  <span className='text-gray-300 px-1'>*</span>
+                  <span className='text-blue-500'>{menu.name}</span>
+                </Link>
+              ))
+            }
+          </div>
+          <div
+            className='text-sm'
+          >
+            {
+              getBreadCrumbArray(path).map((path, i) => (
+                <Link key={i} href={path.href}>
+                  <span className='text-gray-300 px-1'>/</span>
+                  <span className='text-blue-500'>{path.name}</span>
+                </Link>
+              ))
+            }
+          </div>
         </div>
         {children}
       </div>
