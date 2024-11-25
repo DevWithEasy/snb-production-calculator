@@ -1,13 +1,11 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Loading from '../../../../../components/v2/Loading'
 import toast from "react-hot-toast";
-import getItemsString from "../../../../../utils/v2/getItemsString";
-import TableConsumption from "../../../../../components/v2/consumption/TableConsumption";
-import appscript_api_url from "../../../../../utils/v2/appscript_api_url";
 import HeadInfo from "../../../../../components/HeadInfo";
-import getAPI from "../../../../../utils/v2/appscript_api_url";
+import TableConsumption from "../../../../../components/v2/consumption/TableConsumption";
+import Loading from '../../../../../components/v2/Loading';
+import getItemsString from "../../../../../utils/v2/getItemsString";
 
 export default function Consumption() {
     const router = useRouter();
@@ -19,20 +17,20 @@ export default function Consumption() {
     const [batch, setBatch] = useState('')
     const [consumption, setConsumption] = useState({})
     const [isFamily, setIsFamily] = useState(false)
+
     const getProducts = async (section) => {
-        setLoading(true);
+        setLoading(true)
         try {
-            const { data } = await axios.get(`/api/v2/products?section=${section}`)
+          const { data } = await axios.get(`/api/v2/${section}/products`)
+          if (data.success) {
+            setProducts(data.data)
             setLoading(false)
-            if (data.success) {
-                setProducts(data.data);
-                setLoading(false)
-            }
+          }
         } catch (error) {
-            setLoading(false)
-            console.log(error)
+          setLoading(false)
+          console.log(error)
         }
-    };
+      }
 
     const addRequest = async () => {
         if (!product || !batch) return toast.error('Select Product and Input Batch')
@@ -77,7 +75,8 @@ export default function Consumption() {
                     className='space-y-4'
                 >
                     <div>
-                        <div className="flex">
+                        <div>
+                        <div className="flex flex-col space-y-1">
                             <div
                                 className="flex w-full"
                             >
@@ -99,14 +98,15 @@ export default function Consumption() {
                                     className='w-[150px] p-2 border'
                                 />
                             </div>
-
+                            
                             <button
                                 onClick={addRequest}
-                                className="w-[100px] px-6 bg-gray-100 border-r border-t border-b rounded-r hover:bg-gray-200"
+                                className="px-2 py-1 bg-gray-100 border-r border-t border-b rounded-lg hover:bg-gray-200"
                             >
                                 Add
                             </button>
                         </div>
+                    </div>
                     </div>
                     <div className="bg-white rounded-lg border border-gray-200">
                         <div

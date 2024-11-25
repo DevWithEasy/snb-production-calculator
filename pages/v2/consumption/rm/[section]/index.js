@@ -1,12 +1,11 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Loading from '../../../../../components/v2/Loading'
 import toast from "react-hot-toast";
-import getItemsString from "../../../../../utils/v2/getItemsString";
-import TableConsumption from "../../../../../components/v2/consumption/TableConsumption";
 import HeadInfo from "../../../../../components/HeadInfo";
-import getAPI from "../../../../../utils/v2/appscript_api_url";
+import TableConsumption from "../../../../../components/v2/consumption/TableConsumption";
+import Loading from '../../../../../components/v2/Loading';
+import getItemsString from "../../../../../utils/v2/getItemsString";
 
 export default function Consumption() {
     const router = useRouter();
@@ -18,19 +17,18 @@ export default function Consumption() {
     const [batch, setBatch] = useState('')
     const [consumption, setConsumption] = useState({})
     const getProducts = async (section) => {
-        setLoading(true);
+        setLoading(true)
         try {
-            const { data } = await axios.get(`/api/v2/products?section=${section}`)
+          const { data } = await axios.get(`/api/v2/${section}/products`)
+          if (data.success) {
+            setProducts(data.data)
             setLoading(false)
-            if (data.success) {
-                setProducts(data.data);
-                setLoading(false)
-            }
+          }
         } catch (error) {
-            setLoading(false)
-            console.log(error)
+          setLoading(false)
+          console.log(error)
         }
-    };
+      }
 
     const addRequest = async () => {
         if (!product || !batch) return toast.error('Select Product and Input Batch')
