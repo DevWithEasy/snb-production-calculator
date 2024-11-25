@@ -8,15 +8,23 @@ import appStore from '../features/appStore';
 export default function Index() {
     const router = useRouter()
     const { app_user } = appStore()
-    useEffect(()=>{
-        if(app_user.section){
-            return router.push('/v2/user_area/'+app_user?.section.toLowerCase())
-        }else{
-            setTimeout(()=>{
-                return router.push('/v2/login')
-            },2000)
-        }
-    },[router,app_user])
+    
+        useEffect(() => {
+            if (app_user.role === 'admin') {
+                router.push('/admin');
+                return;
+            }
+    
+            if (app_user.role === 'user') {
+                router.push('/v2/user_area/' + app_user.section.toLowerCase());
+                return;
+            }
+            const timeoutId = setTimeout(() => {
+                router.push('/v2/login');
+            }, 2000);
+            return () => clearTimeout(timeoutId);
+        }, [router, app_user]);
+    console.log(app_user)
     return (
         <div
             className='h-[calc(100%-128px)] flex flex-col justify-center items-center'

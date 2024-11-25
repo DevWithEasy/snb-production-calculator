@@ -39,7 +39,7 @@ export default function Login() {
 
                 loged(app_user)
                 if (app_user.role === 'admin') {
-                    return router.push('/v2/admin')
+                    return router.push('/admin')
                 } else {
                     return router.push('/v2/user_area/' + app_user.section.toLowerCase())
                 }
@@ -55,10 +55,7 @@ export default function Login() {
 
     useEffect(() => {
         if (app_user.name) {
-            toast.success('Already loged in.')
-            setTimeout(() => {
-                router.push('/v2/user_area/' + app_user?.section?.toLowerCase())
-            }, 1000)
+            router.push(app_user.role === 'admin' ? '/admin' : '/v2/user_area/' + app_user.section.toLowerCase());
         }
     }, [router, app_user])
     return (

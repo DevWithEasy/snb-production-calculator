@@ -1,23 +1,18 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
-import home from '../../public/home.png'
+import React from 'react'
 import admin from '../../public/admin.png'
+import logout from '../../public/logout.png'
+import product from '../../public/products.png'
 import section from '../../public/sections.png'
 import user from '../../public/users.png'
-import product from '../../public/products.png'
-import logout from '../../public/logout.png'
-import Image from 'next/image'
+import getBreadCrumbArray from '../../utils/v2/getBreadCrumbArray'
 
 export default function AdminLayout({ children }) {
   const router = useRouter()
   const path = router.pathname
   const menus = [
-    {
-      name: 'Home',
-      href: '/',
-      image: home
-    },
     {
       name: 'Admin',
       href: '/admin',
@@ -39,13 +34,13 @@ export default function AdminLayout({ children }) {
       image: product
     },
   ]
-  // console.log(path)
+
   return (
     <div
       className='flex'
     >
       <div
-        className='w-2/12 px-2'
+        className='hidden md:block w-2/12 px-2'
       >
         {
           menus.map((menu, index) => (
@@ -74,7 +69,37 @@ export default function AdminLayout({ children }) {
           <span>Logout</span>
         </button>
       </div>
-      <div className='w-10/12 bg-white rounded-lg p-4'>{children}</div>
+      <div className='w-full md:w-10/12 bg-white rounded-lg p-4'>
+        <div
+          className='border-b mb-2 md:hidden'
+        >
+        <div
+          className='text-sm'
+        >
+          {
+            menus.map((menu, i) => (
+              <Link key={i} href={menu.href}>
+                <span className='text-gray-300 px-1'>*</span>
+                <span className='text-blue-500'>{menu.name}</span>
+              </Link>
+            ))
+          }
+        </div>
+        <div
+          className='text-sm'
+        >
+          {
+            getBreadCrumbArray(path).map((path, i) => (
+              <Link key={i} href={path.href}>
+                <span className='text-gray-300 px-1'>/</span>
+                <span className='text-blue-500'>{path.name}</span>
+              </Link>
+            ))
+          }
+        </div>
+        </div>
+        {children}
+      </div>
     </div>
   )
 }
