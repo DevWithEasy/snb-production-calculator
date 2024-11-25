@@ -24,7 +24,7 @@ export default function Index() {
             }, 2000);
             return () => clearTimeout(timeoutId);
         }, [router, app_user]);
-    console.log(app_user)
+    
     return (
         <div
             className='h-[calc(100%-128px)] flex flex-col justify-center items-center'
