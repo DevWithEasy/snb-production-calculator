@@ -42,7 +42,6 @@ export default function TableConsumption({ headers, rows }) {
                                     </p>
                                 </td>
                                 {tr.map((value, i) => {
-                                    console.log(i === 0);
                                     return (
                                         <td
                                             key={i}

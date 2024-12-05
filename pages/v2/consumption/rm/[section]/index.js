@@ -66,7 +66,7 @@ export default function Consumption() {
         getProducts(section);
     }, [section])
 
-    // console.log(consumption)
+    console.log(consumption)
     return (
         <>
             <HeadInfo title={`Consumption(RM) - ${section}`} />
