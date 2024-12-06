@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
   const isHeader = router.pathname.split('/').pop() === 'login' || router.pathname==='/' ? true : false 
-  console.log(router)
   return <div
     className='h-screen overflow-y-auto bg-gray-50'
   >

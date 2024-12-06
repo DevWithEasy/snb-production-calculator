@@ -6,6 +6,7 @@ import HeadInfo from "../../../../../components/HeadInfo";
 import TableConsumption from "../../../../../components/v2/consumption/TableConsumption";
 import Loading from '../../../../../components/v2/Loading';
 import getItemsString from "../../../../../utils/v2/getItemsString";
+import SubmitConsumption from "../../../../../components/v2/consumption/SubmitConsumption";
 
 export default function Consumption() {
     const router = useRouter();
@@ -16,19 +17,21 @@ export default function Consumption() {
     const [product, setProduct] = useState('')
     const [batch, setBatch] = useState('')
     const [consumption, setConsumption] = useState({})
+    const [totalConsumption, setTotalConsumption] = useState({})
+    const [isSubmit, setIsSubmit] = useState(false)
     const getProducts = async (section) => {
         setLoading(true)
         try {
-          const { data } = await axios.get(`/api/v2/${section}/products`)
-          if (data.success) {
-            setProducts(data.data)
-            setLoading(false)
-          }
+            const { data } = await axios.get(`/api/v2/${section}/products`)
+            if (data.success) {
+                setProducts(data.data)
+                setLoading(false)
+            }
         } catch (error) {
-          setLoading(false)
-          console.log(error)
+            setLoading(false)
+            console.log(error)
         }
-      }
+    }
 
     const addRequest = async () => {
         if (!product || !batch) return toast.error('Select Product and Input Batch')
@@ -45,13 +48,14 @@ export default function Consumption() {
     }
 
     const getConsumption = async () => {
-        if(requests.length === 0) return toast.error('No requests product add')
+        if (requests.length === 0) return toast.error('No requests product add')
         setLoading(true)
         try {
             const { data } = await axios.get(`/api/v2/consumption/rm?section=${section}&items=${getItemsString(requests)}`);
             if (data.success) {
                 setLoading(false)
                 setConsumption(data.data)
+                setTotalConsumption(data.total)
                 toast.success('Consumption added successfully')
                 setRequest([])
             }
@@ -66,98 +70,110 @@ export default function Consumption() {
         getProducts(section);
     }, [section])
 
-    console.log(consumption)
+    // console.log(consumption)
     return (
         <>
             <HeadInfo title={`Consumption(RM) - ${section}`} />
             <div
-                    className='space-y-4'
-                >
-                    <div>
-                        <div className="flex flex-col space-y-1">
-                            <div
-                                className="flex w-full"
-                            >
-                                <select
-                                    value={product}
-                                    onChange={(e) => setProduct(e.target.value)}
-                                    className='w-full p-2 border-l border-t border-b rounded-l'
-                                >
-                                    <option value="">Select a product</option>
-                                    {products.length > 0 &&
-                                        products.map((product) => (
-                                            <option key={product.name} value={product.name}>{product.name}</option>
-                                        ))}
-                                </select>
-                                <input
-                                    value={batch}
-                                    onChange={(e) => setBatch(e.target.value)}
-                                    placeholder={section === 'choclate' ? 'Carton' : 'Batch'}
-                                    className='w-[150px] p-2 border'
-                                />
-                            </div>
-                            
-                            <button
-                                onClick={addRequest}
-                                className="px-2 py-1 bg-gray-100 border-r border-t border-b rounded-lg hover:bg-gray-200"
-                            >
-                                Add
-                            </button>
-                        </div>
-                    </div>
-                    <div className="bg-white rounded-lg border border-gray-200">
+                className='space-y-4'
+            >
+                <div>
+                    <div className="flex flex-col space-y-1">
                         <div
-                            className="flex items-center justify-between bg-gray-100 p-2 rounded-t-lg"
+                            className="flex w-full"
                         >
-                            <p>Product & Batch</p>
-                            <button
-                                onClick={getConsumption}
-                                className="bg-gray-500 text-white px-4 py-1 text-sm rounded"
+                            <select
+                                value={product}
+                                onChange={(e) => setProduct(e.target.value)}
+                                className='w-full p-2 border-l border-t border-b rounded-l'
                             >
-                                Submit
-                            </button>
-                        </div>
-                        <div className="p-2 space-y-2">
-                            {
-                                requests.length > 0 ?
-                                    <table
-                                        className="w-full"
-                                    >
-                                        <tbody>
-                                            {
-                                                requests.map((req, index) => (
-                                                    <tr key={index} className="flex justify-between space-x-2">
-                                                        <td className="w-1/3">{req.product}</td>
-                                                        <td className="w-1/3 text-center">{req.batch}</td>
-                                                        <td className="w-1/3 text-right">
-                                                            <button
-                                                                onClick={() => setRequest(requests.filter(r => r.product !== req.product))}
-                                                                className="px-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md"
-                                                            >
-                                                                Remove
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                ))
-                                            }
-                                        </tbody>
-                                    </table>
-                                    :
-                                    <p className="text-center text-sm text-gray-300">No Products Added yet</p>
-                            }
-                        </div>
-                    </div>
-                    <div>
-                        {
-                            consumption.headers &&
-                            <TableConsumption
-                                headers={consumption.headers}
-                                rows={consumption.rows}
+                                <option value="">Select a product</option>
+                                {products.length > 0 &&
+                                    products.map((product) => (
+                                        <option key={product.name} value={product.name}>{product.name}</option>
+                                    ))}
+                            </select>
+                            <input
+                                value={batch}
+                                onChange={(e) => setBatch(e.target.value)}
+                                placeholder={section === 'choclate' ? 'Carton' : 'Batch'}
+                                className='w-[150px] p-2 border'
                             />
+                        </div>
+
+                        <button
+                            onClick={addRequest}
+                            className="px-2 py-1 bg-gray-100 border-r border-t border-b rounded-lg hover:bg-gray-200"
+                        >
+                            Add
+                        </button>
+                    </div>
+                </div>
+                <div className="bg-white rounded-lg border border-gray-200">
+                    <div
+                        className="flex items-center justify-between bg-gray-100 p-2 rounded-t-lg"
+                    >
+                        <p>Product & Batch</p>
+                        <button
+                            onClick={getConsumption}
+                            className="bg-gray-500 text-white px-4 py-1 text-sm rounded"
+                        >
+                            Submit
+                        </button>
+                    </div>
+                    <div className="p-2 space-y-2">
+                        {
+                            requests.length > 0 ?
+                                <table
+                                    className="w-full"
+                                >
+                                    <tbody>
+                                        {
+                                            requests.map((req, index) => (
+                                                <tr key={index} className="flex justify-between space-x-2">
+                                                    <td className="w-1/3">{req.product}</td>
+                                                    <td className="w-1/3 text-center">{req.batch}</td>
+                                                    <td className="w-1/3 text-right">
+                                                        <button
+                                                            onClick={() => setRequest(requests.filter(r => r.product !== req.product))}
+                                                            className="px-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md"
+                                                        >
+                                                            Remove
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+                                :
+                                <p className="text-center text-sm text-gray-300">No Products Added yet</p>
                         }
                     </div>
                 </div>
-                {loading && <Loading />}
+                <div>
+                    {
+                        consumption.headers &&
+                        <TableConsumption
+                            headers={consumption.headers}
+                            rows={consumption.rows}
+                        />
+                    }
+                </div>
+                <div>
+                    <button onClick={()=>setIsSubmit(true)}>Submit Consumption</button>
+                </div>
+            </div>
+            {loading && <Loading />}
+            {isSubmit && 
+                <SubmitConsumption  
+                    field='pm'
+                    keys={totalConsumption.keys}
+                    values={totalConsumption.values}
+                    object={totalConsumption.object}
+                    setIsSubmit={setIsSubmit}
+                />
+            }
         </>
 
     );
