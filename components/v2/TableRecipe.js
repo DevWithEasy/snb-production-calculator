@@ -3,6 +3,7 @@ import TrRM from './TrRM'
 import TrRMTotal from './TrRMTotal'
 
 export default function TableRecipe({ title, rm, rm_total }) {
+    
     return (
         <div className="max-w-3xl mx-auto">
             <div className="overflow-x-auto">

@@ -48,71 +48,61 @@ export default function Recipe() {
   console.log(recipe)
   return (
     <>
-    <HeadInfo title={`Recipe - ${section}`}/>
-    <div
-      className=' bg-gray-50'
-    >
+      <HeadInfo title={`Recipe - ${section}`} />
       <div
-        className='container md:max-w-3xl md:mx-auto space-y-2'
+        className=' bg-gray-50'
       >
         <div
-          className=''
+          className='container md:max-w-3xl md:mx-auto space-y-2'
         >
-          <select
-            onChange={(e) => getRecipe(section, e.target.value)}
-            className='w-full p-2 border rounded'
+          <div
+            className=''
           >
-            <option value="">Select a product</option>
-            {products.length > 0 &&
-              products.map((product) => (
-                <option key={product.name} value={product.name}>{product.name}</option>
-              ))}
-          </select>
+            <select
+              onChange={(e) => getRecipe(section, e.target.value)}
+              className='w-full p-2 border rounded'
+            >
+              <option value="">Select a product</option>
+              {products.length > 0 &&
+                products.map((product) => (
+                  <option key={product.name} value={product.name}>{product.name}</option>
+                ))}
+            </select>
+          </div>
+          <div
+            className='p-2 bg-white rounded-lg'
+          >
+            <p>Section : {section}</p>
+            <p>Product Name : {product}</p>
+          </div>
         </div>
-        <div
-          className='p-2 bg-white rounded-lg'
-        >
-          <p>Section : {section}</p>
-          <p>Product Name : {product}</p>
-        </div>
-      </div>
-      {recipe.rm &&
-        <div
-          className='py-4'
-        >
-          <TableRecipe
-            title='Recipe'
-            rm={recipe.rm}
-            rm_total={recipe.rm_total}
-          />
-          <TableRecipe
-            title='Product Information'
-            rm={recipe.info}
-          />
-          {
-            section !== 'cake' ?
-              <TableRecipe
-                title='Require Packing Material'
-                rm={recipe.packing}
-              />
-              :
-              <>
-                <TableRecipe
-                  title='Require Packing Material(Standard Item)'
-                  rm={recipe.packing.standard}
-                />
-                <TableRecipe
-                  title='Require Packing Material(Family Item)'
-                  rm={recipe.packing.family}
-                />
-              </>
-          }
-        </div>
-      }
+        {recipe.rm &&
+          <div
+            className='py-4'
+          >
+            <TableRecipe
+              title='Recipe'
+              rm={recipe.rm}
+              rm_total={recipe.rm_total}
+            />
+            <TableRecipe
+              title='Product Information'
+              rm={recipe.info}
+            />
+            <TableRecipe
+              title='Require Packing Material'
+              rm={recipe.packing}
+            />
+            <TableRecipe
+              title='Require Packing Per Carton'
+              rm={recipe.carton_packing}
+            />
+          </div>
+        }
 
-      {loading && <Loading />}
-    </div>
+        {loading && <Loading />}
+      </div>
     </>
-    
+
   )
 }
