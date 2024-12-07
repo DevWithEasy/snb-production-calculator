@@ -75,7 +75,7 @@ export default function Consumption() {
         <>
             <HeadInfo title={`Consumption(RM) - ${section}`} />
             <div
-                className='space-y-4'
+                className='space-y-2'
             >
                 <div>
                     <div className="flex flex-col space-y-1">
@@ -160,13 +160,22 @@ export default function Consumption() {
                         />
                     }
                 </div>
-                <div>
-                    <button onClick={()=>setIsSubmit(true)}>Submit Consumption</button>
-                </div>
+                {
+                    consumption?.headers ?
+                    <div>
+                        <button 
+                        onClick={() => setIsSubmit(true)}
+                        className="p-2 text-sm bg-gray-500 text-white rounded-lg"
+                            >
+                                Submit Consumption
+                        </button>
+                    </div>
+                    : null
+                }
             </div>
             {loading && <Loading />}
-            {isSubmit && 
-                <SubmitConsumption  
+            {isSubmit &&
+                <SubmitConsumption
                     field='pm'
                     keys={totalConsumption.keys}
                     values={totalConsumption.values}

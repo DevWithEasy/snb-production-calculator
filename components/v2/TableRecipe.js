@@ -19,7 +19,7 @@ export default function TableRecipe({ title, rm, rm_total }) {
                                 <th scope="col" className="px-5 py-2 text-sm font-normal text-center text-gray-800 bg-gray-100 border-b border-gray-200">
                                     Sl
                                 </th>
-                                <th scope="col" className="pr-5 py-2 text-sm font-normal text-left text-gray-800 bg-gray-100 border-b border-gray-200">
+                                <th scope="col" className="pr-5 py-2 text-sm font-normal text-left text-nowrap text-gray-800 bg-gray-100 border-b border-gray-200">
                                     Name
                                 </th>
                                 <th scope="col" className="px-5 py-2 text-sm font-normal text-center text-gray-800 bg-gray-100 border-b border-gray-200">
