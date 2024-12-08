@@ -1,34 +1,70 @@
 import React, { useState } from 'react'
+import getMonthDaysArray from '../../../utils/v2/getMonthDaysArray'
+import axios from 'axios'
+import getConsumptionItemsString from '../../../utils/v2/getConsumptionItemsString'
 
-export default function SubmitConsumption({ field, setIsSubmit, keys, values, object }) {
+export default function SubmitConsumption({section, field, setIsSubmit, keys, values, object }) {
     const [data, setData] = useState(object)
-    console.log(data)
+    const [date, setDate] = useState('')
+    const handleSubmitServer=async()=>{
+        try {
+            const response = await axios.post('/api/v2/daily_rmpm/consumption/rmpm_post',{
+                    section,
+                    field,
+                    date,
+                    items : getConsumptionItemsString(data)
+                }
+            )
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <div
             className='absolute top-0 left-0 h-screen w-full flex justify-center items-center bg-gray-500/50'
         >
             <div
-                className='h-[calc(100%-20px)] w-full md:w-5/12 mx-auto px-2 md:px-0 rounded-lg'
+                className='h-screen w-full md:w-5/12 mx-auto md:px-0 overflow-y-auto'
             >
                 <div
-                    className='h-10 px-4 flex justify-end items-center space-x-2 bg-gray-300 text-white text-sm rounded-t-lg'
+                    className='fixed top-0 h-28 w-full md:w-5/12 mx-auto px-4 py-2 space-y-2 bg-gray-300 text-sm'
                 >
-                    <button
-                        onClick={() => setIsSubmit(false)}
-                        className='bg-gray-500 px-4 py-0.5 rounded'
+                    <p className='p-1 bg-white rounded'>রিপোর্ট সার্ভারে সাবমিট করুন । আপনি চাইলে পরিমান পরিবর্তন করতে পারেন।</p>
+                    <div
+                        className='w-full flex justify-between items-center'
                     >
-                        Submit
-                    </button>
-                    <button
-                        onClick={() => setIsSubmit(false)}
-                        className='bg-red-500 px-4 py-0.5 rounded'
-                    >
-                        Close
-                    </button>
+                        <select
+                            onChange={(e) => setDate(e.target.value)}
+                            className='px-2 py-1 rounded-lg focus:outline-none border'
+                        >
+                            {
+                                getMonthDaysArray().map(day => (
+                                    <option key={day.value} value={day.value}>{day.title}</option>
+                                ))
+                            }
+                        </select>
+                        <div
+                            className='text-white space-x-2 '
+                        >
+                            <button
+                                onClick={handleSubmitServer}
+                                className='bg-gray-500 px-3 py-1 rounded'
+                            >
+                                সাবমিট
+                            </button>
+                            <button
+                                onClick={() => setIsSubmit(false)}
+                                className='bg-red-500 px-4 py-1 rounded'
+                            >
+                                X
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div
-                    className='h-[calc(100%-60px)] bg-white rounded-b-lg p-2 text-sm overflow-y-auto'
+                    className='pt-28 bg-white p-2 text-sm overflow-y-auto'
                 >
                     {
                         keys.map(key => (

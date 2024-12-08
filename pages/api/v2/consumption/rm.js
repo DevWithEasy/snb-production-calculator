@@ -6,7 +6,6 @@ export default async function handler(req,res,next){
     const {section,items}=req.query
     try {
         const {data} = await axios.get(getAPI()+`route=consumption_rm&section=${section}&items=${items}`)
-        console.log(data)
         res.send(data)
     } catch (error) {
         console.log(error)
