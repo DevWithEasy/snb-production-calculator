@@ -30,7 +30,7 @@ export default function Index() {
             className='h-[calc(100%-128px)] flex flex-col justify-center items-center'
         >
             <div
-                className='relative flex flex-col items-center'
+                className='relative flex flex-col items-center space-y-2'
             >
                 <Image
                     alt='logo'
@@ -41,7 +41,7 @@ export default function Index() {
                 <p
                     className='font-bold hidden md:block'
                 >
-                    S&B Nice Food Valley Ltd.
+                    এসএন্ডবি নাইস ফুড ভ্যালি লি.
                 </p>
                 <ImSpinner2 size={260} className="absolute -top-24 md:-top-16 w-40 md:w-80 animate-spin text-gray-200" />
             </div>

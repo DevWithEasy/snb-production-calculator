@@ -98,11 +98,11 @@ export default function Login() {
                             {loading ? "Connecting..." : "Login"}
                         </button>
                     </div>
-                    <div
+                    {/* <div
                         className="text-blue-500"
                     >
                         <Link href="/v1/login">Go to V-1</Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

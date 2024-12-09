@@ -45,7 +45,7 @@ export default function TableConsumption({ headers, rows }) {
                                     return (
                                         <td
                                             key={i}
-                                            className={`pr-4 py-1 text-sm bg-white border-gray-200 border-b border-r ${i === 0 ? "text-left text-nowrap" : "text-center"
+                                            className={`pr-4 py-1 text-sm bg-white border-gray-200 border-b border-r ${i === 0 ? "text-left text-nowrap pl-2" : "text-center"
                                                 }`}
                                         >
                                             <p className="text-gray-900 whitespace-no-wrap">

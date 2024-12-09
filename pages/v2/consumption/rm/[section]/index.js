@@ -113,7 +113,7 @@ export default function Consumption() {
                     <div
                         className="flex items-center justify-between bg-gray-100 p-2 rounded-t-lg"
                     >
-                        <p>আইটেম & ব্যাচ</p>
+                        <p>আইটেম ও ব্যাচ</p>
                         <button
                             onClick={getConsumption}
                             className="bg-gray-500 text-white px-4 py-1 text-sm rounded"

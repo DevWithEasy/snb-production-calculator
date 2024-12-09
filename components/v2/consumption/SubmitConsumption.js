@@ -2,12 +2,17 @@ import React, { useState } from 'react'
 import getMonthDaysArray from '../../../utils/v2/getMonthDaysArray'
 import axios from 'axios'
 import getConsumptionItemsString from '../../../utils/v2/getConsumptionItemsString'
+import Loading from '../Loading'
+import toast from 'react-hot-toast'
 
 export default function SubmitConsumption({section, field, setIsSubmit, keys, values, object }) {
     const [data, setData] = useState(object)
-    const [date, setDate] = useState('')
+    const [date, setDate] = useState(null)
+    const [loading,setLoading] = useState(false)
     const handleSubmitServer=async()=>{
+        if (!date) return toast.error('তারিখ সিলেক্ট করেন নি।')
         try {
+            setLoading(true)
             const response = await axios.post('/api/v2/daily_rmpm/consumption/rmpm_post',{
                     section,
                     field,
@@ -15,8 +20,17 @@ export default function SubmitConsumption({section, field, setIsSubmit, keys, va
                     items : getConsumptionItemsString(data)
                 }
             )
+            if(response.data.status === 200){
+                toast.success(response.data.message)
+                setLoading(false)
+                setIsSubmit(false)
+            }else{
+                toast.error(response.data.message)
+                setLoading(false)
+            }
         } catch (error) {
             console.log(error)
+            setLoading(!loading)
         }
     }
     return (
@@ -37,6 +51,7 @@ export default function SubmitConsumption({section, field, setIsSubmit, keys, va
                             onChange={(e) => setDate(e.target.value)}
                             className='px-2 py-1 rounded-lg focus:outline-none border'
                         >
+                            <option>তারিখ সিলেক্ট</option>
                             {
                                 getMonthDaysArray().map(day => (
                                     <option key={day.value} value={day.value}>{day.title}</option>
@@ -85,7 +100,9 @@ export default function SubmitConsumption({section, field, setIsSubmit, keys, va
                     }
                 </div>
             </div>
-
+            {
+                loading && <Loading title='পাঠানো হচ্ছে...'/>
+            }
         </div>
     )
 }
