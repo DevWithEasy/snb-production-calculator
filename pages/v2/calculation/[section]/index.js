@@ -88,7 +88,7 @@ export default function Recipe() {
             <div
               className='flex justify-end'
             >
-              <button className='mt-2 mr-2 px-2 py-1 border rounded-lg' onClick={() => setDateView(!dateView)}>তারিখ পরিবর্তন</button>
+              <button className='mt-2 mr-2 px-2 py-1 border rounded-lg' onClick={() => setDateView(!dateView)}>{`(${start_date}-${end_date}) `}তারিখ পরিবর্তন</button>
             </div>
             <div
               className='w-full overflow-x-auto'

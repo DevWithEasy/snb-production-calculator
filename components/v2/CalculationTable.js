@@ -24,7 +24,7 @@ export default function CalculationTable({ headers, rows }) {
                                 row.map((cell, i) => (
                                     <td
                                         key={i}
-                                        className={`p-2 ${i == 1 ? 'text-left' : 'text-center'}`}
+                                        className={`p-2 ${i == 1 ? 'text-left text-nowrap' : 'text-center'}`}
                                     >
                                         {cell}
                                     </td>
