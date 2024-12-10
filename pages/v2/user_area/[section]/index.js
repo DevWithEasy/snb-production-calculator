@@ -33,6 +33,11 @@ export default function Section() {
             name: 'Packing Material Calculation',
             icon: <PiCalculatorLight />
         },
+        {
+            path: '/v2/calculation/',
+            name: 'Day By Calculation',
+            icon: <PiCalculatorLight />
+        },
     ]
 
     return (
