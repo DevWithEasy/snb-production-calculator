@@ -51,7 +51,7 @@ export default function Recipe() {
             className='absolute left-0 top-0 px-4 md:px-0 h-screen w-full flex justify-center items-center bg-gray-500/50'
           >
             <div
-              className='relative w-full md:w-4/12 p-4 flex flex-col space-y-2 bg-white rounded-lg'
+              className='relative w-6/12 md:w-4/12 p-4 flex flex-col space-y-2 bg-white rounded-lg'
             >
               {consumption?.header && <ImCross onClick={() => setDateView(!dateView)} className='absolute -top-5 right-2 text-red-500' />}
               <select

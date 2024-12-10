@@ -24,6 +24,16 @@ export default function Section() {
             icon: <GiBlackBook />
         },
         {
+            path: '/v2/recieved/rm/',
+            name: 'Raw Material Recieved',
+            icon: <PiCalculatorLight />
+        },
+        {
+            path: '/v2/recieved/pm/',
+            name: 'Packing Material Recieved',
+            icon: <PiCalculatorLight />
+        },
+        {
             path: '/v2/consumption/rm/',
             name: 'Raw Material Calculation',
             icon: <PiCalculatorLight />
