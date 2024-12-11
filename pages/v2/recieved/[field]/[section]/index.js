@@ -61,7 +61,7 @@ export default function Recipe() {
 
     return (
         <>
-            <HeadInfo title={`Calculation - ${section}`} />
+            <HeadInfo title={`Daily Recieve Input - ${section}`} />
             <div
                 className=' bg-gray-50'
             >
@@ -109,7 +109,7 @@ export default function Recipe() {
                             >
                                 <button
                                     onClick={() => setDateView(!dateView)}
-                                    className='border px-2 py-1 rounded-lg'
+                                    className='border px-2 py-1 rounded-lg text-sm'
                                 >
                                     ({date}) Date Change
                                 </button>

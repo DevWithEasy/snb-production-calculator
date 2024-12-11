@@ -42,7 +42,7 @@ export default function Recipe() {
 
   return (
     <>
-      <HeadInfo title={`Calculation - ${section}`} />
+      <HeadInfo title={`Stock Calculation - ${section}`} />
       <div
         className=' bg-gray-50'
       >
@@ -95,9 +95,12 @@ export default function Recipe() {
               className='pt-2 px-2 flex items-center justify-between'
             >
               <IoIosArrowRoundBack size={30} className='cursor-pointer' onClick={() => router.back()} />
-              <button className='px-2 py-1 border rounded-lg' onClick={() => setDateView(!dateView)}>
+              <button
+                className='px-2 py-1 border rounded-lg text-sm'
+                onClick={() => setDateView(!dateView)}
+              >
                 {`(${start_date}-${end_date}) `}Date Change
-                </button>
+              </button>
             </div>
             <div
               className='w-full overflow-x-auto'
