@@ -58,6 +58,7 @@ export default function Login() {
             router.push(app_user.role === 'admin' ? '/admin' : '/v2/user_area/' + app_user.section.toLowerCase());
         }
     }, [router, app_user])
+    
     return (
         <>
             <HeadInfo title="Login (V.2) - app_user authentication" />
