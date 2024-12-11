@@ -43,7 +43,7 @@ export default function SubmitConsumption({section, field, setIsSubmit, keys, va
                 <div
                     className='fixed top-0 h-28 w-full md:w-5/12 mx-auto px-4 py-2 space-y-2 bg-gray-300 text-sm'
                 >
-                    <p className='p-1 bg-white rounded'>রিপোর্ট সার্ভারে সাবমিট করুন । আপনি চাইলে পরিমান পরিবর্তন করতে পারেন।</p>
+                    <p className='p-1 bg-white rounded'>Submit report in server. If want possible to change any item quantity.</p>
                     <div
                         className='w-full flex justify-between items-center'
                     >
@@ -51,7 +51,7 @@ export default function SubmitConsumption({section, field, setIsSubmit, keys, va
                             onChange={(e) => setDate(e.target.value)}
                             className='px-2 py-1 rounded-lg focus:outline-none border'
                         >
-                            <option>তারিখ সিলেক্ট</option>
+                            <option>Date select</option>
                             {
                                 getMonthDaysArray().map(day => (
                                     <option key={day.value} value={day.value}>{day.title}</option>
@@ -65,7 +65,7 @@ export default function SubmitConsumption({section, field, setIsSubmit, keys, va
                                 onClick={handleSubmitServer}
                                 className='bg-gray-500 px-3 py-1 rounded'
                             >
-                                সাবমিট
+                                Submit
                             </button>
                             <button
                                 onClick={() => setIsSubmit(false)}
@@ -101,7 +101,7 @@ export default function SubmitConsumption({section, field, setIsSubmit, keys, va
                 </div>
             </div>
             {
-                loading && <Loading title='পাঠানো হচ্ছে...'/>
+                loading && <Loading title='Sending...'/>
             }
         </div>
     )

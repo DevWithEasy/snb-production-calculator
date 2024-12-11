@@ -1,13 +1,14 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
+import toast from 'react-hot-toast'
+import { ImCross } from 'react-icons/im'
+import { IoIosArrowRoundBack } from "react-icons/io"
 import HeadInfo from '../../../../components/HeadInfo'
+import CalculationTable from '../../../../components/v2/CalculationTable'
+import ItemInOut from '../../../../components/v2/ItemInOut'
 import Loading from '../../../../components/v2/Loading'
 import getMonthDaysArray from '../../../../utils/v2/getMonthDaysArray'
-import toast from 'react-hot-toast'
-import CalculationTable from '../../../../components/v2/CalculationTable'
-import { ImCross } from 'react-icons/im'
-import ItemInOut from '../../../../components/v2/ItemInOut'
 
 export default function Recipe() {
   const router = useRouter()
@@ -51,14 +52,14 @@ export default function Recipe() {
             className='absolute left-0 top-0 px-4 md:px-0 h-screen w-full flex justify-center items-center bg-gray-500/50'
           >
             <div
-              className='relative w-6/12 md:w-4/12 p-4 flex flex-col space-y-2 bg-white rounded-lg'
+              className='relative w-9/12 md:w-4/12 p-4 flex flex-col space-y-2 bg-white rounded-lg'
             >
               {consumption?.header && <ImCross onClick={() => setDateView(!dateView)} className='absolute -top-5 right-2 text-red-500' />}
               <select
                 onChange={(e) => setStart_date(e.target.value)}
                 className='px-2 py-1 rounded-lg focus:outline-none border'
               >
-                <option value={null}>শুরু তারিখ সিলেক্ট</option>
+                <option value={null}>From Date</option>
                 {
                   getMonthDaysArray().map(day => (
                     <option key={day.value} value={day.value}>{day.title}</option>
@@ -69,7 +70,7 @@ export default function Recipe() {
                 onChange={(e) => setEnd_date(e.target.value)}
                 className='px-2 py-1 rounded-lg focus:outline-none border'
               >
-                <option value={null}>শেষ তারিখ সিলেক্ট</option>
+                <option value={null}>To Date</option>
                 {
                   getMonthDaysArray().map(day => (
                     <option key={day.value} value={day.value}>{day.title}</option>
@@ -80,7 +81,7 @@ export default function Recipe() {
                 className='p-2 bg-blue-500 text-white rounded-lg'
                 onClick={getConsumption}
               >
-                সাবমিট
+                Submit
               </button>
             </div>
           </div>
@@ -91,9 +92,12 @@ export default function Recipe() {
             className='container md:max-w-3xl md:mx-auto space-y-2 bg-white'
           >
             <div
-              className='flex justify-end'
+              className='pt-2 px-2 flex items-center justify-between'
             >
-              <button className='mt-2 mr-2 px-2 py-1 border rounded-lg' onClick={() => setDateView(!dateView)}>{`(${start_date}-${end_date}) `}তারিখ পরিবর্তন</button>
+              <IoIosArrowRoundBack size={30} className='cursor-pointer' onClick={() => router.back()} />
+              <button className='px-2 py-1 border rounded-lg' onClick={() => setDateView(!dateView)}>
+                {`(${start_date}-${end_date}) `}Date Change
+                </button>
             </div>
             <div
               className='w-full overflow-x-auto'

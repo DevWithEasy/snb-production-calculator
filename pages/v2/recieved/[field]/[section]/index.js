@@ -71,7 +71,7 @@ export default function Recipe() {
                         className='absolute left-0 top-0 px-4 md:px-0 h-screen w-full flex justify-center items-center bg-gray-500/50'
                     >
                         <div
-                            className='relative w-6/12 md:w-3/12 p-4 flex flex-col space-y-2 bg-white rounded-lg'
+                            className='relative w-9/12 md:w-3/12 p-4 flex flex-col space-y-2 bg-white rounded-lg'
                         >
                             {keys.length > 0 && <ImCross onClick={() => setDateView(!dateView)} className='absolute -top-5 right-2 text-red-500' />}
                             <select
@@ -79,7 +79,7 @@ export default function Recipe() {
                                 onChange={(e) => setDate(e.target.value)}
                                 className='px-2 py-1 rounded-lg focus:outline-none border'
                             >
-                                <option value={null}>তারিখ সিলেক্ট</option>
+                                <option value={null}>Date select</option>
                                 {
                                     getMonthDaysArray().map(day => (
                                         <option key={day.value} value={day.value}>{day.title}</option>
@@ -90,7 +90,7 @@ export default function Recipe() {
                                 className='p-2 bg-blue-500 text-white rounded-lg'
                                 onClick={getConsumption}
                             >
-                                সাবমিট
+                                Submit
                             </button>
                         </div>
                     </div>
@@ -111,13 +111,13 @@ export default function Recipe() {
                                     onClick={() => setDateView(!dateView)}
                                     className='border px-2 py-1 rounded-lg'
                                 >
-                                    ({date}) তারিখ পরিবর্তন
+                                    ({date}) Date Change
                                 </button>
                                 <button
                                     onClick={handleSubmitServer}
                                     className='bg-gray-500 text-white border px-2 py-1 rounded-lg'
                                 >
-                                    সার্ভারে পাঠান
+                                    Send server
                                 </button>
                             </div>
                         </div>

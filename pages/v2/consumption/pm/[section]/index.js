@@ -88,7 +88,7 @@ export default function Consumption() {
                                     onChange={(e) => setProduct(e.target.value)}
                                     className='w-full p-2 border-l border-t border-b rounded-l'
                                 >
-                                    <option value="">আইটেম সিলেক্ট</option>
+                                    <option value="">Select Item</option>
                                     {products.length > 0 &&
                                         products.map((product) => (
                                             <option key={product.name} value={product.name}>{product.name}</option>
@@ -97,7 +97,7 @@ export default function Consumption() {
                                 <input
                                     value={batch}
                                     onChange={(e) => setBatch(e.target.value)}
-                                    placeholder='কার্টন লিখুন'
+                                    placeholder='Carton'
                                     className='w-[150px] p-2 border'
                                 />
                             </div>
@@ -106,7 +106,7 @@ export default function Consumption() {
                                 onClick={addRequest}
                                 className="px-2 py-1 bg-gray-100 border-r border-t border-b rounded-lg hover:bg-gray-200"
                             >
-                                লিস্টে যোগ করুন
+                                Add List
                             </button>
                         </div>
                     </div>
@@ -115,7 +115,7 @@ export default function Consumption() {
                         <div
                             className="flex items-center justify-between bg-gray-100 p-2 rounded-t-lg"
                         >
-                            <p>আইটেম ও ব্যাচ</p>
+                            <p>Item and Batch</p>
                             <div
                                 className="space-x-2"
                             >
@@ -123,7 +123,7 @@ export default function Consumption() {
                                     onClick={getConsumption}
                                     className="bg-gray-500 text-white px-4 py-1 text-sm rounded"
                                 >
-                                    সাবমিট
+                                    Submit
                                 </button>
                             </div>
 
@@ -145,7 +145,7 @@ export default function Consumption() {
                                                                 onClick={() => setRequest(requests.filter(r => r.product !== req.product))}
                                                                 className="px-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md"
                                                             >
-                                                                বাদ দিন
+                                                                Cancel
                                                             </button>
                                                         </td>
                                                     </tr>
@@ -154,7 +154,7 @@ export default function Consumption() {
                                         </tbody>
                                     </table>
                                     :
-                                    <p className="text-center text-sm text-gray-300">কোন আইটেম যোগ সিলেক্ট করেন নি</p>
+                                    <p className="text-center text-sm text-gray-300">No items add in list.</p>
                             }
                         </div>
                     </div>
@@ -174,7 +174,7 @@ export default function Consumption() {
                         onClick={() => setIsSubmit(true)}
                         className="p-2 text-sm bg-gray-500 text-white rounded-lg"
                             >
-                                সার্ভারে পাঠান
+                                Server submit
                         </button>
                     </div>
                     : null

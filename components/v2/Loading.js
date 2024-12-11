@@ -17,7 +17,7 @@ export default function Loading({title}) {
                 height={40}
                 width={50}
             />
-            <p className='text-sm text-gray-500'>{title ? title : 'খোঁজা হচ্ছে...'}</p>
+            <p className='text-sm text-gray-500'>{title ? title : 'Finding...'}</p>
             <ImSpinner2 size={130} className="absolute -top-8 animate-spin text-gray-200"/>
         </div>
     </div>
