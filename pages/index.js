@@ -41,7 +41,7 @@ export default function Index() {
                 <p
                     className='font-bold hidden md:block'
                 >
-                    এসএন্ডবি নাইস ফুড ভ্যালি লি.
+                    S&B Nice Food Valley Ltd.
                 </p>
                 <ImSpinner2 size={260} className="absolute -top-24 md:-top-16 w-40 md:w-80 animate-spin text-gray-200" />
             </div>

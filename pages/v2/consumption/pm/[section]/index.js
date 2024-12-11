@@ -186,8 +186,7 @@ export default function Consumption() {
                 section={section}
                     field='pm'
                     keys={totalConsumption.keys}
-                    values={totalConsumption.values}
-                    object={totalConsumption.object}
+                    cons_object={totalConsumption.object}
                     setIsSubmit={setIsSubmit}
                 />
             }

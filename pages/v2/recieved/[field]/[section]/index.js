@@ -8,6 +8,7 @@ import Loading from '../../../../../components/v2/Loading'
 import getMonthDaysArray from '../../../../../utils/v2/getMonthDaysArray'
 import getConsumptionItemsString from '../../../../../utils/v2/getConsumptionItemsString'
 import { IoIosArrowRoundBack } from 'react-icons/io'
+import checkAddtionIndex from '../../../../../utils/v2/checkAddtionIndex'
 
 export default function Recipe() {
     const router = useRouter()
@@ -17,9 +18,26 @@ export default function Recipe() {
     const [date, setDate] = useState(null)
     const [keys, setKeys] = useState([])
     const [object, setObject] = useState({})
+    const [data, setData] = useState({})
+    const [error, setError] = useState(false)
+    const [errorField, setErrorField] = useState('')
+
+    const handleDateChange = (e) => {
+        const { name, value } = e.target
+        setObject({ ...object, [name]: value })
+        try {
+            const calcValue = eval(value)
+            setData({ ...data, [name]: calcValue })
+            setError(false)
+            setErrorField('')
+        } catch (e) {
+            setError(true)
+            setErrorField(name)
+        }
+    }
 
     const getConsumption = async () => {
-        if (!date) return toast.error('শুরুর তারিখ দিন।')
+        if (!date) return toast.error('Select a date.')
         setLoading(true)
         setDateView(false)
         try {
@@ -29,6 +47,7 @@ export default function Recipe() {
                 setLoading(false)
                 setKeys(data.data.values_array)
                 setObject(data.data.values_object)
+                setData(data.data.values_object)
             }
         } catch (error) {
             setLoading(false)
@@ -36,7 +55,8 @@ export default function Recipe() {
         }
     }
     const handleSubmitServer = async () => {
-        if (!date) return toast.error('তারিখ সিলেক্ট করেন নি।')
+        if (error) return toast.error('Have an input error!')
+        if (!date) return toast.error('Please insert a date!')
         try {
             setLoading(true)
             const response = await axios.post('/api/v2/daily_rmpm/recieved/rmpm_post', {
@@ -68,7 +88,7 @@ export default function Recipe() {
                 {
                     dateView &&
                     <div
-                        className='absolute left-0 top-0 px-4 md:px-0 h-screen w-full flex justify-center items-center bg-gray-500/50'
+                        className='absolute left-0 top-0 z-50 px-4 md:px-0 h-screen w-full flex justify-center items-center bg-gray-500/50'
                     >
                         <div
                             className='relative w-9/12 md:w-3/12 p-4 flex flex-col space-y-2 bg-white rounded-lg'
@@ -77,7 +97,7 @@ export default function Recipe() {
                             <select
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
-                                className='px-2 py-1 rounded-lg focus:outline-none border'
+                                className='p-2 rounded-lg focus:outline-none border'
                             >
                                 <option value={null}>Date select</option>
                                 {
@@ -122,7 +142,9 @@ export default function Recipe() {
                             </div>
                         </div>
                     }
-                    <div>
+                    <div
+                        className='bg-white p-2 text-sm'
+                    >
                         {
                             keys.map(key => (
                                 <div
@@ -130,13 +152,22 @@ export default function Recipe() {
                                     className='flex items-center border-b py-2'
                                 >
                                     <label className='w-full'>{key}</label>
-                                    <input
-                                        key={key}
-                                        type='text'
-                                        value={object[key]}
-                                        onChange={(e) => setObject({ ...object, [key]: e.target.value })}
-                                        className='w-[80px] py-1 text-center border focus:outline-none focus:border-blue-400 rounded-lg'
-                                    />
+                                    <div
+                                        className='w-[80px] relative'
+                                    >
+                                        {
+                                            checkAddtionIndex(object[key]) &&
+                                            <span className='absolute w-[42px] -top-2 -left-10 text-xs text-center bg-blue-50 px-1 border border-blue-100'>{data[key]}</span>
+                                        }
+                                        <input
+                                            key={key}
+                                            type='text'
+                                            name={key}
+                                            value={object[key]}
+                                            onChange={handleDateChange}
+                                            className={`w-[80px] py-1 text-center border focus:outline-none focus:border-blue-500  ${key === errorField ? 'bg-red-50 focus:border-red-500 text-red-500' : ''}`}
+                                        />
+                                    </div>
                                 </div>
                             ))
                         }
