@@ -2,16 +2,16 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
-import { ImCross } from 'react-icons/im'
-import HeadInfo from '../../../../../components/HeadInfo'
-import Loading from '../../../../../components/v2/Loading'
-import getMonthDaysArray from '../../../../../utils/v2/getMonthDaysArray'
-import getConsumptionItemsString from '../../../../../utils/v2/getConsumptionItemsString'
-import { IoIosArrowRoundBack } from 'react-icons/io'
+import { ImBackward, ImCross } from 'react-icons/im'
+import HeadInfo from '../../../../../../components/HeadInfo'
+import Loading from '../../../../../../components/v2/Loading'
+import getMonthDaysArray from '../../../../../../utils/v2/getMonthDaysArray'
+import getConsumptionItemsString from '../../../../../../utils/v2/getConsumptionItemsString'
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 export default function Recipe() {
     const router = useRouter()
-    const { section, field } = router.query
+    const { section, type, field } = router.query
     const [loading, setLoading] = useState(false)
     const [dateView, setDateView] = useState(true)
     const [date, setDate] = useState(null)
@@ -23,7 +23,7 @@ export default function Recipe() {
         setLoading(true)
         setDateView(false)
         try {
-            const { data } = await axios.get(`/api/v2/daily_rmpm/find_items?section=${section}&field=${field}`)
+            const { data } = await axios.post(`/api/v2/daily_rmpm/update/rmpm_inout`, { section, type, field, date })
 
             if (data.success) {
                 setLoading(false)
@@ -39,13 +39,15 @@ export default function Recipe() {
         if (!date) return toast.error('তারিখ সিলেক্ট করেন নি।')
         try {
             setLoading(true)
-            const response = await axios.post('/api/v2/daily_rmpm/recieved/rmpm_post', {
+            const response = await axios.post('/api/v2/daily_rmpm/update/rmpm_inout_post', {
                 section,
+                type,
                 field,
                 date,
                 items: getConsumptionItemsString(object)
             }
             )
+
             if (response.data.status === 200) {
                 toast.success(response.data.message)
                 setLoading(false)
@@ -103,7 +105,7 @@ export default function Recipe() {
                         <div
                             className='flex items-center justify-between space-x-2 py-2'
                         >
-                            <IoIosArrowRoundBack size={30} className='cursor-pointer' onClick={() => router.back()} />
+                            <IoIosArrowRoundBack size={30} className='cursor-pointer' onClick={()=>router.back()}/>
                             <div
                                 className='space-x-2'
                             >

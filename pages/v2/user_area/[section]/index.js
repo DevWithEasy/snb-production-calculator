@@ -7,6 +7,9 @@ import HeadInfo from '../../../../components/HeadInfo'
 import { PiCalculatorLight } from "react-icons/pi";
 import { GiBlackBook } from "react-icons/gi";
 import { BiLogOutCircle } from "react-icons/bi";
+import { LuFileInput } from "react-icons/lu";
+import { FaRegEdit } from "react-icons/fa";
+import { FaBook } from "react-icons/fa";
 
 export default function Section() {
     const router = useRouter()
@@ -17,37 +20,75 @@ export default function Section() {
         toast.success('Logged out successfully')
     }
 
-    const paths = [
+    const path_categorys = [
         {
-            path: '/v2/recipe/',
-            name: 'Recipe Book',
-            icon: <GiBlackBook />
+            title: '',
+            paths: [
+                {
+                    path: '/v2/recipe/',
+                    name: 'Recipe Book',
+                    icon: <GiBlackBook />
+                },
+                {
+                    path: '/v2/calculation/',
+                    name: 'Stock recieved consumption',
+                    icon: <FaBook />
+                },
+            ]
         },
         {
-            path: '/v2/recieved/rm/',
-            name: 'Raw Material Recieved',
-            icon: <PiCalculatorLight />
+            title: 'Raw Materials',
+            paths: [
+                {
+                    path: '/v2/recieved/rm/',
+                    name: 'Insert daily recieved',
+                    icon: <LuFileInput />
+                },
+                {
+                    path: '/v2/consumption/rm/',
+                    name: 'Daily consumption calculation',
+                    icon: <PiCalculatorLight />
+                },
+                {
+                    path: '/v2/update/recieved/rm/',
+                    name: 'Update daily recieved',
+                    icon: <FaRegEdit />
+                },
+                {
+                    path: '/v2/update/consumption/rm/',
+                    name: 'Update daily consumption',
+                    icon: <FaRegEdit />
+                },
+            ]
         },
         {
-            path: '/v2/recieved/pm/',
-            name: 'Packing Material Recieved',
-            icon: <PiCalculatorLight />
-        },
-        {
-            path: '/v2/consumption/rm/',
-            name: 'Raw Material Calculation',
-            icon: <PiCalculatorLight />
-        },
-        {
-            path: '/v2/consumption/pm/',
-            name: 'Packing Material Calculation',
-            icon: <PiCalculatorLight />
-        },
-        {
-            path: '/v2/calculation/',
-            name: 'Day By Calculation',
-            icon: <PiCalculatorLight />
-        },
+            title: 'Packing Materials',
+            paths: [
+                {
+                    path: '/v2/recieved/pm/',
+                    name: 'Insert daily recieved',
+                    icon: <LuFileInput />
+                },
+
+                {
+                    path: '/v2/consumption/pm/',
+                    name: 'Daily consumption calculation',
+                    icon: <PiCalculatorLight />
+                },
+
+                {
+                    path: '/v2/update/recieved/pm/',
+                    name: 'Update daily recieved',
+                    icon: <FaRegEdit />
+                },
+
+                {
+                    path: '/v2/update/consumption/pm/',
+                    name: 'Update daily consumption',
+                    icon: <FaRegEdit />
+                },
+            ]
+        }
     ]
 
     return (
@@ -65,16 +106,25 @@ export default function Section() {
                     className='px-4 pt-2'
                 >
                     {
-                        paths.map(path => (
-                            <Link key={path.path} href={path.path + router.query.section}>
-                                <p
-                                    className='my-3 flex items-center space-x-2'
-                                >
+                        path_categorys.map((category) => (
+                            <div key={category.title}>
+                                {category.title && <p className='border-b'>{category.title}</p>}
+                                <div>
+                                    {
+                                        category.paths.map((path, j) => (
+                                            <Link key={path.path} href={path.path + router.query.section}>
+                                                <p
+                                                    className='my-3 flex items-center space-x-2'
+                                                >
 
-                                    {path.icon}
-                                    <span>{path.name}</span>
-                                </p>
-                            </Link>
+                                                    {path.icon}
+                                                    <span>{path.name}</span>
+                                                </p>
+                                            </Link>
+                                        ))
+                                    }
+                                </div>
+                            </div>
                         ))
                     }
                 </div>
