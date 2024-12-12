@@ -56,8 +56,9 @@ export default function Recipe() {
             >
               {consumption?.header && <ImCross onClick={() => setDateView(!dateView)} className='absolute -top-5 right-2 text-red-500' />}
               <select
+                value={start_date}
                 onChange={(e) => setStart_date(e.target.value)}
-                className='px-2 rounded-lg focus:outline-none border'
+                className='p-2 rounded-lg focus:outline-none border'
               >
                 <option value={null}>From Date</option>
                 {
@@ -67,6 +68,7 @@ export default function Recipe() {
                 }
               </select>
               <select
+                value={end_date}
                 onChange={(e) => setEnd_date(e.target.value)}
                 className='p-2 rounded-lg focus:outline-none border'
               >

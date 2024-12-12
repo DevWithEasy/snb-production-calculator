@@ -1,95 +1,27 @@
+import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import appStore from '../../../../features/appStore'
 import toast from 'react-hot-toast'
+import { BiLogOutCircle } from "react-icons/bi"
 import HeadInfo from '../../../../components/HeadInfo'
-import { PiCalculatorLight } from "react-icons/pi";
-import { GiBlackBook } from "react-icons/gi";
-import { BiLogOutCircle } from "react-icons/bi";
-import { LuFileInput } from "react-icons/lu";
-import { FaRegEdit } from "react-icons/fa";
-import { FaBook } from "react-icons/fa";
+import appStore from '../../../../features/appStore'
+import path_categorys from '../../../../utils/v2/path_categorys'
 
 export default function Section() {
     const router = useRouter()
     const { logout, app_user } = appStore()
+    
     const handleLogout = () => {
-        logout()
-        router.push('/')
+        logout();
+        const isDevelopment = process.env.NODE_ENV === 'development';
+        const domain = isDevelopment ? 'localhost' : 'snbfood.vercel.app';
+        const path = '/'
+        Cookies.remove('authToken', { path, domain });
+        Cookies.remove('section', { path, domain })
         toast.success('Logged out successfully')
+        router.push('/')
     }
-
-    const path_categorys = [
-        {
-            title: '',
-            paths: [
-                {
-                    path: '/v2/recipe/',
-                    name: 'Recipe Book',
-                    icon: <GiBlackBook />
-                },
-                {
-                    path: '/v2/calculation/',
-                    name: 'Stock recieved consumption',
-                    icon: <FaBook />
-                },
-            ]
-        },
-        {
-            title: 'Raw Materials',
-            paths: [
-                {
-                    path: '/v2/recieved/rm/',
-                    name: 'Insert daily recieved',
-                    icon: <LuFileInput />
-                },
-                {
-                    path: '/v2/consumption/rm/',
-                    name: 'Daily consumption calculation',
-                    icon: <PiCalculatorLight />
-                },
-                {
-                    path: '/v2/update/recieved/rm/',
-                    name: 'Update daily recieved',
-                    icon: <FaRegEdit />
-                },
-                {
-                    path: '/v2/update/consumption/rm/',
-                    name: 'Update daily consumption',
-                    icon: <FaRegEdit />
-                },
-            ]
-        },
-        {
-            title: 'Packing Materials',
-            paths: [
-                {
-                    path: '/v2/recieved/pm/',
-                    name: 'Insert daily recieved',
-                    icon: <LuFileInput />
-                },
-
-                {
-                    path: '/v2/consumption/pm/',
-                    name: 'Daily consumption calculation',
-                    icon: <PiCalculatorLight />
-                },
-
-                {
-                    path: '/v2/update/recieved/pm/',
-                    name: 'Update daily recieved',
-                    icon: <FaRegEdit />
-                },
-
-                {
-                    path: '/v2/update/consumption/pm/',
-                    name: 'Update daily consumption',
-                    icon: <FaRegEdit />
-                },
-            ]
-        }
-    ]
 
     return (
         <>

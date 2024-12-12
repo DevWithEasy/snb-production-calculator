@@ -16,7 +16,7 @@ export default function Index() {
             }
     
             if (app_user.role === 'user') {
-                router.push('/v2/user_area/' + app_user.section.toLowerCase());
+                router.push('/v2/user-area/' + app_user.section.toLowerCase());
                 return;
             }
             const timeoutId = setTimeout(() => {

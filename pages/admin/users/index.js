@@ -26,8 +26,11 @@ export default function Users({users}) {
               <span>New User</span>
             </button>
           </Link>
-          <table
-            className='w-full border rounded-lg'
+          <div
+            className='overflow-x-auto  border rounded-lg'
+          >
+            <table
+            className='w-full'
           >
             <thead>
               <tr
@@ -35,7 +38,7 @@ export default function Users({users}) {
               >
                 {
                   headers.map((header) => (
-                    <th className='text-left px-2 py-1' key={header}>{capitalizeFirstLetter(header)}</th>
+                    <th className='text-left px-2 py-1 text-sm' key={header}>{capitalizeFirstLetter(header)}</th>
                   ))
                 }
               </tr>
@@ -43,7 +46,7 @@ export default function Users({users}) {
             <tbody>
               {users.map((user,i) => (
                 <tr className='border-b' key={i}>
-                  <td className='px-2 py-1'>{user.name}</td>
+                  <td className='px-2 py-1 text-nowrap'>{user.name}</td>
                   <td className='px-2 py-1'>{user.username}</td>
                   <td className='px-2 py-1'>{user.password}</td>
                   <td className='px-2 py-1'>{user.section}</td>
@@ -52,6 +55,8 @@ export default function Users({users}) {
               ))}
             </tbody>
           </table>
+          </div>
+          
         </div>
     </AdminLayout>
   )

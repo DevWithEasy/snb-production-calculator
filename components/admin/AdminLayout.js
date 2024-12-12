@@ -11,6 +11,7 @@ import getBreadCrumbArray from '../../utils/v2/getBreadCrumbArray'
 import appStore from '../../features/appStore'
 import { BiLogOutCircle } from "react-icons/bi";
 import toast from 'react-hot-toast'
+import Cookies from 'js-cookie'
 
 export default function AdminLayout({ children }) {
   const router = useRouter()
@@ -39,9 +40,14 @@ export default function AdminLayout({ children }) {
     },
   ]
   const handleLogout = () => {
-    logout()
-    router.push('/')
+    logout();
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    const domain = isDevelopment ? 'localhost' : 'snbfood.vercel.app';
+    const path = '/'
+    Cookies.remove('authToken', { path, domain });
+    Cookies.remove('section', { path, domain })
     toast.success('Logged out successfully')
+    router.push('/')
   }
   return (
     <div
@@ -82,8 +88,8 @@ export default function AdminLayout({ children }) {
           className='border-b mb-2 md:hidden relative'
         >
           <button onClick={handleLogout} className='absolute top-1  right-0 text-red-500'>
-          <BiLogOutCircle size={20}/>
-        </button>
+            <BiLogOutCircle size={20} />
+          </button>
           <div
             className='text-sm'
           >
