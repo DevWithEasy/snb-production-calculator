@@ -20,14 +20,14 @@ export default function Admin({ sections }) {
       <HeadInfo title={`Adminitration`} />
       <div>
         <div
-          className='flex flex-wrap space-x-2 text-sm'
+          className='flex flex-wrap text-sm'
         >
           {
             sections.map(section => (
               <button
                 key={section.id}
                 onClick={() => sactionHandler(section)}
-                className={`px-2 py-1 border rounded ${section.id === active ? 'border-blue-500 text-blue-500' : 'border-gray-300'}`}
+                className={`px-2 py-1 m-1 border rounded ${section.id === active ? 'border-blue-500 text-blue-500' : 'border-gray-300'}`}
               >
                 {section.name}
               </button>

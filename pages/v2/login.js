@@ -57,7 +57,7 @@ export default function Login() {
 
     return (
         <>
-            <HeadInfo title="Login (V.2) - app_user authentication" />
+            <HeadInfo title="Login user account" />
             <div className="w-full flex justify-center items-center pt-10">
                 <div className="relative flex flex-col items-center bg-white rounded-md p-4 pt-10 space-y-1">
                     <button
