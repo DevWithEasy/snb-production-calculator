@@ -9,32 +9,31 @@ export async function middleware(request) {
   // Check if user is already on signin or signup page
   if (!cookie) {
     if (isPath === '/v2/login') {
-      return NextResponse.next(); // Allow access to these pages
+      return NextResponse.next()
     }
-    return NextResponse.redirect(new URL('/v2/login', request.url));
+    return NextResponse.redirect(new URL('/v2/login', request.url))
   }
 
   try {
-    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
-    const { payload } = await jwtVerify(cookie.value, secret);
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET)
+    const { payload } = await jwtVerify(cookie.value, secret)
 
     if (payload.section === 'Admin' && isPath.startsWith('/admin')) { 
       return NextResponse.next()
     }
-    // Redirect authenticated users away from signin/signup
+   
     if (isPath === '/v2/login') {
       return NextResponse.redirect(new URL(`/v2/user-area/${section}`, request.url))
     }
     
   } catch (error) {
-    return NextResponse.redirect(new URL('/v2/login', request.url));
+    return NextResponse.redirect(new URL('/v2/login', request.url))
   }
 
-  return NextResponse.next(); // Allow other requests to proceed
+  return NextResponse.next()
 
 }
 
-// Configuration for matching paths
 export const config = {
   matcher: [
     '/v2/login',
