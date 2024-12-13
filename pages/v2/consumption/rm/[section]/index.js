@@ -1,17 +1,17 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import HeadInfo from "../../../../../components/HeadInfo";
+import SubmitConsumption from "../../../../../components/v2/consumption/SubmitConsumption";
 import TableConsumption from "../../../../../components/v2/consumption/TableConsumption";
 import Loading from '../../../../../components/v2/Loading';
+import baseUrl from "../../../../../utils/v1/baseUrl";
 import getItemsString from "../../../../../utils/v2/getItemsString";
-import SubmitConsumption from "../../../../../components/v2/consumption/SubmitConsumption";
 
-export default function Consumption() {
+export default function Consumption({products}) {
     const router = useRouter();
     const section = router.query.section;
-    const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(false)
     const [requests, setRequest] = useState([])
     const [product, setProduct] = useState('')
@@ -19,19 +19,6 @@ export default function Consumption() {
     const [consumption, setConsumption] = useState({})
     const [totalConsumption, setTotalConsumption] = useState({})
     const [isSubmit, setIsSubmit] = useState(false)
-    const getProducts = async (section) => {
-        setLoading(true)
-        try {
-            const { data } = await axios.get(`/api/v2/${section}/products`)
-            if (data.success) {
-                setProducts(data.data)
-                setLoading(false)
-            }
-        } catch (error) {
-            setLoading(false)
-            console.log(error)
-        }
-    }
 
     const addRequest = async () => {
         if (!product || !batch) return toast.error('Select Product and Input Batch')
@@ -65,12 +52,6 @@ export default function Consumption() {
         }
     }
 
-
-    useEffect(() => {
-        getProducts(section);
-    }, [section])
-
-    // console.log(consumption)
     return (
         <>
             <HeadInfo title={`Consumption(RM) - ${section}`} />
@@ -187,3 +168,22 @@ export default function Consumption() {
 
     );
 }
+
+export async function getServerSideProps(context) {
+    const { section } = context.params;
+    try {
+      const { data } = await axios.get(`${baseUrl}/api/v2/${section}/products`)
+      return {
+        props: {
+          products: data.data,
+        },
+      };
+    } catch (error) {
+      console.error('Error fetching products:', error.response ? error.response.data : error.message);
+      return {
+        props: {
+          products: [],
+        },
+      };
+    }
+  }

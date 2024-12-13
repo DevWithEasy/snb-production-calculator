@@ -17,6 +17,11 @@ const path_categorys = [
                 name: 'Stock recieved consumption',
                 icon: <FaBook />
             },
+            {
+                path: '/v2/demand/',
+                name: 'Demand Calculation',
+                icon: <FaBook />
+            },
         ]
     },
     {

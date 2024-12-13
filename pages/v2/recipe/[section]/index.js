@@ -1,31 +1,17 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import HeadInfo from '../../../../components/HeadInfo'
 import Loading from '../../../../components/v2/Loading'
 import TableRecipe from '../../../../components/v2/TableRecipe'
-import appscript_api_url from '../../../../utils/v2/appscript_api_url'
-import HeadInfo from '../../../../components/HeadInfo'
+import baseUrl from '../../../../utils/v1/baseUrl'
 
-export default function Recipe() {
+export default function Recipe({products}) {
   const router = useRouter()
   const section = router.query.section
   const [loading, setLoading] = useState(false)
-  const [products, setProducts] = useState([])
   const [product, setProduct] = useState('')
   const [recipe, setRecipe] = useState({})
-  const getProducts = async (section) => {
-    setLoading(true)
-    try {
-      const { data } = await axios.get(`/api/v2/${section}/products`)
-      if (data.success) {
-        setProducts(data.data)
-        setLoading(false)
-      }
-    } catch (error) {
-      setLoading(false)
-      console.log(error)
-    }
-  }
 
   const getRecipe = async (section, name) => {
     setLoading(true)
@@ -42,10 +28,6 @@ export default function Recipe() {
     }
   }
 
-  useEffect(() => {
-    getProducts(section)
-  }, [section])
-  console.log(recipe)
   return (
     <>
       <HeadInfo title={`Recipe - ${section}`} />
@@ -105,4 +87,23 @@ export default function Recipe() {
     </>
 
   )
+}
+
+export async function getServerSideProps(context) {
+  const { section } = context.params;
+  try {
+    const { data } = await axios.get(`${baseUrl}/api/v2/${section}/products`)
+    return {
+      props: {
+        products: data.data,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching products:', error.response ? error.response.data : error.message);
+    return {
+      props: {
+        products: [],
+      },
+    };
+  }
 }
