@@ -18,9 +18,9 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
         try {
             const calcValue = eval(value)
             setData({
-                 ...data, 
-                 [name]: Number.isInteger(calcValue) ? calcValue : calcValue.toFixed(2) 
-                }
+                ...data,
+                [name]: Number.isInteger(calcValue) ? calcValue : calcValue.toFixed(2)
+            }
             )
             setError(false)
             setErrorField('')
@@ -29,6 +29,13 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
             setErrorField(name)
         }
     }
+    const handleFocus = (e) => {
+        e.target.type = 'tel'
+        e.target.setAttribute('inputmode', 'numeric')
+    };
+    const handleBlur = (e) => {
+        e.target.type = 'text'
+    };
     const handleSubmitServer = async () => {
         if (error) return toast.error('Have an input error!')
         if (!date) return toast.error('Please insert a date!')
@@ -123,6 +130,8 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
                                         name={key}
                                         value={object[key]}
                                         onChange={handleDateChange}
+                                        onFocus={handleFocus}
+                                        onBlur={handleBlur}
                                         className={`w-[80px] py-1 text-center border focus:outline-none focus:border-blue-500  ${key === errorField ? 'bg-red-50 focus:border-red-500 text-red-500' : ''}`}
                                     />
                                 </div>
