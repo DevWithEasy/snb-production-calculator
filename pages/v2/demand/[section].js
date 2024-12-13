@@ -61,92 +61,100 @@ export default function Demand({ data }) {
                     }
                     <button onClick={getDemand} className='px-2 py-1 mt-2 border rounded-md bg-gray-50 hover:bg-gray-100'>Generate Demand</button>
                 </div>
-                <div
-                    className='p-2'
-                >
-                    <table
-                        className='w-full text-sm border'
+                {
+                    demand.rm &&
+                    <div
+                        className='p-2'
                     >
-                        <thead>
-                            <tr
-                                className='bg-gray-100'
-                            >
-                                <td className='p-2 font-semibold text-center'>Sl</td>
-                                <td className='p-2 font-semibold'>Name</td>
-                                <td className='p-2 text-center font-semibold'>Unit</td>
-                                <td className='p-2 text-center font-semibold'>Quantity</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                demand.rm && demand.rm.map((tr, i) => (
-                                    <tr
-                                        key={i}
-                                        className='border-b'
-                                    >
-                                        <td className='p-2 text-center'>{i + 1}</td>
-                                        {
-                                            tr.map((td, j) => (
-                                                <td
-                                                    key={j}
-                                                    className={`p-2 ${j !== 0 ? 'text-center' : ''}`}
-                                                >
-                                                    {td}
-                                                </td>
-                                            ))
-                                        }
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-                    {
+                        <table
+                            className='w-full text-sm border'
+                        >
+                            <thead>
+                                <tr
+                                    className='bg-gray-100'
+                                >
+                                    <td className='p-2 font-semibold text-center'>Sl</td>
+                                    <td className='p-2 font-semibold'>Name</td>
+                                    <td className='p-2 text-center font-semibold'>Unit</td>
+                                    <td className='p-2 text-center font-semibold'>Quantity</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    demand.rm.map((tr, i) => (
+                                        <tr
+                                            key={i}
+                                            className='border-b'
+                                        >
+                                            <td className='p-2 text-center'>{i + 1}</td>
+                                            {
+                                                tr.map((td, j) => (
+                                                    <td
+                                                        key={j}
+                                                        className={`p-2 ${j !== 0 ? 'text-center' : ''}`}
+                                                    >
+                                                        {td}
+                                                    </td>
+                                                ))
+                                            }
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                        {
 
-                    }
-                </div>
-                <div
-                    className='p-2'
-                >
-                    <table
-                        className='w-full text-sm border'
+                        }
+                    </div>
+                }
+
+                {
+                    demand.pm &&
+                    <div
+                        className='p-2'
                     >
-                        <thead>
-                            <tr
-                                className='bg-gray-100'
-                            >
-                                <td className='p-2 font-semibold text-center'>Sl</td>
-                                <td className='p-2 font-semibold'>Name</td>
-                                <td className='p-2 text-center font-semibold'>Unit</td>
-                                <td className='p-2 text-center font-semibold'>Quantity</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                demand.pm && demand.pm.map((tr, i) => (
-                                    <tr
-                                        key={i}
-                                        className='border-b'
-                                    >
-                                        <td className='p-2 text-center'>{i + 1}</td>
-                                        {
-                                            tr.map((td, j) => (
-                                                <td
-                                                    key={j}
-                                                    className={`p-2 ${j !== 0 ? 'text-center' : ''}`}
-                                                >
-                                                    {td}
-                                                </td>
-                                            ))
-                                        }
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-                    {
+                        <table
+                            className='w-full text-sm border'
+                        >
+                            <thead>
+                                <tr
+                                    className='bg-gray-100'
+                                >
+                                    <td className='p-2 font-semibold text-center'>Sl</td>
+                                    <td className='p-2 font-semibold'>Name</td>
+                                    <td className='p-2 text-center font-semibold'>Unit</td>
+                                    <td className='p-2 text-center font-semibold'>Quantity</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    demand.pm.map((tr, i) => (
+                                        <tr
+                                            key={i}
+                                            className='border-b'
+                                        >
+                                            <td className='p-2 text-center'>{i + 1}</td>
+                                            {
+                                                tr.map((td, j) => (
+                                                    <td
+                                                        key={j}
+                                                        className={`p-2 ${j !== 0 ? 'text-center' : ''}`}
+                                                    >
+                                                        {td}
+                                                    </td>
+                                                ))
+                                            }
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                        {
 
-                    }
-                </div>
+                        }
+                    </div>
+                }
+
             </div>
             {loading && <Loading />}
         </div>
