@@ -6,9 +6,7 @@ import getConsumptionItemsString from '../../../utils/v2/getConsumptionItemsStri
 import getMonthDaysArray from '../../../utils/v2/getMonthDaysArray'
 import Loading from '../Loading'
 
-export default function SubmitConsumption({ section, field, setIsSubmit, keys, cons_object }) {
-    const [object, setObject] = useState(cons_object)
-    const [data, setData] = useState(cons_object)
+export default function SubmitConsumption({ section, field, setIsSubmit, keys, object, setObject, data, setData }) {
     const [date, setDate] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
@@ -19,7 +17,11 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, c
         setObject({ ...object, [name]: value })
         try {
             const calcValue = eval(value)
-            setData({ ...data, [name]: calcValue })
+            setData({
+                 ...data, 
+                 [name]: Number.isInteger(calcValue) ? calcValue : calcValue.toFixed(2) 
+                }
+            )
             setError(false)
             setErrorField('')
         } catch (e) {
@@ -99,7 +101,7 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, c
                 </div>
 
                 <div
-                    className='pt-28 bg-white p-2 text-sm overflow-y-auto'
+                    className='pt-[116px] bg-white p-2 text-sm overflow-y-auto'
                 >
                     {
                         keys.map(key => (
@@ -112,7 +114,7 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, c
                                     className='w-[80px] relative'
                                 >
                                     {
-                                        checkAddtionIndex(object[key]) && 
+                                        checkAddtionIndex(object[key]) &&
                                         <span className='absolute w-[42px] -top-2 -left-10 text-xs text-center bg-blue-50 px-1 border border-blue-100'>{data[key]}</span>
                                     }
                                     <input

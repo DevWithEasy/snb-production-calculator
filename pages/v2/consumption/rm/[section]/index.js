@@ -9,7 +9,7 @@ import Loading from '../../../../../components/v2/Loading';
 import baseUrl from "../../../../../utils/v1/baseUrl";
 import getItemsString from "../../../../../utils/v2/getItemsString";
 
-export default function Consumption({products}) {
+export default function Consumption({ products }) {
     const router = useRouter();
     const section = router.query.section;
     const [loading, setLoading] = useState(false)
@@ -17,7 +17,9 @@ export default function Consumption({products}) {
     const [product, setProduct] = useState('')
     const [batch, setBatch] = useState('')
     const [consumption, setConsumption] = useState({})
-    const [totalConsumption, setTotalConsumption] = useState({})
+    const [object, setObject] = useState()
+    const [data, setData] = useState()
+    const [keys, setKeys] = useState([])
     const [isSubmit, setIsSubmit] = useState(false)
 
     const addRequest = async () => {
@@ -42,7 +44,9 @@ export default function Consumption({products}) {
             if (data.success) {
                 setLoading(false)
                 setConsumption(data.data)
-                setTotalConsumption(data.total)
+                setData(data.total.object)
+                setObject(data.total.object)
+                setKeys(data.total.keys)
                 toast.success('Consumption added successfully')
                 setRequest([])
             }
@@ -92,12 +96,12 @@ export default function Consumption({products}) {
                 </div>
                 <div className="bg-white rounded-lg border border-gray-200">
                     <div
-                        className="flex items-center justify-between bg-gray-100 p-2 rounded-t-lg"
+                        className="flex items-center justify-between bg-gray-100 px-2 py-1 rounded-t-lg"
                     >
                         <p>Item & Batch</p>
                         <button
                             onClick={getConsumption}
-                            className="bg-gray-500 text-white px-4 py-1 text-sm rounded"
+                            className="bg-gray-500 text-white px-4 py-0.5 text-sm rounded"
                         >
                             Submit
                         </button>
@@ -132,6 +136,20 @@ export default function Consumption({products}) {
                         }
                     </div>
                 </div>
+                {
+                    consumption?.headers ?
+                        <div
+                            className="flex justify-end"
+                        >
+                            <button
+                                onClick={() => setIsSubmit(true)}
+                                className="p-2 text-sm bg-gray-500 text-white rounded"
+                            >
+                                Server submit
+                            </button>
+                        </div>
+                        : null
+                }
                 <div>
                     {
                         consumption.headers &&
@@ -141,26 +159,17 @@ export default function Consumption({products}) {
                         />
                     }
                 </div>
-                {
-                    consumption?.headers ?
-                    <div>
-                        <button 
-                        onClick={() => setIsSubmit(true)}
-                        className="p-2 text-sm bg-gray-500 text-white rounded-lg"
-                            >
-                                Server submit
-                        </button>
-                    </div>
-                    : null
-                }
             </div>
             {loading && <Loading />}
             {isSubmit &&
                 <SubmitConsumption
-                section={section}
+                    section={section}
                     field='rm'
-                    keys={totalConsumption.keys}
-                    cons_object={totalConsumption.object}
+                    keys={keys}
+                    object={object}
+                    setObject={setObject}
+                    data={data}
+                    setData={setData}
                     setIsSubmit={setIsSubmit}
                 />
             }
@@ -172,18 +181,18 @@ export default function Consumption({products}) {
 export async function getServerSideProps(context) {
     const { section } = context.params;
     try {
-      const { data } = await axios.get(`${baseUrl}/api/v2/${section}/products`)
-      return {
-        props: {
-          products: data.data,
-        },
-      };
+        const { data } = await axios.get(`${baseUrl}/api/v2/${section}/products`)
+        return {
+            props: {
+                products: data.data,
+            },
+        };
     } catch (error) {
-      console.error('Error fetching products:', error.response ? error.response.data : error.message);
-      return {
-        props: {
-          products: [],
-        },
-      };
+        console.error('Error fetching products:', error.response ? error.response.data : error.message);
+        return {
+            props: {
+                products: [],
+            },
+        };
     }
-  }
+}

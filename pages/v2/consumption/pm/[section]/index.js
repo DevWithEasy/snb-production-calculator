@@ -9,7 +9,7 @@ import Loading from '../../../../../components/v2/Loading';
 import baseUrl from "../../../../../utils/v1/baseUrl";
 import getItemsString from "../../../../../utils/v2/getItemsString";
 
-export default function Consumption({products}) {
+export default function Consumption({ products }) {
     const router = useRouter();
     const section = router.query.section;
     const [loading, setLoading] = useState(false)
@@ -17,7 +17,9 @@ export default function Consumption({products}) {
     const [product, setProduct] = useState('')
     const [batch, setBatch] = useState('')
     const [consumption, setConsumption] = useState({})
-    const [totalConsumption, setTotalConsumption] = useState({})
+    const [object, setObject] = useState()
+    const [data, setData] = useState()
+    const [keys, setKeys] = useState([])
     const [isSubmit, setIsSubmit] = useState(false)
 
     const addRequest = async () => {
@@ -41,7 +43,9 @@ export default function Consumption({products}) {
             if (data.success) {
                 setLoading(false)
                 setConsumption(data.data)
-                setTotalConsumption(data.total)
+                setData(data.total.object)
+                setObject(data.total.object)
+                setKeys(data.total.keys)
                 toast.success('Consumption added successfully')
                 setRequest([])
             }
@@ -55,10 +59,10 @@ export default function Consumption({products}) {
         <>
             <HeadInfo title={`Consumption(PM) - ${section}`} />
             <div
-                    className='space-y-4'
-                >
+                className='space-y-4'
+            >
+                <div>
                     <div>
-                        <div>
                         <div className="flex flex-col space-y-1">
                             <div
                                 className="flex w-full"
@@ -81,7 +85,7 @@ export default function Consumption({products}) {
                                     className='w-[150px] p-2 border'
                                 />
                             </div>
-                            
+
                             <button
                                 onClick={addRequest}
                                 className="px-2 py-1 bg-gray-100 border-r border-t border-b rounded-lg hover:bg-gray-200"
@@ -90,83 +94,88 @@ export default function Consumption({products}) {
                             </button>
                         </div>
                     </div>
-                    </div>
-                    <div className="bg-white rounded-lg border border-gray-200">
+                </div>
+                <div className="bg-white rounded-lg border border-gray-200">
+                    <div
+                        className="flex items-center justify-between bg-gray-100 px-2 py-1 rounded-t-lg"
+                    >
+                        <p>Item and Batch</p>
                         <div
-                            className="flex items-center justify-between bg-gray-100 p-2 rounded-t-lg"
+                            className="space-x-2"
                         >
-                            <p>Item and Batch</p>
-                            <div
-                                className="space-x-2"
+                            <button
+                                onClick={getConsumption}
+                                className="bg-gray-500 text-white px-4 py-1 text-sm rounded"
                             >
-                                <button
-                                    onClick={getConsumption}
-                                    className="bg-gray-500 text-white px-4 py-1 text-sm rounded"
-                                >
-                                    Submit
-                                </button>
-                            </div>
+                                Submit
+                            </button>
+                        </div>
 
-                        </div>
-                        <div className="p-2 space-y-2">
-                            {
-                                requests.length > 0 ?
-                                    <table
-                                        className="w-full"
-                                    >
-                                        <tbody>
-                                            {
-                                                requests.map((req, index) => (
-                                                    <tr key={index} className="flex justify-between space-x-2">
-                                                        <td className="w-1/3">{req.product}</td>
-                                                        <td className="w-1/3 text-center">{req.batch}</td>
-                                                        <td className="w-1/3 text-right">
-                                                            <button
-                                                                onClick={() => setRequest(requests.filter(r => r.product !== req.product))}
-                                                                className="px-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md"
-                                                            >
-                                                                Cancel
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                ))
-                                            }
-                                        </tbody>
-                                    </table>
-                                    :
-                                    <p className="text-center text-sm text-gray-300">No items add in list.</p>
-                            }
-                        </div>
                     </div>
-                    <div>
+                    <div className="p-2 space-y-2">
                         {
-                            consumption.headers &&
-                            <TableConsumption
-                                headers={consumption.headers}
-                                rows={consumption.rows}
-                            />
+                            requests.length > 0 ?
+                                <table
+                                    className="w-full"
+                                >
+                                    <tbody>
+                                        {
+                                            requests.map((req, index) => (
+                                                <tr key={index} className="flex justify-between space-x-2">
+                                                    <td className="w-1/3">{req.product}</td>
+                                                    <td className="w-1/3 text-center">{req.batch}</td>
+                                                    <td className="w-1/3 text-right">
+                                                        <button
+                                                            onClick={() => setRequest(requests.filter(r => r.product !== req.product))}
+                                                            className="px-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md"
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+                                </table>
+                                :
+                                <p className="text-center text-sm text-gray-300">No items add in list.</p>
                         }
                     </div>
-                    {
+                </div>
+                {
                     consumption?.headers ?
-                    <div>
-                        <button 
-                        onClick={() => setIsSubmit(true)}
-                        className="p-2 text-sm bg-gray-500 text-white rounded-lg"
+                        <div
+                            className="flex justify-end"
+                        >
+                            <button
+                                onClick={() => setIsSubmit(true)}
+                                className="p-2 text-sm bg-gray-500 text-white rounded"
                             >
                                 Server submit
-                        </button>
-                    </div>
-                    : null
+                            </button>
+                        </div>
+                        : null
                 }
+                <div>
+                    {
+                        consumption.headers &&
+                        <TableConsumption
+                            headers={consumption.headers}
+                            rows={consumption.rows}
+                        />
+                    }
                 </div>
-                {loading && <Loading />}
-                {isSubmit &&
+            </div>
+            {loading && <Loading />}
+            {isSubmit &&
                 <SubmitConsumption
-                section={section}
+                    section={section}
                     field='pm'
-                    keys={totalConsumption.keys}
-                    cons_object={totalConsumption.object}
+                    keys={keys}
+                    object={object}
+                    setObject={setObject}
+                    data={data}
+                    setData={setData}
                     setIsSubmit={setIsSubmit}
                 />
             }
@@ -178,18 +187,18 @@ export default function Consumption({products}) {
 export async function getServerSideProps(context) {
     const { section } = context.params;
     try {
-      const { data } = await axios.get(`${baseUrl}/api/v2/${section}/products`)
-      return {
-        props: {
-          products: data.data,
-        },
-      };
+        const { data } = await axios.get(`${baseUrl}/api/v2/${section}/products`)
+        return {
+            props: {
+                products: data.data,
+            },
+        };
     } catch (error) {
-      console.error('Error fetching products:', error.response ? error.response.data : error.message);
-      return {
-        props: {
-          products: [],
-        },
-      };
+        console.error('Error fetching products:', error.response ? error.response.data : error.message);
+        return {
+            props: {
+                products: [],
+            },
+        };
     }
-  }
+}
