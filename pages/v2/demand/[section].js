@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import baseUrl from '../../../utils/v1/baseUrl';
-import axios from 'axios';
-import getConsumptionItemsString from '../../../utils/v2/getConsumptionItemsString';
-import Loading from '../../../components/v2/Loading';
-import HeadInfo from '../../../components/HeadInfo';
+import baseUrl from '../../../utils/v1/baseUrl'
+import axios from 'axios'
+import getConsumptionItemsString from '../../../utils/v2/getConsumptionItemsString'
+import Loading from '../../../components/v2/Loading'
+import HeadInfo from '../../../components/HeadInfo'
 
 export default function Demand({ data }) {
     const [object, setObject] = useState(data.object)
@@ -102,9 +102,6 @@ export default function Demand({ data }) {
                                 }
                             </tbody>
                         </table>
-                        {
-
-                        }
                     </div>
                 }
 
@@ -149,9 +146,6 @@ export default function Demand({ data }) {
                                 }
                             </tbody>
                         </table>
-                        {
-
-                        }
                     </div>
                 }
 
