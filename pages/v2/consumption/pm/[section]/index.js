@@ -1,26 +1,40 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import HeadInfo from "../../../../../components/HeadInfo";
 import SubmitConsumption from "../../../../../components/v2/consumption/SubmitConsumption";
 import TableConsumption from "../../../../../components/v2/consumption/TableConsumption";
 import Loading from '../../../../../components/v2/Loading';
-import baseUrl from "../../../../../utils/v1/baseUrl";
 import getItemsString from "../../../../../utils/v2/getItemsString";
 
-export default function Consumption({ products }) {
+export default function Consumption() {
     const router = useRouter();
     const section = router.query.section;
     const [loading, setLoading] = useState(false)
     const [requests, setRequest] = useState([])
     const [product, setProduct] = useState('')
+    const [products, setProducts] = useState([])
     const [batch, setBatch] = useState('')
     const [consumption, setConsumption] = useState({})
     const [object, setObject] = useState()
     const [data, setData] = useState()
     const [keys, setKeys] = useState([])
     const [isSubmit, setIsSubmit] = useState(false)
+
+    const getProducts = async (section) => {
+        setLoading(true)
+        try {
+            const { data } = await axios.get(`/api/v2/${section}/products`)
+            if (data.success) {
+                setLoading(false)
+                setProducts(data.data)
+            }
+        } catch (error) {
+            console.log(error)
+            setLoading(false)
+        }
+    }
 
     const addRequest = async () => {
         if (!product || !batch) return toast.error('Select Product and Input Batch')
@@ -54,6 +68,10 @@ export default function Consumption({ products }) {
             console.log(error);
         }
     }
+
+    useEffect(() => {
+        getProducts(section)
+    }, [section])
 
     return (
         <>
@@ -122,12 +140,12 @@ export default function Consumption({ products }) {
                                         {
                                             requests.map((req, index) => (
                                                 <tr key={index} className="flex justify-between space-x-2">
-                                                    <td className="w-1/3">{req.product}</td>
-                                                    <td className="w-1/3 text-center">{req.batch}</td>
-                                                    <td className="w-1/3 text-right">
+                                                    <td className="text-nowrap">{req.product}</td>
+                                                    <td className="text-center">{req.batch}</td>
+                                                    <td className="text-right">
                                                         <button
                                                             onClick={() => setRequest(requests.filter(r => r.product !== req.product))}
-                                                            className="px-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md"
+                                                            className="px-2 py-0.5 bg-red-500 hover:bg-red-600 text-white text-sm rounded-md"
                                                         >
                                                             Cancel
                                                         </button>
@@ -182,23 +200,4 @@ export default function Consumption({ products }) {
         </>
 
     );
-}
-
-export async function getServerSideProps(context) {
-    const { section } = context.params;
-    try {
-        const { data } = await axios.get(`${baseUrl}/api/v2/${section}/products`)
-        return {
-            props: {
-                products: data.data,
-            },
-        };
-    } catch (error) {
-        console.error('Error fetching products:', error.response ? error.response.data : error.message);
-        return {
-            props: {
-                products: [],
-            },
-        };
-    }
 }

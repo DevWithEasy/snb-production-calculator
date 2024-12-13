@@ -4,34 +4,23 @@ import { jwtVerify } from 'jose'
 export async function middleware(request) {
   const cookie = request.cookies.get('authToken')
   const isPath = request.nextUrl.pathname
-  const section = request.cookies.get('section')?.value
 
-  // Check if user is already on signin or signup page
+  // // Check if user is already on signin or signup page
   if (!cookie) {
     if (isPath === '/v2/login') {
       return NextResponse.next()
     }
-    return NextResponse.redirect(new URL('/v2/login', request.url))
   }
-
   try {
     const secret = new TextEncoder().encode(process.env.JWT_SECRET)
     const { payload } = await jwtVerify(cookie.value, secret)
 
-    if (payload.section === 'Admin' && isPath.startsWith('/admin')) { 
-      return NextResponse.next()
-    }
-   
-    if (isPath === '/v2/login') {
-      return NextResponse.redirect(new URL(`/v2/user-area/${section}`, request.url))
-    }
+    return NextResponse.next()
     
   } catch (error) {
     return NextResponse.redirect(new URL('/v2/login', request.url))
   }
-
-  return NextResponse.next()
-
+  
 }
 
 export const config = {

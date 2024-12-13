@@ -55,6 +55,14 @@ export default function Login() {
         }
     }
 
+    useEffect(()=>{
+        if(app_user.role === 'admin'){
+            router.push('/admin')
+        } else if(app_user.role === 'user'){
+            router.push('/v2/user-area/' + app_user.section.toLowerCase())
+        }
+    },[router,app_user.role,app_user.section])
+    console.log(app_user)
     return (
         <>
             <HeadInfo title="Login user account" />
