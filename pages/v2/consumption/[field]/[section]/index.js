@@ -7,10 +7,11 @@ import SubmitConsumption from "../../../../../components/v2/consumption/SubmitCo
 import TableConsumption from "../../../../../components/v2/consumption/TableConsumption";
 import Loading from '../../../../../components/v2/Loading';
 import getItemsString from "../../../../../utils/v2/getItemsString";
+import { handleBlur, handleFocus } from "../../../../../utils/v2/inputHandler";
 
 export default function Consumption() {
     const router = useRouter();
-    const section = router.query.section;
+    const { section, field } = router.query;
     const [loading, setLoading] = useState(false)
     const [requests, setRequest] = useState([])
     const [product, setProduct] = useState('')
@@ -20,6 +21,8 @@ export default function Consumption() {
     const [object, setObject] = useState()
     const [data, setData] = useState()
     const [keys, setKeys] = useState([])
+    const [closingValues, setSetClosingValues] = useState({})
+    const [fixedValues, setSetFixedValues] = useState({})
     const [isSubmit, setIsSubmit] = useState(false)
 
     const getProducts = async (section) => {
@@ -53,13 +56,20 @@ export default function Consumption() {
     const getConsumption = async () => {
         setLoading(true)
         try {
-            const { data } = await axios.get(`/api/v2/consumption/pm?section=${section}&items=${getItemsString(requests)}`);
+            const { data } = await axios.post(`/api/v2/consumption`, {
+                section,
+                field,
+                items: getItemsString(requests)
+            });
+            
             if (data.success) {
                 setLoading(false)
                 setConsumption(data.data)
                 setData(data.total.object)
                 setObject(data.total.object)
                 setKeys(data.total.keys)
+                setSetClosingValues(data.total.closing_values)
+                setSetFixedValues(data.total.object)
                 toast.success('Consumption added successfully')
                 setRequest([])
             }
@@ -73,6 +83,7 @@ export default function Consumption() {
         getProducts(section)
     }, [section])
 
+    console.log(closingValues)
     return (
         <>
             <HeadInfo title={`Consumption(PM) - ${section}`} />
@@ -99,6 +110,8 @@ export default function Consumption() {
                                 <input
                                     value={batch}
                                     onChange={(e) => setBatch(e.target.value)}
+                                    onFocus={handleFocus}
+                                    onBlur={handleBlur}
                                     placeholder='Carton'
                                     className='w-[150px] p-2 border'
                                 />
@@ -194,6 +207,10 @@ export default function Consumption() {
                     setObject={setObject}
                     data={data}
                     setData={setData}
+                    closingValues={closingValues}
+                    setSetClosingValues={setSetClosingValues}
+                    fixedValues={fixedValues}
+                    setSetFixedValues={setSetFixedValues}
                     setIsSubmit={setIsSubmit}
                 />
             }

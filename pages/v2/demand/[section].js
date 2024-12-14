@@ -4,11 +4,13 @@ import axios from 'axios'
 import getConsumptionItemsString from '../../../utils/v2/getConsumptionItemsString'
 import Loading from '../../../components/v2/Loading'
 import HeadInfo from '../../../components/HeadInfo'
+import { handleBlur, handleFocus } from '../../../utils/v2/inputHandler'
 
 export default function Demand({ data }) {
     const [object, setObject] = useState(data.object)
     const [loading, setLoading] = useState(false)
     const [demand, setDemand] = useState({})
+
     const getDemand = async () => {
         setLoading(true)
         try {
@@ -53,6 +55,8 @@ export default function Demand({ data }) {
                                         name={key}
                                         value={object[key]}
                                         onChange={(e) => setObject({ ...object, [key]: Number(e.target.value) })}
+                                        onFocus={handleFocus}
+                                        onBlur={handleBlur}
                                         className={`w-[80px] py-1 text-center border focus:outline-none focus:border-blue-500`}
                                     />
                                 </div>

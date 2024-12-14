@@ -22,6 +22,15 @@ export default function Recipe() {
     const [error, setError] = useState(false)
     const [errorField, setErrorField] = useState('')
 
+    const handleFocus = (e) => {
+        e.target.type = 'tel'
+        e.target.setAttribute('inputmode', 'numeric')
+    }
+
+    const handleBlur = (e) => {
+        e.target.type = 'text'
+    }
+
     const handleDateChange = (e) => {
         const { name, value } = e.target
         setObject({ ...object, [name]: value })
@@ -165,6 +174,8 @@ export default function Recipe() {
                                             name={key}
                                             value={object[key]}
                                             onChange={handleDateChange}
+                                            onFocus={handleFocus}
+                                            onBlur={handleBlur}
                                             className={`w-[80px] py-1 text-center border focus:outline-none focus:border-blue-500  ${key === errorField ? 'bg-red-50 focus:border-red-500 text-red-500' : ''}`}
                                         />
                                     </div>

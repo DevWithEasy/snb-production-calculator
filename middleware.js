@@ -7,9 +7,7 @@ export async function middleware(request) {
 
   // // Check if user is already on signin or signup page
   if (!cookie) {
-    if (isPath === '/v2/login') {
-      return NextResponse.next()
-    }
+    return NextResponse.redirect(new URL('/v2/login', request.url))
   }
   try {
     const secret = new TextEncoder().encode(process.env.JWT_SECRET)
@@ -25,7 +23,6 @@ export async function middleware(request) {
 
 export const config = {
   matcher: [
-    '/v2/login',
     '/admin',
     '/admin/users',
     '/admin/users/add',

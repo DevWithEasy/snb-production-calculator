@@ -9,6 +9,7 @@ import Loading from '../../../../../../components/v2/Loading'
 import getConsumptionItemsString from '../../../../../../utils/v2/getConsumptionItemsString'
 import getMonthDaysArray from '../../../../../../utils/v2/getMonthDaysArray'
 import checkAddtionIndex from '../../../../../../utils/v2/checkAddtionIndex'
+import { handleBlur, handleFocus } from '../../../../../../utils/v2/inputHandler'
 
 export default function Recipe() {
     const router = useRouter()
@@ -167,6 +168,8 @@ export default function Recipe() {
                                             name={key}
                                             value={object[key]}
                                             onChange={handleDateChange}
+                                            onFocus={handleFocus}
+                                            onBlur={handleBlur}
                                             className={`w-[80px] py-1 text-center border focus:outline-none focus:border-blue-500  ${key === errorField ? 'bg-red-50 focus:border-red-500 text-red-500' : ''}`}
                                         />
                                     </div>
