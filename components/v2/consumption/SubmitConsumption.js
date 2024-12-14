@@ -3,11 +3,12 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import checkAddtionIndex from '../../../utils/v2/checkAddtionIndex'
 import getConsumptionItemsString from '../../../utils/v2/getConsumptionItemsString'
+import getFormatNumber from '../../../utils/v2/getFormatNumber'
 import getMonthDaysArray from '../../../utils/v2/getMonthDaysArray'
 import { handleBlur, handleFocus } from '../../../utils/v2/inputHandler'
 import Loading from '../Loading'
 
-export default function SubmitConsumption({ section, field, setIsSubmit, keys, object, setObject, data, setData, closingValues, setSetClosingValues }) {
+export default function SubmitConsumption({ section, field, setIsSubmit, keys, object, setObject, data, setData, fixedValues, closingValues, setSetClosingValues }) {
     const [date, setDate] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
@@ -20,8 +21,20 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
             const calcValue = eval(value)
             setData({
                 ...data,
-                [name]: Number.isInteger(calcValue) ? calcValue : calcValue.toFixed(2)
+                [name]: getFormatNumber(calcValue)
             }
+            )
+            const newStockAdjustValue = fixedValues[name] - calcValue
+
+            const newStockValue = newStockAdjustValue < 0 ?
+                closingValues[name] + (fixedValues[name] - calcValue) :
+                closingValues[name] - (fixedValues[name] - calcValue)
+
+            setSetClosingValues(
+                {
+                    ...closingValues,
+                    [name]: getFormatNumber(newStockValue)
+                }
             )
             setError(false)
             setErrorField('')
@@ -56,7 +69,7 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
             setLoading(!loading)
         }
     }
-    
+
     return (
         <div
             className='absolute top-0 left-0 h-screen w-full flex justify-center items-center bg-gray-500/50'
@@ -103,7 +116,7 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
                 </div>
 
                 <div
-                    className='pt-[116px] bg-white p-2 text-sm overflow-y-auto'
+                    className='pt-[120px] bg-white p-2 text-sm overflow-y-auto'
                 >
                     {
                         keys.map(key => (
@@ -113,7 +126,7 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
                             >
                                 <label className='w-full'>{key}</label>
                                 <div
-                                    className='w-[160px] flex space-x-1 relative'
+                                    className='w-[120px] flex space-x-1 relative'
                                 >
                                     {
                                         checkAddtionIndex(object[key]) &&
@@ -127,9 +140,9 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
                                         onChange={handleDateChange}
                                         onFocus={handleFocus}
                                         onBlur={handleBlur}
-                                        className={`w-[100px] py-1 text-center border focus:outline-none focus:border-blue-500  ${key === errorField ? 'bg-red-50 focus:border-red-500 text-red-500' : ''}`}
+                                        className={`w-[60px] py-1 text-center border focus:outline-none focus:border-blue-500  ${key === errorField ? 'bg-red-50 focus:border-red-500 text-red-500' : ''}`}
                                     />
-                                    <input className='w-[60px] py-1 text-center border focus:outline-none' readOnly value={closingValues[key]}/>
+                                    <input className='w-[60px] py-1 text-center border focus:outline-none' readOnly value={closingValues[key]} />
                                 </div>
                             </div>
                         ))

@@ -1,8 +1,7 @@
 import axios from "axios"
-import Cookies from 'js-cookie'
 import Image from 'next/image'
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import toast from "react-hot-toast"
 import { FaCheckCircle } from "react-icons/fa"
 import HeadInfo from "../../components/HeadInfo"
@@ -10,7 +9,7 @@ import appStore from "../../features/appStore"
 import logo from '../../public/key.png'
 
 export default function Login() {
-    const { loged, app_user } = appStore()
+    const { loged } = appStore()
     const router = useRouter()
     const [hide, setHide] = useState(false)
     const [type, setType] = useState("password")
@@ -30,12 +29,10 @@ export default function Login() {
     async function login() {
         setLoading(true)
         try {
-            const { data } = await axios.get(`/api/v2/login?username=${username}&password=${password}`)
+            const { data } = await axios.post(`/api/v2/login`,{username,password})
             if (data.sucess) {
                 setLoading(false)
                 toast.success(data.message)
-                Cookies.set('authToken', data.token)
-                Cookies.set('section', data.data.section.toLowerCase())
                 const app_user = data.data
 
                 loged(app_user)
@@ -54,15 +51,7 @@ export default function Login() {
             console.log(error)
         }
     }
-
-    useEffect(()=>{
-        if(app_user.role === 'admin'){
-            router.push('/admin')
-        } else if(app_user.role === 'user'){
-            router.push('/v2/user-area/' + app_user.section.toLowerCase())
-        }
-    },[router,app_user.role,app_user.section])
-    console.log(app_user)
+    
     return (
         <>
             <HeadInfo title="Login user account" />

@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -13,12 +12,7 @@ export default function Section() {
     const { logout, app_user } = appStore()
     
     const handleLogout = () => {
-        logout();
-        const isDevelopment = process.env.NODE_ENV === 'development';
-        const domain = isDevelopment ? 'localhost' : 'snbfood.vercel.app';
-        const path = '/'
-        Cookies.remove('authToken', { path, domain });
-        Cookies.remove('section', { path, domain })
+        logout()
         toast.success('Logged out successfully')
         router.push('/')
     }

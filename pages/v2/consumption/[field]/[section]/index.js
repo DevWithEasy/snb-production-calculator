@@ -83,7 +83,7 @@ export default function Consumption() {
         getProducts(section)
     }, [section])
 
-    console.log(closingValues)
+    
     return (
         <>
             <HeadInfo title={`Consumption(PM) - ${section}`} />
@@ -112,7 +112,7 @@ export default function Consumption() {
                                     onChange={(e) => setBatch(e.target.value)}
                                     onFocus={handleFocus}
                                     onBlur={handleBlur}
-                                    placeholder='Carton'
+                                    placeholder={field==='rm' && section !== 'chocolate' ? 'Batch' : 'Carton'}
                                     className='w-[150px] p-2 border'
                                 />
                             </div>
