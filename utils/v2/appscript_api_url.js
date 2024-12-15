@@ -1,4 +1,4 @@
-const deploy_id = 'https://script.google.com/macros/s/AKfycbxnlBlr8I0tA6DhAdiaRiZ_GnJo8rdt9j-W3Tnj2B0XUZAtA6jnGTNliruqCEqcLqj9/exec?'
+const deploy_id = 'https://script.google.com/macros/s/AKfycbxj0b4alZlM3ySMenqh0RNLug4z4hKAth2a7rCKHGqApEzATG2rfEu-RCNr25pjBh8M/exec?'
 
 const getAPI=()=>{
     return deploy_id
