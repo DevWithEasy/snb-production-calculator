@@ -13,6 +13,8 @@ export default function CalculationTable({ headers, rows,section,setItem,setView
                 setUnit(data.unit)
                 setLoading(false)
                 setView(true)
+            }else{
+                setLoading(false)
             }
         } catch (error) {
             setLoading(false)
