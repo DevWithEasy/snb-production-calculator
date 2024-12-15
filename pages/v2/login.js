@@ -7,6 +7,7 @@ import { FaCheckCircle } from "react-icons/fa"
 import HeadInfo from "../../components/HeadInfo"
 import appStore from "../../features/appStore"
 import logo from '../../public/key.png'
+import Loading from "../../components/v2/Loading"
 
 export default function Login() {
     const { loged } = appStore()
@@ -16,6 +17,7 @@ export default function Login() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
+    const [redirect, setRedirect] = useState(false)
     function handleHide() {
         if (type === "password") {
             setType("text")
@@ -36,6 +38,8 @@ export default function Login() {
                 const app_user = data.data
 
                 loged(app_user)
+
+                setRedirect(true)
                 
                 if (app_user.role === 'admin') {
                     return router.push('/admin')
@@ -98,6 +102,7 @@ export default function Login() {
                         <Link href="/v1/login">Go to V-1</Link>
                     </div> */}
                 </div>
+                {redirect && <Loading title='Redirecting...'/>}
             </div>
         </>
     )

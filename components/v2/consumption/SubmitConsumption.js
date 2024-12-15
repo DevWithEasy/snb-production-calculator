@@ -142,7 +142,7 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
                                         onBlur={handleBlur}
                                         className={`w-[60px] py-1 text-center border focus:outline-none focus:border-blue-500  ${key === errorField ? 'bg-red-50 focus:border-red-500 text-red-500' : ''}`}
                                     />
-                                    <input className='w-[60px] py-1 text-center border focus:outline-none' readOnly value={closingValues[key]} />
+                                    <input className='w-[60px] py-1 text-center border bg-gray-100 focus:outline-none' readOnly value={closingValues[key]} />
                                 </div>
                             </div>
                         ))

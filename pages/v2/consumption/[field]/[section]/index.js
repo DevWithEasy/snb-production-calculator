@@ -201,7 +201,7 @@ export default function Consumption() {
             {isSubmit &&
                 <SubmitConsumption
                     section={section}
-                    field='pm'
+                    field={field}
                     keys={keys}
                     object={object}
                     setObject={setObject}
