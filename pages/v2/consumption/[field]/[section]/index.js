@@ -54,6 +54,7 @@ export default function Consumption() {
     }
 
     const getConsumption = async () => {
+        if(requests.length ===0) return toast.error('This product no added.')
         setLoading(true)
         try {
             const { data } = await axios.post(`/api/v2/consumption`, {
@@ -61,7 +62,7 @@ export default function Consumption() {
                 field,
                 items: getItemsString(requests)
             });
-            
+            console.log(data)
             if (data.success) {
                 setLoading(false)
                 setConsumption(data.data)
