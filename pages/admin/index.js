@@ -11,7 +11,7 @@ export default function Admin({ sections }) {
   const [active, setActive] = useState(1)
   const [section, setSection] = useState(sections[0].name.toLowerCase())
   function sactionHandler(section) {
-    setSection(section.name)
+    setSection(section.name.toLowerCase())
     setActive(section.id)
   }
   console.log(section)
