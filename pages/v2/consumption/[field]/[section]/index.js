@@ -22,7 +22,6 @@ export default function Consumption() {
     const [data, setData] = useState()
     const [keys, setKeys] = useState([])
     const [closingValues, setSetClosingValues] = useState({})
-    const [fixedValues, setSetFixedValues] = useState({})
     const [isSubmit, setIsSubmit] = useState(false)
 
     const getProducts = async (section) => {
@@ -61,8 +60,8 @@ export default function Consumption() {
                 section,
                 field,
                 items: getItemsString(requests)
-            });
-            console.log(data)
+            })
+
             if (data.success) {
                 setLoading(false)
                 setConsumption(data.data)
@@ -70,7 +69,6 @@ export default function Consumption() {
                 setObject(data.total.object)
                 setKeys(data.total.keys)
                 setSetClosingValues(data.total.closing_values)
-                setSetFixedValues(data.total.object)
                 toast.success('Consumption added successfully')
                 setRequest([])
             }
@@ -209,9 +207,6 @@ export default function Consumption() {
                     data={data}
                     setData={setData}
                     closingValues={closingValues}
-                    setSetClosingValues={setSetClosingValues}
-                    fixedValues={fixedValues}
-                    setSetFixedValues={setSetFixedValues}
                     setIsSubmit={setIsSubmit}
                 />
             }

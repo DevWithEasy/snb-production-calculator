@@ -7,8 +7,9 @@ import getFormatNumber from '../../../utils/v2/getFormatNumber'
 import getMonthDaysArray from '../../../utils/v2/getMonthDaysArray'
 import { handleBlur, handleFocus } from '../../../utils/v2/inputHandler'
 import Loading from '../Loading'
+import getClosingValues from '../../../utils/v2/getClosingValues'
 
-export default function SubmitConsumption({ section, field, setIsSubmit, keys, object, setObject, data, setData, fixedValues, closingValues, setSetClosingValues }) {
+export default function SubmitConsumption({ section, field, setIsSubmit, keys, object, setObject, data, setData, closingValues }) {
     const [date, setDate] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
@@ -23,18 +24,6 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
                 ...data,
                 [name]: getFormatNumber(calcValue)
             }
-            )
-            const newStockAdjustValue = fixedValues[name] - calcValue
-
-            const newStockValue = newStockAdjustValue < 0 ?
-                closingValues[name] + (fixedValues[name] - calcValue) :
-                closingValues[name] - (fixedValues[name] - calcValue)
-
-            setSetClosingValues(
-                {
-                    ...closingValues,
-                    [name]: getFormatNumber(newStockValue)
-                }
             )
             setError(false)
             setErrorField('')
@@ -69,7 +58,7 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
             setLoading(!loading)
         }
     }
-
+    
     return (
         <div
             className='absolute top-0 left-0 h-screen w-full flex justify-center items-center bg-gray-500/50'
@@ -142,7 +131,7 @@ export default function SubmitConsumption({ section, field, setIsSubmit, keys, o
                                         onBlur={handleBlur}
                                         className={`w-[60px] py-1 text-center border focus:outline-none focus:border-blue-500  ${key === errorField ? 'bg-red-50 focus:border-red-500 text-red-500' : ''}`}
                                     />
-                                    <input className='w-[60px] py-1 text-center border bg-gray-100 focus:outline-none' readOnly value={closingValues[key]} />
+                                    <input className='w-[60px] py-1 text-center border bg-gray-100 focus:outline-none' readOnly value={getClosingValues(keys,data,closingValues)[key]} />
                                 </div>
                             </div>
                         ))
