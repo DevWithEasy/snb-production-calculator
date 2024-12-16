@@ -28,46 +28,6 @@ export default function ItemInOut({ item, unit, inOut, setView }) {
                         </div>
                     </div>
                 </div>
-                {
-                    setting &&
-                    <div
-                        className='absolute top-0 h-screen w-full flex justify-center items-center bg-gray-500/50 z-50 text-sm'
-                    >
-                        <div className="relative bg-white flex flex-col p-4 rounded-lg">
-                            <button
-                                className='absolute -right-2 -top-2 bg-white p-1 text-red-500 rounded-full'
-                                onClick={() => setSetting(false)}
-                            >
-                                <ImCross />
-                            </button>
-                            <label className="flex items-center mr-4">
-                                <input type="checkbox" checked={showUnit} onChange={() => setShowUnit(!showUnit)} />
-                                <span className="ml-2">Unit</span>
-                            </label>
-                            <label className="flex items-center mr-4">
-                                <input type="checkbox" checked={showUnit} onChange={() => setShowUnit(!showUnit)} />
-                                <span className="ml-2">Unit</span>
-                            </label>
-                            <label className="flex items-center">
-                                <input type="checkbox" checked={opening} onChange={() => setOpening(!opening)} />
-                                <span className="ml-2">Opening</span>
-                            </label>
-                            <label className="flex items-center">
-                                <input type="checkbox" checked={recieved} onChange={() => setRecieved(!recieved)} />
-                                <span className="ml-2">Recieved</span>
-                            </label>
-                            <label className="flex items-center">
-                                <input type="checkbox" checked={consumption} onChange={() => setConsumption(!consumption)} />
-                                <span className="ml-2">Consumption</span>
-                            </label>
-                            <label className="flex items-center">
-                                <input type="checkbox" checked={stcok} onChange={() => setStock(!stcok)} />
-                                <span className="ml-2">Stock</span>
-                            </label>
-                        </div>
-                    </div>
-                }
-
                 <div className='relative h-[calc(100%-40px)] w-full overflow-y-auto text-sm bg-white'>
                     <table className='w-full table-fixed'>
                         <thead className='bg-gray-200 sticky top-0'>
@@ -101,6 +61,41 @@ export default function ItemInOut({ item, unit, inOut, setView }) {
                     </table>
                 </div>
             </div>
+            {
+                    setting &&
+                    <div
+                        className='absolute top-0 h-screen w-full flex justify-center items-center bg-gray-500/50 z-50 text-sm'
+                    >
+                        <div className="relative bg-white flex flex-col p-4 rounded-lg">
+                            <button
+                                className='absolute -right-2 -top-2 bg-white p-1 text-red-500 rounded-full'
+                                onClick={() => setSetting(false)}
+                            >
+                                <ImCross />
+                            </button>
+                            <label className="flex items-center mr-4 pb-2">
+                                <input type="checkbox" checked={showUnit} onChange={() => setShowUnit(!showUnit)} />
+                                <span className="ml-2">Unit</span>
+                            </label>
+                            <label className="flex items-center mr-4 pb-2">
+                                <input type="checkbox" checked={opening} onChange={() => setOpening(!opening)} />
+                                <span className="ml-2">Opening</span>
+                            </label>
+                            <label className="flex items-center mr-4 pb-2">
+                                <input type="checkbox" checked={recieved} onChange={() => setRecieved(!recieved)} />
+                                <span className="ml-2">Recieved</span>
+                            </label>
+                            <label className="flex items-center mr-4 pb-2">
+                                <input type="checkbox" checked={consumption} onChange={() => setConsumption(!consumption)} />
+                                <span className="ml-2">Consumption</span>
+                            </label>
+                            <label className="flex items-center mr-4">
+                                <input type="checkbox" checked={stcok} onChange={() => setStock(!stcok)} />
+                                <span className="ml-2">Stock</span>
+                            </label>
+                        </div>
+                    </div>
+                }
         </div>
     );
 }

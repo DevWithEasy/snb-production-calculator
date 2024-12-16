@@ -69,7 +69,13 @@ export default function Recipe() {
               </select>
               <select
                 value={end_date}
-                onChange={(e) => setEnd_date(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value < start_date){
+                    return toast.error('You must select a date later than the start date')
+                  }else{
+                    setEnd_date(e.target.value)
+                  }
+                }}
                 className='p-2 rounded-lg focus:outline-none border'
               >
                 <option value={null}>To Date</option>
