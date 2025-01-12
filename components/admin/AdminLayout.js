@@ -1,18 +1,22 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 import admin from '../../public/admin.png'
 import logout_icon from '../../public/logout.png'
 import product from '../../public/products.png'
 import section from '../../public/sections.png'
 import user from '../../public/users.png'
+import drive from '../../public/drive.png'
 import getBreadCrumbArray from '../../utils/v2/getBreadCrumbArray'
 import appStore from '../../features/appStore'
 import { BiLogOutCircle } from "react-icons/bi";
 import toast from 'react-hot-toast'
+import Loading from '../v2/Loading'
+import axios from 'axios'
 
 export default function AdminLayout({ children }) {
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
   const { logout } = appStore()
   const path = router.pathname
@@ -43,6 +47,19 @@ export default function AdminLayout({ children }) {
     toast.success('Logged out successfully')
     router.push('/')
   }
+  const handleDriveClear = async () => {
+    setLoading(true)
+    try {
+      const { data } = await axios.get(`/api/v2/drive_clear`)
+      if (data.success) {
+        toast.success(data?.message)
+        setLoading(false)
+      }
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
+  }
   return (
     <div
       className='flex'
@@ -67,6 +84,15 @@ export default function AdminLayout({ children }) {
             </Link>
           ))
         }
+        <button onClick={handleDriveClear} className='w-full flex items-center space-x-3 my-1.5 px-4 py-2 text-left bg-white rounded-full hover:bg-red-100 duration-300 shadow-sm'>
+          <Image
+            alt='drive'
+            src={drive}
+            height={20}
+            width={20}
+          />
+          <span>Drive Clear</span>
+        </button>
         <button onClick={handleLogout} className='w-full flex items-center space-x-3 my-1.5 px-4 py-2 text-left bg-white rounded-full hover:bg-red-100 duration-300 shadow-sm'>
           <Image
             alt='logout'
@@ -110,6 +136,9 @@ export default function AdminLayout({ children }) {
           </div>
         </div>
         {children}
+        {
+          loading && <Loading title='Clearing...'/>
+        }
       </div>
     </div>
   )

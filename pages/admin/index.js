@@ -14,7 +14,6 @@ export default function Admin({ sections }) {
     setSection(section.name.toLowerCase())
     setActive(section.id)
   }
-  console.log(section)
   return (
     <AdminLayout>
       <HeadInfo title={`Adminitration`} />

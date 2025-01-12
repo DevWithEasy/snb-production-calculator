@@ -6,7 +6,7 @@ import { ImSpinner2 } from "react-icons/im";
 export default function Loading({title}) {
   return (
     <div
-        className='absolute top-0 h-screen w-full flex justify-center items-center bg-slate-100/50'
+        className='fixed left-0 top-0 h-screen w-full flex justify-center items-center bg-slate-100/50'
     >
         <div
         className='relative flex flex-col items-center'

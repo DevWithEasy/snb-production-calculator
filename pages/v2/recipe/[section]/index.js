@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react'
 import HeadInfo from '../../../../components/HeadInfo'
 import Loading from '../../../../components/v2/Loading'
 import TableRecipe from '../../../../components/v2/TableRecipe'
+import { FaRegFilePdf } from "react-icons/fa";
+import { MdDownload } from "react-icons/md";
 
 export default function Recipe() {
   const router = useRouter()
@@ -12,6 +14,25 @@ export default function Recipe() {
   const [product, setProduct] = useState('')
   const [products, setProducts] = useState([])
   const [recipe, setRecipe] = useState({})
+  const [url, setUrl] = useState('')
+  const [loadingMsg, setLoadingMsg] = useState('')
+
+  const getPdfLink = async () => {
+    setLoadingMsg('Generating PDF')
+    setLoading(true)
+    setUrl((''))
+    try {
+      const { data } = await axios.get(`/api/v2/recipe/pdf?section=${section}&name=${product}`)
+      if (data.success) {
+        const pdfUrl = data.data.url
+        setUrl(pdfUrl)
+      }
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
+  }
 
   const getProducts = async (section) => {
     setLoading(true)
@@ -30,6 +51,7 @@ export default function Recipe() {
   const getRecipe = async (section, name) => {
     setLoading(true)
     setProduct(name)
+    setUrl('')
     try {
       const { data } = await axios.get(`/api/v2/recipe?section=${section}&name=${name}`)
       console.log(data)
@@ -45,7 +67,7 @@ export default function Recipe() {
   useEffect(() => {
     getProducts(section)
   }, [section])
-
+  console.log(url)
   return (
     <>
       <HeadInfo title={`Recipe - ${section}`} />
@@ -75,6 +97,26 @@ export default function Recipe() {
             <p>Section : {section}</p>
             <p>Product Name : {product}</p>
           </div>
+          <div
+            className='flex justify-end items-center gap-2'
+          >
+            {
+              url && <a
+              href={url}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='flex items-center gap-2 p-2 text-xs rounded-md bg-blue-100 hover:bg-blue-200'
+            >
+              <MdDownload /> Download
+            </a>
+            }
+            <button
+              onClick={getPdfLink}
+              className='flex items-center gap-2 p-2 text-xs rounded-md bg-gray-200 hover:bg-gray-300'
+            >
+              <FaRegFilePdf /> Make PDF
+            </button>
+          </div>
         </div>
         {recipe.rm &&
           <div
@@ -100,7 +142,7 @@ export default function Recipe() {
           </div>
         }
 
-        {loading && <Loading />}
+        {loading && <Loading loadingMsg={loadingMsg} />}
       </div>
     </>
 
